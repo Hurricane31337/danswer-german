@@ -1,0 +1,10 @@
+Git Bash in deployment/ öffnen
+
+Starten:
+docker compose -f docker-compose.dev-pgadmin.yml -p danswer-stack up -d
+
+Neustarten:
+docker compose -f docker-compose.dev-pgadmin.yml -p danswer-stack down && docker compose -f docker-compose.dev-kersten.yml -p danswer-stack up -d
+
+Beenden:
+docker compose -f docker-compose.dev-pgadmin.yml -p danswer-stack down
