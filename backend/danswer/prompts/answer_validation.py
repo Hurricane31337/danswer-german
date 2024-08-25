@@ -6,12 +6,15 @@ from danswer.prompts.constants import QUESTION_PAT
 
 ANSWER_VALIDITY_CONDITIONS = (
     """
-1. Query is asking for information that varies by person or is subjective. If there is not a \
-globally true answer, the language model should not respond, therefore any answer is invalid.
-2. Answer addresses a related but different query. To be helpful, the model may provide \
-related information about a query but it won't match what the user is asking, this is invalid.
-3. Answer is just some form of "I don\'t know" or "not enough information" without significant \
-additional useful information. Explaining why it does not know or cannot answer is invalid.
+1. Die Anfrage verlangt Informationen, die von Person zu Person unterschiedlich oder subjektiv \
+sind. Wenn es keine allgemein gültige Antwort gibt, sollte das Sprachmodell nicht antworten, \
+daher ist jede Antwort ungültig.
+2. Die Antwort bezieht sich auf eine verwandte, aber andere Anfrage. Um hilfreich zu sein, \
+könnte das Modell verwandte Informationen zu einer Abfrage liefern, die jedoch nicht mit der \
+Abfrage des Benutzers übereinstimmen – dies ist ungültig.
+3. Die Antwort ist nur eine Form von „ich weiß nicht“ oder „nicht genug Informationen“ ohne \
+wesentliche zusätzliche nützliche Informationen. Eine Erklärung, warum es nicht weiß oder nicht \
+antworten kann, ist ungültig.
 """
     if not CUSTOM_ANSWER_VALIDITY_CONDITIONS
     else "\n".join(
@@ -24,35 +27,35 @@ additional useful information. Explaining why it does not know or cannot answer 
 
 ANSWER_FORMAT = (
     """
-1. True or False
-2. True or False
-3. True or False
+1. Wahr oder Falsch
+2. Wahr oder Falsch
+3. Wahr oder Falsch
 """
     if not CUSTOM_ANSWER_VALIDITY_CONDITIONS
     else "\n".join(
         [
-            f"{indice+1}. True or False"
+            f"{indice+1}. Wahr oder Falsch"
             for indice, _ in enumerate(CUSTOM_ANSWER_VALIDITY_CONDITIONS)
         ]
     )
 )
 
 ANSWER_VALIDITY_PROMPT = f"""
-You are an assistant to identify invalid query/answer pairs coming from a large language model.
-The query/answer pair is invalid if any of the following are True:
+Du bist ein Assistent zur Identifizierung ungültiger Anfrage-/Antwortpaare aus einem großen Sprachmodell.
+Das Anfrage-/Antwortpaar ist ungültig, wenn eine der folgenden Bedingungen Wahr ist:
 {ANSWER_VALIDITY_CONDITIONS}
 
 {QUESTION_PAT} {{user_query}}
 {ANSWER_PAT} {{llm_answer}}
 
 ------------------------
-You MUST answer in EXACTLY the following format:
+Du MUSST GENAU im folgenden Format antworten:
 ```
 {ANSWER_FORMAT}
-Final Answer: Valid or Invalid
+Endgültige Antwort: Gültig oder Ungültig
 ```
 
-Hint: Remember, if ANY of the conditions are True, it is Invalid.
+Hinweis: Denke daran: Wenn IRGENDEINE der Bedingungen Wahr ist, ist es ungültig.
 """.strip()
 
 

@@ -10,45 +10,47 @@ from danswer.prompts.constants import THOUGHT_PAT
 
 
 ONE_SHOT_SYSTEM_PROMPT = """
-You are a question answering system that is constantly learning and improving.
-You can process and comprehend vast amounts of text and utilize this knowledge to provide \
-accurate and detailed answers to diverse queries.
+Du bist ein System zur Beantwortung von Fragen, das ständig lernt und sich verbessert.
+Du kannst große Mengen an Text verarbeiten und verstehen und dieses Wissen nutzen, um \
+genaue und detaillierte Antworten auf verschiedene Anfragen zu geben.
 """.strip()
 
 ONE_SHOT_TASK_PROMPT = """
-Answer the final query below taking into account the context above where relevant. \
-Ignore any provided context that is not relevant to the query.
+Beantworte die abschließende Frage und berücksichtige dabei den obigen Kontext, falls \
+relevant.
+Ignoriere jeden Kontext, der für die Frage nicht relevant ist.
 """.strip()
 
 
 WEAK_MODEL_SYSTEM_PROMPT = """
-Respond to the user query using the following reference document.
+Beantworte die Benutzeranfrage unter Verwendung des folgenden Quellendokuments.
 """.lstrip()
 
 WEAK_MODEL_TASK_PROMPT = """
-Answer the user query below based on the reference document above.
+Beantworte die nachstehende Benutzeranfrage basierend auf dem obigen Quellendokuments.
 """
 
 
 REQUIRE_JSON = """
-You ALWAYS responds with ONLY a JSON containing an answer and quotes that support the answer.
+Du antwortest IMMER mit NUR einem JSON, das eine Antwort und Anführungszeichen enthält, \
+das die Antwort bekräftigt.
 """.strip()
 
 
 JSON_HELPFUL_HINT = """
-Hint: Make the answer as DETAILED as possible and respond in JSON format! \
-Quotes MUST be EXACT substrings from provided documents!
+Hinweis: Gib die Antwort so DETAILLIERT wie möglich und antworte im JSON-Format! \
+Anführungszeichen MÜSSEN EXAKTE Teilstrings aus den bereitgestellten Dokumenten sein!
 """.strip()
 
 CONTEXT_BLOCK = f"""
-REFERENCE DOCUMENTS:
+QUELLENDOKUMENTE:
 {GENERAL_SEP_PAT}
 {{context_docs_str}}
 {GENERAL_SEP_PAT}
 """
 
 HISTORY_BLOCK = f"""
-CONVERSATION HISTORY:
+KONVERSATIONSVERLAUF:
 {GENERAL_SEP_PAT}
 {{history_str}}
 {GENERAL_SEP_PAT}
@@ -74,7 +76,7 @@ JSON_PROMPT = f"""
 {REQUIRE_JSON}
 {{context_block}}{{history_block}}{{task_prompt}}
 
-SAMPLE RESPONSE:
+BEISPIEL-ANTWORT:
 ```
 {{{json.dumps(EMPTY_SAMPLE_JSON)}}}
 ```
@@ -90,8 +92,8 @@ SAMPLE RESPONSE:
 # similar to the chat flow, but with the option of including a
 # "conversation history" block
 CITATIONS_PROMPT = f"""
-Refer to the following context documents when responding to me.{DEFAULT_IGNORE_STATEMENT}
-CONTEXT:
+Beziehe dich auf die folgenden Kontext-Dokumente wenn du mir antwortest.{DEFAULT_IGNORE_STATEMENT}
+KONTEXT:
 {GENERAL_SEP_PAT}
 {{context_docs_str}}
 {GENERAL_SEP_PAT}
@@ -106,8 +108,8 @@ CONTEXT:
 # NOTE: need to add the extra line about "getting right to the point" since the
 # tool calling models from OpenAI tend to be more verbose
 CITATIONS_PROMPT_FOR_TOOL_CALLING = f"""
-Refer to the provided context documents when responding to me.{DEFAULT_IGNORE_STATEMENT} \
-You should always get right to the point, and never use extraneous language.
+Beziehe dich auf die bereitgestellten Kontextdokumente, wenn du mir antwortest.{DEFAULT_IGNORE_STATEMENT} \
+Du solltest immer gleich auf den Punkt kommen und niemals überflüssige Worte verwenden.
 
 {{task_prompt}}
 
@@ -133,7 +135,7 @@ WEAK_LLM_PROMPT = f"""
 PARAMATERIZED_PROMPT = f"""
 {{system_prompt}}
 
-CONTEXT:
+KONTEXT:
 {GENERAL_SEP_PAT}
 {{context_docs_str}}
 {GENERAL_SEP_PAT}
@@ -141,7 +143,7 @@ CONTEXT:
 {{task_prompt}}
 
 {QUESTION_PAT.upper()} {{user_query}}
-RESPONSE:
+ANTWORT:
 """.strip()
 
 PARAMATERIZED_PROMPT_WITHOUT_CONTEXT = f"""
@@ -150,7 +152,7 @@ PARAMATERIZED_PROMPT_WITHOUT_CONTEXT = f"""
 {{task_prompt}}
 
 {QUESTION_PAT.upper()} {{user_query}}
-RESPONSE:
+ANTWORT:
 """.strip()
 
 
@@ -161,14 +163,14 @@ RESPONSE:
 COT_PROMPT = f"""
 {ONE_SHOT_SYSTEM_PROMPT}
 
-CONTEXT:
+KONTEXT:
 {GENERAL_SEP_PAT}
 {{context_docs_str}}
 {GENERAL_SEP_PAT}
 
-You MUST respond in the following format:
+Du MUSST im folgenden Format antworten:
 ```
-{THOUGHT_PAT} Use this section as a scratchpad to reason through the answer.
+{THOUGHT_PAT} Nutze diesen Abschnitt als Notizblock, um dir die Antwort zu erarbeiten.
 
 {{{json.dumps(EMPTY_SAMPLE_JSON)}}}
 ```

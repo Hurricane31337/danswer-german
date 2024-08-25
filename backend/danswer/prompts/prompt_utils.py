@@ -15,20 +15,20 @@ from danswer.prompts.constants import CODE_BLOCK_PAT
 from danswer.search.models import InferenceChunk
 
 
-MOST_BASIC_PROMPT = "You are a helpful AI assistant."
+MOST_BASIC_PROMPT = "Du bist ein hilfreicher KI-Assistent."
 DANSWER_DATETIME_REPLACEMENT = "DANSWER_DATETIME_REPLACEMENT"
-BASIC_TIME_STR = "The current date is {datetime_info}."
+BASIC_TIME_STR = "Das aktuelle Datum ist {datetime_info}."
 
 
 def get_current_llm_day_time(
     include_day_of_week: bool = True, full_sentence: bool = True
 ) -> str:
     current_datetime = datetime.now()
-    # Format looks like: "October 16, 2023 14:30"
-    formatted_datetime = current_datetime.strftime("%B %d, %Y %H:%M")
+    # Format looks like: "16.10.2023 14:30 Uhr"
+    formatted_datetime = current_datetime.strftime("%d.&m.%Y %H:%M Uhr")
     day_of_week = current_datetime.strftime("%A")
     if full_sentence:
-        return f"The current day and time is {day_of_week} {formatted_datetime}"
+        return f"Der aktuelle Tag und die Uhrzeit sind {day_of_week} {formatted_datetime}"
     if include_day_of_week:
         return f"{day_of_week} {formatted_datetime}"
     return f"{formatted_datetime}"

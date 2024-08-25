@@ -5,26 +5,28 @@
 USEFUL_PAT = "Yes useful"
 NONUSEFUL_PAT = "Not useful"
 SECTION_FILTER_PROMPT = f"""
-Determine if the following section is USEFUL for answering the user query.
-It is NOT enough for the section to be related to the query, \
-it must contain information that is USEFUL for answering the query.
-If the section contains ANY useful information, that is good enough, \
-it does not need to fully answer the every part of the user query.
+Bestimme, ob der folgende Abschnitt für die Beantwortung der Benutzeranfrage \
+NÜTZLICH ist.
+Es reicht NICHT aus, dass der Abschnitt mit der Anfrage in Verbindung steht – \
+er muss Informationen enthalten, die für die Beantwortung der Abfrage NÜTZLICH \
+sind.
+Wenn der Abschnitt IRGENDEINE nützliche Information enthält, ist das gut genug.
+Er muss nicht jeden Teil der Benutzeranfrage vollständig beantworten.
 
 
-Title: {{title}}
+Titel: {{title}}
 {{optional_metadata}}
-Reference Section:
+Quellenverzeichnis:
 ```
 {{chunk_text}}
 ```
 
-User Query:
+Benutzeranfrage:
 ```
 {{user_query}}
 ```
 
-Respond with EXACTLY AND ONLY: "{USEFUL_PAT}" or "{NONUSEFUL_PAT}"
+Antworte EXAKT und WIRKLICH NUR mit „{USEFUL_PAT}“ oder „{NONUSEFUL_PAT}“.
 """.strip()
 
 

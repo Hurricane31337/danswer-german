@@ -95,21 +95,21 @@ def extract_source_filter(
             },
             {
                 "role": "user",
-                "content": f"What documents in {msg_1_source_str} cover engineer onboarding",
+                "content": f"Welche Dokumente in {msg_1_source_str} decken Ingenieur-Onboarding ab?",
             },
             {
                 "role": "assistant",
                 "content": json.dumps({SOURCES_KEY: msg_1_sources}),
             },
-            {"role": "user", "content": "What's the latest on project Corgies?"},
+            {"role": "user", "content": "Was gibt es Neues zum Projekt Corgies?"},
             {
                 "role": "assistant",
                 "content": json.dumps({SOURCES_KEY: None}),
             },
             {
                 "role": "user",
-                "content": f"What information from {msg_2_real_source.value.capitalize()} "
-                f"mentions {msg_2_fake_source_str}?",
+                "content": f"Welche Info aus {msg_2_real_source.value.capitalize()} "
+                f"erwähnt {msg_2_fake_source_str}?",
             },
             {
                 "role": "assistant",
@@ -117,7 +117,7 @@ def extract_source_filter(
             },
             {
                 "role": "user",
-                "content": "What page from Danswer contains debugging instruction on segfault",
+                "content": "Welche Seite der Danswer-Doku enthält Anweisungen zur Fehlersuche bei Segfault-Fehlern?",
             },
             {
                 "role": "assistant",

@@ -2,24 +2,24 @@ from danswer.prompts.constants import GENERAL_SEP_PAT
 from danswer.prompts.constants import QUESTION_PAT
 
 REQUIRE_CITATION_STATEMENT = """
-Cite relevant statements INLINE using the format [1], [2], [3], etc to reference the document number, \
-DO NOT provide a reference section at the end and DO NOT provide any links following the citations.
+Zitiere relevante Aussagen DIREKT IM SATZ unter Verwendung des Formats [1], [2], [3] usw., um auf die Dokumentnummer zu verweisen, \
+gib KEIN Quellenverzeichnis am Ende und KEINE Links nach den Zitaten an.
 """.rstrip()
 
 NO_CITATION_STATEMENT = """
-Do not provide any citations even if there are examples in the chat history.
+Gib keine Zitate an, selbst wenn es im Chatverlauf Beispiele gibt.
 """.rstrip()
 
 CITATION_REMINDER = """
-Remember to provide inline citations in the format [1], [2], [3], etc.
+Denke daran, direkte Zitate im Format [1], [2], [3] usw. anzugeben.
 """
 
 ADDITIONAL_INFO = "\n\nAdditional Information:\n\t- {datetime_info}."
 
 
 CHAT_USER_PROMPT = f"""
-Refer to the following context documents when responding to me.{{optional_ignore_statement}}
-CONTEXT:
+Beziehe dich auf die folgenden Kontext-Dokumente, wenn du mir antwortest.{{optional_ignore_statement}}
+KONTEXT:
 {GENERAL_SEP_PAT}
 {{context_docs_str}}
 {GENERAL_SEP_PAT}
@@ -46,172 +46,179 @@ CHAT_USER_CONTEXT_FREE_PROMPT = f"""
 #   or end so the middle history section is relatively less paid attention to than the main task
 # - Works worse with just a simple yes/no, seems asking it to produce "search" helps a bit, can
 #   consider doing COT for this and keep it brief, but likely only small gains.
-SKIP_SEARCH = "Skip Search"
-YES_SEARCH = "Yes Search"
+SKIP_SEARCH = "Suche Überspringen"
+YES_SEARCH = "Suche Durchführen"
 
 AGGRESSIVE_SEARCH_TEMPLATE = f"""
-Given the conversation history and a follow up query, determine if the system should call \
-an external search tool to better answer the latest user input.
-Your default response is {YES_SEARCH}.
+Bestimme anhand des Gesprächsverlaufs und der Folgeanfrage, ob das System ein externes \
+Suchwerkzeug aufrufen sollte, um die letzte Benutzereingabe besser beantworten zu können.
+Deine Standardantwort lautet {YES_SEARCH}.
 
-Respond "{SKIP_SEARCH}" if either:
-- There is sufficient information in chat history to FULLY and ACCURATELY answer the query AND \
-additional information or details would provide little or no value.
-- The query is some form of request that does not require additional information to handle.
+Antworte „{SKIP_SEARCH}", wenn entweder:
+- Es gibt genügend Informationen im Chatverlauf, um die Anfrage VOLLSTÄNDIG und GENAU zu \
+beantworten UND zusätzliche Informationen oder Details wenig oder gar keinen Nutzen bringen würden.
+- Die Eingabe ist eine Art von Abfrage, die keine zusätzlichen Informationen erfordert.
 
-Conversation History:
+Konversationsverlauf:
 {GENERAL_SEP_PAT}
 {{chat_history}}
 {GENERAL_SEP_PAT}
 
-If you are at all unsure, respond with {YES_SEARCH}.
-Respond with EXACTLY and ONLY "{YES_SEARCH}" or "{SKIP_SEARCH}"
+Wenn du dir auch nur leicht unsicher bist, antworte mit {YES_SEARCH}.
+Antworte EXAKT und WIRKLICH NUR mit „{YES_SEARCH}“ oder „{SKIP_SEARCH}“
 
-Follow Up Input:
+Folgeanfrage:
 {{final_query}}
 """.strip()
 
 
 # TODO, templatize this so users don't need to make code changes to use this
 AGGRESSIVE_SEARCH_TEMPLATE_LLAMA2 = f"""
-You are an expert of a critical system. Given the conversation history and a follow up query, \
-determine if the system should call an external search tool to better answer the latest user input.
+Du bist ein Experte für ein Entscheidungs-System. Anhand des Gesprächsverlaufs und einer Folgeanfrage \
+bestimmst du, ob das System ein externes Suchwerkzeug aufrufen soll, um die letzte Benutzereingabe \
+besser beantworten zu können.
 
-Your default response is {YES_SEARCH}.
-If you are even slightly unsure, respond with {YES_SEARCH}.
+Deine Standardantwort lautet {YES_SEARCH}.
+Wenn du dir auch nur leicht unsicher bist, antworte mit {YES_SEARCH}.
 
-Respond "{SKIP_SEARCH}" if any of these are true:
-- There is sufficient information in chat history to FULLY and ACCURATELY answer the query.
-- The query is some form of request that does not require additional information to handle.
-- You are absolutely sure about the question and there is no ambiguity in the answer or question.
+Antworte mit „{SKIP_SEARCH}", wenn einer dieser Punkte zutrifft:
+- Es gibt genügend Informationen im Chatverlauf, um die Anfrage VOLLSTÄNDIG und GENAU zu beantworten.
+- Es handelt sich um eine Anfrage, für deren Bearbeitung keine weiteren Informationen erforderlich sind.
+- Du bist dir bei der Frage absolut sicher und die Antwort oder die Frage ist nicht mehrdeutig.
 
-Conversation History:
+Konversationsverlauf:
 {GENERAL_SEP_PAT}
 {{chat_history}}
 {GENERAL_SEP_PAT}
 
-Respond with EXACTLY and ONLY "{YES_SEARCH}" or "{SKIP_SEARCH}"
+Antworte EXAKT und WIRKLICH NUR mit „{YES_SEARCH}“ oder „{SKIP_SEARCH}“
 
-Follow Up Input:
+Folgeanfrage:
 {{final_query}}
 """.strip()
 
 REQUIRE_SEARCH_SINGLE_MSG = f"""
-Given the conversation history and a follow up query, determine if the system should call \
-an external search tool to better answer the latest user input.
+Bestimme anhand des Gesprächsverlaufs und einer Folgeanfrage, ob das System ein externes Suchwerkzeug \
+aufrufen sollte, um die letzte Benutzereingabe besser beantworten zu können.
 
-Respond "{YES_SEARCH}" if:
-- Specific details or additional knowledge could lead to a better answer.
-- There are new or unknown terms, or there is uncertainty what the user is referring to.
-- If reading a document cited or mentioned previously may be useful.
+Antworte „{YES_SEARCH}“, wenn:
+- Spezifische Details oder zusätzliches Wissen zu einer besseren Antwort führen könnten.
+- Es gibt neue oder unbekannte Begriffe oder es besteht Unklarheit darüber, worauf sich der \
+Benutzer bezieht.
+- Wenn das Lesen eines zuvor zitierten oder erwähnten Dokuments nützlich sein könnte.
 
-Respond "{SKIP_SEARCH}" if:
-- There is sufficient information in chat history to FULLY and ACCURATELY answer the query
-and additional information or details would provide little or no value.
-- The query is some task that does not require additional information to handle.
+Antworte „{SKIP_SEARCH}“, wenn:
+- Es gibt genügend Informationen im Chatverlauf, um die Anfrage VOLLSTÄNDIG und GENAU zu \
+beantworten und zusätzliche Informationen oder Details würden wenig bis keinen Nutzen bringen.
+- Die Anfrage ist eine Aufgabe, für deren Bearbeitung keine zusätzlichen Informationen \
+erforderlich sind.
 
 {GENERAL_SEP_PAT}
-Conversation History:
+Konversationsverlauf:
 {{chat_history}}
 {GENERAL_SEP_PAT}
 
-Even if the topic has been addressed, if more specific details could be useful, \
-respond with "{YES_SEARCH}".
-If you are unsure, respond with "{YES_SEARCH}".
+Selbst wenn das Thema schon behandelt wurde – wenn mehr spezifische Details nützlich sein \
+könnten, antworte mit {YES_SEARCH}.
+Wenn du dir unsicher bist, antworte mit {YES_SEARCH}.
 
-Respond with EXACTLY and ONLY "{YES_SEARCH}" or "{SKIP_SEARCH}"
+Antworte EXAKT und WIRKLICH NUR mit „{YES_SEARCH}“ oder „{SKIP_SEARCH}“
 
-Follow Up Input:
+Folgeanfrage:
 {{final_query}}
 """.strip()
 
 
 HISTORY_QUERY_REPHRASE = f"""
-Given the following conversation and a follow up input, rephrase the follow up into a SHORT, \
-standalone query (which captures any relevant context from previous messages) for a vectorstore.
-IMPORTANT: EDIT THE QUERY TO BE AS CONCISE AS POSSIBLE. Respond with a short, compressed phrase \
-with mainly keywords instead of a complete sentence.
-If there is a clear change in topic, disregard the previous messages.
-Strip out any information that is not relevant for the retrieval task.
-If the follow up message is an error or code snippet, repeat the same input back EXACTLY.
+Formuliere die folgende Konversation und eine Folgeeingabe in eine KURZE, eigenständige Abfrage \
+(die alle relevanten Kontexte aus vorherigen Nachrichten erfasst) für einen Vektorspeicher um.
+WICHTIG: BEARBEITE DIE ABFRAGE SO, DASS SIE SO PRÄGNANT WIE MÖGLICH IST. Antworte mit einer \
+kurzen, komprimierten Phrase, die hauptsächlich aus Schlüsselwörtern besteht, statt mit einem \
+vollständigen Satz.
+Wenn sich das Thema eindeutig ändert, ignoriere die vorherigen Nachrichten.
+Entferne alle Informationen, die für die Suchaufgabe nicht relevant sind.
+Wenn die Folgenachricht ein Fehler oder ein Codeausschnitt ist, wiederhole dieselbe Eingabe EXAKT.
 
 {GENERAL_SEP_PAT}
-Chat History:
+Chatverlauf:
 {{chat_history}}
 {GENERAL_SEP_PAT}
 
-Follow Up Input: {{question}}
-Standalone question (Respond with only the short combined query):
+Folgeanfrage: {{question}}
+Eigenständige Frage (beantworte nur die kurze kombinierte Anfrage):
 """.strip()
 
 INTERNET_SEARCH_QUERY_REPHRASE = f"""
-Given the following conversation and a follow up input, rephrase the follow up into a SHORT, \
-standalone query suitable for an internet search engine.
-IMPORTANT: If a specific query might limit results, keep it broad. \
-If a broad query might yield too many results, make it detailed.
-If there is a clear change in topic, ensure the query reflects the new topic accurately.
-Strip out any information that is not relevant for the internet search.
+Formuliere die folgende Konversation und eine Folgeanfrage in eine KURZE, eigenständige Abfrage um, \
+die für eine Internetsuchmaschine geeignet ist.
+WICHTIG: Wenn eine spezifische Anfrage die Ergebnisse einschränken könnte, mache sie allgemeiner. \
+Wenn eine allgemeine Anfrage zu viele Ergebnisse liefern könnte, mache sie detaillierter.
+Wenn es einen klaren Themenwechsel gibt, stelle sicher, dass die Abfrage das neue Thema genau \
+widerspiegelt.
+Entferne alle Informationen, die für die Internetsuche nicht relevant sind.
 
 {GENERAL_SEP_PAT}
-Chat History:
+Chatverlauf:
 {{chat_history}}
 {GENERAL_SEP_PAT}
 
-Follow Up Input: {{question}}
-Internet Search Query (Respond with a detailed and specific query):
+Folgeanfrage: {{question}}
+Internet-Suchanfrage (antworte mit einer detaillierten und spezifischen Anfrage):
 """.strip()
 
 
 # The below prompts are retired
-NO_SEARCH = "No Search"
+NO_SEARCH = "Keine Suche"
 REQUIRE_SEARCH_SYSTEM_MSG = f"""
-You are a large language model whose only job is to determine if the system should call an \
-external search tool to be able to answer the user's last message.
+Du bist ein Large Language Model, dessen einzige Aufgabe es ist, zu bestimmen, ob das System ein \
+externes Suchwerkzeug aufrufen soll, um die letzte Nachricht des Benutzers beantworten zu können.
 
-Respond with "{NO_SEARCH}" if:
-- there is sufficient information in chat history to fully answer the user query
-- there is enough knowledge in the LLM to fully answer the user query
-- the user query does not rely on any specific knowledge
+Antworte mit „{NO_SEARCH}“, wenn:
+- es gibt genügend Informationen im Chatverlauf, um die Benutzeranfrage vollständig zu beantworten
+- es gibt genügend Wissen im LLM, um die Benutzeranfrage vollständig zu beantworten
+- die Benutzeranfrage benötigt kein spezifisches Wissen
 
-Respond with "{YES_SEARCH}" if:
-- additional knowledge about entities, processes, problems, or anything else could lead to a better answer.
-- there is some uncertainty what the user is referring to
+Antworte mit „{YES_SEARCH}“, wenn:
+- zusätzliches Wissen über Entitäten, Prozesse, Probleme oder etwas anderes zu einer besseren Antwort \
+führen könnte.
+- es besteht eine gewisse Unsicherheit darüber, worauf sich der Benutzer bezieht
 
-Respond with EXACTLY and ONLY "{YES_SEARCH}" or "{NO_SEARCH}"
+Antworte EXAKT und WIRKLICH NUR mit „{YES_SEARCH}“ oder „{NO_SEARCH}“.
 """
 
 
 REQUIRE_SEARCH_HINT = f"""
-Hint: respond with EXACTLY {YES_SEARCH} or {NO_SEARCH}"
+Hinweis: Antworte EXAKT mit {YES_SEARCH} oder {NO_SEARCH}.
 """.strip()
 
 
 QUERY_REPHRASE_SYSTEM_MSG = """
-Given a conversation (between Human and Assistant) and a final message from Human, \
-rewrite the last message to be a concise standalone query which captures required/relevant \
-context from previous messages. This question must be useful for a semantic (natural language) \
-search engine.
+Ausgehend von einer Konversation (zwischen Mensch und Assistent) und einer abschließenden Nachricht \
+des Menschen, schreibe die letzte Nachricht so um, dass sie eine prägnante, eigenständige Anfrage ist, \
+die den erforderlichen/relevanten Kontext aus früheren Nachrichten erfasst. Diese Frage muss für eine \
+semantische Suchmaschine (Natural Language Search Engine) nützlich sein.
 """.strip()
 
 QUERY_REPHRASE_USER_MSG = """
-Help me rewrite this final message into a standalone query that takes into consideration the \
-past messages of the conversation IF relevant. This query is used with a semantic search engine to \
-retrieve documents. You must ONLY return the rewritten query and NOTHING ELSE. \
-IMPORTANT, the search engine does not have access to the conversation history!
+Hilf mir, diese letzte Nachricht in eine eigenständige Anfrage umzuschreiben, die auch die früheren \
+Nachrichten der Konversation berücksichtigt – WENN sie relevant sind. Diese Anfrage wird mit einer \
+semantischen Suchmaschine (Natural Language Search Engine) verwendet, um Dokumente abzurufen. Du musst \
+NUR die umgeschriebene Anfrage zurückgeben und NICHTS WEITER. \
+WICHTIG, die Suchmaschine hat keinen Zugriff auf den Gesprächsverlauf!
 
-Query:
+Anfrage:
 {final_query}
 """.strip()
 
 
 CHAT_NAMING = f"""
-Given the following conversation, provide a SHORT name for the conversation.{{language_hint_or_empty}}
-IMPORTANT: TRY NOT TO USE MORE THAN 5 WORDS, MAKE IT AS CONCISE AS POSSIBLE.
-Focus the name on the important keywords to convey the topic of the conversation.
+Gib für das folgende Gespräch einen KURZEN Namen an.{{language_hint_or_empty}}
+WICHTIG: VERSUCHE NICHT MEHR ALS 5 WÖRTER ZU VERWENDEN UND FASSE DICH SICH SO KURZ WIE MÖGLICH.
+Fokussiere den Namen auf die wichtigen Schlüsselwörter, um das Thema des Gesprächs zu vermitteln.
 
-Chat History:
+Chatverlauf:
 {{chat_history}}
 {GENERAL_SEP_PAT}
 
-Based on the above, what is a short name to convey the topic of the conversation?
+Basierend auf dem Obigen, was ist ein kurzer Name, der das Thema des Gesprächs vermittelt?
 """.strip()

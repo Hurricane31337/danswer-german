@@ -5,12 +5,12 @@ personas:
   # this is for DanswerBot to use when tagged in a non-configured channel
   # Careful setting specific IDs, this won't autoincrement the next ID value for postgres
   - id: 0
-    name: "Knowledge"
+    name: "Wissen"
     description: >
-      Assistant with access to documents from your Connected Sources.
+      Assistent mit Zugriff auf Dokumente aus deinen verbundenen Quellen.
     # Default Prompt objects attached to the persona, see prompts.yaml
     prompts:
-      - "Answer-Question"
+      - "Frage-Antwort"
     # Default number of chunks to include as context, set to 0 to disable retrieval
     # Remove the field to set to the system default number of chunks/tokens to pass to Gen AI
     # Each chunk is 512 tokens long
@@ -43,9 +43,9 @@ personas:
     is_visible: true
 
   - id: 1
-    name: "General"
+    name: "Allgemein"
     description: >
-      Assistant with no access to documents. Chat with just the Large Language Model.
+      Assistent ohne Zugriff auf Dokumente. Chatte einfach nur mit dem Large Language Model.
     prompts:
       - "OnlyLLM"
     num_chunks: 0
@@ -59,11 +59,11 @@ personas:
     is_visible: true
 
   - id: 2
-    name: "Paraphrase"
+    name: "Paraphrasieren"
     description: >
-      Assistant that is heavily constrained and only provides exact quotes from Connected Sources.
+      Assistent, der stark eingeschränkt ist und nur genaue Zitate aus verbundenen Quellen liefert.
     prompts:
-      - "Paraphrase"
+      - "Paraphrasieren"
     num_chunks: 10
     llm_relevance_filter: true
     llm_filter_extraction: true
@@ -76,11 +76,11 @@ personas:
 
 
   - id: 3
-    name: "Art"
+    name: "Kunst"
     description: >
-      Assistant for generating images based on descriptions.
+      Assistent zum Generieren von Bildern basierend auf Beschreibungen.
     prompts:
-      - "ImageGeneration"
+      - "Bildgenerierung"
     num_chunks: 0
     llm_relevance_filter: false
     llm_filter_extraction: false

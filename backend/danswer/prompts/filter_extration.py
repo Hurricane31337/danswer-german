@@ -6,19 +6,22 @@ from danswer.prompts.constants import SOURCES_KEY
 
 # Smaller followup prompts in time_filter.py
 TIME_FILTER_PROMPT = """
-You are a tool to identify time filters to apply to a user query for a downstream search \
-application. The downstream application is able to use a recency bias or apply a hard cutoff to \
-remove all documents before the cutoff. Identify the correct filters to apply for the user query.
+Du bist ein Werkzeug, um Zeitfilter zu identifizieren, die auf eine Benutzeranfrage für eine \
+nachgelagerte Suchanwendung angewendet werden sollen. Die nachgelagerte Anwendung kann eine \
+Präferenz für Aktuelles (favors recent) anwenden oder einen harten Stichtag (hard cutoff) \
+anwenden, um alle Dokumente vor diesem Zeitpunkt zu entfernen. Identifiziere die richtigen Filter, \
+die auf die Benutzeranfrage angewendet werden sollen.
 
-The current day and time is {current_day_time_str}.
+Der aktuelle Tag und die Uhrzeit sind {current_day_time_str}.
 
-Always answer with ONLY a json which contains the keys "filter_type", "filter_value", \
-"value_multiple" and "date".
+Antworte IMMER NUR im JSON-Format, welches die Schlüssel „filter_type“, „filter_value“, \
+„value_multiple“ und „date“ enthält.
 
-The valid values for "filter_type" are "hard cutoff", "favors recent", or "not time sensitive".
-The valid values for "filter_value" are "day", "week", "month", "quarter", "half", or "year".
-The valid values for "value_multiple" is any number.
-The valid values for "date" is a date in format MM/DD/YYYY, ALWAYS follow this format.
+Die gültigen Werte für „filter_type“ sind  „hard cutoff“, „favors recent“, oder „not time sensitive“.
+Die gültigen Werte für „filter_value“ sind „day“ (Tag), „week“ (Woche), „month“ (Monat), „quarter“ \
+(Quartal), „half“ (halbes Jahr), oder „year“ (ganzes Jahr).
+Der gültige Wert für „value_multiple“ ist irgendeine Zahl.
+Der gültige Wert für „date“ ist ein Datum im Format MM/TT/YYYY – befolge IMMER dieses Format.
 """.strip()
 
 
@@ -30,32 +33,35 @@ The valid values for "date" is a date in format MM/DD/YYYY, ALWAYS follow this f
 # This is generally not a big issue though as if the company has confluence, hopefully they add
 # a connector for it or the user is aware that confluence has not been added.
 SOURCE_FILTER_PROMPT = f"""
-Given a user query, extract relevant source filters for use in a downstream search tool.
-Respond with a json containing the source filters or null if no specific sources are referenced.
-ONLY extract sources when the user is explicitly limiting the scope of where information is \
-coming from.
-The user may provide invalid source filters, ignore those.
+Extrahiere aus einer gegebenen Benutzeranfrage relevante Quellfilter zur Verwendung in einer \
+nachgeschalteten Suchanwendung.
+Antworte im JSON-Format, das die Quellenfilter oder „null“ (leer) enthält, wenn keine spezifischen \
+Quellen referenziert werden.
+Extrahiere NUR Quellen, wenn der Benutzer den Bereich, aus dem Informationen kommen können, explizit \
+einschränkt.
+Der Benutzer könnte ungültige Quellenfilter angeben – ignoriere diese.
 
-The valid sources are:
+Die gültigen Quellen sind:
 {{valid_sources}}
 {{web_source_warning}}
 {{file_source_warning}}
 
 
-ALWAYS answer with ONLY a json with the key "{SOURCES_KEY}". \
-The value for "{SOURCES_KEY}" must be null or a list of valid sources.
+Antworte IMMER NUR im JSON-Format mit dem Schlüssel „{SOURCES_KEY}“. \
+Der Wert für „{SOURCES_KEY}“ muss „null“ (leer) oder eine Liste gültiger Quellen sein.
 
 Sample Response:
 {{sample_response}}
 """.strip()
 
 WEB_SOURCE_WARNING = """
-Note: The "web" source only applies to when the user specifies "website" in the query. \
-It does not apply to tools such as Confluence, GitHub, etc. that have a website.
+Hinweis: Die Quelle „web“ gilt nur, wenn der Benutzer in der Anfrage „website“ angibt. Sie \
+gilt nicht für Tools wie Confluence, GitHub usw., die über eine Website verfügen.
 """.strip()
 
 FILE_SOURCE_WARNING = """
-Note: The "file" source only applies to when the user refers to uploaded files in the query.
+Hinweis: Die Quelle „file“ gilt nur, wenn der Benutzer in der Anfrage auf hochgeladene Dateien \
+verweist.
 """.strip()
 
 

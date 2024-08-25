@@ -49,7 +49,7 @@ def test_handle_simplified_chat_message(client: TestClient) -> None:
 def test_handle_send_message_simple_with_history(client: TestClient) -> None:
     req: dict[str, Any] = {}
     messages = []
-    messages.append({"message": "What sorts of questions can you answer for me?"})
+    messages.append({"message": "Welche Art von Fragen kannst du mir beantworten?"})
     # messages.append({"message":
     #                  "I'd be happy to assist you with a wide range of questions related to Ramp's expense management platform. "
     #                  "I can help with topics such as:\n\n"
@@ -73,25 +73,25 @@ def test_handle_send_message_simple_with_history(client: TestClient) -> None:
     req["prompt_id"] = 4
     messages.append(
         {
-            "message": "Answer questions for you, I can. "
-            "About many topics, knowledge I have. "
-            "But specific to documents provided, limited my responses are. "
-            "Ask you may about:\n\n"
-            "- User interviews and building trust with participants\n"
-            "- Designing effective surveys and survey questions  \n"
-            "- Product analysis approaches\n"
-            "- Recruiting participants for research\n"
-            "- Discussion guides for user interviews\n"
-            "- Types of survey questions\n\n"
-            "More there may be, but focus on these areas, the given context does. "
-            "Specific questions you have, ask you should. Guide you I will, as best I can.",
+            "message": "Fragen für dich beantworten, ich kann. "
+            "Über viele Themen, Wissen ich habe. "
+            "Aber spezifisch für die bereitgestellten Dokumente, begrenzt sind meine Antworten. "
+            "Fragen du kannst über:\n\n"
+            "- Nutzerinterviews und Vertrauensbildung mit Teilnehmern\n"
+            "- Effektives Design von Umfragen und Umfragefragen\n"
+            "- Ansätze zur Produktanalyse\n"
+            "- Rekrutierung von Teilnehmern für Forschung\n"
+            "- Diskussionsleitfäden für Nutzerinterviews\n"
+            "- Arten von Umfragefragen\n\n"
+            "Mehr es geben mag, aber auf diese Bereiche der gegebene Kontext sich fokussiert. "
+            "Spezifische Fragen du hast, fragen du solltst. Führen ich dich werden, so gut ich kann.",
             "role": "assistant",
         }
     )
     # messages.append({"message": "Where can I pilot a survey?"})
 
     # messages.append({"message": "How many data points should I collect to validate my solution?"})
-    messages.append({"message": "What is solution validation research used for?"})
+    messages.append({"message": "Wofür wird Solution Validation Research gebraucht?"})
 
     req["messages"] = messages
 

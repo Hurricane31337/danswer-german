@@ -9,44 +9,47 @@ from danswer.prompts.constants import THOUGHT_PAT
 
 
 ANSWERABLE_PROMPT = f"""
-You are a helper tool to determine if a query is answerable using retrieval augmented generation.
-The main system will try to answer the user query based on ONLY the top 5 most relevant \
-documents found from search.
-Sources contain both up to date and proprietary information for the specific team.
-For named or unknown entities, assume the search will find relevant and consistent knowledge \
-about the entity.
-The system is not tuned for writing code.
-The system is not tuned for interfacing with structured data via query languages like SQL.
-If the question might not require code or query language, then assume it can be answered without \
-code or query language.
-Determine if that system should attempt to answer.
-"ANSWERABLE" must be exactly "True" or "False"
+Du bist ein Hilfswerkzeug, das feststellt, ob eine Anfrage mithilfe von Retrieval Augmented \
+Generation (RAG) beantwortet werden kann.
+Das Hauptsystem wird versuchen, die Benutzeranfrage basierend auf NUR 5 der relevantesten \
+Dokumente zu beantworten, die bei der Suche gefunden wurden.
+Die Quellen enthalten sowohl aktuelle als auch proprietäre Informationen für das jeweilige \
+Team.
+Gehe bei benannten oder unbekannten Entitäten davon aus, dass die Suche relevantes und \
+konsistentes Wissen über die Entität finden wird.
+Das System ist nicht auf das Schreiben von Code abgestimmt.
+Das System ist nicht darauf ausgelegt, mit strukturierten Daten über Abfragesprachen wie SQL \
+zu interagieren.
+Wenn für die Frage möglicherweise kein Code oder keine Abfragesprache erforderlich ist, gehe \
+davon aus, dass sie ohne Code oder Abfragesprache beantwortet werden kann.
+Bestimme, ob das System versuchen sollte, die Frage zu beantworten.
+„{ANSWERABLE_PAT.upper()[:-1]}“ muss exakt „Wahr“ oder „Falsch“ sein.
 
 {GENERAL_SEP_PAT}
 
-{QUESTION_PAT.upper()} What is this Slack channel about?
+{QUESTION_PAT.upper()} Worum geht es in diesem Slack-Kanal?
 ```
-{THOUGHT_PAT.upper()} First the system must determine which Slack channel is being referred to. \
-By fetching 5 documents related to Slack channel contents, it is not possible to determine which \
-Slack channel the user is referring to.
-{ANSWERABLE_PAT.upper()} False
-```
-
-{QUESTION_PAT.upper()} Danswer is unreachable.
-```
-{THOUGHT_PAT.upper()} The system searches documents related to Danswer being unreachable. \
-Assuming the documents from search contains situations where Danswer is not reachable and \
-contains a fix, the query may be answerable.
-{ANSWERABLE_PAT.upper()} True
+{THOUGHT_PAT.upper()} Zunächst muss das System feststellen, auf welchen Slack-Kanal es sich bezieht. \
+Durch das Abrufen von 5 Dokumenten, die sich auf den Inhalt von Slack-Kanälen beziehen, ist es nicht \
+möglich zu bestimmen, auf welchen Slack-Kanal sich der Benutzer bezieht.
+{ANSWERABLE_PAT.upper()} Falsch
 ```
 
-{QUESTION_PAT.upper()} How many customers do we have
+{QUESTION_PAT.upper()} Danswer ist nicht erreichbar.
 ```
-{THOUGHT_PAT.upper()} Assuming the retrieved documents contain up to date customer acquisition \
-information including a list of customers, the query can be answered. It is important to note \
-that if the information only exists in a SQL database, the system is unable to execute SQL and \
-won't find an answer.
-{ANSWERABLE_PAT.upper()} True
+{THOUGHT_PAT.upper()} Das System sucht nach Dokumenten im Zusammenhang mit der Nichterreichbarkeit \
+von Danswer. Angenommen, die Dokumente aus der Suche enthalten Situationen, in denen Danswer nicht \
+erreichbar ist, und einen Fix dafür enthält, kann die Anfrage möglicherweise beantwortet werden.
+{ANSWERABLE_PAT.upper()} Wahr
+```
+
+{QUESTION_PAT.upper()} Wie viele Kunden haben wir?
+```
+{THOUGHT_PAT.upper()} Unter der Annahme, dass die abgerufenen Dokumente aktuelle Informationen zur \
+Kundengewinnung enthalten, einschließlich einer Liste von Kunden, kann die Anfrage beantwortet werden. \
+Es ist wichtig zu beachten, dass das System kein SQL ausführen kann und keine Antwort finden wird, \
+wenn die Informationen nur in einer SQL-Datenbank vorhanden sind.
+{ANSWERABLE_PAT.upper()} Wahr
 ```
 
 {QUESTION_PAT.upper()} {{user_query}}
