@@ -3,9 +3,9 @@ import { DateRangePickerValue } from "@tremor/react";
 import { FiCalendar, FiChevronDown, FiXCircle } from "react-icons/fi";
 import { CustomDropdown, DefaultDropdownElement } from "../Dropdown";
 
-export const LAST_30_DAYS = "Last 30 days";
-export const LAST_7_DAYS = "Last 7 days";
-export const TODAY = "Today";
+export const LAST_30_DAYS = "Letzte 30 Tage";
+export const LAST_7_DAYS = "Letzte 7 Tage";
+export const TODAY = "Heute";
 
 export function DateRangeSelector({
   value,
@@ -95,7 +95,7 @@ export function DateRangeSelector({
             ) : value?.selectValue ? (
               <div className="text-emphasis">{value.selectValue}</div>
             ) : (
-              "Any time..."
+              "Beliebige Zeit..."
             )}
           </p>
           {value?.selectValue ? (

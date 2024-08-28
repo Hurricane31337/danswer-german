@@ -85,7 +85,7 @@ export const SearchResultsDisplay = ({
     return (
       <div className="mt-4">
         <div className="font-bold flex justify-between text-emphasis border-b mb-3 pb-1 border-border text-lg">
-          <p>Results</p>
+          <p>Ergebnisse</p>
         </div>
       </div>
     );
@@ -99,10 +99,10 @@ export const SearchResultsDisplay = ({
       <div className="text-base gap-x-1.5 flex flex-col">
         <div className="flex gap-x-2 items-center font-semibold">
           <AlertIcon size={16} />
-          No documents were found!
+          Keine Dokumente gefunden!
         </div>
         <p>
-          Have you set up a connector? Your data may not have loaded properly.
+          Hast du einen Connector eingerichtet? Deine Daten wurden möglicherweise nicht richtig geladen.
         </p>
       </div>
     );
@@ -119,7 +119,7 @@ export const SearchResultsDisplay = ({
           <div className="text-error text-sm">
             <div className="flex">
               <AlertIcon size={16} className="text-error my-auto mr-1" />
-              <p className="italic">{error || "No documents were found!"}</p>
+              <p className="italic">{error || "Keine Dokumente gefunden!"}</p>
             </div>
           </div>
         )}
@@ -177,7 +177,7 @@ export const SearchResultsDisplay = ({
                         setShowAll((showAll) => !showAll);
                       }
                     }}
-                    className={`flex items-center justify-center animate-fade-in-up rounded-lg p-1 text-xs transition-all duration-300 w-20 h-8 ${
+                    className={`flex items-center justify-center animate-fade-in-up rounded-lg p-1 text-xs transition-all duration-300 h-8 ${
                       !sweep
                         ? "bg-green-500 text-text-800"
                         : "bg-rose-700 text-text-100"
@@ -192,11 +192,11 @@ export const SearchResultsDisplay = ({
                       <span></span>
                       {!sweep
                         ? agenticResults
-                          ? "Show All"
-                          : "Focus"
+                          ? "Alle anzeigen"
+                          : "Relevanteste anzeigen"
                         : agenticResults
-                          ? "Focus"
-                          : "Show All"}
+                          ? "Relevanteste anzeigen"
+                          : "Alle anzeigen"}
 
                       <span className="ml-1">
                         {!sweep ? (
@@ -217,7 +217,7 @@ export const SearchResultsDisplay = ({
             relevantDocs.length == 0 &&
             !showAll && (
               <p className="flex text-lg font-bold">
-                No high quality results found by agentic search.
+                Keine guten Ergebnisse bei der Agentensuche gefunden.
               </p>
             )}
 
@@ -271,15 +271,15 @@ export function AgenticDisclaimer({
   return (
     <div className="ml-auto mx-12 flex transition-all duration-300 animate-fade-in flex-col gap-y-2">
       <p className="text-sm">
-        Please note that agentic quries can take substantially longer than
-        non-agentic queries. You can click <i>non-agentic</i> to re-submit your
-        query without agentic capabilities.
+        Bitte beachte, dass agentenbasierte Abfragen wesentlich länger dauern
+        können als nicht-agentenbasierte Abfragen. Du kannst auf <i>nicht-agentenbasiert</i>
+        klicken, um deine Abfrage erneut ohne agentenbasierte Funktionen zu übermitteln.
       </p>
       <button
         onClick={forceNonAgentic}
         className="p-2 bg-background-900 mr-auto text-text-200 rounded-lg text-xs my-auto"
       >
-        Non-agentic
+        Nicht-agentenbasiert
       </button>
     </div>
   );

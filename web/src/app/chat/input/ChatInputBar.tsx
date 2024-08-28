@@ -316,7 +316,7 @@ export function ChatInputBar({
                   href="/assistants/new"
                 >
                   <FiPlus size={17} />
-                  <p>Create a new assistant</p>
+                  <p>Neuen Assistenten erstellen</p>
                 </a>
               </div>
             </div>
@@ -355,7 +355,7 @@ export function ChatInputBar({
                   href="/prompts"
                 >
                   <FiPlus size={17} />
-                  <p>Create a new prompt</p>
+                  <p>Neuen Prompt erstellen</p>
                 </a>
               </div>
             </div>
@@ -491,8 +491,8 @@ export function ChatInputBar({
               style={{ scrollbarWidth: "thin" }}
               role="textarea"
               aria-multiline
-              placeholder={`Send a message ${
-                !settings?.isMobile ? "or try using @ or /" : ""
+              placeholder={`Sende eine Nachricht ${
+                !settings?.isMobile ? "oder versuche es mit @ oder /" : ""
               }`}
               value={message}
               onKeyDown={(event) => {
@@ -533,7 +533,7 @@ export function ChatInputBar({
                   toggle
                   flexPriority="shrink"
                   name={
-                    selectedAssistant ? selectedAssistant.name : "Assistants"
+                    selectedAssistant ? selectedAssistant.name : "Assistenten"
                   }
                   Icon={AssistantsIconSkeleton as IconType}
                 />
@@ -580,7 +580,7 @@ export function ChatInputBar({
 
               <ChatInputOption
                 flexPriority="stiff"
-                name="File"
+                name="Datei"
                 Icon={FiPlusCircle}
                 onClick={() => {
                   const input = document.createElement("input");

@@ -1,11 +1,11 @@
 import { User } from "./types";
 
-const conditionallyAddPlural = (noun: string, cnt: number) => {
+/*const conditionallyAddPlural = (noun: string, cnt: number) => {
   if (cnt > 1) {
     return `${noun}s`;
   }
   return noun;
-};
+};*/
 
 export const timeAgo = (
   dateString: string | undefined | null
@@ -19,42 +19,36 @@ export const timeAgo = (
   const secondsDiff = Math.floor((now.getTime() - date.getTime()) / 1000);
 
   if (secondsDiff < 60) {
-    return `${secondsDiff} ${conditionallyAddPlural(
-      "second",
-      secondsDiff
-    )} ago`;
+    return `vor ${secondsDiff} ${secondsDiff > 1 ? "Sekunden" : "Sekunde"}`;
   }
 
   const minutesDiff = Math.floor(secondsDiff / 60);
   if (minutesDiff < 60) {
-    return `${minutesDiff} ${conditionallyAddPlural(
-      "minute",
-      secondsDiff
-    )} ago`;
+    return `vor ${minutesDiff} ${minutesDiff > 1 ? "Minuten" : "Minute"}`;
   }
 
   const hoursDiff = Math.floor(minutesDiff / 60);
   if (hoursDiff < 24) {
-    return `${hoursDiff} ${conditionallyAddPlural("hour", hoursDiff)} ago`;
+    return `vor ${hoursDiff} ${hoursDiff > 1 ? "Stunden" : "Stunde"}`;
   }
 
   const daysDiff = Math.floor(hoursDiff / 24);
   if (daysDiff < 30) {
-    return `${daysDiff} ${conditionallyAddPlural("day", daysDiff)} ago`;
+    return `vor ${daysDiff} ${daysDiff > 1 ? "Tage" : "Tag"}`;
   }
 
   const weeksDiff = Math.floor(daysDiff / 7);
   if (weeksDiff < 4) {
-    return `${weeksDiff} ${conditionallyAddPlural("week", weeksDiff)} ago`;
+    return `vor ${weeksDiff} ${weeksDiff > 1 ? "Wochen" : "Woche"}`;
   }
 
   const monthsDiff = Math.floor(daysDiff / 30);
   if (monthsDiff < 12) {
-    return `${monthsDiff} ${conditionallyAddPlural("month", monthsDiff)} ago`;
+    return `vor ${monthsDiff} ${monthsDiff > 1 ? "Monate" : "Monat"}`;
   }
 
   const yearsDiff = Math.floor(monthsDiff / 12);
-  return `${yearsDiff} ${conditionallyAddPlural("year", yearsDiff)} ago`;
+  return `vor ${yearsDiff} ${yearsDiff > 1 ? "Jahre" : "Jahr"}`;
 };
 
 export function localizeAndPrettify(dateString: string) {
@@ -68,7 +62,7 @@ export function humanReadableFormat(dateString: string): string {
 
   // Use Intl.DateTimeFormat to format the date
   // Specify the locale as 'en-US' and options for month, day, and year
-  const formatter = new Intl.DateTimeFormat("en-US", {
+  const formatter = new Intl.DateTimeFormat("de-DE", {
     month: "long", // full month name
     day: "numeric", // numeric day
     year: "numeric", // numeric year
@@ -84,7 +78,7 @@ export function humanReadableFormatWithTime(datetimeString: string): string {
 
   // Use Intl.DateTimeFormat to format the date
   // Specify the locale as 'en-US' and options for month, day, and year
-  const formatter = new Intl.DateTimeFormat("en-US", {
+  const formatter = new Intl.DateTimeFormat("de-DE", {
     month: "long", // full month name
     day: "numeric", // numeric day
     year: "numeric", // numeric year

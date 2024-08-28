@@ -65,7 +65,7 @@ const SOURCE_METADATA_MAP: SourceMap = {
   },
   file: {
     icon: FileIcon,
-    displayName: "File",
+    displayName: "Datei",
     category: SourceCategory.Storage,
     docs: "https://docs.danswer.dev/connectors/file",
   },

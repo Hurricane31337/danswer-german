@@ -33,7 +33,7 @@ export function BackButton({
       }}
     >
       <FiChevronLeft className="mr-1 my-auto" />
-      Back
+      Zurück
     </div>
   );
 }

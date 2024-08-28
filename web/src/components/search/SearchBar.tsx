@@ -59,17 +59,17 @@ export const AnimatedToggle = ({
       content={
         <div className="bg-white my-auto p-6 rounded-lg w-full">
           <h2 className="text-xl text-text-800 font-bold mb-2">
-            Agentic Search
+            Agentenbasierte Suche
           </h2>
           <p className="text-text-700 text-sm mb-4">
-            Our most powerful search, have an AI agent guide you to pinpoint
-            exactly what you&apos;re looking for.
+            Die leistungsstärkste Suche &mdash; Lasse dich von einem
+            KI-Agenten unterstützen, um genau das zu finden, wonach du suchst.
           </p>
           <Divider />
-          <h2 className="text-xl text-text-800 font-bold mb-2">Fast Search</h2>
+          <h2 className="text-xl text-text-800 font-bold mb-2">Schnelle Suche</h2>
           <p className="text-text-700 text-sm mb-4">
-            Get quality results immediately, best suited for instant access to
-            your documents.
+            Erhalte direkt qualitativ hochwertige Ergebnisse &mdash; optimal
+            für den sofortigen Zugriff auf deine Dokumente.
           </p>
           <p className="mt-2 text-xs">Shortcut: ({commandSymbol}/)</p>
         </div>
@@ -104,14 +104,14 @@ export const AnimatedToggle = ({
                 isOn ? "opacity-0  translate-y-10 w-0" : "opacity-100"
               }`}
             >
-              Fast
+              Schnell
             </span>
             <span
               className={`text-sm transition-all duration-300 ease-in-out ${
                 isOn ? "opacity-100 " : "opacity-0 -translate-y-10 w-0"
               }`}
             >
-              Agentic
+              Agentenbasiert
             </span>
           </p>
         </div>
@@ -200,7 +200,7 @@ export const FullSearchBar = ({
         style={{ scrollbarWidth: "thin" }}
         role="textarea"
         aria-multiline
-        placeholder="Search for something..."
+        placeholder="Suche nach etwas..."
         value={query}
         onChange={handleChange}
         onKeyDown={(event) => {}}

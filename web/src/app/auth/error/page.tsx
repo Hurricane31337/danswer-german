@@ -8,11 +8,11 @@ const Page = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="font-bold">
-        Unable to login, please try again and/or contact an administrator.
+        Anmeldung fehlgeschlagen. Bitte versuche es erneut und/oder wende dich an einen Administrator.
       </div>
       <Link href="/auth/login" className="w-fit">
         <Button className="mt-4" size="xs" icon={FiLogIn}>
-          Back to login
+          Zurück zum Login
         </Button>
       </Link>
     </div>

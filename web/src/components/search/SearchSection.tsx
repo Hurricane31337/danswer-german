@@ -200,7 +200,7 @@ export const SearchSection = ({
         const danswerDocs: SearchResponse = {
           documents: searchSession.documents,
           suggestedSearchType: null,
-          answer: assistantMessage || "Search response not found",
+          answer: assistantMessage || "Suchantwort nicht gefunden",
           quotes: null,
           selectedDocIndices: null,
           error: null,
@@ -562,14 +562,14 @@ export const SearchSection = ({
 
     if (response.ok) {
       setPopup({
-        message: "Thanks for your feedback!",
+        message: "Danke für dein Feedback!",
         type: "success",
       });
     } else {
       const responseJson = await response.json();
       const errorMsg = responseJson.detail || responseJson.message;
       setPopup({
-        message: `Failed to submit feedback - ${errorMsg}`,
+        message: `Feedback konnte nicht gesendet werden - ${errorMsg}`,
         type: "error",
       });
     }
@@ -709,7 +709,7 @@ export const SearchSection = ({
                         <div className="w-message-xs 2xl:w-message-sm 3xl:w-message">
                           <div className="flex">
                             <div className="text-3xl font-bold font-strong text-strong mx-auto">
-                              Unlock Knowledge
+                              Wissen enthüllen
                             </div>
                           </div>
                         </div>

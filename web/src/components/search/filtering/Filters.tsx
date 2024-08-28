@@ -106,7 +106,7 @@ export function SourceSelector({
         <FiFilter className="my-auto ml-2" size="16" />
       </div>
 
-      <SectionTitle>Time Range</SectionTitle>
+      <SectionTitle>Zeitraum</SectionTitle>
       <div className="mt-2">
         <DateRangeSelector value={timeRange} onValueChange={setTimeRange} />
       </div>
@@ -154,7 +154,7 @@ export function SourceSelector({
       {availableDocumentSets.length > 0 && (
         <>
           <div className="mt-4">
-            <SectionTitle>Knowledge Sets</SectionTitle>
+            <SectionTitle>Wissenssamlungen</SectionTitle>
           </div>
           <div className="px-1">
             {availableDocumentSets.map((documentSet) => (

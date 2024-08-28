@@ -57,7 +57,7 @@ export function ChatIntro({
                 {selectedPersona.document_sets.length > 0 && (
                   <div className="mt-2">
                     <p className="font-bold mb-1 mt-4 text-emphasis">
-                      Knowledge Sets:{" "}
+                      Wissenssammlungen:{" "}
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {selectedPersona.document_sets.map((documentSet) => (
@@ -90,7 +90,7 @@ export function ChatIntro({
                 {availableSources.length > 0 && (
                   <div className="mt-1">
                     <p className="font-bold mb-1 mt-4 text-emphasis">
-                      Connected Sources:{" "}
+                      Verbundene Quellen:{" "}
                     </p>
                     <div className={`flex flex-wrap gap-2`}>
                       {availableSourceMetadata.map((sourceMetadata) => (

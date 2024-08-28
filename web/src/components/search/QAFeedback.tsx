@@ -44,7 +44,7 @@ const QAFeedback = ({
         const isSuccessful = await giveFeedback(messageId, feedbackType);
         if (isSuccessful) {
           setPopup({
-            message: "Thanks for your feedback!",
+            message: "Danke für dein Feedback!",
             type: "success",
           });
         }
@@ -75,7 +75,7 @@ export const QAFeedbackBlock = ({
 }: QAFeedbackBlockProps) => {
   return (
     <div className="flex">
-      <CustomTooltip line position="top" content="Like Search Response">
+      <CustomTooltip line position="top" content="Suchergebnis positiv bewerten">
         <QAFeedback
           messageId={messageId}
           setPopup={setPopup}
@@ -84,7 +84,7 @@ export const QAFeedbackBlock = ({
       </CustomTooltip>
 
       <div className="ml-2">
-        <CustomTooltip line position="top" content="Dislike Search Response">
+        <CustomTooltip line position="top" content="Suchergebnis negativ bewerten">
           <QAFeedback
             messageId={messageId}
             setPopup={setPopup}
