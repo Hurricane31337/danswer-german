@@ -75,7 +75,7 @@ export function AssistantTools({
                 >
                   <div className="flex gap-x-1">
                     <FiSearch key={ind} className="ml-1 h-3 w-3 my-auto" />
-                    Search
+                    Suche
                   </div>
                 </div>
               );
@@ -98,7 +98,7 @@ export function AssistantTools({
                       key={ind}
                       className="ml-1 my-auto h-3 w-3 my-auto"
                     />
-                    Image Generation
+                    Bildergenerierung
                   </div>
                 </div>
               );

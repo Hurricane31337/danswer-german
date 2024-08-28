@@ -131,19 +131,19 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
                 }}
               >
                 <FiEdit className="flex-none " />
-                <p className="my-auto flex items-center text-sm">New Chat</p>
+                <p className="my-auto flex items-center text-sm">Neuer Chat</p>
               </Link>
               <button
                 onClick={() =>
-                  createFolder("New Folder")
+                  createFolder("Neuer Ordner")
                     .then((folderId) => {
                       router.refresh();
                       setNewFolderId(folderId);
                     })
                     .catch((error) => {
-                      console.error("Failed to create folder:", error);
+                      console.error("Ordner wurde nicht erstellt:", error);
                       setPopup({
-                        message: `Failed to create folder: ${error.message}`,
+                        message: `Ordner wurde nicht erstellt: ${error.message}`,
                         type: "error",
                       });
                     })
@@ -151,7 +151,7 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
                 className="w-full p-2 bg-white border-border border rounded items-center hover:bg-background-200 cursor-pointer transition-all duration-150 flex gap-x-2"
               >
                 <FiFolderPlus className="my-auto" />
-                <p className="my-auto flex items-center text-sm">New Folder</p>
+                <p className="my-auto flex items-center text-sm">Neuer Ordner</p>
               </button>
 
               <Link
@@ -160,7 +160,7 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
               >
                 <AssistantsIconSkeleton className="h-4 w-4 my-auto" />
                 <p className="my-auto flex items-center text-sm">
-                  Manage Assistants
+                  Assistenten verwalten
                 </p>
               </Link>
               <Link
@@ -169,7 +169,7 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
               >
                 <ClosedBookIcon className="h-4 w-4 my-auto" />
                 <p className="my-auto flex items-center text-sm">
-                  Manage Prompts
+                  Prompts verwalten
                 </p>
               </Link>
             </div>

@@ -357,10 +357,10 @@ export function groupSessionsByDateRange(chatSessions: ChatSession[]) {
   today.setHours(0, 0, 0, 0); // Set to start of today for accurate comparison
 
   const groups: Record<string, ChatSession[]> = {
-    Today: [],
-    "Previous 7 Days": [],
-    "Previous 30 Days": [],
-    "Over 30 days ago": [],
+    Heute: [],
+    "Letzte 7 Tage": [],
+    "Letzte 30 Tage": [],
+    "Vor mehr als 30 Tagen": [],
   };
 
   chatSessions.forEach((chatSession) => {
@@ -370,13 +370,13 @@ export function groupSessionsByDateRange(chatSessions: ChatSession[]) {
     const diffDays = diffTime / (1000 * 3600 * 24); // Convert time difference to days
 
     if (diffDays < 1) {
-      groups["Today"].push(chatSession);
+      groups["Heute"].push(chatSession);
     } else if (diffDays <= 7) {
-      groups["Previous 7 Days"].push(chatSession);
+      groups["Letzte 7 Tage"].push(chatSession);
     } else if (diffDays <= 30) {
-      groups["Previous 30 Days"].push(chatSession);
+      groups["Letzte 30 Tage"].push(chatSession);
     } else {
-      groups["Over 30 days ago"].push(chatSession);
+      groups["Vor mehr als 30 Tagen"].push(chatSession);
     }
   });
 

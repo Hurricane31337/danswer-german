@@ -102,7 +102,7 @@ export function SourceSelector({
       } duration-1000 flex  ease-out transition-all transform origin-top-right`}
     >
       <div className="mb-4 pb-2 flex border-b border-border text-emphasis">
-        <h2 className="font-bold my-auto">Filters</h2>
+        <h2 className="font-bold my-auto">Filter</h2>
         <FiFilter className="my-auto ml-2" size="16" />
       </div>
 
@@ -115,7 +115,7 @@ export function SourceSelector({
         <div className="mt-4">
           <div className="flex w-full gap-x-2 items-center">
             <div className="font-bold text-xs mt-2 flex items-center gap-x-2">
-              <p>Sources</p>
+              <p>Quellen</p>
               <input
                 type="checkbox"
                 checked={allSourcesSelected}
