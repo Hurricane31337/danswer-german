@@ -74,30 +74,30 @@ export default function SearchAnswer({
     >
       <div>
         <div className="flex gap-x-2">
-          <h2 className="text-emphasis font-bold my-auto mb-1">AI Answer</h2>
+          <h2 className="text-emphasis font-bold my-auto mb-1">KI-Antwort</h2>
 
           {searchState == "generating" && (
             <div key={"generating"} className="relative inline-block">
-              <span className="loading-text">Generating response...</span>
+              <span className="loading-text">Generiere Antwort...</span>
             </div>
           )}
 
           {searchState == "citing" && (
             <div key={"citing"} className="relative inline-block">
-              <span className="loading-text">Creating citations...</span>
+              <span className="loading-text">Erzeuge Zitate...</span>
             </div>
           )}
 
           {searchState == "searching" && (
             <div key={"Reading"} className="relative inline-block">
-              <span className="loading-text">Searching...</span>
+              <span className="loading-text">Suche...</span>
             </div>
           )}
 
           {searchState == "reading" && (
             <div key={"Reading"} className="relative inline-block">
               <span className="loading-text">
-                Reading{settings?.isMobile ? "" : " Documents"}
+                Lese{settings?.isMobile ? "" : " Dokumente"}
                 ...
               </span>
             </div>
@@ -106,8 +106,7 @@ export default function SearchAnswer({
           {searchState == "analyzing" && (
             <div key={"Generating"} className="relative inline-block">
               <span className="loading-text">
-                Running
-                {settings?.isMobile ? "" : " Analysis"}...
+                Analysiere...
               </span>
             </div>
           )}

@@ -71,7 +71,7 @@ const DocumentDisplay = ({
             } else {
               setPopup({
                 type: "error",
-                message: `Failed to update document - ${getErrorMsg(
+                message: `Dokument konnte nicht aktualisiert werden - ${getErrorMsg(
                   response
                 )}}`,
               });
@@ -168,7 +168,7 @@ export function Explorer({
             className="flex-grow ml-2 h-6 bg-transparent outline-none placeholder-subtle overflow-hidden whitespace-normal resize-none"
             role="textarea"
             aria-multiline
-            placeholder="Find documents based on title / content..."
+            placeholder="Finde Dokumente basierend auf Titel/Inhalt..."
             value={query}
             onChange={(event) => {
               setQuery(event.target.value);
@@ -211,8 +211,8 @@ export function Explorer({
       )}
       {!query && (
         <div className="flex text-emphasis mt-3">
-          Search for a document above to modify it&apos;s boost or hide it from
-          searches.
+          Suche oben nach einem Dokument, um seine Wichtigkeit zu verändern oder
+          es von der Suche auszunehmen.
         </div>
       )}
     </div>

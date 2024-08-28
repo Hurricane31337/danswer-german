@@ -71,7 +71,7 @@ function Main() {
     !currentEmeddingModel ||
     futureEmeddingModelError
   ) {
-    return <ErrorCallout errorTitle="Failed to fetch embedding model status" />;
+    return <ErrorCallout errorTitle="Der Status des Embedding-Modells konnte nicht abgerufen werden" />;
   }
 
   const currentModelName = currentEmeddingModel?.model_name;
@@ -96,16 +96,16 @@ function Main() {
         <>
           {settings?.settings.needs_reindexing && (
             <p className="max-w-3xl">
-              Your search settings are currently out of date! We recommend
-              updating your search settings and re-indexing.
+              Deine Sucheinstellungen sind derzeit veraltet! Wir empfehlen,
+              deine Sucheinstellungen zu aktualisieren und neu zu indizieren.
             </p>
           )}
-          <Title className="mb-6 mt-8 !text-2xl">Embedding Model</Title>
+          <Title className="mb-6 mt-8 !text-2xl">Embedding-Modell</Title>
 
           {currentModel ? (
             <ModelPreview model={currentModel} display />
           ) : (
-            <Title className="mt-8 mb-4">Choose your Embedding Model</Title>
+            <Title className="mt-8 mb-4">Wähle dein Embedding-Modell</Title>
           )}
 
           <Title className="mb-2 mt-8 !text-2xl">Post-processing</Title>
@@ -116,14 +116,14 @@ function Main() {
                 <div className="px-1 w-full rounded-lg">
                   <div className="space-y-4">
                     <div>
-                      <Text className="font-semibold">Reranking Model</Text>
+                      <Text className="font-semibold">Reranking-Modell</Text>
                       <Text className="text-gray-700">
-                        {searchSettings.rerank_model_name || "Not set"}
+                        {searchSettings.rerank_model_name || "Nicht festgelegt"}
                       </Text>
                     </div>
 
                     <div>
-                      <Text className="font-semibold">Results to Rerank</Text>
+                      <Text className="font-semibold">Ergebnise zum Reranking</Text>
                       <Text className="text-gray-700">
                         {searchSettings.num_rerank}
                       </Text>
@@ -131,32 +131,32 @@ function Main() {
 
                     <div>
                       <Text className="font-semibold">
-                        Multilingual Expansion
+                        Mehrsprachige Erweiterung
                       </Text>
                       <Text className="text-gray-700">
                         {searchSettings.multilingual_expansion.length > 0
                           ? searchSettings.multilingual_expansion.join(", ")
-                          : "None"}
+                          : "Keine"}
                       </Text>
                     </div>
 
                     <div>
-                      <Text className="font-semibold">Multipass Indexing</Text>
+                      <Text className="font-semibold">Mehrstufige Indizierung</Text>
                       <Text className="text-gray-700">
                         {searchSettings.multipass_indexing
-                          ? "Enabled"
-                          : "Disabled"}
+                          ? "Aktiviert"
+                          : "Deaktiviert"}
                       </Text>
                     </div>
 
                     <div>
                       <Text className="font-semibold">
-                        Disable Reranking for Streaming
+                        Reranking für Streaming deaktivieren
                       </Text>
                       <Text className="text-gray-700">
                         {searchSettings.disable_rerank_for_streaming
-                          ? "Yes"
-                          : "No"}
+                          ? "Ja"
+                          : "Nein"}
                       </Text>
                     </div>
                   </div>
@@ -166,7 +166,7 @@ function Main() {
           </Card>
 
           <Link href="/admin/embeddings">
-            <Button className="mt-8">Update Search Settings</Button>
+            <Button className="mt-8">Such-Einstellungen aktualisieren</Button>
           </Link>
         </>
       ) : (
@@ -180,7 +180,7 @@ function Page() {
   return (
     <div className="mx-auto container">
       <AdminPageTitle
-        title="Search Settings"
+        title="Such-Einstellungen"
         icon={<EmbeddingIcon size={32} className="my-auto" />}
       />
       <Main />

@@ -44,7 +44,7 @@ export const LlmTab = forwardRef<HTMLDivElement, LlmTabProps>(
     return (
       <div className="w-full">
         <div className="flex w-full justify-between content-center mb-2 gap-x-2">
-          <label className="block text-sm font-medium">Choose Model</label>
+          <label className="block text-sm font-medium">KI-Modell wählen</label>
           <button
             onClick={() => {
               close();
@@ -77,16 +77,16 @@ export const LlmTab = forwardRef<HTMLDivElement, LlmTabProps>(
             <span className="mr-2 text-xs text-primary">
               {isTemperatureExpanded ? "▼" : "►"}
             </span>
-            <span>Temperature</span>
+            <span>Temperatur</span>
           </button>
 
           {isTemperatureExpanded && (
             <>
               <Text className="mt-2 mb-8">
-                Adjust the temperature of the LLM. Higher temperatures will make
-                the LLM generate more creative and diverse responses, while
-                lower temperature will make the LLM generate more conservative
-                and focused responses.
+                Passe die Temperatur des KI-Modells an. Bei höheren Temperaturen
+                erzeugt das KI-Modell kreativere und vielfältigere Antworten,
+                während es bei niedrigeren Temperaturen konservativere und
+                gezieltere Antworten erzeugt.
               </Text>
 
               <div className="relative w-full">

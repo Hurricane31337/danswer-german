@@ -84,12 +84,12 @@ const DocumentFeedback = ({
         );
         if (!errorMsg) {
           setPopup({
-            message: "Thanks for your feedback!",
+            message: "Danke für dein Feedback!",
             type: "success",
           });
         } else {
           setPopup({
-            message: `Error giving feedback - ${errorMsg}`,
+            message: `Fehler beim Feedback geben – ${errorMsg}`,
             type: "error",
           });
         }
@@ -116,7 +116,7 @@ export const DocumentFeedbackBlock = ({
 }: DocumentFeedbackBlockProps) => {
   return (
     <div className="flex items-center gap-x-2">
-      <CustomTooltip showTick line content="Good response">
+      <CustomTooltip showTick line content="Gute Antwort">
         <DocumentFeedback
           documentId={documentId}
           messageId={messageId}
@@ -125,7 +125,7 @@ export const DocumentFeedbackBlock = ({
           feedbackType="endorse"
         />
       </CustomTooltip>
-      <CustomTooltip showTick line content="Bad response">
+      <CustomTooltip showTick line content="Schlechte Antwort">
         <DocumentFeedback
           documentId={documentId}
           messageId={messageId}

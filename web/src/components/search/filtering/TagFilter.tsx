@@ -76,7 +76,7 @@ export function TagFilter({
       <input
         ref={inputRef}
         className="w-full border border-border py-0.5 px-2 rounded text-sm h-8"
-        placeholder="Find a tag"
+        placeholder="Finde ein Tag"
         value={filterValue}
         onChange={handleFilterChange}
         onFocus={() => setTagOptionsAreVisible(true)}

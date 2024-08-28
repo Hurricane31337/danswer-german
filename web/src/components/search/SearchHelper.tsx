@@ -42,10 +42,10 @@ const getAssistantMessage = ({
   ) {
     return (
       <div>
-        This doesn&apos;t seem like a question for a Generative AI. Do you still
-        want to have{" "}
+        Das scheint keine Frage für eine generative KI zu sein. Willst du immer
+        noch{" "}
         <span className={CLICKABLE_CLASS_NAME} onClick={forceQADisplay}>
-          GPT give a response?
+          von der KI eine Antwort geben lassen?
         </span>
       </div>
     );
@@ -59,9 +59,9 @@ const getAssistantMessage = ({
   ) {
     return (
       <div>
-        GPT was unable to find an answer in the most relevant{" "}
+        Die KI konnte in den relevantesten{" "}
         <b>{` ${(defaultOverrides.offset + 1) * NUM_DOCUMENTS_FED_TO_GPT} `}</b>{" "}
-        documents. Do you want to{" "}
+        Dokumenten keine Antwort finden. Willst du{" "}
         <span
           className={CLICKABLE_CLASS_NAME}
           onClick={() => {
@@ -72,7 +72,7 @@ const getAssistantMessage = ({
             });
           }}
         >
-          keep searching?
+          weitersuchen?
         </span>
       </div>
     );
@@ -92,7 +92,7 @@ export const SearchHelper: React.FC<Props> = (props) => {
     <div className="border border-border rounded p-3 text-sm">
       <div className="flex">
         <BrainIcon size={20} />
-        <b className="ml-2 text-strong">AI Assistant</b>
+        <b className="ml-2 text-strong">KI-Assistent</b>
       </div>
 
       <div className="mt-1">{message}</div>
