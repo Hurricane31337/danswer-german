@@ -98,7 +98,7 @@ export const AnimatedToggle = ({
             `}
             ></div>
           </div>
-          <p className="flex ml-2 w-[40px]">
+          <p className="flex ml-2 w-[100px]">
             <span
               className={`no-underline text-sm transition-all duration-300 ease-in-out ${
                 isOn ? "opacity-0  translate-y-10 w-0" : "opacity-100"

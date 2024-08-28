@@ -154,7 +154,7 @@ export default function SearchAnswer({
             onClick={() => setSearchAnswerExpanded(true)}
             className="flex gap-x-1 items-center justify-center hover:bg-background-100 cursor-pointer max-w-sm text-sm mx-auto w-full bg-background border py-2 rounded-full"
           >
-            Show more
+            Mehr zeigen
             <ToggleDown />
           </button>
         </div>

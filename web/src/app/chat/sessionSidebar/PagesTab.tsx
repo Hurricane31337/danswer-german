@@ -93,9 +93,9 @@ export function PagesTab({
       >
         {(page == "chat" || page == "search") && (
           <p className="my-2 text-xs text-subtle flex font-bold">
-            {page == "chat" && "Chat "}
-            {page == "search" && "Search "}
-            History
+            {page == "chat" && "Chat"}
+            {page == "search" && "Such"}
+            verlauf
           </p>
         )}
         {isHistoryEmpty ? (

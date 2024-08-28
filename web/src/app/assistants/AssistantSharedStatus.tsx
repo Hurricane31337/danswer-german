@@ -27,7 +27,7 @@ export function AssistantSharedStatusDisplay({
     return (
       <div className="text-subtle text-sm flex items-center">
         <FiUnlock className="mr-1" />
-        Public
+        Öffentlich
       </div>
     );
   }
@@ -77,7 +77,7 @@ export function AssistantSharedStatusDisplay({
   return (
     <div className="text-subtle text-sm flex items-center">
       <FiLock className="mr-1" />
-      Private
+      Privat
     </div>
   );
 }
