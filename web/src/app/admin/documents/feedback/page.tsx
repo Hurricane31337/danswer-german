@@ -29,7 +29,7 @@ const Main = () => {
   };
 
   if (isMostLikedDocumentsLoading || isMostLikedDocumentLoading) {
-    return <LoadingAnimation text="Loading" />;
+    return <LoadingAnimation text="Lade" />;
   }
 
   if (
@@ -40,7 +40,7 @@ const Main = () => {
   ) {
     return (
       <div className="text-red-600">
-        Error loading documents -{" "}
+        Fehler beim Laden der Dokumente –{" "}
         {mostDislikedDocumentsError || mostLikedDocumentsError}
       </div>
     );
@@ -48,10 +48,10 @@ const Main = () => {
 
   return (
     <div className="mb-8">
-      <Title className="mb-2">Most Liked Documents</Title>
+      <Title className="mb-2">Dokumente mit meisten Likes</Title>
       <DocumentFeedbackTable documents={mostLikedDocuments} refresh={refresh} />
 
-      <Title className="mb-2 mt-6">Most Disliked Documents</Title>
+      <Title className="mb-2 mt-6">Dokumente mit meisten Dislikes</Title>
       <DocumentFeedbackTable
         documents={mostDislikedDocuments}
         refresh={refresh}
@@ -65,7 +65,7 @@ const Page = () => {
     <div className="container mx-auto">
       <AdminPageTitle
         icon={<ThumbsUpIcon size={32} />}
-        title="Document Feedback"
+        title="Dokument-Feedback"
       />
 
       <Main />

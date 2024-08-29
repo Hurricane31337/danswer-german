@@ -295,7 +295,7 @@ export function HorizontalFilters({
               <FiMap size={16} />
             </div>
           }
-          defaultDisplay="All Sources"
+          defaultDisplay="Alle Quellen"
         />
 
         <FilterDropdown
@@ -319,7 +319,7 @@ export function HorizontalFilters({
               <FiBook size={16} />
             </div>
           }
-          defaultDisplay="All Document Sets"
+          defaultDisplay="Alle Dokument-Sets"
         />
       </div>
 
@@ -456,7 +456,7 @@ export function HorizontalSourceSelector({
               )
             }
             icon={<FiMap size={16} />}
-            defaultDisplay="Sources"
+            defaultDisplay="Quellen"
             width="w-fit ellipsis truncate"
             resetValues={resetSources}
             dropdownWidth="w-40"

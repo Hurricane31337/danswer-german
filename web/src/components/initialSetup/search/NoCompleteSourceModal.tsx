@@ -34,22 +34,24 @@ export function NoCompleteSourcesModal({
   return (
     <Modal
       className="max-w-4xl"
-      title="⏳ None of your connectors have finished a full sync yet"
+      title="⏳ Keiner deiner Anbindungen hat bisher eine vollständige Synchronisierung durchgeführt"
       onOutsideClick={() => setIsHidden(true)}
     >
       <div className="text-sm">
         <div>
           <div>
-            You&apos;ve connected some sources, but none of them have finished
-            syncing. Depending on the size of the knowledge base(s) you&apos;ve
-            connected to Danswer, it can take anywhere between 30 seconds to a
-            few days for the initial sync to complete. So far we&apos;ve synced{" "}
-            <b>{totalDocs}</b> documents.
+            Du hast einige Anbindungen eingerichtet, aber noch keine davon wurde
+            vollständig synchronisiert. Je nach Größe der Wissensdatenbank(en), die
+            du mit Danswer verbunden hast, kann es zwischen 30 Sekunden und ein paar
+            Tagen dauern, bis die initiale Synchronisierung abgeschlossen ist. Bis
+            jetzt haben wir{" "}
+            <b>{totalDocs}</b> Dokumente synchronisiert.
             <br />
             <br />
-            To view the status of your syncing connectors, head over to the{" "}
+            Um den Status deiner synchronisierenden Anbindungen einzusehen, gehe
+            zur Seite{" "}
             <Link className="text-link" href="admin/indexing/status">
-              Existing Connectors page
+              Vorhandene Anbindungen
             </Link>
             .
             <br />
@@ -60,8 +62,8 @@ export function NoCompleteSourcesModal({
                 setIsHidden(true);
               }}
             >
-              Or, click here to continue and ask questions on the partially
-              synced knowledge set.
+              Oder klicke hier, um fortzufahren und Fragen zur teilweise
+              synchronisierten Wissensdatenbank zu stellen.
             </p>
           </div>
         </div>

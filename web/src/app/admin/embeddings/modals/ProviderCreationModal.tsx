@@ -36,10 +36,10 @@ export function ProviderCreationModal({
   };
 
   const validationSchema = Yup.object({
-    provider_type: Yup.string().required("Provider type is required"),
+    provider_type: Yup.string().required("Anbieter-Typ ist erforderlich"),
     api_key: useFileUpload
       ? Yup.string()
-      : Yup.string().required("API Key is required"),
+      : Yup.string().required("API-Schlüssel ist erforderlich"),
     custom_config: Yup.array().of(Yup.array().of(Yup.string()).length(2)),
   });
 
@@ -60,7 +60,7 @@ export function ProviderCreationModal({
           jsonContent = JSON.parse(fileContent);
         } catch (parseError) {
           throw new Error(
-            "Failed to parse JSON file. Please ensure it's a valid JSON."
+            "Die JSON-Datei konnte nicht geparst werden. Bitte stelle sicher, dass es sich um gültiges JSON handelt."
           );
         }
         setFieldValue("api_key", JSON.stringify(jsonContent));
@@ -114,7 +114,7 @@ export function ProviderCreationModal({
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(
-          errorData.detail || "Failed to update provider- check your API key"
+          errorData.detail || "Der Anbieter konnte nicht aktualisiert werden – überprüfe deinen API-Schlüssel"
         );
       }
 
@@ -123,7 +123,7 @@ export function ProviderCreationModal({
       if (error instanceof Error) {
         setErrorMsg(error.message);
       } else {
-        setErrorMsg("An unknown error occurred");
+        setErrorMsg("Ein unbekannter Fehler ist aufgetreten");
       }
     } finally {
       setIsProcessing(false);
@@ -154,29 +154,30 @@ export function ProviderCreationModal({
           }) => (
             <Form onSubmit={handleSubmit} className="space-y-4">
               <Text className="text-lg mb-2">
-                You are setting the credentials for this provider. To access
-                this information, follow the instructions{" "}
+                Du legst die Anmeldeinformationen für diesen Anbieter fest. Um
+                auf diese Informationen zuzugreifen, folge den Anweisungen{" "}
                 <a
                   className="cursor-pointer underline"
                   target="_blank"
                   href={selectedProvider.docsLink}
                 >
-                  here
+                  hier
                 </a>{" "}
-                and gather your{" "}
+                und hole deinen{" "}
                 <a
                   className="cursor-pointer underline"
                   target="_blank"
                   href={selectedProvider.apiLink}
                 >
-                  API KEY
+                  API-Schlüssel
                 </a>
+                ab.
               </Text>
 
               <div className="flex flex-col gap-y-2">
                 {useFileUpload ? (
                   <>
-                    <Label>Upload JSON File</Label>
+                    <Label>JSON-Datei hochladen</Label>
                     <input
                       ref={fileInputRef}
                       type="file"
@@ -184,13 +185,13 @@ export function ProviderCreationModal({
                       onChange={(e) => handleFileUpload(e, setFieldValue)}
                       className="text-lg w-full p-1"
                     />
-                    {fileName && <p>Uploaded file: {fileName}</p>}
+                    {fileName && <p>Hochgeladene Datei: {fileName}</p>}
                   </>
                 ) : (
                   <TextFormField
                     name="api_key"
                     label="API Key"
-                    placeholder="API Key"
+                    placeholder="API-Schlüssel"
                     type="password"
                   />
                 )}
@@ -200,7 +201,7 @@ export function ProviderCreationModal({
                   target="_blank"
                   className="underline cursor-pointer"
                 >
-                  Learn more here
+                  Hier mehr erfahren
                 </a>
               </div>
 
@@ -219,9 +220,9 @@ export function ProviderCreationModal({
                 {isProcessing ? (
                   <LoadingAnimation />
                 ) : existingProvider ? (
-                  "Update"
+                  "Aktualisieren"
                 ) : (
-                  "Create"
+                  "Erstellen"
                 )}
               </Button>
             </Form>

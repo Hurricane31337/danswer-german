@@ -43,7 +43,7 @@ export default function UpgradingPage({
       mutate("/api/search-settings/get-secondary-search-settings");
     } else {
       alert(
-        `Failed to cancel embedding model update - ${await response.text()}`
+        `Wechsel des Embedding-Modells konnte nicht abgebrochen werden – ${await response.text()}`
       );
     }
     setIsCancelling(false);
@@ -54,19 +54,19 @@ export default function UpgradingPage({
       {isCancelling && (
         <Modal
           onOutsideClick={() => setIsCancelling(false)}
-          title="Cancel Embedding Model Switch"
+          title="Wechsel des Embedding-Modells abbrechen"
         >
           <div>
             <div>
-              Are you sure you want to cancel?
+              Bist du sicher, dass du abbrechen willst?
               <br />
               <br />
-              Cancelling will revert to the previous model and all progress will
-              be lost.
+              Beim Abbruch wird das vorherige Modell wiederhergestellt und alle
+              Fortschritte gehen verloren.
             </div>
             <div className="flex">
               <Button onClick={onCancel} className="mt-3 mx-auto" color="green">
-                Confirm
+                Bestätigen
               </Button>
             </div>
           </div>
@@ -75,10 +75,10 @@ export default function UpgradingPage({
 
       {futureEmbeddingModel && connectors && connectors.length > 0 && (
         <div>
-          <Title className="mt-8">Current Upgrade Status</Title>
+          <Title className="mt-8">Aktueller Stand der Aktualisierung</Title>
           <div className="mt-4">
             <div className="italic text-lg mb-2">
-              Currently in the process of switching to:{" "}
+              Aktuell beim Wechseln zu:{" "}
               {futureEmbeddingModel.model_name}
             </div>
 
@@ -88,15 +88,15 @@ export default function UpgradingPage({
               className="mt-4"
               onClick={() => setIsCancelling(true)}
             >
-              Cancel
+              Abbrechen
             </Button>
 
             <Text className="my-4">
-              The table below shows the re-indexing progress of all existing
-              connectors. Once all connectors have been re-indexed successfully,
-              the new model will be used for all search queries. Until then, we
-              will use the old model so that no downtime is necessary during
-              this transition.
+              Die folgende Tabelle zeigt den Neuindizierungsfortschritt aller
+              vorhandenen Anbindungen. Sobald alle Anbindungen erfolgreich
+              reindiziert wurden, wird das neue Modell für alle Suchanfragen
+              verwendet. Bis dahin werden wir wir das alte Modell nutzen, sodass
+              während der Umstellung keine Ausfallzeiten entstehen.
             </Text>
 
             {isLoadingOngoingReIndexingStatus ? (
@@ -106,7 +106,7 @@ export default function UpgradingPage({
                 reindexingProgress={ongoingReIndexingStatus}
               />
             ) : (
-              <ErrorCallout errorTitle="Failed to fetch re-indexing progress" />
+              <ErrorCallout errorTitle="Fortschritt der Neuindizierung konnte nicht abgerufen werden" />
             )}
           </div>
         </div>

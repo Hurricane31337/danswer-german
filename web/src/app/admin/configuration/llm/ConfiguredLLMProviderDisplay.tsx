@@ -27,10 +27,10 @@ function LLMProviderUpdateModal({
     : null ||
       llmProviderDescriptor?.display_name ||
       llmProviderDescriptor?.name ||
-      "Custom LLM Provider";
+      "Eigener LLM-Anbieter";
   return (
     <Modal
-      title={`${llmProviderDescriptor ? "Configure" : "Setup"} ${providerName}`}
+      title={`${llmProviderDescriptor ? "Konfigurieren" : "Einrichten"} ${providerName}`}
       onOutsideClick={() => onClose()}
     >
       <div className="max-h-[70vh] overflow-y-auto px-4">
@@ -92,7 +92,7 @@ function LLMProviderDisplay({
                   const errorMsg = (await response.json()).detail;
                   setPopup({
                     type: "error",
-                    message: `Failed to set provider as default: ${errorMsg}`,
+                    message: `Anbieter konnte nicht als Standard festgelegt werden: ${errorMsg}`,
                   });
                   return;
                 }
@@ -100,7 +100,7 @@ function LLMProviderDisplay({
                 mutate(LLM_PROVIDERS_ADMIN_URL);
                 setPopup({
                   type: "success",
-                  message: "Provider set as default successfully!",
+                  message: "Anbieter erfolgreich als Standard festgelegt!",
                 });
               }}
             >
@@ -129,7 +129,7 @@ function LLMProviderDisplay({
             size="xs"
             onClick={() => setFormIsVisible(true)}
           >
-            {existingLlmProvider ? "Edit" : "Set up"}
+            {existingLlmProvider ? "Editieren" : "Einrichten"}
           </Button>
         </div>
       </div>

@@ -251,7 +251,7 @@ export default function AddConnector({
     if (!credentialActivated) {
       if (isSuccess) {
         setPopup({
-          message: "Connector created! Redirecting to connector home page",
+          message: "Anbindung erstellt! Leite zur Anbindungs-Startseite weiter",
           type: "success",
         });
         setTimeout(() => {
@@ -275,7 +275,7 @@ export default function AddConnector({
       );
       if (linkCredentialResponse.ok) {
         setPopup({
-          message: "Connector created! Redirecting to connector home page",
+          message: "Anbindung erstellt! Leite zur Anbindungs-Startseite weiter",
           type: "success",
         });
         setTimeout(() => {
@@ -291,7 +291,7 @@ export default function AddConnector({
     } else if (isSuccess) {
       setPopup({
         message:
-          "Credential created succsfully! Redirecting to connector home page",
+          "Anmeldeinformationen erfolgreich erstellt! Leite zur Anbindungs-Startseite weiter",
         type: "success",
       });
     } else {
@@ -311,7 +311,7 @@ export default function AddConnector({
     const response = await deleteCredential(credential.id, true);
     if (response.ok) {
       setPopup({
-        message: "Credential deleted successfully!",
+        message: "Anmeldeinformationen erfolgreich gelöscht!",
         type: "success",
       });
     } else {
@@ -327,14 +327,14 @@ export default function AddConnector({
     setCurrentCredential(selectedCredential);
     setAlowCreate(true);
     setPopup({
-      message: "Swapped credential successfully!",
+      message: "Anmeldeinformationen erfolgreich ausgetauscht!",
       type: "success",
     });
     refresh();
   };
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Connector Name is required"),
+    name: Yup.string().required("Anbindungsname ist erforderlich"),
     ...configuration.values.reduce(
       (acc, field) => {
         let schema: any =
@@ -345,7 +345,7 @@ export default function AddConnector({
               : Yup.string();
 
         if (!field.optional) {
-          schema = schema.required(`${field.label} is required`);
+          schema = schema.required(`${field.label} ist erforderlich`);
         }
         acc[field.name] = schema;
         return acc;
@@ -356,8 +356,8 @@ export default function AddConnector({
 
   const advancedValidationSchema = Yup.object().shape({
     indexingStart: Yup.string().nullable(),
-    pruneFreq: Yup.number().min(0, "Prune frequency must be non-negative"),
-    refreshFreq: Yup.number().min(0, "Refresh frequency must be non-negative"),
+    pruneFreq: Yup.number().min(0, "Die Bereinigungshäufigkeit darf nicht negativ sein"),
+    refreshFreq: Yup.number().min(0, "Die Aktualisierungshäufigkeit darf nicht negativ sein"),
   });
 
   const isFormSubmittable = (values: any) => {
@@ -387,7 +387,7 @@ export default function AddConnector({
         (connector == "google_drive" ? (
           <>
             <Card>
-              <Title className="mb-2 text-lg">Select a credential</Title>
+              <Title className="mb-2 text-lg">Wähle eine Zugangsmethode</Title>
               <GDriveMain />
             </Card>
             <div className="mt-4 flex w-full justify-end">
@@ -396,7 +396,7 @@ export default function AddConnector({
                 disabled={!credentialActivated}
                 onClick={() => nextFormStep()}
               >
-                Continue
+                Fortfahren
                 <ArrowRight />
               </button>
             </div>
@@ -404,7 +404,7 @@ export default function AddConnector({
         ) : connector == "gmail" ? (
           <>
             <Card>
-              <Title className="mb-2 text-lg">Select a credential</Title>
+              <Title className="mb-2 text-lg">Wähle eine Zugangsmethode</Title>
               <GmailMain />
             </Card>
             <div className="mt-4 flex w-full justify-end">
@@ -413,7 +413,7 @@ export default function AddConnector({
                 disabled={!credentialActivated}
                 onClick={() => nextFormStep()}
               >
-                Continue
+                Fortfahren
                 <ArrowRight />
               </button>
             </div>
@@ -421,7 +421,7 @@ export default function AddConnector({
         ) : (
           <>
             <Card>
-              <Title className="mb-2 text-lg">Select a credential</Title>
+              <Title className="mb-2 text-lg">Wähle eine Zugangsmethode</Title>
               <ModifyCredential
                 showIfEmpty
                 source={connector}
@@ -440,7 +440,7 @@ export default function AddConnector({
                     )
                   }
                 >
-                  Create New
+                  Neu anlegen
                 </button>
               )}
 
@@ -451,7 +451,7 @@ export default function AddConnector({
                 >
                   <>
                     <Title className="mb-2 text-lg">
-                      Create a {getSourceDisplayName(connector)} credential
+                      Erstelle einen {getSourceDisplayName(connector)}-Zugang
                     </Title>
                     <CreateCredential
                       close
@@ -471,7 +471,7 @@ export default function AddConnector({
                 disabled={currentCredential == null}
                 onClick={() => nextFormStep()}
               >
-                Continue
+                Fortfahren
                 <ArrowRight />
               </button>
             </div>
@@ -525,7 +525,7 @@ export default function AddConnector({
                 onClick={() => prevFormStep()}
               >
                 <ArrowLeft />
-                Previous
+                Zurück
               </button>
             ) : (
               <div />
@@ -540,7 +540,7 @@ export default function AddConnector({
                 await createConnector();
               }}
             >
-              Create Connector
+              Anbindung anlegen
               <FiPlus className="text-white h-4 w-4" />
             </button>
 
@@ -553,7 +553,7 @@ export default function AddConnector({
                     nextFormStep();
                   }}
                 >
-                  Advanced
+                  Erweitert
                   <ArrowRight />
                 </button>
               </div>
@@ -583,7 +583,7 @@ export default function AddConnector({
                       >
                         <TrashIcon size={20} className="text-white" />
                         <div className="w-full items-center gap-x-2 flex">
-                          Reset
+                          Zurücksetzen
                         </div>
                       </button>
                     </div>
@@ -598,7 +598,7 @@ export default function AddConnector({
               onClick={() => prevFormStep()}
             >
               <ArrowLeft />
-              Previous
+              Zurück
             </button>
             <button
               className="enabled:cursor-pointer ml-auto disabled:bg-accent/50 bg-accent flex mx-auto gap-x-1 items-center text-white py-2.5 px-3.5 text-sm font-regular rounded-sm"
@@ -606,7 +606,7 @@ export default function AddConnector({
                 await createConnector();
               }}
             >
-              Create Connector
+              Anbindung anlegen
               <FiPlus className="text-white h-4 w-4" />
             </button>
           </div>

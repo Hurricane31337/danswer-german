@@ -20,20 +20,20 @@ export function DeleteCredentialsModal({
     >
       <div className="mb-4">
         <Text className="text-lg mb-2">
-          You&apos;re about to delete your {modelProvider.provider_type}{" "}
-          credentials. Are you sure?
+          Du bist dabei, deine Anmeldeinformation für {modelProvider.provider_type}{" "}
+          zu löschen. Bist du dir sicher?
         </Text>
         <Callout
-          title="Point of No Return"
+          title="Punkt, an dem es kein Zurück mehr gibt"
           color="red"
           className="mt-4"
         ></Callout>
         <div className="flex mt-8 justify-between">
           <Button color="gray" onClick={onCancel}>
-            Keep Credentaisl
+            Anmeldeinformationen behalten
           </Button>
           <Button color="red" onClick={onConfirm}>
-            Delete Credentials
+            Anmeldeinformationen löschen
           </Button>
         </div>
       </div>

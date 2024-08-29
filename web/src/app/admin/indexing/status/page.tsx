@@ -38,7 +38,7 @@ function Main() {
       <div className="text-error">
         {indexAttemptError?.info?.detail ||
           editableIndexAttemptError?.info?.detail ||
-          "Error loading indexing history."}
+          "Fehler beim Laden des Indizierungsverlaufs."}
       </div>
     );
   }
@@ -46,11 +46,12 @@ function Main() {
   if (indexAttemptData.length === 0) {
     return (
       <Text>
-        It looks like you don&apos;t have any connectors setup yet. Visit the{" "}
+        Scheint, als hättest du noch keine Anbindungen eingerichtet. Besuche die
+        Seite{" "}
         <Link className="text-link" href="/admin/add-connector">
-          Add Connector
+          Anbindung hinzufügen
         </Link>{" "}
-        page to get started!
+        um loszulegen!
       </Text>
     );
   }
@@ -79,11 +80,11 @@ export default function Status() {
     <div className="mx-auto container">
       <AdminPageTitle
         icon={<NotebookIcon size={32} />}
-        title="Existing Connectors"
+        title="Bestehende Anbindungen"
         farRightElement={
           <Link href="/admin/add-connector">
             <Button color="green" size="xs">
-              Add Connector
+              Anbindung hinzufügen
             </Button>
           </Link>
         }

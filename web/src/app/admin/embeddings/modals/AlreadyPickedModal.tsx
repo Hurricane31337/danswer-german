@@ -14,16 +14,16 @@ export function AlreadyPickedModal({
   return (
     <Modal
       width="max-w-3xl"
-      title={`${model.model_name} already chosen`}
+      title={`${model.model_name} bereits ausgewählt`}
       onOutsideClick={onClose}
     >
       <div className="mb-4">
         <Text className="text-sm mb-2">
-          You can select a different one if you want!
+          Du kannst ein anderes wählen wenn du willst!
         </Text>
         <div className="flex mt-8 justify-between">
           <Button color="blue" onClick={onClose}>
-            Close
+            Schließen
           </Button>
         </div>
       </div>
