@@ -886,7 +886,7 @@ export function ChatPage({
 
     if (currentChatState() != "input") {
       setPopup({
-        message: "Please wait for the response to complete",
+        message: "Bitte warte, bis die Antwort abgeschlossen ist",
         type: "error",
       });
 
@@ -942,7 +942,7 @@ export function ChatPage({
     if (!messageToResend && messageIdToResend !== undefined) {
       setPopup({
         message:
-          "Failed to re-send message - please refresh the page and try again.",
+          "Nachricht konnte nicht erneut gesendet werden – bitte aktualisiere die Seite und versuche es erneut.",
         type: "error",
       });
       resetRegenerationState(currentSessionId());
@@ -1322,14 +1322,14 @@ export function ChatPage({
 
     if (response.ok) {
       setPopup({
-        message: "Thanks for your feedback!",
+        message: "Danke für dein Feedback!",
         type: "success",
       });
     } else {
       const responseJson = await response.json();
       const errorMsg = responseJson.detail || responseJson.message;
       setPopup({
-        message: `Failed to submit feedback - ${errorMsg}`,
+        message: `Feedback konnte nicht gesendet werden – ${errorMsg}`,
         type: "error",
       });
     }
@@ -1363,7 +1363,7 @@ export function ChatPage({
       setPopup({
         type: "error",
         message:
-          "The current Assistant does not support image input. Please select an assistant with Vision support.",
+          "Der aktuelle Assistent unterstützt keine Bildeingabe. Bitte wähle einen Assistenten mit Vision-Unterstützung.",
       });
       return;
     }
@@ -1912,7 +1912,7 @@ export function ChatPage({
                                                 setPopup({
                                                   type: "error",
                                                   message:
-                                                    "Cannot edit query of first message - please refresh the page and try again.",
+                                                    "Die Abfrage der ersten Nachricht kann nicht bearbeitet werden – bitte aktualisiere die Seite und versuche es erneut.",
                                                 });
                                                 return;
                                               }
@@ -1923,7 +1923,7 @@ export function ChatPage({
                                                 setPopup({
                                                   type: "error",
                                                   message:
-                                                    "Cannot edit query of a pending message - please wait a few seconds and try again.",
+                                                    "Die Abfrage einer ausstehenden Nachricht kann nicht bearbeitet werden – bitte warte einige Sekunden und versuche es erneut.",
                                                 });
                                                 return;
                                               }
@@ -1969,7 +1969,7 @@ export function ChatPage({
                                           setPopup({
                                             type: "error",
                                             message:
-                                              "Failed to force search - please refresh the page and try again.",
+                                              "Die Suche konnte nicht erzwungen werden – bitte aktualisiere die Seite und versuche es erneut.",
                                           });
                                         }
                                       }}
@@ -2002,7 +2002,7 @@ export function ChatPage({
                                               }
                                               className="ml-2 cursor-pointer underline"
                                             >
-                                              Show stack trace.
+                                              Stack-Trace anzeigen.
                                             </span>
                                           )}
                                         </p>
@@ -2043,7 +2043,7 @@ export function ChatPage({
                                       className="mr-auto relative inline-block"
                                     >
                                       <span className="text-sm loading-text">
-                                        Thinking...
+                                        Denke nach...
                                       </span>
                                     </div>
                                   }

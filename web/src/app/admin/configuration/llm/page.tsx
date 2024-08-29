@@ -9,7 +9,7 @@ const Page = () => {
   return (
     <div className="mx-auto container">
       <AdminPageTitle
-        title="LLM-Einrichtung"
+        title="LLM-Konfiguration"
         icon={<CpuIcon size={32} className="my-auto" />}
       />
 
