@@ -40,7 +40,7 @@ const IsVisibleSection = ({
             }}
             className="flex text-error cursor-pointer hover:bg-hover py-1 px-2 w-fit rounded-full"
           >
-            <div className="select-none">Hidden</div>
+            <div className="select-none">Versteckt</div>
             <div className="ml-1 my-auto">
               <CustomCheckbox checked={false} />
             </div>
@@ -56,7 +56,7 @@ const IsVisibleSection = ({
             }}
             className="flex cursor-pointer hover:bg-hover py-1 px-2 w-fit rounded-full"
           >
-            <div className="my-auto select-none">Visible</div>
+            <div className="my-auto select-none">Sichtbar</div>
             <div className="ml-1 my-auto">
               <CustomCheckbox checked={true} />
             </div>
@@ -67,12 +67,12 @@ const IsVisibleSection = ({
         <div className="text-xs">
           {document.hidden ? (
             <div className="flex">
-              <FiEye className="my-auto mr-1" /> Unhide
+              <FiEye className="my-auto mr-1" /> Einblenden
             </div>
           ) : (
             <div className="flex">
               <FiEyeOff className="my-auto mr-1" />
-              Hide
+              Ausblenden
             </div>
           )}
         </div>
@@ -97,9 +97,9 @@ export const DocumentFeedbackTable = ({
       <Table className="overflow-visible">
         <TableHead>
           <TableRow>
-            <TableHeaderCell>Document Name</TableHeaderCell>
-            <TableHeaderCell>Is Searchable?</TableHeaderCell>
-            <TableHeaderCell>Score</TableHeaderCell>
+            <TableHeaderCell>Dokumentname</TableHeaderCell>
+            <TableHeaderCell>Durchsuchbar?</TableHeaderCell>
+            <TableHeaderCell>Punktzahl</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -126,7 +126,7 @@ export const DocumentFeedbackTable = ({
                           refresh();
                         } else {
                           setPopup({
-                            message: `Error updating hidden status - ${getErrorMsg(
+                            message: `Fehler beim Aktualisieren des Versteckt-Status – ${getErrorMsg(
                               response
                             )}`,
                             type: "error",

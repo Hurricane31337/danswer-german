@@ -111,14 +111,14 @@ function SummaryRow({
       )}
 
       <TableCell className={`py-4 w-[${columnWidths.fifth}]`}>
-        <div className="text-sm text-gray-500">Total Docs Indexed</div>
+        <div className="text-sm text-gray-500">Insgesamt indizierte Dokumente</div>
         <div className="text-xl font-semibold">
           {summary.totalDocsIndexed.toLocaleString()}
         </div>
       </TableCell>
 
       <TableCell className={`w-[${columnWidths.sixth}]`}>
-        <div className="text-sm text-gray-500">Errors</div>
+        <div className="text-sm text-gray-500">Fehler</div>
 
         <div className="flex items-center text-lg gap-x-1 font-semibold">
           {summary.errors > 0 && <Warning className="text-error h-6 w-6" />}
@@ -160,7 +160,7 @@ function ConnectorRow({
         >
           <div className="flex text-xs items-center gap-x-1">
             <div className="w-3 h-3 rounded-full bg-red-500"></div>
-            Deleting
+            Lösche
           </div>
         </Badge>
       );
@@ -175,7 +175,7 @@ function ConnectorRow({
         >
           <div className="flex text-xs items-center gap-x-1">
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-            Paused
+            Pausiert
           </div>
         </Badge>
       );
@@ -191,7 +191,7 @@ function ConnectorRow({
           >
             <div className="flex text-xs items-center gap-x-1">
               <div className="w-3 h-3 rounded-full bg-green-500"></div>
-              Indexing
+              Indiziere
             </div>
           </Badge>
         );
@@ -203,7 +203,7 @@ function ConnectorRow({
           >
             <div className="flex text-xs items-center gap-x-1">
               <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-              Scheduled
+              Geplant
             </div>
           </Badge>
         );
@@ -215,7 +215,7 @@ function ConnectorRow({
           >
             <div className="flex text-xs items-center gap-x-1">
               <div className="w-3 h-3 rounded-full bg-green-500"></div>
-              Active
+              Aktiv
             </div>
           </Badge>
         );
@@ -250,11 +250,11 @@ function ConnectorRow({
               color={isEditable ? "green" : "gray"}
               icon={FiUnlock}
             >
-              Public
+              Öffentlich
             </Badge>
           ) : (
             <Badge size="md" color={isEditable ? "blue" : "gray"} icon={FiLock}>
-              Private
+              Privat
             </Badge>
           )}
         </TableCell>
@@ -271,7 +271,7 @@ function ConnectorRow({
       </TableCell>
       <TableCell className={`w-[${columnWidths.seventh}]`}>
         {isEditable && (
-          <CustomTooltip content="Manage Connector">
+          <CustomTooltip content="Anbidung verwalten">
             <FiSettings
               className="cursor-pointer"
               onClick={handleManageClick}
@@ -406,11 +406,11 @@ export function CCPairIndexingStatusTable({
           invisible
           ccPairsIndexingStatus={{
             cc_pair_id: 1,
-            name: "Sample File Connector",
+            name: "Beispiel-Datei-Anbindung",
             cc_pair_status: ConnectorCredentialPairStatus.ACTIVE,
             last_status: "success",
             connector: {
-              name: "Sample File Connector",
+              name: "Beispiel-Datei-Anbindung",
               source: "file",
               input_type: "poll",
               connector_specific_config: {
@@ -426,7 +426,7 @@ export function CCPairIndexingStatusTable({
             },
             credential: {
               id: 1,
-              name: "Sample Credential",
+              name: "Beispiel-Anmeldeinformation",
               source: "file",
               user_id: "1",
               time_created: "2023-07-01T12:00:00Z",
@@ -454,14 +454,14 @@ export function CCPairIndexingStatusTable({
             <input
               type="text"
               ref={searchInputRef}
-              placeholder="Search connectors..."
+              placeholder="Suche Anbindungen..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="ml-2 w-96 h-9 flex-none rounded-md border border-border bg-background-50 px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             />
 
             <Button className="h-9" onClick={() => toggleSources()}>
-              {!shouldExpand ? "Collapse All" : "Expand All"}
+              {!shouldExpand ? "Alle einklappen" : "Alle ausklappen"}
             </Button>
           </div>
           {sortedSources
@@ -499,29 +499,29 @@ export function CCPairIndexingStatusTable({
                           <TableHeaderCell
                             className={`w-[${columnWidths.fifth}]`}
                           >
-                            Last Indexed
+                            Zuletzt indiziert
                           </TableHeaderCell>
                           <TableHeaderCell
                             className={`w-[${columnWidths.second}]`}
                           >
-                            Activity
+                            Aktivität
                           </TableHeaderCell>
                           {isPaidEnterpriseFeaturesEnabled && (
                             <TableHeaderCell
                               className={`w-[${columnWidths.fourth}]`}
                             >
-                              Permissions
+                              Berechtigungen
                             </TableHeaderCell>
                           )}
                           <TableHeaderCell
                             className={`w-[${columnWidths.sixth}]`}
                           >
-                            Total Docs
+                            Dokumente insgesamt
                           </TableHeaderCell>
                           <TableHeaderCell
                             className={`w-[${columnWidths.third}]`}
                           >
-                            Last Status
+                            Letzter Status
                           </TableHeaderCell>
                           <TableHeaderCell
                             className={`w-[${columnWidths.seventh}]`}

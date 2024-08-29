@@ -29,7 +29,7 @@ Wahr oder Falsch
 
 AGENTIC_SEARCH_USER_PROMPT = """
 
-Dokumenttitel: {title}{optional_metadata}
+Dokument-Titel: {title}{optional_metadata}
 ```
 {content}
 ```
