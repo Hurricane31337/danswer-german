@@ -93,15 +93,15 @@ export function _WelcomeModal({ user }: { user: User | null }) {
               {apiKeyVerified && (
                 <FiCheckCircle className="my-auto mr-2 text-success" />
               )}
-              Step 1: Setup an LLM
+              Schritt 1: Richte ein LLM ein
             </Text>
             <div>
               {apiKeyVerified ? (
                 <Text className="mt-2">
-                  LLM setup complete!
+                  LLM-Einrichtung abgeschlossen!
                   <br /> <br />
-                  If you want to change the key later, you&apos;ll be able to
-                  easily to do so in the Admin Panel.
+                  Falls du später den API-Schlüssel ändern willst, kannst du
+                  das ganz einfach im Admin-Panel tun.
                 </Text>
               ) : (
                 <ApiKeyForm
@@ -111,14 +111,15 @@ export function _WelcomeModal({ user }: { user: User | null }) {
               )}
             </div>
             <Text className="font-bold mt-6 mb-2">
-              Step 2: Connect Data Sources
+              Schritt 2: Datenquellen anbinden
             </Text>
             <div>
               <Text>
-                Connectors are the way that Danswer gets data from your
-                organization&apos;s various data sources. Once setup, we&apos;ll
-                automatically sync data from your apps and docs into Danswer, so
-                you can search through all of them in one place.
+                Anbindungen sind der Weg, durch den Danswer Daten aus den
+                verschiedenen Datenquellen deiner Organisation bekommt. Sobald
+                die Einrichtung abgeschlossen ist, synchronisieren wir automatisch
+                Daten aus deinen Apps und Dokumenten zu Danswer, sodass du sie
+                alle an einem Ort durchsuchen kannst.
               </Text>
 
               <div className="flex mt-3">
@@ -132,7 +133,7 @@ export function _WelcomeModal({ user }: { user: User | null }) {
                   className="w-fit mx-auto"
                 >
                   <Button size="xs" icon={FiShare2} disabled={!apiKeyVerified}>
-                    Setup your first connector!
+                    Richte deine erste Anbindung ein!
                   </Button>
                 </Link>
               </div>
@@ -152,15 +153,15 @@ export function _WelcomeModal({ user }: { user: User | null }) {
               {apiKeyVerified && (
                 <FiCheckCircle className="my-auto mr-2 text-success" />
               )}
-              Step 1: Setup an LLM
+              Schritt 1: Richte ein LLM ein
             </Text>
             <div>
               {apiKeyVerified ? (
                 <Text className="mt-2">
-                  LLM setup complete!
+                  LLM-Einrichtung abgeschlossen!
                   <br /> <br />
-                  If you want to change the key later or choose a different LLM,
-                  you&apos;ll be able to easily to do so in the Admin Panel.
+                  Falls du später den API-Schlüssel ändern willst, kannst du
+                  das ganz einfach im Admin-Panel tun.
                 </Text>
               ) : (
                 <div>
@@ -173,13 +174,14 @@ export function _WelcomeModal({ user }: { user: User | null }) {
             </div>
 
             <Text className="font-bold mt-6 mb-2 flex">
-              Step 2: Start Chatting!
+              Schritt 2: Beginne zu chatten!
             </Text>
 
             <Text>
-              Click the button below to start chatting with the LLM setup above!
-              Don&apos;t worry, if you do decide later on you want to connect
-              your organization&apos;s knowledge, you can always do that in the{" "}
+              Klicke auf den untenstehenden Button, um mit dem oben konfigurierten
+              LLM zu chatten! Keine Sorge – wenn du dich doch später dazu entschließt,
+              das Wissen deiner Organisation zu verknüpfen, kannst du das jederzeit
+              im{" "}
               <Link
                 className="text-link"
                 href="/admin/add-connector"
@@ -189,9 +191,9 @@ export function _WelcomeModal({ user }: { user: User | null }) {
                   router.push("/admin/add-connector");
                 }}
               >
-                Admin Panel
+                Admin-Panel
               </Link>
-              .
+              tun.
             </Text>
 
             <div className="flex mt-3">
@@ -206,7 +208,7 @@ export function _WelcomeModal({ user }: { user: User | null }) {
                 className="w-fit mx-auto"
               >
                 <Button size="xs" icon={FiShare2} disabled={!apiKeyVerified}>
-                  Start chatting!
+                  Beginne zu chatten!
                 </Button>
               </Link>
             </div>
@@ -215,36 +217,36 @@ export function _WelcomeModal({ user }: { user: User | null }) {
       );
       break;
     default:
-      title = "🎉 Welcome to Danswer";
+      title = "🎉 Willkommen bei Danswer";
       body = (
         <>
           <div>
-            <Text>How are you planning on using Danswer?</Text>
+            <Text>Wie planst du, Danswer zu nutzen?</Text>
           </div>
           <Divider />
           <UsageTypeSection
-            title="Search / Chat with Knowledge"
+            title="Suchen/chatten mit Wissen"
             description={
               <Text>
-                If you&apos;re looking to search through, chat with, or ask
-                direct questions of your organization&apos;s knowledge, then
-                this is the option for you!
+                Wenn du das Wissen deiner Organisation durchsuchen, chatten
+                oder direkte Fragen stellen möchtest, dann ist das die richtige
+                Option für dich!
               </Text>
             }
-            callToAction="Get Started"
+            callToAction="Loslegen"
             onClick={() => setSelectedFlow("search")}
           />
           <Divider />
           <UsageTypeSection
-            title="Secure ChatGPT"
+            title="Sicheres ChatGPT"
             description={
               <Text>
-                If you&apos;re looking for a pure ChatGPT-like experience, then
-                this is the option for you!
+                Wenn du ein reines ChatGPT-Erlebnis suchst, dann ist das die
+                richtige Option für dich!
               </Text>
             }
             icon={FiMessageSquare}
-            callToAction="Get Started"
+            callToAction="Loslegen"
             onClick={() => {
               setSelectedFlow("chat");
             }}

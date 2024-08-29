@@ -129,7 +129,7 @@ function LLMProviderDisplay({
             size="xs"
             onClick={() => setFormIsVisible(true)}
           >
-            {existingLlmProvider ? "Editieren" : "Einrichten"}
+            {existingLlmProvider ? "Bearbeiten" : "Einrichten"}
           </Button>
         </div>
       </div>

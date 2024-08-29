@@ -132,15 +132,15 @@ const DocumentSetTable = ({
 
   return (
     <div>
-      <Title>Existing Document Sets</Title>
+      <Title>Bestehende Dokument-Sets</Title>
       <Table className="overflow-visible mt-2">
         <TableHead>
           <TableRow>
             <TableHeaderCell>Name</TableHeaderCell>
-            <TableHeaderCell>Connectors</TableHeaderCell>
+            <TableHeaderCell>Anbindungen</TableHeaderCell>
             <TableHeaderCell>Status</TableHeaderCell>
-            <TableHeaderCell>Public</TableHeaderCell>
-            <TableHeaderCell>Delete</TableHeaderCell>
+            <TableHeaderCell>Öffentlich</TableHeaderCell>
+            <TableHeaderCell>Löschen</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -189,15 +189,15 @@ const DocumentSetTable = ({
                   <TableCell>
                     {documentSet.is_up_to_date ? (
                       <Badge size="md" color="green" icon={FiCheckCircle}>
-                        Up to Date
+                        Aktuell
                       </Badge>
                     ) : documentSet.cc_pair_descriptors.length > 0 ? (
                       <Badge size="md" color="amber" icon={FiClock}>
-                        Syncing
+                        Synchronisiere
                       </Badge>
                     ) : (
                       <Badge size="md" color="red" icon={FiAlertTriangle}>
-                        Deleting
+                        Lösche
                       </Badge>
                     )}
                   </TableCell>
@@ -208,7 +208,7 @@ const DocumentSetTable = ({
                         color={isEditable ? "green" : "gray"}
                         icon={FiUnlock}
                       >
-                        Public
+                        Öffentlich
                       </Badge>
                     ) : (
                       <Badge
@@ -216,7 +216,7 @@ const DocumentSetTable = ({
                         color={isEditable ? "blue" : "gray"}
                         icon={FiLock}
                       >
-                        Private
+                        Privat
                       </Badge>
                     )}
                   </TableCell>
@@ -229,13 +229,13 @@ const DocumentSetTable = ({
                           );
                           if (response.ok) {
                             setPopup({
-                              message: `Document set "${documentSet.name}" scheduled for deletion`,
+                              message: `Dokument-Set "${documentSet.name}" zur Löschung vorgemerkt`,
                               type: "success",
                             });
                           } else {
                             const errorMsg = (await response.json()).detail;
                             setPopup({
-                              message: `Failed to schedule document set for deletion - ${errorMsg}`,
+                              message: `Das Löschen des Dokument-Sets konnte nicht vorgemerkt werden – ${errorMsg}`,
                               type: "error",
                             });
                           }
@@ -296,26 +296,27 @@ const Main = () => {
   }
 
   if (documentSetsError || !documentSets) {
-    return <div>Error: {documentSetsError}</div>;
+    return <div>Fehler: {documentSetsError}</div>;
   }
 
   if (editableDocumentSetsError || !editableDocumentSets) {
-    return <div>Error: {editableDocumentSetsError}</div>;
+    return <div>Fehler: {editableDocumentSetsError}</div>;
   }
 
   if (ccPairsError || !ccPairs) {
-    return <div>Error: {ccPairsError}</div>;
+    return <div>Fehler: {ccPairsError}</div>;
   }
 
   return (
     <div className="mb-8">
       {popup}
       <Text className="mb-3">
-        <b>Document Sets</b> allow you to group logically connected documents
-        into a single bundle. These can then be used as filter when performing
-        searches in the web UI or attached to slack bots to limit the amount of
-        information the bot searches over when answering in a specific channel
-        or with a certain command.
+        <b>Dokument-Sets</b> ermöglichen es dir, logisch zusammenhängende
+        Dokumente in einem einzigen Bündel zu gruppieren. Diese können dann als
+        Filter verwendet werden, wenn du in der Web-Oberfläche suchst oder wenn
+        sie an Slack-Bots angehängt werden, um die Menge an Informationen zu
+        begrenzen, über die der Bot bei der Beantwortung in einem bestimmten
+        Kanal oder mit einer bestimmten Aktion sucht.
       </Text>
 
       <div className="mb-3"></div>
@@ -323,7 +324,7 @@ const Main = () => {
       <div className="flex mb-6">
         <Link href="/admin/documents/sets/new">
           <Button size="xs" color="green" className="ml-2 my-auto">
-            New Document Set
+            Neues Dokument-Set
           </Button>
         </Link>
       </div>
@@ -348,7 +349,7 @@ const Main = () => {
 const Page = () => {
   return (
     <div className="container mx-auto">
-      <AdminPageTitle icon={<BookmarkIcon size={32} />} title="Document Sets" />
+      <AdminPageTitle icon={<BookmarkIcon size={32} />} title="Dokument-Sets" />
 
       <Main />
     </div>

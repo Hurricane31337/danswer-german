@@ -59,13 +59,13 @@ export function ClientLayout({
           <AdminSidebar
             collections={[
               {
-                name: "Connectors",
+                name: "Anbindungen",
                 items: [
                   {
                     name: (
                       <div className="flex">
                         <NotebookIconSkeleton size={18} />
-                        <div className="ml-1">Existing Connectors</div>
+                        <div className="ml-1">Bestehende Anbindungen</div>
                       </div>
                     ),
                     link: "/admin/indexing/status",
@@ -74,7 +74,7 @@ export function ClientLayout({
                     name: (
                       <div className="flex">
                         <ConnectorIconSkeleton size={18} />
-                        <div className="ml-1.5">Add Connector</div>
+                        <div className="ml-1.5">Anbindung hinzufügen</div>
                       </div>
                     ),
                     link: "/admin/add-connector",
@@ -82,13 +82,13 @@ export function ClientLayout({
                 ],
               },
               {
-                name: "Document Management",
+                name: "Dokument-Verwaltung",
                 items: [
                   {
                     name: (
                       <div className="flex">
                         <DocumentSetIconSkeleton size={18} />
-                        <div className="ml-1">Document Sets</div>
+                        <div className="ml-1">Dokument-Sets</div>
                       </div>
                     ),
                     link: "/admin/documents/sets",
@@ -97,7 +97,7 @@ export function ClientLayout({
                     name: (
                       <div className="flex">
                         <ZoomInIconSkeleton size={18} />
-                        <div className="ml-1">Explorer</div>
+                        <div className="ml-1">Dokument-Explorer</div>
                       </div>
                     ),
                     link: "/admin/documents/explorer",
@@ -114,13 +114,13 @@ export function ClientLayout({
                 ],
               },
               {
-                name: "Custom Assistants",
+                name: "Benutzerdefinierte Assistenten",
                 items: [
                   {
                     name: (
                       <div className="flex">
                         <AssistantsIconSkeleton className="my-auto" size={18} />
-                        <div className="ml-1">Assistants</div>
+                        <div className="ml-1">Assistenten</div>
                       </div>
                     ),
                     link: "/admin/assistants",
@@ -131,7 +131,7 @@ export function ClientLayout({
                           name: (
                             <div className="flex">
                               <SlackIconSkeleton />
-                              <div className="ml-1">Slack Bots</div>
+                              <div className="ml-1">Slack-Bots</div>
                             </div>
                           ),
                           link: "/admin/bot",
@@ -149,7 +149,7 @@ export function ClientLayout({
                           name: (
                             <div className="flex">
                               <ClipboardIcon size={18} />
-                              <div className="ml-1">Standard Answers</div>
+                              <div className="ml-1">Standard-Antworten</div>
                             </div>
                           ),
                           link: "/admin/standard-answer",
@@ -158,7 +158,7 @@ export function ClientLayout({
                           name: (
                             <div className="flex">
                               <ClosedBookIcon size={18} />
-                              <div className="ml-1">Prompt Library</div>
+                              <div className="ml-1">Prompt-Bibliothek</div>
                             </div>
                           ),
                           link: "/admin/prompt-library",
@@ -170,13 +170,13 @@ export function ClientLayout({
               ...(isCurator
                 ? [
                     {
-                      name: "User Management",
+                      name: "Benutzerverwaltung",
                       items: [
                         {
                           name: (
                             <div className="flex">
                               <GroupsIconSkeleton size={18} />
-                              <div className="ml-1">Groups</div>
+                              <div className="ml-1">Gruppen</div>
                             </div>
                           ),
                           link: "/admin/groups",
@@ -188,13 +188,13 @@ export function ClientLayout({
               ...(!isCurator
                 ? [
                     {
-                      name: "Configuration",
+                      name: "Konfiguration",
                       items: [
                         {
                           name: (
                             <div className="flex">
                               <CpuIconSkeleton size={18} />
-                              <div className="ml-1">LLM</div>
+                              <div className="ml-1">LLM-Einstellungen</div>
                             </div>
                           ),
                           link: "/admin/configuration/llm",
@@ -204,7 +204,7 @@ export function ClientLayout({
                           name: (
                             <div className="flex">
                               <SearchIcon />
-                              <div className="ml-1">Search Settings</div>
+                              <div className="ml-1">Sucheinstellungen</div>
                             </div>
                           ),
                           link: "/admin/configuration/search",
@@ -212,13 +212,13 @@ export function ClientLayout({
                       ],
                     },
                     {
-                      name: "User Management",
+                      name: "Benutzerverwaltung",
                       items: [
                         {
                           name: (
                             <div className="flex">
                               <UsersIconSkeleton size={18} />
-                              <div className="ml-1">Users</div>
+                              <div className="ml-1">Benutzer</div>
                             </div>
                           ),
                           link: "/admin/users",
@@ -229,7 +229,7 @@ export function ClientLayout({
                                 name: (
                                   <div className="flex">
                                     <GroupsIconSkeleton size={18} />
-                                    <div className="ml-1">Groups</div>
+                                    <div className="ml-1">Gruppen</div>
                                   </div>
                                 ),
                                 link: "/admin/groups",
@@ -238,7 +238,7 @@ export function ClientLayout({
                                 name: (
                                   <div className="flex">
                                     <KeyIconSkeleton size={18} />
-                                    <div className="ml-1">API Keys</div>
+                                    <div className="ml-1">API-Schlüssel</div>
                                   </div>
                                 ),
                                 link: "/admin/api-key",
@@ -249,7 +249,7 @@ export function ClientLayout({
                           name: (
                             <div className="flex">
                               <ShieldIconSkeleton size={18} />
-                              <div className="ml-1">Token Rate Limits</div>
+                              <div className="ml-1">Token-Rate-Limits</div>
                             </div>
                           ),
                           link: "/admin/token-rate-limits",
@@ -259,13 +259,13 @@ export function ClientLayout({
                     ...(enableEnterprise
                       ? [
                           {
-                            name: "Performance",
+                            name: "Leistung",
                             items: [
                               {
                                 name: (
                                   <div className="flex">
                                     <FiActivity size={18} />
-                                    <div className="ml-1">Usage Statistics</div>
+                                    <div className="ml-1">Nutzungsstatistiken</div>
                                   </div>
                                 ),
                                 link: "/admin/performance/usage",
@@ -274,7 +274,7 @@ export function ClientLayout({
                                 name: (
                                   <div className="flex">
                                     <DatabaseIconSkeleton size={18} />
-                                    <div className="ml-1">Query History</div>
+                                    <div className="ml-1">Anfrage-Verlauf</div>
                                   </div>
                                 ),
                                 link: "/admin/performance/query-history",
@@ -283,7 +283,7 @@ export function ClientLayout({
                                 name: (
                                   <div className="flex">
                                     <FiBarChart2 size={18} />
-                                    <div className="ml-1">Custom Analytics</div>
+                                    <div className="ml-1">Benutzerdefinierte Analysen</div>
                                   </div>
                                 ),
                                 link: "/admin/performance/custom-analytics",
@@ -299,7 +299,7 @@ export function ClientLayout({
                           name: (
                             <div className="flex">
                               <SettingsIconSkeleton size={18} />
-                              <div className="ml-1">Workspace Settings</div>
+                              <div className="ml-1">Workspace-Einstellungen</div>
                             </div>
                           ),
                           link: "/admin/settings",
@@ -310,7 +310,7 @@ export function ClientLayout({
                                 name: (
                                   <div className="flex">
                                     <PaintingIconSkeleton size={18} />
-                                    <div className="ml-1">Whitelabeling</div>
+                                    <div className="ml-1">White-Labeling</div>
                                   </div>
                                 ),
                                 link: "/admin/whitelabeling",
