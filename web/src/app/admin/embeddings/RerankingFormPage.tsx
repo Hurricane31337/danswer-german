@@ -39,7 +39,7 @@ const RerankingDetailsForm = forwardRef<
     return (
       <div className="p-2 rounded-lg max-w-4xl mx-auto">
         <h2 className="text-2xl font-bold mb-4 text-text-800">
-          Post-processing
+          Post-Processing
         </h2>
         <div className="text-sm mr-auto mb-6 divide-x-2 flex">
           {originalRerankingDetails.rerank_model_name && (

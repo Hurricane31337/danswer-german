@@ -166,7 +166,7 @@ function Main() {
           </Card>
 
           <Link href="/admin/embeddings">
-            <Button className="mt-8">Such-Einstellungen aktualisieren</Button>
+            <Button className="mt-8">Sucheinstellungen aktualisieren</Button>
           </Link>
         </>
       ) : (
@@ -180,7 +180,7 @@ function Page() {
   return (
     <div className="mx-auto container">
       <AdminPageTitle
-        title="Such-Einstellungen"
+        title="Sucheinstellungen"
         icon={<EmbeddingIcon size={32} className="my-auto" />}
       />
       <Main />
