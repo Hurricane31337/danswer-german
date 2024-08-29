@@ -65,7 +65,7 @@ export function ClientLayout({
                     name: (
                       <div className="flex">
                         <NotebookIconSkeleton size={18} />
-                        <div className="ml-1">Bestehende Anbindungen</div>
+                        <div className="ml-1">Anbindungen</div>
                       </div>
                     ),
                     link: "/admin/indexing/status",
@@ -194,7 +194,7 @@ export function ClientLayout({
                           name: (
                             <div className="flex">
                               <CpuIconSkeleton size={18} />
-                              <div className="ml-1">LLM-Einstellungen</div>
+                              <div className="ml-1">LLM-Konfiguration</div>
                             </div>
                           ),
                           link: "/admin/configuration/llm",

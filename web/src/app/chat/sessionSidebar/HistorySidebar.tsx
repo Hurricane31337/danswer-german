@@ -141,7 +141,7 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
                       setNewFolderId(folderId);
                     })
                     .catch((error) => {
-                      console.error("Ordner wurde nicht erstellt:", error);
+                      console.error("Failed to create folder:", error);
                       setPopup({
                         message: `Ordner wurde nicht erstellt: ${error.message}`,
                         type: "error",
