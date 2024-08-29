@@ -19,42 +19,42 @@ export function ModelSelectionConfirmationModal({
   return (
     <Modal
       width="max-w-3xl"
-      title="Update Embedding Model"
+      title="Embedding-Modell aktualisieren"
       onOutsideClick={onCancel}
     >
       <div>
         <div className="mb-4">
           <Text className="text-lg mb-4">
-            You have selected: <b>{selectedModel.model_name}</b>. Are you sure
-            you want to update to this new embedding model?
+            Du hast gewählt: <b>{selectedModel.model_name}</b>. Bist du sicher,
+            dass du auf dieses Embedding-Modell aktualisieren möchtest?
           </Text>
           <Text className="text-lg mb-2">
-            We will re-index all your documents in the background so you will be
-            able to continue to use Danswer as normal with the old model in the
-            meantime. Depending on how many documents you have indexed, this may
-            take a while.
+            Wir werden alle deine Dokumente im Hintergrund neu-indizieren, sodass
+            du Danswer in der Zwischenzeit wie gewohnt mit dem alten Modell
+            weiternutzen kannst. Je nachdem, wie viele Dokumente du indiziert hast,
+            kann dies eine Weile dauern.
           </Text>
           <Text className="text-lg mb-2">
-            <i>NOTE:</i> this re-indexing process will consume more resources
-            than normal. If you are self-hosting, we recommend that you allocate
-            at least 16GB of RAM to Danswer during this process.
+            <i>HINWEIS:</i> Dieser Neuindizierungsprozess verbraucht mehr Ressourcen
+            als normalerweise. Wenn du selbst-hostest, empfehlen wir dir, Danswer
+            während dieses Vorgangs mindestens 16 GB RAM zuzuweisen.
           </Text>
 
           {isCustom && (
-            <Callout title="IMPORTANT" color="yellow" className="mt-4">
-              We&apos;ve detected that this is a custom-specified embedding
-              model. Since we have to download the model files before verifying
-              the configuration&apos;s correctness, we won&apos;t be able to let
-              you know if the configuration is valid until <b>after</b> we start
-              re-indexing your documents. If there is an issue, it will show up
-              on this page as an indexing error on this page after clicking
-              Confirm.
+            <Callout title="WICHTIG" color="yellow" className="mt-4">
+              Wir haben festgestellt, dass dies ein benutzerdefiniertes
+              Embedding-Modell ist. Da wir die Modell-Dateien herunterladen müssen
+              um wir die Richtigkeit der Konfiguration überprüfen zu können, können
+              wir dir erst mitteilen, ob die Konfiguration gültig ist, <b>nachdem</b>
+              wir mit der Neuindizierung deiner Dokumente begonnen haben. Wenn ein
+              Problem auftritt, wird es auf dieser Seite als Indizierungsfehler
+              angezeigt, nachdem du auf Bestätigen geklickt hast.
             </Callout>
           )}
 
           <div className="flex mt-8">
             <Button className="mx-auto" color="green" onClick={onConfirm}>
-              Yes
+              Bestätigen
             </Button>
           </div>
         </div>

@@ -93,7 +93,7 @@ const RerankingDetailsForm = forwardRef<
               .oneOf(Object.values(RerankerProvider))
               .optional(),
             api_key: Yup.string().nullable(),
-            num_rerank: Yup.number().min(1, "Must be at least 1"),
+            num_rerank: Yup.number().min(1, "Muss mindestens 1 sein"),
           })}
           onSubmit={async (_, { setSubmitting }) => {
             setSubmitting(false);
@@ -188,7 +188,7 @@ const RerankingDetailsForm = forwardRef<
                     setIsApiKeyModalOpen(false);
                   }}
                   width="w-[800px]"
-                  title="API Key Configuration"
+                  title="API-Schlüssel-Konfiguration"
                 >
                   <div className="w-full px-4">
                     <TextFormField
@@ -199,7 +199,7 @@ const RerankingDetailsForm = forwardRef<
                         setFieldValue("api_key", value);
                       }}
                       type="password"
-                      label="Cohere API Key"
+                      label="Cohere API-Schlüssel"
                       name="api_key"
                     />
                     <div className="mt-4 flex justify-between">

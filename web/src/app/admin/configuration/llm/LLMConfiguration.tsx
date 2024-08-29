@@ -30,9 +30,9 @@ function LLMProviderUpdateModal({
     llmProviderDescriptor?.display_name ||
     llmProviderDescriptor?.name ||
     existingLlmProvider?.name ||
-    "Custom LLM Provider";
+    "Eigener LLM-Anbieter";
   return (
-    <Modal title={`Setup ${providerName}`} onOutsideClick={() => onClose()}>
+    <Modal title={`${providerName} einrichten`} onOutsideClick={() => onClose()}>
       <div className="max-h-[70vh] overflow-y-auto px-4">
         {llmProviderDescriptor ? (
           <LLMProviderUpdateForm
@@ -77,7 +77,7 @@ function DefaultLLMProviderDisplay({
 
         <div className="ml-auto">
           <Button color="blue" size="xs" onClick={() => setFormIsVisible(true)}>
-            Set up
+            Einrichten
           </Button>
         </div>
       </div>
@@ -103,7 +103,7 @@ function AddCustomLLMProvider({
   if (formIsVisible) {
     return (
       <Modal
-        title={`Setup Custom LLM Provider`}
+        title={`Eigenen LLM-Anbieter einrichten`}
         onOutsideClick={() => setFormIsVisible(false)}
       >
         <div className="max-h-[70vh] overflow-y-auto px-4">
@@ -118,7 +118,7 @@ function AddCustomLLMProvider({
 
   return (
     <Button size="xs" onClick={() => setFormIsVisible(true)}>
-      Add Custom LLM Provider
+      Eigenen LLM-Anbieter hinzufügen
     </Button>
   );
 }
@@ -138,15 +138,15 @@ export function LLMConfiguration() {
 
   return (
     <>
-      <Title className="mb-2">Enabled LLM Providers</Title>
+      <Title className="mb-2">Aktivierte LLM-Anbieter</Title>
 
       {existingLlmProviders.length > 0 ? (
         <>
           <Text className="mb-4">
-            If multiple LLM providers are enabled, the default provider will be
-            used for all &quot;Default&quot; Assistants. For user-created
-            Assistants, you can select the LLM provider/model that best fits the
-            use case!
+            Wenn mehrere LLM-Anbieter aktiviert sind, wird der Standardanbieter
+            für alle &bdquo;Standard&ldquo;-Assistenten verwendet. Für
+            benutzerdefinierte Assistenten kannst du den LLM-Anbieter bzw. das
+            LLM-Modell auswählen, der/das am besten zum Anwendungsfall passt!
           </Text>
           <ConfiguredLLMProviderDisplay
             existingLlmProviders={existingLlmProviders}
@@ -154,15 +154,16 @@ export function LLMConfiguration() {
           />
         </>
       ) : (
-        <Callout title="No LLM providers configured yet" color="yellow">
-          Please set one up below in order to start using Danswer!
+        <Callout title="Noch keine LLM-Anbieter konfiguriert" color="yellow">
+          Bitte richte einen ein, um Danswer nutzen zu können!
         </Callout>
       )}
 
-      <Title className="mb-2 mt-6">Add LLM Provider</Title>
+      <Title className="mb-2 mt-6">LLM-Anbieter hinzufügen</Title>
       <Text className="mb-4">
-        Add a new LLM provider by either selecting from one of the default
-        providers or by specifying your own custom LLM provider.
+        Füge einen neuen LLM-Anbieter hinzu, indem du entweder einen der
+        Standard-Anbieter wählst oder einen eigenen LLM-Anbieter
+        spezifizierst.
       </Text>
 
       <div className="gap-y-4 flex flex-col">

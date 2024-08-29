@@ -13,23 +13,23 @@ export function SwitchModelModal({
     <Modal className="max-w-4xl">
       <div className="text-base">
         <h2 className="text-xl font-bold mb-4 pb-2 border-b border-border flex">
-          ❗ Switch Embedding Model ❗
+          ❗ Embedding-Modell wechseln ❗
         </h2>
         <Text>
-          We&apos;ve detected you are using our old default embedding model (
-          <i>{embeddingModelName || "thenlper/gte-small"}</i>). We believe that
-          search performance can be dramatically improved by a simple model
-          switch.
+          Wir haben festgestellt, dass du unser altes Embedding-Modell nutzt (
+          <i>{embeddingModelName || "thenlper/gte-small"}</i>). Wir glauben,
+          dass die Suchleistung durch einen einfachen Modellwechsel enorm
+          verbessert werden kann.
           <br />
           <br />
-          Please click the button below to choose a new model. Don&apos;t worry,
-          the re-indexing necessary for the switch will happen in the background
-          - your use of Danswer will not be interrupted.
+          Bitte klicke auf die Schaltfläche unten, um ein neues Modell auszuwählen.
+          Keine Sorge: Die für den Wechsel notwendige Neuindizierung erfolgt im
+          Hintergrund – deine Nutzung von Danswer wird nicht unterbrochen.
         </Text>
 
         <div className="flex mt-4">
           <Link href="/admin/models/embedding" className="w-fit mx-auto">
-            <Button size="xs">Choose your Embedding Model</Button>
+            <Button size="xs">Wähle dein Embedding-Modell</Button>
           </Link>
         </div>
       </div>

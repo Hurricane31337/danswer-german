@@ -53,14 +53,14 @@ export function ChangeCredentialsModal({
           setApiKey(JSON.stringify(jsonContent));
         } catch (parseError) {
           throw new Error(
-            "Failed to parse JSON file. Please ensure it's a valid JSON."
+            "Die JSON-Datei konnte nicht geparst werden. Bitte stelle sicher, dass es sich um gültiges JSON handelt."
           );
         }
       } catch (error) {
         setTestError(
           error instanceof Error
             ? error.message
-            : "An unknown error occurred while processing the file."
+            : "Beim Verarbeiten der Datei ist ein unbekannter Fehler aufgetreten."
         );
         setApiKey("");
         clearFileInput();
@@ -149,7 +149,7 @@ export function ChangeCredentialsModal({
     >
       <div className="mb-4">
         <Subtitle className="font-bold text-lg">
-          Want to swap out your key?
+          Möchtest du deinen Schlüssel austauschen?
         </Subtitle>
         <a
           href={provider.apiLink}
@@ -157,13 +157,13 @@ export function ChangeCredentialsModal({
           rel="noopener noreferrer"
           className="underline cursor-pointer mt-2 mb-4"
         >
-          Visit API
+          API besuchen
         </a>
 
         <div className="flex flex-col mt-4 gap-y-2">
           {useFileUpload ? (
             <>
-              <Label>Upload JSON File</Label>
+              <Label>JSON-Datei hochladen</Label>
               <input
                 ref={fileInputRef}
                 type="file"
@@ -171,7 +171,7 @@ export function ChangeCredentialsModal({
                 onChange={handleFileUpload}
                 className="text-lg w-full p-1"
               />
-              {fileName && <p>Uploaded file: {fileName}</p>}
+              {fileName && <p>Hochgeladene Datei: {fileName}</p>}
             </>
           ) : (
             <>
@@ -187,14 +187,14 @@ export function ChangeCredentialsModal({
                 `}
                 value={apiKey}
                 onChange={(e: any) => setApiKey(e.target.value)}
-                placeholder="Paste your API key here"
+                placeholder="Füge deinen API-Schlüssel hier ein"
               />
             </>
           )}
         </div>
 
         {testError && (
-          <Callout title="Error" color="red" className="mt-4">
+          <Callout title="Fehler" color="red" className="mt-4">
             {testError}
           </Callout>
         )}
@@ -205,21 +205,21 @@ export function ChangeCredentialsModal({
             onClick={() => handleSubmit()}
             disabled={!apiKey}
           >
-            Swap Key
+            Schlüssel wechseln
           </Button>
         </div>
         <Divider />
 
         <Subtitle className="mt-4 font-bold text-lg mb-2">
-          You can also delete your key.
+          Du kannst deinen Schlüssel auch löschen.
         </Subtitle>
         <Text className="mb-2">
-          This is only possible if you have already switched to a different
-          embedding type!
+          Das ist nur möglich, wenn du schon auf eine andere Embedding-Art
+          umgestiegen bist!
         </Text>
 
         <Button onClick={handleDelete} color="red">
-          Delete key
+          Schlüssel löschen
         </Button>
         {deletionError && (
           <Callout title="Error" color="red" className="mt-4">
