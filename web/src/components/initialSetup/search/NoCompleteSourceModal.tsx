@@ -34,7 +34,7 @@ export function NoCompleteSourcesModal({
   return (
     <Modal
       className="max-w-4xl"
-      title="⏳ Keiner deiner Anbindungen hat bisher eine vollständige Synchronisierung durchgeführt"
+      title="⏳ Keiner deiner Anbindungen ist vollständig synchronisiert"
       onOutsideClick={() => setIsHidden(true)}
     >
       <div className="text-sm">
