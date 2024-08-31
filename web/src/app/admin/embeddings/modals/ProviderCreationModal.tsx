@@ -174,7 +174,7 @@ export function ProviderCreationModal({
                 ab.
               </Text>
 
-              <div className="flex flex-col gap-y-2">
+              <div className="flex w-full flex-col gap-y-2">
                 {useFileUpload ? (
                   <>
                     <Label>JSON-Datei hochladen</Label>
