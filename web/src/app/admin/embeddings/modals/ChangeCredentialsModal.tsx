@@ -193,7 +193,7 @@ export function ChangeCredentialsModal({
                 `}
                 value={apiKeyOrUrl}
                 onChange={(e: any) => setApiKeyOrUrl(e.target.value)}
-                placeholder="Füge ${isProxy ? "deine API-URL" : "deinen API-Schlüssel"} hier ein"
+                placeholder={`Füge your ${isProxy ? "deine API-URL" : "deinen API-Schlüssel"} hier ein`}
               />
             </>
           )}
