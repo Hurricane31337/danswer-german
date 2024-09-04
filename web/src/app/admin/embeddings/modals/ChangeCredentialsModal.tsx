@@ -15,14 +15,16 @@ export function ChangeCredentialsModal({
   onCancel,
   onDeleted,
   useFileUpload,
+  isProxy = false,
 }: {
   provider: CloudEmbeddingProvider;
   onConfirm: () => void;
   onCancel: () => void;
   onDeleted: () => void;
   useFileUpload: boolean;
+  isProxy?: boolean;
 }) {
-  const [apiKey, setApiKey] = useState("");
+  const [apiKeyOrUrl, setApiKeyOrUrl] = useState("");
   const [testError, setTestError] = useState<string>("");
   const [fileName, setFileName] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -50,7 +52,7 @@ export function ChangeCredentialsModal({
         let jsonContent;
         try {
           jsonContent = JSON.parse(fileContent);
-          setApiKey(JSON.stringify(jsonContent));
+          setApiKeyOrUrl(JSON.stringify(jsonContent));
         } catch (parseError) {
           throw new Error(
             "Die JSON-Datei konnte nicht geparst werden. Bitte stelle sicher, dass es sich um gültiges JSON handelt."
@@ -62,7 +64,7 @@ export function ChangeCredentialsModal({
             ? error.message
             : "Beim Verarbeiten der Datei ist ein unbekannter Fehler aufgetreten."
         );
-        setApiKey("");
+        setApiKeyOrUrl("");
         clearFileInput();
       }
     }
@@ -74,7 +76,7 @@ export function ChangeCredentialsModal({
 
     try {
       const response = await fetch(
-        `${EMBEDDING_PROVIDERS_ADMIN_URL}/${provider.provider_type}`,
+        `${EMBEDDING_PROVIDERS_ADMIN_URL}/${provider.provider_type.toLowerCase()}`,
         {
           method: "DELETE",
         }
@@ -105,7 +107,10 @@ export function ChangeCredentialsModal({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           provider_type: provider.provider_type.toLowerCase().split(" ")[0],
-          api_key: apiKey,
+          [isProxy ? "api_url" : "api_key"]: apiKeyOrUrl,
+          [isProxy ? "api_key" : "api_url"]: isProxy
+            ? provider.api_key
+            : provider.api_url,
         }),
       });
 
@@ -119,7 +124,7 @@ export function ChangeCredentialsModal({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           provider_type: provider.provider_type.toLowerCase().split(" ")[0],
-          api_key: apiKey,
+          [isProxy ? "api_url" : "api_key"]: apiKeyOrUrl,
           is_default_provider: false,
           is_configured: true,
         }),
@@ -128,7 +133,8 @@ export function ChangeCredentialsModal({
       if (!updateResponse.ok) {
         const errorData = await updateResponse.json();
         throw new Error(
-          errorData.detail || "Failed to update provider- check your API key"
+          errorData.detail ||
+            `Failed to update provider- check your ${isProxy ? "API URL" : "API key"}`
         );
       }
 
@@ -144,12 +150,12 @@ export function ChangeCredentialsModal({
     <Modal
       width="max-w-3xl"
       icon={provider.icon}
-      title={`Modify your ${provider.provider_type} key`}
+      title={`Modify your ${provider.provider_type} ${isProxy ? "URL" : "key"}`}
       onOutsideClick={onCancel}
     >
       <div className="mb-4">
         <Subtitle className="font-bold text-lg">
-          Möchtest du deinen Schlüssel austauschen?
+          Möchtest du {isProxy ? "deine URL" : "deinen Schlüssel"} austauschen?
         </Subtitle>
         <a
           href={provider.apiLink}
@@ -185,9 +191,9 @@ export function ChangeCredentialsModal({
                     px-3 
                     bg-background-emphasis
                 `}
-                value={apiKey}
-                onChange={(e: any) => setApiKey(e.target.value)}
-                placeholder="Füge deinen API-Schlüssel hier ein"
+                value={apiKeyOrUrl}
+                onChange={(e: any) => setApiKeyOrUrl(e.target.value)}
+                placeholder="Füge ${isProxy ? "deine API-URL" : "deinen API-Schlüssel"} hier ein"
               />
             </>
           )}
@@ -203,15 +209,15 @@ export function ChangeCredentialsModal({
           <Button
             color="blue"
             onClick={() => handleSubmit()}
-            disabled={!apiKey}
+            disabled={!apiKeyOrUrl}
           >
-            Schlüssel wechseln
+            {isProxy ? "URL" : "Schlüssel"} wechseln
           </Button>
         </div>
         <Divider />
 
         <Subtitle className="mt-4 font-bold text-lg mb-2">
-          Du kannst deinen Schlüssel auch löschen.
+          Du kannst {isProxy ? "deine URL" : "deinen Schlüssel"} auch löschen.
         </Subtitle>
         <Text className="mb-2">
           Das ist nur möglich, wenn du schon auf eine andere Embedding-Art
@@ -219,7 +225,7 @@ export function ChangeCredentialsModal({
         </Text>
 
         <Button onClick={handleDelete} color="red">
-          Schlüssel löschen
+          {isProxy ? "URL" : "Schlüssel"} löschen
         </Button>
         {deletionError && (
           <Callout title="Error" color="red" className="mt-4">

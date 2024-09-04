@@ -231,27 +231,7 @@ const RerankingDetailsForm = forwardRef<
                         label="Cohere API-Schlüssel"
                         name="api_key"
                       />
-                      <div className="mt-4 flex justify-between">
-                        <Button
-                          onClick={() => {
-                            Object.keys(originalRerankingDetails).forEach(
-                              (key) => {
-                                setFieldValue(
-                                  key,
-                                  originalRerankingDetails[
-                                    key as keyof RerankingDetails
-                                  ]
-                                );
-                              }
-                            );
-
-                            setIsApiKeyModalOpen(false);
-                          }}
-                          color="red"
-                          size="xs"
-                        >
-                          Stilllegen
-                        </Button>
+                      <div className="flex w-full justify-end mt-4">
                         <Button
                           onClick={() => setIsApiKeyModalOpen(false)}
                           color="blue"

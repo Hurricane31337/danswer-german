@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Text, Button, Callout } from "@tremor/react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Label, TextFormField } from "@/components/admin/connectors/Field";
 import { LoadingAnimation } from "@/components/Loading";
@@ -13,11 +13,13 @@ export function ProviderCreationModal({
   onConfirm,
   onCancel,
   existingProvider,
+  isProxy,
 }: {
   selectedProvider: CloudEmbeddingProvider;
   onConfirm: () => void;
   onCancel: () => void;
   existingProvider?: CloudEmbeddingProvider;
+  isProxy?: boolean;
 }) {
   const useFileUpload = selectedProvider.provider_type == "Google";
 
@@ -29,6 +31,7 @@ export function ProviderCreationModal({
     provider_type:
       existingProvider?.provider_type || selectedProvider.provider_type,
     api_key: existingProvider?.api_key || "",
+    api_url: existingProvider?.api_url || "",
     custom_config: existingProvider?.custom_config
       ? Object.entries(existingProvider.custom_config)
       : [],
@@ -37,9 +40,14 @@ export function ProviderCreationModal({
 
   const validationSchema = Yup.object({
     provider_type: Yup.string().required("Anbieter-Typ ist erforderlich"),
-    api_key: useFileUpload
+    api_key: isProxy
       ? Yup.string()
-      : Yup.string().required("API-Schlüssel ist erforderlich"),
+      : useFileUpload
+        ? Yup.string()
+        : Yup.string().required("API-Schlüssel ist erforderlich"),
+    api_url: isProxy
+      ? Yup.string().required("API-URL ist erforderlich")
+      : Yup.string(),
     custom_config: Yup.array().of(Yup.array().of(Yup.string()).length(2)),
   });
 
@@ -87,6 +95,7 @@ export function ProviderCreationModal({
           body: JSON.stringify({
             provider_type: values.provider_type.toLowerCase().split(" ")[0],
             api_key: values.api_key,
+            api_url: values.api_url,
           }),
         }
       );
@@ -169,13 +178,20 @@ export function ProviderCreationModal({
                   target="_blank"
                   href={selectedProvider.apiLink}
                 >
-                  API-Schlüssel
+                  {isProxy ? "API-URL" : "API-Schlüssel"}
                 </a>
                 ab.
               </Text>
 
               <div className="flex w-full flex-col gap-y-2">
-                {useFileUpload ? (
+                {isProxy ? (
+                  <TextFormField
+                    name="api_url"
+                    label="API URL"
+                    placeholder="API-URL"
+                    type="text"
+                  />
+                ) : useFileUpload ? (
                   <>
                     <Label>JSON-Datei hochladen</Label>
                     <input
