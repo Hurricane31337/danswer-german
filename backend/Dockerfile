@@ -69,7 +69,7 @@ RUN apt-get update && \
 
 # Pre-downloading models for setups with limited egress
 RUN python -c "from tokenizers import Tokenizer; \
-Tokenizer.from_pretrained('nomic-ai/nomic-embed-text-v1')"
+Tokenizer.from_pretrained('jinaai/jina-embeddings-v2-base-de')"
 
 
 # Pre-downloading NLTK for setups with limited egress

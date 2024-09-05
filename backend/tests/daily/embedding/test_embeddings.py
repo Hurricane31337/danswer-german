@@ -66,7 +66,7 @@ def local_nomic_embedding_model() -> EmbeddingModel:
     return EmbeddingModel(
         server_host="localhost",
         server_port=9000,
-        model_name="nomic-ai/nomic-embed-text-v1",
+        model_name="jinaai/jina-embeddings-v2-base-de",
         normalize=True,
         query_prefix="search_query: ",
         passage_prefix="search_document: ",

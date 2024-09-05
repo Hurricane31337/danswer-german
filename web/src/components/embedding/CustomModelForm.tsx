@@ -51,7 +51,7 @@ export function CustomModelForm({
               name="model_name"
               label="Name:"
               subtext="The name of the model on Hugging Face"
-              placeholder="E.g. 'nomic-ai/nomic-embed-text-v1'"
+              placeholder="E.g. 'jinaai/jina-embeddings-v2-base-de'"
               autoCompleteDisabled={true}
             />
 
