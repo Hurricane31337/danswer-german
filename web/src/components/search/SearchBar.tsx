@@ -71,7 +71,7 @@ export const AnimatedToggle = ({
             Erhalte direkt qualitativ hochwertige Ergebnisse &mdash; optimal
             für den sofortigen Zugriff auf deine Dokumente.
           </p>
-          <p className="mt-2 text-xs">Shortcut: ({commandSymbol}/)</p>
+          <p className="mt-2 flex text-xs">Shortcut: ({commandSymbol}/)</p>
         </div>
       }
     >

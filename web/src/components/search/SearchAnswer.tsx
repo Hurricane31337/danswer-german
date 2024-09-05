@@ -84,7 +84,7 @@ export default function SearchAnswer({
 
           {searchState == "citing" && (
             <div key={"citing"} className="relative inline-block">
-              <span className="loading-text">Erzeuge Zitate...</span>
+              <span className="loading-text">Extrahiere Zitate...</span>
             </div>
           )}
 
