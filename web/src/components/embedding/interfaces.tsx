@@ -80,12 +80,27 @@ export interface CloudEmbeddingProviderFull extends CloudEmbeddingProvider {
 
 export const AVAILABLE_MODELS: HostedEmbeddingModel[] = [
   {
+    model_name: "jinaai/jina-embeddings-v2-base-de",
+    model_dim: 768,
+    normalize: true,
+    description:
+      "Die empfohlene Standardeinstellung für vorrangig deutsche Texte. Wenn du nicht sicher bist, welches Modell du verwenden sollst, ist das wahrscheinlich das richtige.",
+    isDefault: true,
+    link: "https://huggingface.co/jinaai/jina-embeddings-v2-base-de",
+    query_prefix: "search_query: ",
+    passage_prefix: "search_document: ",
+    index_name: "",
+    provider_type: null,
+    api_key: null,
+    api_url: null,
+  },
+  {
     model_name: "nomic-ai/nomic-embed-text-v1",
     model_dim: 768,
     normalize: true,
     description:
       "The recommended default for most situations. If you aren't sure which model to use, this is probably the one.",
-    isDefault: true,
+    isDefault: false,
     link: "https://huggingface.co/nomic-ai/nomic-embed-text-v1",
     query_prefix: "search_query: ",
     passage_prefix: "search_document: ",
