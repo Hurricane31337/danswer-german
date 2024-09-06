@@ -38,6 +38,7 @@ CREDENTIAL_PERMISSIONS_TO_IGNORE = {
     DocumentSource.GOOGLE_SITES,
     DocumentSource.WIKIPEDIA,
     DocumentSource.MEDIAWIKI,
+    DocumentSource.LABEL_MANUAL,
 }
 
 

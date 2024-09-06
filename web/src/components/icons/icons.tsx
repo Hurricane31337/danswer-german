@@ -87,6 +87,8 @@ import cohereIcon from "../../../public/Cohere.svg";
 import voyageIcon from "../../../public/Voyage.png";
 import googleIcon from "../../../public/Google.webp";
 
+import labelIcon from "../../../public/Label.png";
+
 import { FaRobot } from "react-icons/fa";
 
 export interface IconProps {
@@ -1538,6 +1540,18 @@ export const WikipediaIcon = ({
     className={`w-[${size}px] h-[${size}px] ` + className}
   >
     <Image src={wikipediaIcon} alt="Logo" width="96" height="96" />
+  </div>
+);
+
+export const LabelIcon = ({
+  size = 16,
+  className = defaultTailwindCSS,
+}: IconProps) => (
+  <div
+    style={{ width: `${size}px`, height: `${size}px` }}
+    className={`w-[${size}px] h-[${size}px] ` + className}
+  >
+    <Image src={labelIcon} alt="Logo" width="96" height="96" />
   </div>
 );
 

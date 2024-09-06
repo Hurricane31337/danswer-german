@@ -238,6 +238,7 @@ const validSources = [
   "oci_storage",
   "not_applicable",
   "ingestion_api",
+  "label_manual",
 ] as const;
 
 export type ValidSources = (typeof validSources)[number];
