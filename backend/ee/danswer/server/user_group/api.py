@@ -4,22 +4,22 @@ from fastapi import HTTPException
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.auth.users import current_curator_or_admin_user
-from danswer.db.engine import get_session
-from danswer.db.models import User
-from danswer.db.models import UserRole
-from danswer.utils.logger import setup_logger
-from ee.danswer.db.user_group import fetch_user_groups
-from ee.danswer.db.user_group import fetch_user_groups_for_user
-from ee.danswer.db.user_group import insert_user_group
-from ee.danswer.db.user_group import prepare_user_group_for_deletion
-from ee.danswer.db.user_group import update_user_curator_relationship
-from ee.danswer.db.user_group import update_user_group
-from ee.danswer.server.user_group.models import SetCuratorRequest
-from ee.danswer.server.user_group.models import UserGroup
-from ee.danswer.server.user_group.models import UserGroupCreate
-from ee.danswer.server.user_group.models import UserGroupUpdate
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.auth.users import current_curator_or_admin_user
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import User
+from backend.danswer.db.models import UserRole
+from backend.danswer.utils.logger import setup_logger
+from backend.ee.danswer.db.user_group import fetch_user_groups
+from backend.ee.danswer.db.user_group import fetch_user_groups_for_user
+from backend.ee.danswer.db.user_group import insert_user_group
+from backend.ee.danswer.db.user_group import prepare_user_group_for_deletion
+from backend.ee.danswer.db.user_group import update_user_curator_relationship
+from backend.ee.danswer.db.user_group import update_user_group
+from backend.ee.danswer.server.user_group.models import SetCuratorRequest
+from backend.ee.danswer.server.user_group.models import UserGroup
+from backend.ee.danswer.server.user_group.models import UserGroupCreate
+from backend.ee.danswer.server.user_group.models import UserGroupUpdate
 
 logger = setup_logger()
 

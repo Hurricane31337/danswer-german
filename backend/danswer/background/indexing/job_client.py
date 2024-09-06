@@ -11,8 +11,8 @@ from typing import Any
 from typing import Literal
 from typing import Optional
 
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.utils.logger import setup_logger
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

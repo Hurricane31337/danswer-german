@@ -6,27 +6,27 @@ from fastapi import HTTPException
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.auth.users import current_user
-from danswer.auth.users import is_user_admin
-from danswer.configs.constants import KV_REINDEX_KEY
-from danswer.configs.constants import NotificationType
-from danswer.db.engine import get_session
-from danswer.db.models import User
-from danswer.db.notification import create_notification
-from danswer.db.notification import dismiss_all_notifications
-from danswer.db.notification import dismiss_notification
-from danswer.db.notification import get_notification_by_id
-from danswer.db.notification import get_notifications
-from danswer.db.notification import update_notification_last_shown
-from danswer.dynamic_configs.factory import get_dynamic_config_store
-from danswer.dynamic_configs.interface import ConfigNotFoundError
-from danswer.server.settings.models import Notification
-from danswer.server.settings.models import Settings
-from danswer.server.settings.models import UserSettings
-from danswer.server.settings.store import load_settings
-from danswer.server.settings.store import store_settings
-from danswer.utils.logger import setup_logger
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.auth.users import current_user
+from backend.danswer.auth.users import is_user_admin
+from backend.danswer.configs.constants import KV_REINDEX_KEY
+from backend.danswer.configs.constants import NotificationType
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import User
+from backend.danswer.db.notification import create_notification
+from backend.danswer.db.notification import dismiss_all_notifications
+from backend.danswer.db.notification import dismiss_notification
+from backend.danswer.db.notification import get_notification_by_id
+from backend.danswer.db.notification import get_notifications
+from backend.danswer.db.notification import update_notification_last_shown
+from backend.danswer.dynamic_configs.factory import get_dynamic_config_store
+from backend.danswer.dynamic_configs.interface import ConfigNotFoundError
+from backend.danswer.server.settings.models import Notification
+from backend.danswer.server.settings.models import Settings
+from backend.danswer.server.settings.models import UserSettings
+from backend.danswer.server.settings.store import load_settings
+from backend.danswer.server.settings.store import store_settings
+from backend.danswer.utils.logger import setup_logger
 
 
 logger = setup_logger()

@@ -1,7 +1,7 @@
 from fastapi.datastructures import Headers
 
-from danswer.configs.model_configs import LITELLM_EXTRA_HEADERS
-from danswer.configs.model_configs import LITELLM_PASS_THROUGH_HEADERS
+from backend.danswer.configs.model_configs import LITELLM_EXTRA_HEADERS
+from backend.danswer.configs.model_configs import LITELLM_PASS_THROUGH_HEADERS
 
 
 def get_litellm_additional_request_headers(

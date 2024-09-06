@@ -7,7 +7,7 @@ import pytest
 import pywikibot  # type: ignore[import-untyped]
 from pytest_mock import MockFixture
 
-from danswer.connectors.mediawiki import wiki
+from backend.danswer.connectors.mediawiki import wiki
 
 
 @pytest.fixture

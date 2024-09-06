@@ -5,11 +5,11 @@ the permissions of the curator manipulating credentials.
 import pytest
 from requests.exceptions import HTTPError
 
-from danswer.server.documents.models import DocumentSource
-from tests.integration.common_utils.managers.credential import CredentialManager
-from tests.integration.common_utils.managers.user import TestUser
-from tests.integration.common_utils.managers.user import UserManager
-from tests.integration.common_utils.managers.user_group import UserGroupManager
+from backend.danswer.server.documents.models import DocumentSource
+from backend.tests.integration.common_utils.managers.credential import CredentialManager
+from backend.tests.integration.common_utils.managers.user import TestUser
+from backend.tests.integration.common_utils.managers.user import UserManager
+from backend.tests.integration.common_utils.managers.user_group import UserGroupManager
 
 
 def test_credential_permissions(reset: None) -> None:

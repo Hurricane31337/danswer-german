@@ -2,9 +2,9 @@ import json
 import os
 import urllib.parse
 
-from danswer.configs.constants import AuthType
-from danswer.configs.constants import DocumentIndexType
-from danswer.file_processing.enums import HtmlBasedConnectorTransformLinksStrategy
+from backend.danswer.configs.constants import AuthType
+from backend.danswer.configs.constants import DocumentIndexType
+from backend.danswer.file_processing.enums import HtmlBasedConnectorTransformLinksStrategy
 
 #####
 # App Configs

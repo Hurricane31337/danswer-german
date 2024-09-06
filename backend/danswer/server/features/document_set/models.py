@@ -3,10 +3,10 @@ from uuid import UUID
 from pydantic import BaseModel
 from pydantic import Field
 
-from danswer.db.models import DocumentSet as DocumentSetDBModel
-from danswer.server.documents.models import ConnectorCredentialPairDescriptor
-from danswer.server.documents.models import ConnectorSnapshot
-from danswer.server.documents.models import CredentialSnapshot
+from backend.danswer.db.models import DocumentSet as DocumentSetDBModel
+from backend.danswer.server.documents.models import ConnectorCredentialPairDescriptor
+from backend.danswer.server.documents.models import ConnectorSnapshot
+from backend.danswer.server.documents.models import CredentialSnapshot
 
 
 class DocumentSetCreationRequest(BaseModel):

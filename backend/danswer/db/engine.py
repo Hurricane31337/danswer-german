@@ -15,17 +15,17 @@ from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import sessionmaker
 
-from danswer.configs.app_configs import LOG_POSTGRES_CONN_COUNTS
-from danswer.configs.app_configs import LOG_POSTGRES_LATENCY
-from danswer.configs.app_configs import POSTGRES_DB
-from danswer.configs.app_configs import POSTGRES_HOST
-from danswer.configs.app_configs import POSTGRES_PASSWORD
-from danswer.configs.app_configs import POSTGRES_POOL_PRE_PING
-from danswer.configs.app_configs import POSTGRES_POOL_RECYCLE
-from danswer.configs.app_configs import POSTGRES_PORT
-from danswer.configs.app_configs import POSTGRES_USER
-from danswer.configs.constants import POSTGRES_UNKNOWN_APP_NAME
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.app_configs import LOG_POSTGRES_CONN_COUNTS
+from backend.danswer.configs.app_configs import LOG_POSTGRES_LATENCY
+from backend.danswer.configs.app_configs import POSTGRES_DB
+from backend.danswer.configs.app_configs import POSTGRES_HOST
+from backend.danswer.configs.app_configs import POSTGRES_PASSWORD
+from backend.danswer.configs.app_configs import POSTGRES_POOL_PRE_PING
+from backend.danswer.configs.app_configs import POSTGRES_POOL_RECYCLE
+from backend.danswer.configs.app_configs import POSTGRES_PORT
+from backend.danswer.configs.app_configs import POSTGRES_USER
+from backend.danswer.configs.constants import POSTGRES_UNKNOWN_APP_NAME
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

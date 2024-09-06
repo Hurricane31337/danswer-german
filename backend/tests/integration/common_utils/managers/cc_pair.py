@@ -4,18 +4,18 @@ from uuid import uuid4
 
 import requests
 
-from danswer.connectors.models import InputType
-from danswer.db.enums import ConnectorCredentialPairStatus
-from danswer.server.documents.models import ConnectorCredentialPairIdentifier
-from danswer.server.documents.models import ConnectorIndexingStatus
-from danswer.server.documents.models import DocumentSource
-from tests.integration.common_utils.constants import API_SERVER_URL
-from tests.integration.common_utils.constants import GENERAL_HEADERS
-from tests.integration.common_utils.constants import MAX_DELAY
-from tests.integration.common_utils.managers.connector import ConnectorManager
-from tests.integration.common_utils.managers.credential import CredentialManager
-from tests.integration.common_utils.test_models import TestCCPair
-from tests.integration.common_utils.test_models import TestUser
+from backend.danswer.connectors.models import InputType
+from backend.danswer.db.enums import ConnectorCredentialPairStatus
+from backend.danswer.server.documents.models import ConnectorCredentialPairIdentifier
+from backend.danswer.server.documents.models import ConnectorIndexingStatus
+from backend.danswer.server.documents.models import DocumentSource
+from backend.tests.integration.common_utils.constants import API_SERVER_URL
+from backend.tests.integration.common_utils.constants import GENERAL_HEADERS
+from backend.tests.integration.common_utils.constants import MAX_DELAY
+from backend.tests.integration.common_utils.managers.connector import ConnectorManager
+from backend.tests.integration.common_utils.managers.credential import CredentialManager
+from backend.tests.integration.common_utils.test_models import TestCCPair
+from backend.tests.integration.common_utils.test_models import TestUser
 
 
 def _cc_pair_creator(

@@ -6,7 +6,7 @@ from langchain_core.messages.tool import ToolCall
 from langchain_core.messages.tool import ToolMessage
 from pydantic.v1 import BaseModel as BaseModel__v1
 
-from danswer.natural_language_processing.utils import BaseTokenizer
+from backend.danswer.natural_language_processing.utils import BaseTokenizer
 
 # Langchain has their own version of pydantic which is version 1
 

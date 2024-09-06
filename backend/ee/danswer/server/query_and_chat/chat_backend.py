@@ -5,36 +5,36 @@ from fastapi import Depends
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_user
-from danswer.chat.chat_utils import create_chat_chain
-from danswer.chat.models import DanswerAnswerPiece
-from danswer.chat.models import LLMRelevanceFilterResponse
-from danswer.chat.models import QADocsResponse
-from danswer.chat.models import StreamingError
-from danswer.chat.process_message import stream_chat_message_objects
-from danswer.configs.constants import MessageType
-from danswer.configs.danswerbot_configs import DANSWER_BOT_TARGET_CHUNK_PERCENTAGE
-from danswer.db.chat import create_chat_session
-from danswer.db.chat import create_new_chat_message
-from danswer.db.chat import get_or_create_root_message
-from danswer.db.engine import get_session
-from danswer.db.models import User
-from danswer.llm.factory import get_llms_for_persona
-from danswer.llm.utils import get_max_input_tokens
-from danswer.natural_language_processing.utils import get_tokenizer
-from danswer.one_shot_answer.qa_utils import combine_message_thread
-from danswer.search.models import OptionalSearchSetting
-from danswer.search.models import RetrievalDetails
-from danswer.secondary_llm_flows.query_expansion import thread_based_query_rephrase
-from danswer.server.query_and_chat.models import ChatMessageDetail
-from danswer.server.query_and_chat.models import CreateChatMessageRequest
-from danswer.utils.logger import setup_logger
-from ee.danswer.server.query_and_chat.models import BasicCreateChatMessageRequest
-from ee.danswer.server.query_and_chat.models import (
+from backend.danswer.auth.users import current_user
+from backend.danswer.chat.chat_utils import create_chat_chain
+from backend.danswer.chat.models import DanswerAnswerPiece
+from backend.danswer.chat.models import LLMRelevanceFilterResponse
+from backend.danswer.chat.models import QADocsResponse
+from backend.danswer.chat.models import StreamingError
+from backend.danswer.chat.process_message import stream_chat_message_objects
+from backend.danswer.configs.constants import MessageType
+from backend.danswer.configs.danswerbot_configs import DANSWER_BOT_TARGET_CHUNK_PERCENTAGE
+from backend.danswer.db.chat import create_chat_session
+from backend.danswer.db.chat import create_new_chat_message
+from backend.danswer.db.chat import get_or_create_root_message
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import User
+from backend.danswer.llm.factory import get_llms_for_persona
+from backend.danswer.llm.utils import get_max_input_tokens
+from backend.danswer.natural_language_processing.utils import get_tokenizer
+from backend.danswer.one_shot_answer.qa_utils import combine_message_thread
+from backend.danswer.search.models import OptionalSearchSetting
+from backend.danswer.search.models import RetrievalDetails
+from backend.danswer.secondary_llm_flows.query_expansion import thread_based_query_rephrase
+from backend.danswer.server.query_and_chat.models import ChatMessageDetail
+from backend.danswer.server.query_and_chat.models import CreateChatMessageRequest
+from backend.danswer.utils.logger import setup_logger
+from backend.ee.danswer.server.query_and_chat.models import BasicCreateChatMessageRequest
+from backend.ee.danswer.server.query_and_chat.models import (
     BasicCreateChatMessageWithHistoryRequest,
 )
-from ee.danswer.server.query_and_chat.models import ChatBasicResponse
-from ee.danswer.server.query_and_chat.models import SimpleDoc
+from backend.ee.danswer.server.query_and_chat.models import ChatBasicResponse
+from backend.ee.danswer.server.query_and_chat.models import SimpleDoc
 
 logger = setup_logger()
 

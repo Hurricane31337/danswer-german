@@ -1,7 +1,7 @@
-from danswer.configs.app_configs import DYNAMIC_CONFIG_STORE
-from danswer.dynamic_configs.interface import DynamicConfigStore
-from danswer.dynamic_configs.store import FileSystemBackedDynamicConfigStore
-from danswer.dynamic_configs.store import PostgresBackedDynamicConfigStore
+from backend.danswer.configs.app_configs import DYNAMIC_CONFIG_STORE
+from backend.danswer.dynamic_configs.interface import DynamicConfigStore
+from backend.danswer.dynamic_configs.store import FileSystemBackedDynamicConfigStore
+from backend.danswer.dynamic_configs.store import PostgresBackedDynamicConfigStore
 
 
 def get_dynamic_config_store() -> DynamicConfigStore:

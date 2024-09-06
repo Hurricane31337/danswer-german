@@ -4,10 +4,10 @@ from collections.abc import MutableMapping
 from logging.handlers import RotatingFileHandler
 from typing import Any
 
-from shared_configs.configs import DEV_LOGGING_ENABLED
-from shared_configs.configs import LOG_FILE_NAME
-from shared_configs.configs import LOG_LEVEL
-from shared_configs.configs import SLACK_CHANNEL_ID
+from backend.shared_configs.configs import DEV_LOGGING_ENABLED
+from backend.shared_configs.configs import LOG_FILE_NAME
+from backend.shared_configs.configs import LOG_LEVEL
+from backend.shared_configs.configs import SLACK_CHANNEL_ID
 
 
 logging.addLevelName(logging.INFO + 5, "NOTICE")

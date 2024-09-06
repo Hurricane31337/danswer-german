@@ -7,9 +7,9 @@ from cryptography.hazmat.primitives.ciphers import algorithms
 from cryptography.hazmat.primitives.ciphers import Cipher
 from cryptography.hazmat.primitives.ciphers import modes
 
-from danswer.configs.app_configs import ENCRYPTION_KEY_SECRET
-from danswer.utils.logger import setup_logger
-from danswer.utils.variable_functionality import fetch_versioned_implementation
+from backend.danswer.configs.app_configs import ENCRYPTION_KEY_SECRET
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.variable_functionality import fetch_versioned_implementation
 
 logger = setup_logger()
 

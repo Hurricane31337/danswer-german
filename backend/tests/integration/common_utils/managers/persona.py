@@ -2,12 +2,12 @@ from uuid import uuid4
 
 import requests
 
-from danswer.search.enums import RecencyBiasSetting
-from danswer.server.features.persona.models import PersonaSnapshot
-from tests.integration.common_utils.constants import API_SERVER_URL
-from tests.integration.common_utils.constants import GENERAL_HEADERS
-from tests.integration.common_utils.test_models import TestPersona
-from tests.integration.common_utils.test_models import TestUser
+from backend.danswer.search.enums import RecencyBiasSetting
+from backend.danswer.server.features.persona.models import PersonaSnapshot
+from backend.tests.integration.common_utils.constants import API_SERVER_URL
+from backend.tests.integration.common_utils.constants import GENERAL_HEADERS
+from backend.tests.integration.common_utils.test_models import TestPersona
+from backend.tests.integration.common_utils.test_models import TestUser
 
 
 class PersonaManager:

@@ -11,21 +11,21 @@ from sqlalchemy import select
 from sqlalchemy.orm import aliased
 from sqlalchemy.orm import Session
 
-from danswer.configs.constants import MessageType
-from danswer.configs.constants import SearchFeedbackType
-from danswer.db.chat import get_chat_message
-from danswer.db.models import ChatMessageFeedback
-from danswer.db.models import ConnectorCredentialPair
-from danswer.db.models import Document as DbDocument
-from danswer.db.models import DocumentByConnectorCredentialPair
-from danswer.db.models import DocumentRetrievalFeedback
-from danswer.db.models import User
-from danswer.db.models import User__UserGroup
-from danswer.db.models import UserGroup__ConnectorCredentialPair
-from danswer.db.models import UserRole
-from danswer.document_index.interfaces import DocumentIndex
-from danswer.document_index.interfaces import UpdateRequest
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.constants import MessageType
+from backend.danswer.configs.constants import SearchFeedbackType
+from backend.danswer.db.chat import get_chat_message
+from backend.danswer.db.models import ChatMessageFeedback
+from backend.danswer.db.models import ConnectorCredentialPair
+from backend.danswer.db.models import Document as DbDocument
+from backend.danswer.db.models import DocumentByConnectorCredentialPair
+from backend.danswer.db.models import DocumentRetrievalFeedback
+from backend.danswer.db.models import User
+from backend.danswer.db.models import User__UserGroup
+from backend.danswer.db.models import UserGroup__ConnectorCredentialPair
+from backend.danswer.auth.schemas import UserRole
+from backend.danswer.document_index.interfaces import DocumentIndex
+from backend.danswer.document_index.interfaces import UpdateRequest
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

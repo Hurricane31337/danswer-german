@@ -1,17 +1,17 @@
 from sqlalchemy.orm import Session
 
-from danswer.access.access import get_access_for_documents
-from danswer.db.document import prepare_to_modify_documents
-from danswer.db.search_settings import get_current_search_settings
-from danswer.db.search_settings import get_secondary_search_settings
-from danswer.document_index.factory import get_default_document_index
-from danswer.document_index.interfaces import DocumentIndex
-from danswer.document_index.interfaces import UpdateRequest
-from danswer.utils.logger import setup_logger
-from ee.danswer.db.user_group import delete_user_group
-from ee.danswer.db.user_group import fetch_documents_for_user_group_paginated
-from ee.danswer.db.user_group import fetch_user_group
-from ee.danswer.db.user_group import mark_user_group_as_synced
+from backend.danswer.access.access import get_access_for_documents
+from backend.danswer.db.document import prepare_to_modify_documents
+from backend.danswer.db.search_settings import get_current_search_settings
+from backend.danswer.db.search_settings import get_secondary_search_settings
+from backend.danswer.document_index.factory import get_default_document_index
+from backend.danswer.document_index.interfaces import DocumentIndex
+from backend.danswer.document_index.interfaces import UpdateRequest
+from backend.danswer.utils.logger import setup_logger
+from backend.ee.danswer.db.user_group import delete_user_group
+from backend.ee.danswer.db.user_group import fetch_documents_for_user_group_paginated
+from backend.ee.danswer.db.user_group import fetch_user_group
+from backend.ee.danswer.db.user_group import mark_user_group_as_synced
 
 logger = setup_logger()
 

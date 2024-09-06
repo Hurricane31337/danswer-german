@@ -5,11 +5,11 @@ from typing import IO
 from psycopg2.extensions import connection
 from sqlalchemy.orm import Session
 
-from danswer.configs.constants import FileOrigin
-from danswer.db.models import PGFileStore
-from danswer.file_store.constants import MAX_IN_MEMORY_SIZE
-from danswer.file_store.constants import STANDARD_CHUNK_SIZE
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.constants import FileOrigin
+from backend.danswer.db.models import PGFileStore
+from backend.danswer.file_store.constants import MAX_IN_MEMORY_SIZE
+from backend.danswer.file_store.constants import STANDARD_CHUNK_SIZE
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

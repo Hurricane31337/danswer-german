@@ -3,13 +3,13 @@ from uuid import uuid4
 
 import requests
 
-from danswer.connectors.models import InputType
-from danswer.server.documents.models import ConnectorUpdateRequest
-from danswer.server.documents.models import DocumentSource
-from tests.integration.common_utils.constants import API_SERVER_URL
-from tests.integration.common_utils.constants import GENERAL_HEADERS
-from tests.integration.common_utils.test_models import TestConnector
-from tests.integration.common_utils.test_models import TestUser
+from backend.danswer.connectors.models import InputType
+from backend.danswer.server.documents.models import ConnectorUpdateRequest
+from backend.danswer.server.documents.models import DocumentSource
+from backend.tests.integration.common_utils.constants import API_SERVER_URL
+from backend.tests.integration.common_utils.constants import GENERAL_HEADERS
+from backend.tests.integration.common_utils.test_models import TestConnector
+from backend.tests.integration.common_utils.test_models import TestUser
 
 
 class ConnectorManager:

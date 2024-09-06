@@ -7,20 +7,20 @@ from typing import Any
 from simple_salesforce import Salesforce
 from simple_salesforce import SFType
 
-from danswer.configs.app_configs import INDEX_BATCH_SIZE
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.cross_connector_utils.miscellaneous_utils import time_str_to_utc
-from danswer.connectors.interfaces import GenerateDocumentsOutput
-from danswer.connectors.interfaces import IdConnector
-from danswer.connectors.interfaces import LoadConnector
-from danswer.connectors.interfaces import PollConnector
-from danswer.connectors.interfaces import SecondsSinceUnixEpoch
-from danswer.connectors.models import BasicExpertInfo
-from danswer.connectors.models import ConnectorMissingCredentialError
-from danswer.connectors.models import Document
-from danswer.connectors.models import Section
-from danswer.connectors.salesforce.utils import extract_dict_text
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.app_configs import INDEX_BATCH_SIZE
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.cross_connector_utils.miscellaneous_utils import time_str_to_utc
+from backend.danswer.connectors.interfaces import GenerateDocumentsOutput
+from backend.danswer.connectors.interfaces import IdConnector
+from backend.danswer.connectors.interfaces import LoadConnector
+from backend.danswer.connectors.interfaces import PollConnector
+from backend.danswer.connectors.interfaces import SecondsSinceUnixEpoch
+from backend.danswer.connectors.models import BasicExpertInfo
+from backend.danswer.connectors.models import ConnectorMissingCredentialError
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import Section
+from backend.danswer.connectors.salesforce.utils import extract_dict_text
+from backend.danswer.utils.logger import setup_logger
 
 DEFAULT_PARENT_OBJECT_TYPES = ["Account"]
 MAX_QUERY_LENGTH = 10000  # max query length is 20,000 characters

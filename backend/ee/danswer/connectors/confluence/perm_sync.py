@@ -1,4 +1,4 @@
-from danswer.utils.logger import setup_logger
+from backend.danswer.utils.logger import setup_logger
 
 
 logger = setup_logger()

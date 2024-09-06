@@ -2,15 +2,15 @@ from pydantic import BaseModel
 from pydantic import Field
 from pydantic import model_validator
 
-from danswer.chat.models import CitationInfo
-from danswer.chat.models import DanswerContexts
-from danswer.chat.models import DanswerQuotes
-from danswer.chat.models import QADocsResponse
-from danswer.configs.constants import MessageType
-from danswer.search.enums import LLMEvaluationType
-from danswer.search.models import ChunkContext
-from danswer.search.models import RerankingDetails
-from danswer.search.models import RetrievalDetails
+from backend.danswer.chat.models import CitationInfo
+from backend.danswer.chat.models import DanswerContexts
+from backend.danswer.chat.models import DanswerQuotes
+from backend.danswer.chat.models import QADocsResponse
+from backend.danswer.configs.constants import MessageType
+from backend.danswer.search.enums import LLMEvaluationType
+from backend.danswer.search.models import ChunkContext
+from backend.danswer.search.models import RerankingDetails
+from backend.danswer.search.models import RetrievalDetails
 
 
 class QueryRephrase(BaseModel):

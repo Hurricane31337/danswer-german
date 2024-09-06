@@ -1,15 +1,15 @@
 import re
 from collections.abc import Iterator
 
-from danswer.chat.models import AnswerQuestionStreamReturn
-from danswer.chat.models import CitationInfo
-from danswer.chat.models import DanswerAnswerPiece
-from danswer.chat.models import LlmDoc
-from danswer.configs.chat_configs import STOP_STREAM_PAT
-from danswer.llm.answering.models import StreamProcessor
-from danswer.llm.answering.stream_processing.utils import DocumentIdOrderMapping
-from danswer.prompts.constants import TRIPLE_BACKTICK
-from danswer.utils.logger import setup_logger
+from backend.danswer.chat.models import AnswerQuestionStreamReturn
+from backend.danswer.chat.models import CitationInfo
+from backend.danswer.chat.models import DanswerAnswerPiece
+from backend.danswer.chat.models import LlmDoc
+from backend.danswer.configs.chat_configs import STOP_STREAM_PAT
+from backend.danswer.llm.answering.models import StreamProcessor
+from backend.danswer.llm.answering.stream_processing.utils import DocumentIdOrderMapping
+from backend.danswer.prompts.constants import TRIPLE_BACKTICK
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

@@ -6,35 +6,35 @@ from pydantic import BaseModel
 from pydantic import ConfigDict
 from sqlalchemy.orm import Session
 
-from danswer.access.access import get_access_for_documents
-from danswer.access.models import DocumentAccess
-from danswer.configs.app_configs import ENABLE_MULTIPASS_INDEXING
-from danswer.configs.app_configs import INDEXING_EXCEPTION_LIMIT
-from danswer.configs.constants import DEFAULT_BOOST
-from danswer.connectors.cross_connector_utils.miscellaneous_utils import (
+from backend.danswer.access.access import get_access_for_documents
+from backend.danswer.access.models import DocumentAccess
+from backend.danswer.configs.app_configs import ENABLE_MULTIPASS_INDEXING
+from backend.danswer.configs.app_configs import INDEXING_EXCEPTION_LIMIT
+from backend.danswer.configs.constants import DEFAULT_BOOST
+from backend.danswer.connectors.cross_connector_utils.miscellaneous_utils import (
     get_experts_stores_representations,
 )
-from danswer.connectors.models import Document
-from danswer.connectors.models import IndexAttemptMetadata
-from danswer.db.document import get_documents_by_ids
-from danswer.db.document import prepare_to_modify_documents
-from danswer.db.document import update_docs_updated_at
-from danswer.db.document import upsert_documents_complete
-from danswer.db.document_set import fetch_document_sets_for_documents
-from danswer.db.index_attempt import create_index_attempt_error
-from danswer.db.models import Document as DBDocument
-from danswer.db.search_settings import get_current_search_settings
-from danswer.db.tag import create_or_add_document_tag
-from danswer.db.tag import create_or_add_document_tag_list
-from danswer.document_index.interfaces import DocumentIndex
-from danswer.document_index.interfaces import DocumentMetadata
-from danswer.indexing.chunker import Chunker
-from danswer.indexing.embedder import IndexingEmbedder
-from danswer.indexing.models import DocAwareChunk
-from danswer.indexing.models import DocMetadataAwareIndexChunk
-from danswer.utils.logger import setup_logger
-from danswer.utils.timing import log_function_time
-from shared_configs.enums import EmbeddingProvider
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import IndexAttemptMetadata
+from backend.danswer.db.document import get_documents_by_ids
+from backend.danswer.db.document import prepare_to_modify_documents
+from backend.danswer.db.document import update_docs_updated_at
+from backend.danswer.db.document import upsert_documents_complete
+from backend.danswer.db.document_set import fetch_document_sets_for_documents
+from backend.danswer.db.index_attempt import create_index_attempt_error
+from backend.danswer.db.models import Document as DBDocument
+from backend.danswer.db.search_settings import get_current_search_settings
+from backend.danswer.db.tag import create_or_add_document_tag
+from backend.danswer.db.tag import create_or_add_document_tag_list
+from backend.danswer.document_index.interfaces import DocumentIndex
+from backend.danswer.document_index.interfaces import DocumentMetadata
+from backend.danswer.indexing.chunker import Chunker
+from backend.danswer.indexing.embedder import IndexingEmbedder
+from backend.danswer.indexing.models import DocAwareChunk
+from backend.danswer.indexing.models import DocMetadataAwareIndexChunk
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.timing import log_function_time
+from backend.shared_configs.enums import EmbeddingProvider
 
 logger = setup_logger()
 

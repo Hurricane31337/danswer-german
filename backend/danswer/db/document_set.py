@@ -12,22 +12,22 @@ from sqlalchemy import select
 from sqlalchemy.orm import aliased
 from sqlalchemy.orm import Session
 
-from danswer.db.connector_credential_pair import get_cc_pair_groups_for_ids
-from danswer.db.connector_credential_pair import get_connector_credential_pairs
-from danswer.db.enums import ConnectorCredentialPairStatus
-from danswer.db.models import ConnectorCredentialPair
-from danswer.db.models import Document
-from danswer.db.models import DocumentByConnectorCredentialPair
-from danswer.db.models import DocumentSet as DocumentSetDBModel
-from danswer.db.models import DocumentSet__ConnectorCredentialPair
-from danswer.db.models import DocumentSet__UserGroup
-from danswer.db.models import User
-from danswer.db.models import User__UserGroup
-from danswer.db.models import UserRole
-from danswer.server.features.document_set.models import DocumentSetCreationRequest
-from danswer.server.features.document_set.models import DocumentSetUpdateRequest
-from danswer.utils.logger import setup_logger
-from danswer.utils.variable_functionality import fetch_versioned_implementation
+from backend.danswer.db.connector_credential_pair import get_cc_pair_groups_for_ids
+from backend.danswer.db.connector_credential_pair import get_connector_credential_pairs
+from backend.danswer.db.enums import ConnectorCredentialPairStatus
+from backend.danswer.db.models import ConnectorCredentialPair
+from backend.danswer.db.models import Document
+from backend.danswer.db.models import DocumentByConnectorCredentialPair
+from backend.danswer.db.models import DocumentSet as DocumentSetDBModel
+from backend.danswer.db.models import DocumentSet__ConnectorCredentialPair
+from backend.danswer.db.models import DocumentSet__UserGroup
+from backend.danswer.db.models import User
+from backend.danswer.db.models import User__UserGroup
+from backend.danswer.db.models import UserRole
+from backend.danswer.server.features.document_set.models import DocumentSetCreationRequest
+from backend.danswer.server.features.document_set.models import DocumentSetUpdateRequest
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.variable_functionality import fetch_versioned_implementation
 
 logger = setup_logger()
 

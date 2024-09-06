@@ -12,29 +12,29 @@ connector / credential pair from the access list
 """
 from sqlalchemy.orm import Session
 
-from danswer.access.access import get_access_for_documents
-from danswer.db.connector import fetch_connector_by_id
-from danswer.db.connector_credential_pair import (
+from backend.danswer.access.access import get_access_for_documents
+from backend.danswer.db.connector import fetch_connector_by_id
+from backend.danswer.db.connector_credential_pair import (
     delete_connector_credential_pair__no_commit,
 )
-from danswer.db.document import delete_document_by_connector_credential_pair__no_commit
-from danswer.db.document import delete_documents_complete__no_commit
-from danswer.db.document import get_document_connector_cnts
-from danswer.db.document import get_documents_for_connector_credential_pair
-from danswer.db.document import prepare_to_modify_documents
-from danswer.db.document_set import delete_document_set_cc_pair_relationship__no_commit
-from danswer.db.document_set import fetch_document_sets_for_documents
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.db.index_attempt import delete_index_attempts
-from danswer.db.models import ConnectorCredentialPair
-from danswer.document_index.interfaces import DocumentIndex
-from danswer.document_index.interfaces import UpdateRequest
-from danswer.server.documents.models import ConnectorCredentialPairIdentifier
-from danswer.utils.logger import setup_logger
-from danswer.utils.variable_functionality import (
+from backend.danswer.db.document import delete_document_by_connector_credential_pair__no_commit
+from backend.danswer.db.document import delete_documents_complete__no_commit
+from backend.danswer.db.document import get_document_connector_cnts
+from backend.danswer.db.document import get_documents_for_connector_credential_pair
+from backend.danswer.db.document import prepare_to_modify_documents
+from backend.danswer.db.document_set import delete_document_set_cc_pair_relationship__no_commit
+from backend.danswer.db.document_set import fetch_document_sets_for_documents
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.db.index_attempt import delete_index_attempts
+from backend.danswer.db.models import ConnectorCredentialPair
+from backend.danswer.document_index.interfaces import DocumentIndex
+from backend.danswer.document_index.interfaces import UpdateRequest
+from backend.danswer.server.documents.models import ConnectorCredentialPairIdentifier
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.variable_functionality import (
     fetch_versioned_implementation_with_fallback,
 )
-from danswer.utils.variable_functionality import noop_fallback
+from backend.danswer.utils.variable_functionality import noop_fallback
 
 logger = setup_logger()
 

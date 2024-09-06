@@ -7,13 +7,13 @@ from uuid import uuid4
 import requests
 from sqlalchemy.orm import Session
 
-from danswer.configs.constants import FileOrigin
-from danswer.db.engine import get_session_context_manager
-from danswer.db.models import ChatMessage
-from danswer.file_store.file_store import get_default_file_store
-from danswer.file_store.models import FileDescriptor
-from danswer.file_store.models import InMemoryChatFile
-from danswer.utils.threadpool_concurrency import run_functions_tuples_in_parallel
+from backend.danswer.configs.constants import FileOrigin
+from backend.danswer.db.engine import get_session_context_manager
+from backend.danswer.db.models import ChatMessage
+from backend.danswer.file_store.file_store import get_default_file_store
+from backend.danswer.file_store.models import FileDescriptor
+from backend.danswer.file_store.models import InMemoryChatFile
+from backend.danswer.utils.threadpool_concurrency import run_functions_tuples_in_parallel
 
 
 def load_chat_file(

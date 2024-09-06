@@ -5,12 +5,12 @@ from datetime import timezone
 
 from dateutil.parser import parse
 
-from danswer.llm.interfaces import LLM
-from danswer.llm.utils import dict_based_prompt_to_langchain_prompt
-from danswer.llm.utils import message_to_string
-from danswer.prompts.filter_extration import TIME_FILTER_PROMPT
-from danswer.prompts.prompt_utils import get_current_llm_day_time
-from danswer.utils.logger import setup_logger
+from backend.danswer.llm.interfaces import LLM
+from backend.danswer.llm.utils import dict_based_prompt_to_langchain_prompt
+from backend.danswer.llm.utils import message_to_string
+from backend.danswer.prompts.filter_extration import TIME_FILTER_PROMPT
+from backend.danswer.prompts.prompt_utils import get_current_llm_day_time
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 
@@ -156,7 +156,7 @@ def extract_time_filter(query: str, llm: LLM) -> tuple[datetime | None, bool]:
 
 if __name__ == "__main__":
     # Just for testing purposes, too tedious to unit test as it relies on an LLM
-    from danswer.llm.factory import get_default_llms, get_main_llm_from_tuple
+    from backend.danswer.llm.factory import get_default_llms, get_main_llm_from_tuple
 
     while True:
         user_input = input("Query to Extract Time: ")

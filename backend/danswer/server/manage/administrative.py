@@ -8,36 +8,36 @@ from fastapi import Depends
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.auth.users import current_curator_or_admin_user
-from danswer.configs.app_configs import GENERATIVE_MODEL_ACCESS_CHECK_FREQ
-from danswer.configs.constants import DocumentSource
-from danswer.configs.constants import KV_GEN_AI_KEY_CHECK_TIME
-from danswer.db.connector_credential_pair import get_connector_credential_pair
-from danswer.db.connector_credential_pair import (
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.auth.users import current_curator_or_admin_user
+from backend.danswer.configs.app_configs import GENERATIVE_MODEL_ACCESS_CHECK_FREQ
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.configs.constants import KV_GEN_AI_KEY_CHECK_TIME
+from backend.danswer.db.connector_credential_pair import get_connector_credential_pair
+from backend.danswer.db.connector_credential_pair import (
     update_connector_credential_pair_from_id,
 )
-from danswer.db.deletion_attempt import check_deletion_attempt_is_allowed
-from danswer.db.engine import get_session
-from danswer.db.enums import ConnectorCredentialPairStatus
-from danswer.db.feedback import fetch_docs_ranked_by_boost
-from danswer.db.feedback import update_document_boost
-from danswer.db.feedback import update_document_hidden
-from danswer.db.index_attempt import cancel_indexing_attempts_for_ccpair
-from danswer.db.models import User
-from danswer.document_index.document_index_utils import get_both_index_names
-from danswer.document_index.factory import get_default_document_index
-from danswer.dynamic_configs.factory import get_dynamic_config_store
-from danswer.dynamic_configs.interface import ConfigNotFoundError
-from danswer.file_store.file_store import get_default_file_store
-from danswer.llm.factory import get_default_llms
-from danswer.llm.utils import test_llm
-from danswer.server.documents.models import ConnectorCredentialPairIdentifier
-from danswer.server.manage.models import BoostDoc
-from danswer.server.manage.models import BoostUpdateRequest
-from danswer.server.manage.models import HiddenUpdateRequest
-from danswer.server.models import StatusResponse
-from danswer.utils.logger import setup_logger
+from backend.danswer.db.deletion_attempt import check_deletion_attempt_is_allowed
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.enums import ConnectorCredentialPairStatus
+from backend.danswer.db.feedback import fetch_docs_ranked_by_boost
+from backend.danswer.db.feedback import update_document_boost
+from backend.danswer.db.feedback import update_document_hidden
+from backend.danswer.db.index_attempt import cancel_indexing_attempts_for_ccpair
+from backend.danswer.db.models import User
+from backend.danswer.document_index.document_index_utils import get_both_index_names
+from backend.danswer.document_index.factory import get_default_document_index
+from backend.danswer.dynamic_configs.factory import get_dynamic_config_store
+from backend.danswer.dynamic_configs.interface import ConfigNotFoundError
+from backend.danswer.file_store.file_store import get_default_file_store
+from backend.danswer.llm.factory import get_default_llms
+from backend.danswer.llm.utils import test_llm
+from backend.danswer.server.documents.models import ConnectorCredentialPairIdentifier
+from backend.danswer.server.manage.models import BoostDoc
+from backend.danswer.server.manage.models import BoostUpdateRequest
+from backend.danswer.server.manage.models import HiddenUpdateRequest
+from backend.danswer.server.models import StatusResponse
+from backend.danswer.utils.logger import setup_logger
 
 router = APIRouter(prefix="/manage")
 logger = setup_logger()
@@ -151,7 +151,7 @@ def create_deletion_attempt_for_connector_id(
     user: User = Depends(current_curator_or_admin_user),
     db_session: Session = Depends(get_session),
 ) -> None:
-    from danswer.background.celery.celery_app import (
+    from backend.danswer.background.celery.celery_app import (
         cleanup_connector_credential_pair_task,
     )
 

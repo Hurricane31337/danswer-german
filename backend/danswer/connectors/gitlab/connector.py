@@ -11,18 +11,18 @@ import gitlab
 import pytz
 from gitlab.v4.objects import Project
 
-from danswer.configs.app_configs import GITLAB_CONNECTOR_INCLUDE_CODE_FILES
-from danswer.configs.app_configs import INDEX_BATCH_SIZE
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.interfaces import GenerateDocumentsOutput
-from danswer.connectors.interfaces import LoadConnector
-from danswer.connectors.interfaces import PollConnector
-from danswer.connectors.interfaces import SecondsSinceUnixEpoch
-from danswer.connectors.models import BasicExpertInfo
-from danswer.connectors.models import ConnectorMissingCredentialError
-from danswer.connectors.models import Document
-from danswer.connectors.models import Section
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.app_configs import GITLAB_CONNECTOR_INCLUDE_CODE_FILES
+from backend.danswer.configs.app_configs import INDEX_BATCH_SIZE
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.interfaces import GenerateDocumentsOutput
+from backend.danswer.connectors.interfaces import LoadConnector
+from backend.danswer.connectors.interfaces import PollConnector
+from backend.danswer.connectors.interfaces import SecondsSinceUnixEpoch
+from backend.danswer.connectors.models import BasicExpertInfo
+from backend.danswer.connectors.models import ConnectorMissingCredentialError
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import Section
+from backend.danswer.utils.logger import setup_logger
 
 # List of directories/Files to exclude
 exclude_patterns = [

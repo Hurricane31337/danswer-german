@@ -7,20 +7,20 @@ from typing import Any
 from oauthlib.oauth2 import BackendApplicationClient
 from requests_oauthlib import OAuth2Session  # type: ignore
 
-from danswer.configs.app_configs import INDEX_BATCH_SIZE
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.cross_connector_utils.miscellaneous_utils import time_str_to_utc
-from danswer.connectors.interfaces import GenerateDocumentsOutput
-from danswer.connectors.interfaces import LoadConnector
-from danswer.connectors.interfaces import PollConnector
-from danswer.connectors.interfaces import SecondsSinceUnixEpoch
-from danswer.connectors.models import BasicExpertInfo
-from danswer.connectors.models import ConnectorMissingCredentialError
-from danswer.connectors.models import Document
-from danswer.connectors.models import Section
-from danswer.file_processing.html_utils import parse_html_page_basic
-from danswer.file_processing.html_utils import strip_excessive_newlines_and_spaces
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.app_configs import INDEX_BATCH_SIZE
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.cross_connector_utils.miscellaneous_utils import time_str_to_utc
+from backend.danswer.connectors.interfaces import GenerateDocumentsOutput
+from backend.danswer.connectors.interfaces import LoadConnector
+from backend.danswer.connectors.interfaces import PollConnector
+from backend.danswer.connectors.interfaces import SecondsSinceUnixEpoch
+from backend.danswer.connectors.models import BasicExpertInfo
+from backend.danswer.connectors.models import ConnectorMissingCredentialError
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import Section
+from backend.danswer.file_processing.html_utils import parse_html_page_basic
+from backend.danswer.file_processing.html_utils import strip_excessive_newlines_and_spaces
+from backend.danswer.utils.logger import setup_logger
 
 LOOPIO_API_BASE = "https://api.loopio.com/"
 LOOPIO_AUTH_URL = LOOPIO_API_BASE + "oauth2/access_token"

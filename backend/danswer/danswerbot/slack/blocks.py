@@ -16,25 +16,25 @@ from slack_sdk.models.blocks import SectionBlock
 from slack_sdk.models.blocks.basic_components import MarkdownTextObject
 from slack_sdk.models.blocks.block_elements import ImageElement
 
-from danswer.chat.models import DanswerQuote
-from danswer.configs.app_configs import DISABLE_GENERATIVE_AI
-from danswer.configs.constants import DocumentSource
-from danswer.configs.constants import SearchFeedbackType
-from danswer.configs.danswerbot_configs import DANSWER_BOT_NUM_DOCS_TO_DISPLAY
-from danswer.danswerbot.slack.constants import DISLIKE_BLOCK_ACTION_ID
-from danswer.danswerbot.slack.constants import FEEDBACK_DOC_BUTTON_BLOCK_ACTION_ID
-from danswer.danswerbot.slack.constants import FOLLOWUP_BUTTON_ACTION_ID
-from danswer.danswerbot.slack.constants import FOLLOWUP_BUTTON_RESOLVED_ACTION_ID
-from danswer.danswerbot.slack.constants import GENERATE_ANSWER_BUTTON_ACTION_ID
-from danswer.danswerbot.slack.constants import IMMEDIATE_RESOLVED_BUTTON_ACTION_ID
-from danswer.danswerbot.slack.constants import LIKE_BLOCK_ACTION_ID
-from danswer.danswerbot.slack.icons import source_to_github_img_link
-from danswer.danswerbot.slack.utils import build_feedback_id
-from danswer.danswerbot.slack.utils import remove_slack_text_interactions
-from danswer.danswerbot.slack.utils import translate_vespa_highlight_to_slack
-from danswer.search.models import SavedSearchDoc
-from danswer.utils.text_processing import decode_escapes
-from danswer.utils.text_processing import replace_whitespaces_w_space
+from backend.danswer.chat.models import DanswerQuote
+from backend.danswer.configs.app_configs import DISABLE_GENERATIVE_AI
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.configs.constants import SearchFeedbackType
+from backend.danswer.configs.danswerbot_configs import DANSWER_BOT_NUM_DOCS_TO_DISPLAY
+from backend.danswer.danswerbot.slack.constants import DISLIKE_BLOCK_ACTION_ID
+from backend.danswer.danswerbot.slack.constants import FEEDBACK_DOC_BUTTON_BLOCK_ACTION_ID
+from backend.danswer.danswerbot.slack.constants import FOLLOWUP_BUTTON_ACTION_ID
+from backend.danswer.danswerbot.slack.constants import FOLLOWUP_BUTTON_RESOLVED_ACTION_ID
+from backend.danswer.danswerbot.slack.constants import GENERATE_ANSWER_BUTTON_ACTION_ID
+from backend.danswer.danswerbot.slack.constants import IMMEDIATE_RESOLVED_BUTTON_ACTION_ID
+from backend.danswer.danswerbot.slack.constants import LIKE_BLOCK_ACTION_ID
+from backend.danswer.danswerbot.slack.icons import source_to_github_img_link
+from backend.danswer.danswerbot.slack.utils import build_feedback_id
+from backend.danswer.danswerbot.slack.utils import remove_slack_text_interactions
+from backend.danswer.danswerbot.slack.utils import translate_vespa_highlight_to_slack
+from backend.danswer.search.models import SavedSearchDoc
+from backend.danswer.utils.text_processing import decode_escapes
+from backend.danswer.utils.text_processing import replace_whitespaces_w_space
 
 _MAX_BLURB_LEN = 45
 

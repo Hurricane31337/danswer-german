@@ -6,15 +6,15 @@ from pathlib import Path
 from typing import Any
 from typing import cast
 
-from danswer.configs.app_configs import INDEX_BATCH_SIZE
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.interfaces import GenerateDocumentsOutput
-from danswer.connectors.interfaces import LoadConnector
-from danswer.connectors.models import Document
-from danswer.connectors.models import Section
-from danswer.connectors.slack.connector import filter_channels
-from danswer.connectors.slack.utils import get_message_link
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.app_configs import INDEX_BATCH_SIZE
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.interfaces import GenerateDocumentsOutput
+from backend.danswer.connectors.interfaces import LoadConnector
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import Section
+from backend.danswer.connectors.slack.connector import filter_channels
+from backend.danswer.connectors.slack.utils import get_message_link
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

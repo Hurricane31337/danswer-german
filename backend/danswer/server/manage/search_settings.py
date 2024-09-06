@@ -4,31 +4,31 @@ from fastapi import HTTPException
 from fastapi import status
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.auth.users import current_user
-from danswer.configs.app_configs import DISABLE_INDEX_UPDATE_ON_SWAP
-from danswer.db.connector_credential_pair import get_connector_credential_pairs
-from danswer.db.connector_credential_pair import resync_cc_pair
-from danswer.db.engine import get_session
-from danswer.db.index_attempt import expire_index_attempts
-from danswer.db.models import IndexModelStatus
-from danswer.db.models import User
-from danswer.db.search_settings import create_search_settings
-from danswer.db.search_settings import delete_search_settings
-from danswer.db.search_settings import get_current_search_settings
-from danswer.db.search_settings import get_embedding_provider_from_provider_type
-from danswer.db.search_settings import get_secondary_search_settings
-from danswer.db.search_settings import update_current_search_settings
-from danswer.db.search_settings import update_search_settings_status
-from danswer.document_index.factory import get_default_document_index
-from danswer.natural_language_processing.search_nlp_models import clean_model_name
-from danswer.search.models import SavedSearchSettings
-from danswer.search.models import SearchSettingsCreationRequest
-from danswer.server.manage.embedding.models import SearchSettingsDeleteRequest
-from danswer.server.manage.models import FullModelVersionResponse
-from danswer.server.models import IdReturn
-from danswer.utils.logger import setup_logger
-from shared_configs.configs import ALT_INDEX_SUFFIX
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.auth.users import current_user
+from backend.danswer.configs.app_configs import DISABLE_INDEX_UPDATE_ON_SWAP
+from backend.danswer.db.connector_credential_pair import get_connector_credential_pairs
+from backend.danswer.db.connector_credential_pair import resync_cc_pair
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.index_attempt import expire_index_attempts
+from backend.danswer.db.models import IndexModelStatus
+from backend.danswer.db.models import User
+from backend.danswer.db.search_settings import create_search_settings
+from backend.danswer.db.search_settings import delete_search_settings
+from backend.danswer.db.search_settings import get_current_search_settings
+from backend.danswer.db.search_settings import get_embedding_provider_from_provider_type
+from backend.danswer.db.search_settings import get_secondary_search_settings
+from backend.danswer.db.search_settings import update_current_search_settings
+from backend.danswer.db.search_settings import update_search_settings_status
+from backend.danswer.document_index.factory import get_default_document_index
+from backend.danswer.natural_language_processing.search_nlp_models import clean_model_name
+from backend.danswer.search.models import SavedSearchSettings
+from backend.danswer.search.models import SearchSettingsCreationRequest
+from backend.danswer.server.manage.embedding.models import SearchSettingsDeleteRequest
+from backend.danswer.server.manage.models import FullModelVersionResponse
+from backend.danswer.server.models import IdReturn
+from backend.danswer.utils.logger import setup_logger
+from backend.shared_configs.configs import ALT_INDEX_SUFFIX
 
 
 router = APIRouter(prefix="/search-settings")

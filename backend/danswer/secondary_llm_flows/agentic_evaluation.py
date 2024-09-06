@@ -1,13 +1,13 @@
 import re
 
-from danswer.chat.models import SectionRelevancePiece
-from danswer.llm.interfaces import LLM
-from danswer.llm.utils import dict_based_prompt_to_langchain_prompt
-from danswer.llm.utils import message_to_string
-from danswer.prompts.agentic_evaluation import AGENTIC_SEARCH_SYSTEM_PROMPT
-from danswer.prompts.agentic_evaluation import AGENTIC_SEARCH_USER_PROMPT
-from danswer.search.models import InferenceSection
-from danswer.utils.logger import setup_logger
+from backend.danswer.chat.models import SectionRelevancePiece
+from backend.danswer.llm.interfaces import LLM
+from backend.danswer.llm.utils import dict_based_prompt_to_langchain_prompt
+from backend.danswer.llm.utils import message_to_string
+from backend.danswer.prompts.agentic_evaluation import AGENTIC_SEARCH_SYSTEM_PROMPT
+from backend.danswer.prompts.agentic_evaluation import AGENTIC_SEARCH_USER_PROMPT
+from backend.danswer.search.models import InferenceSection
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

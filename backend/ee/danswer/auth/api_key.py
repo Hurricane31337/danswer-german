@@ -5,8 +5,8 @@ from fastapi import Request
 from passlib.hash import sha256_crypt
 from pydantic import BaseModel
 
-from danswer.auth.schemas import UserRole
-from ee.danswer.configs.app_configs import API_KEY_HASH_ROUNDS
+from backend.danswer.auth.schemas import UserRole
+from backend.ee.danswer.configs.app_configs import API_KEY_HASH_ROUNDS
 
 
 _API_KEY_HEADER_NAME = "Authorization"

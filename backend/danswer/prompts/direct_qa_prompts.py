@@ -2,11 +2,11 @@
 # It is used also for the one shot direct QA flow
 import json
 
-from danswer.prompts.constants import DEFAULT_IGNORE_STATEMENT
-from danswer.prompts.constants import FINAL_QUERY_PAT
-from danswer.prompts.constants import GENERAL_SEP_PAT
-from danswer.prompts.constants import QUESTION_PAT
-from danswer.prompts.constants import THOUGHT_PAT
+from backend.danswer.prompts.constants import DEFAULT_IGNORE_STATEMENT
+from backend.danswer.prompts.constants import FINAL_QUERY_PAT
+from backend.danswer.prompts.constants import GENERAL_SEP_PAT
+from backend.danswer.prompts.constants import QUESTION_PAT
+from backend.danswer.prompts.constants import THOUGHT_PAT
 
 
 ONE_SHOT_SYSTEM_PROMPT = """

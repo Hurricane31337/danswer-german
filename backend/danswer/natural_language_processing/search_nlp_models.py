@@ -9,29 +9,29 @@ import requests
 from httpx import HTTPError
 from retry import retry
 
-from danswer.configs.app_configs import LARGE_CHUNK_RATIO
-from danswer.configs.model_configs import BATCH_SIZE_ENCODE_CHUNKS
-from danswer.configs.model_configs import (
+from backend.danswer.configs.app_configs import LARGE_CHUNK_RATIO
+from backend.danswer.configs.model_configs import BATCH_SIZE_ENCODE_CHUNKS
+from backend.danswer.configs.model_configs import (
     BATCH_SIZE_ENCODE_CHUNKS_FOR_API_EMBEDDING_SERVICES,
 )
-from danswer.configs.model_configs import DOC_EMBEDDING_CONTEXT_SIZE
-from danswer.db.models import SearchSettings
-from danswer.natural_language_processing.utils import get_tokenizer
-from danswer.natural_language_processing.utils import tokenizer_trim_content
-from danswer.utils.logger import setup_logger
-from shared_configs.configs import MODEL_SERVER_HOST
-from shared_configs.configs import MODEL_SERVER_PORT
-from shared_configs.enums import EmbeddingProvider
-from shared_configs.enums import EmbedTextType
-from shared_configs.enums import RerankerProvider
-from shared_configs.model_server_models import Embedding
-from shared_configs.model_server_models import EmbedRequest
-from shared_configs.model_server_models import EmbedResponse
-from shared_configs.model_server_models import IntentRequest
-from shared_configs.model_server_models import IntentResponse
-from shared_configs.model_server_models import RerankRequest
-from shared_configs.model_server_models import RerankResponse
-from shared_configs.utils import batch_list
+from backend.danswer.configs.model_configs import DOC_EMBEDDING_CONTEXT_SIZE
+from backend.danswer.db.models import SearchSettings
+from backend.danswer.natural_language_processing.utils import get_tokenizer
+from backend.danswer.natural_language_processing.utils import tokenizer_trim_content
+from backend.danswer.utils.logger import setup_logger
+from backend.shared_configs.configs import MODEL_SERVER_HOST
+from backend.shared_configs.configs import MODEL_SERVER_PORT
+from backend.shared_configs.enums import EmbeddingProvider
+from backend.shared_configs.enums import EmbedTextType
+from backend.shared_configs.enums import RerankerProvider
+from backend.shared_configs.model_server_models import Embedding
+from backend.shared_configs.model_server_models import EmbedRequest
+from backend.shared_configs.model_server_models import EmbedResponse
+from backend.shared_configs.model_server_models import IntentRequest
+from backend.shared_configs.model_server_models import IntentResponse
+from backend.shared_configs.model_server_models import RerankRequest
+from backend.shared_configs.model_server_models import RerankResponse
+from backend.shared_configs.utils import batch_list
 
 logger = setup_logger()
 

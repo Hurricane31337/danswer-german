@@ -8,23 +8,23 @@ from sqlalchemy.orm import Session
 from sqlalchemy.sql.expression import and_
 from sqlalchemy.sql.expression import or_
 
-from danswer.auth.schemas import UserRole
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.gmail.constants import (
+from backend.danswer.auth.schemas import UserRole
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.gmail.constants import (
     GMAIL_DB_CREDENTIALS_DICT_SERVICE_ACCOUNT_KEY,
 )
-from danswer.connectors.google_drive.constants import (
+from backend.danswer.connectors.google_drive.constants import (
     DB_CREDENTIALS_DICT_SERVICE_ACCOUNT_KEY,
 )
-from danswer.db.models import ConnectorCredentialPair
-from danswer.db.models import Credential
-from danswer.db.models import Credential__UserGroup
-from danswer.db.models import DocumentByConnectorCredentialPair
-from danswer.db.models import User
-from danswer.db.models import User__UserGroup
-from danswer.server.documents.models import CredentialBase
-from danswer.server.documents.models import CredentialDataUpdateRequest
-from danswer.utils.logger import setup_logger
+from backend.danswer.db.models import ConnectorCredentialPair
+from backend.danswer.db.models import Credential
+from backend.danswer.db.models import Credential__UserGroup
+from backend.danswer.db.models import DocumentByConnectorCredentialPair
+from backend.danswer.db.models import User
+from backend.danswer.db.models import User__UserGroup
+from backend.danswer.server.documents.models import CredentialBase
+from backend.danswer.server.documents.models import CredentialDataUpdateRequest
+from backend.danswer.utils.logger import setup_logger
 
 
 logger = setup_logger()

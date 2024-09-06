@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from uuid import UUID
 
-from danswer.access.utils import prefix_user
-from danswer.access.utils import prefix_user_group
-from danswer.configs.constants import PUBLIC_DOC_PAT
+from backend.danswer.access.utils import prefix_user
+from backend.danswer.access.utils import prefix_user_group
+from backend.danswer.configs.constants import PUBLIC_DOC_PAT
 
 
 @dataclass(frozen=True)

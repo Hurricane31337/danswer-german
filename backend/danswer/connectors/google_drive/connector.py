@@ -13,38 +13,38 @@ from google.oauth2.service_account import Credentials as ServiceAccountCredentia
 from googleapiclient import discovery  # type: ignore
 from googleapiclient.errors import HttpError  # type: ignore
 
-from danswer.configs.app_configs import CONTINUE_ON_CONNECTOR_FAILURE
-from danswer.configs.app_configs import GOOGLE_DRIVE_FOLLOW_SHORTCUTS
-from danswer.configs.app_configs import GOOGLE_DRIVE_INCLUDE_SHARED
-from danswer.configs.app_configs import GOOGLE_DRIVE_ONLY_ORG_PUBLIC
-from danswer.configs.app_configs import INDEX_BATCH_SIZE
-from danswer.configs.constants import DocumentSource
-from danswer.configs.constants import IGNORE_FOR_QA
-from danswer.connectors.cross_connector_utils.retry_wrapper import retry_builder
-from danswer.connectors.google_drive.connector_auth import (
+from backend.danswer.configs.app_configs import CONTINUE_ON_CONNECTOR_FAILURE
+from backend.danswer.configs.app_configs import GOOGLE_DRIVE_FOLLOW_SHORTCUTS
+from backend.danswer.configs.app_configs import GOOGLE_DRIVE_INCLUDE_SHARED
+from backend.danswer.configs.app_configs import GOOGLE_DRIVE_ONLY_ORG_PUBLIC
+from backend.danswer.configs.app_configs import INDEX_BATCH_SIZE
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.configs.constants import IGNORE_FOR_QA
+from backend.danswer.connectors.cross_connector_utils.retry_wrapper import retry_builder
+from backend.danswer.connectors.google_drive.connector_auth import (
     get_google_drive_creds_for_authorized_user,
 )
-from danswer.connectors.google_drive.connector_auth import (
+from backend.danswer.connectors.google_drive.connector_auth import (
     get_google_drive_creds_for_service_account,
 )
-from danswer.connectors.google_drive.constants import (
+from backend.danswer.connectors.google_drive.constants import (
     DB_CREDENTIALS_DICT_DELEGATED_USER_KEY,
 )
-from danswer.connectors.google_drive.constants import (
+from backend.danswer.connectors.google_drive.constants import (
     DB_CREDENTIALS_DICT_SERVICE_ACCOUNT_KEY,
 )
-from danswer.connectors.google_drive.constants import DB_CREDENTIALS_DICT_TOKEN_KEY
-from danswer.connectors.interfaces import GenerateDocumentsOutput
-from danswer.connectors.interfaces import LoadConnector
-from danswer.connectors.interfaces import PollConnector
-from danswer.connectors.interfaces import SecondsSinceUnixEpoch
-from danswer.connectors.models import Document
-from danswer.connectors.models import Section
-from danswer.file_processing.extract_file_text import docx_to_text
-from danswer.file_processing.extract_file_text import pptx_to_text
-from danswer.file_processing.extract_file_text import read_pdf_file
-from danswer.utils.batching import batch_generator
-from danswer.utils.logger import setup_logger
+from backend.danswer.connectors.google_drive.constants import DB_CREDENTIALS_DICT_TOKEN_KEY
+from backend.danswer.connectors.interfaces import GenerateDocumentsOutput
+from backend.danswer.connectors.interfaces import LoadConnector
+from backend.danswer.connectors.interfaces import PollConnector
+from backend.danswer.connectors.interfaces import SecondsSinceUnixEpoch
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import Section
+from backend.danswer.file_processing.extract_file_text import docx_to_text
+from backend.danswer.file_processing.extract_file_text import pptx_to_text
+from backend.danswer.file_processing.extract_file_text import read_pdf_file
+from backend.danswer.utils.batching import batch_generator
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

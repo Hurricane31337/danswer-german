@@ -4,18 +4,18 @@ from fastapi import HTTPException
 from fastapi import Query
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_user
-from danswer.db.engine import get_session
-from danswer.db.models import User
-from danswer.db.search_settings import get_current_search_settings
-from danswer.document_index.factory import get_default_document_index
-from danswer.document_index.interfaces import VespaChunkRequest
-from danswer.natural_language_processing.utils import get_tokenizer
-from danswer.prompts.prompt_utils import build_doc_context_str
-from danswer.search.models import IndexFilters
-from danswer.search.preprocessing.access_filters import build_access_filters_for_user
-from danswer.server.documents.models import ChunkInfo
-from danswer.server.documents.models import DocumentInfo
+from backend.danswer.auth.users import current_user
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import User
+from backend.danswer.db.search_settings import get_current_search_settings
+from backend.danswer.document_index.factory import get_default_document_index
+from backend.danswer.document_index.interfaces import VespaChunkRequest
+from backend.danswer.natural_language_processing.utils import get_tokenizer
+from backend.danswer.prompts.prompt_utils import build_doc_context_str
+from backend.danswer.search.models import IndexFilters
+from backend.danswer.search.preprocessing.access_filters import build_access_filters_for_user
+from backend.danswer.server.documents.models import ChunkInfo
+from backend.danswer.server.documents.models import DocumentInfo
 
 
 router = APIRouter(prefix="/document")

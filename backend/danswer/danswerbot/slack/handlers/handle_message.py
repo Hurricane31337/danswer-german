@@ -4,25 +4,25 @@ from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 from sqlalchemy.orm import Session
 
-from danswer.configs.danswerbot_configs import DANSWER_BOT_FEEDBACK_REMINDER
-from danswer.configs.danswerbot_configs import DANSWER_REACT_EMOJI
-from danswer.danswerbot.slack.blocks import get_feedback_reminder_blocks
-from danswer.danswerbot.slack.handlers.handle_regular_answer import (
+from backend.danswer.configs.danswerbot_configs import DANSWER_BOT_FEEDBACK_REMINDER
+from backend.danswer.configs.danswerbot_configs import DANSWER_REACT_EMOJI
+from backend.danswer.danswerbot.slack.blocks import get_feedback_reminder_blocks
+from backend.danswer.danswerbot.slack.handlers.handle_regular_answer import (
     handle_regular_answer,
 )
-from danswer.danswerbot.slack.handlers.handle_standard_answers import (
+from backend.danswer.danswerbot.slack.handlers.handle_standard_answers import (
     handle_standard_answers,
 )
-from danswer.danswerbot.slack.models import SlackMessageInfo
-from danswer.danswerbot.slack.utils import fetch_user_ids_from_emails
-from danswer.danswerbot.slack.utils import fetch_user_ids_from_groups
-from danswer.danswerbot.slack.utils import respond_in_thread
-from danswer.danswerbot.slack.utils import slack_usage_report
-from danswer.danswerbot.slack.utils import update_emote_react
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.db.models import SlackBotConfig
-from danswer.utils.logger import setup_logger
-from shared_configs.configs import SLACK_CHANNEL_ID
+from backend.danswer.danswerbot.slack.models import SlackMessageInfo
+from backend.danswer.danswerbot.slack.utils import fetch_user_ids_from_emails
+from backend.danswer.danswerbot.slack.utils import fetch_user_ids_from_groups
+from backend.danswer.danswerbot.slack.utils import respond_in_thread
+from backend.danswer.danswerbot.slack.utils import slack_usage_report
+from backend.danswer.danswerbot.slack.utils import update_emote_react
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.db.models import SlackBotConfig
+from backend.danswer.utils.logger import setup_logger
+from backend.shared_configs.configs import SLACK_CHANNEL_ID
 
 logger_base = setup_logger()
 

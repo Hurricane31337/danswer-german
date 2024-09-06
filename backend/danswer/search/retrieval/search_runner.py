@@ -7,31 +7,31 @@ from nltk.stem import WordNetLemmatizer  # type:ignore
 from nltk.tokenize import word_tokenize  # type:ignore
 from sqlalchemy.orm import Session
 
-from danswer.db.search_settings import get_current_search_settings
-from danswer.db.search_settings import get_multilingual_expansion
-from danswer.document_index.interfaces import DocumentIndex
-from danswer.document_index.interfaces import VespaChunkRequest
-from danswer.document_index.vespa.shared_utils.utils import (
+from backend.danswer.db.search_settings import get_current_search_settings
+from backend.danswer.db.search_settings import get_multilingual_expansion
+from backend.danswer.document_index.interfaces import DocumentIndex
+from backend.danswer.document_index.interfaces import VespaChunkRequest
+from backend.danswer.document_index.vespa.shared_utils.utils import (
     replace_invalid_doc_id_characters,
 )
-from danswer.natural_language_processing.search_nlp_models import EmbeddingModel
-from danswer.search.models import ChunkMetric
-from danswer.search.models import IndexFilters
-from danswer.search.models import InferenceChunk
-from danswer.search.models import InferenceChunkUncleaned
-from danswer.search.models import InferenceSection
-from danswer.search.models import MAX_METRICS_CONTENT
-from danswer.search.models import RetrievalMetricsContainer
-from danswer.search.models import SearchQuery
-from danswer.search.postprocessing.postprocessing import cleanup_chunks
-from danswer.search.utils import inference_section_from_chunks
-from danswer.secondary_llm_flows.query_expansion import multilingual_query_expansion
-from danswer.utils.logger import setup_logger
-from danswer.utils.threadpool_concurrency import run_functions_tuples_in_parallel
-from danswer.utils.timing import log_function_time
-from shared_configs.configs import MODEL_SERVER_HOST
-from shared_configs.configs import MODEL_SERVER_PORT
-from shared_configs.enums import EmbedTextType
+from backend.danswer.natural_language_processing.search_nlp_models import EmbeddingModel
+from backend.danswer.search.models import ChunkMetric
+from backend.danswer.search.models import IndexFilters
+from backend.danswer.search.models import InferenceChunk
+from backend.danswer.search.models import InferenceChunkUncleaned
+from backend.danswer.search.models import InferenceSection
+from backend.danswer.search.models import MAX_METRICS_CONTENT
+from backend.danswer.search.models import RetrievalMetricsContainer
+from backend.danswer.search.models import SearchQuery
+from backend.danswer.search.postprocessing.postprocessing import cleanup_chunks
+from backend.danswer.search.utils import inference_section_from_chunks
+from backend.danswer.secondary_llm_flows.query_expansion import multilingual_query_expansion
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.threadpool_concurrency import run_functions_tuples_in_parallel
+from backend.danswer.utils.timing import log_function_time
+from backend.shared_configs.configs import MODEL_SERVER_HOST
+from backend.shared_configs.configs import MODEL_SERVER_PORT
+from backend.shared_configs.enums import EmbedTextType
 
 
 logger = setup_logger()

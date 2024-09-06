@@ -4,29 +4,29 @@ from fastapi import HTTPException
 from fastapi import Query
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.auth.users import current_curator_or_admin_user
-from danswer.auth.users import current_user
-from danswer.db.credentials import alter_credential
-from danswer.db.credentials import create_credential
-from danswer.db.credentials import CREDENTIAL_PERMISSIONS_TO_IGNORE
-from danswer.db.credentials import delete_credential
-from danswer.db.credentials import fetch_credential_by_id
-from danswer.db.credentials import fetch_credentials
-from danswer.db.credentials import fetch_credentials_by_source
-from danswer.db.credentials import swap_credentials_connector
-from danswer.db.credentials import update_credential
-from danswer.db.engine import get_session
-from danswer.db.models import DocumentSource
-from danswer.db.models import User
-from danswer.server.documents.models import CredentialBase
-from danswer.server.documents.models import CredentialDataUpdateRequest
-from danswer.server.documents.models import CredentialSnapshot
-from danswer.server.documents.models import CredentialSwapRequest
-from danswer.server.documents.models import ObjectCreationIdResponse
-from danswer.server.models import StatusResponse
-from danswer.utils.logger import setup_logger
-from ee.danswer.db.user_group import validate_user_creation_permissions
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.auth.users import current_curator_or_admin_user
+from backend.danswer.auth.users import current_user
+from backend.danswer.db.credentials import alter_credential
+from backend.danswer.db.credentials import create_credential
+from backend.danswer.db.credentials import CREDENTIAL_PERMISSIONS_TO_IGNORE
+from backend.danswer.db.credentials import delete_credential
+from backend.danswer.db.credentials import fetch_credential_by_id
+from backend.danswer.db.credentials import fetch_credentials
+from backend.danswer.db.credentials import fetch_credentials_by_source
+from backend.danswer.db.credentials import swap_credentials_connector
+from backend.danswer.db.credentials import update_credential
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import DocumentSource
+from backend.danswer.db.models import User
+from backend.danswer.server.documents.models import CredentialBase
+from backend.danswer.server.documents.models import CredentialDataUpdateRequest
+from backend.danswer.server.documents.models import CredentialSnapshot
+from backend.danswer.server.documents.models import CredentialSwapRequest
+from backend.danswer.server.documents.models import ObjectCreationIdResponse
+from backend.danswer.server.models import StatusResponse
+from backend.danswer.utils.logger import setup_logger
+from backend.ee.danswer.db.user_group import validate_user_creation_permissions
 
 logger = setup_logger()
 

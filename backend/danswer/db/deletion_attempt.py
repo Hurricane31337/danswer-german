@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session
 
-from danswer.db.index_attempt import get_last_attempt
-from danswer.db.models import ConnectorCredentialPair
-from danswer.db.models import IndexingStatus
-from danswer.db.search_settings import get_current_search_settings
+from backend.danswer.db.index_attempt import get_last_attempt
+from backend.danswer.db.models import ConnectorCredentialPair
+from backend.danswer.db.models import IndexingStatus
+from backend.danswer.db.search_settings import get_current_search_settings
 
 
 def check_deletion_attempt_is_allowed(

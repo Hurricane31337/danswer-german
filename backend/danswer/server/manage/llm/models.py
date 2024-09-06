@@ -3,11 +3,11 @@ from typing import TYPE_CHECKING
 from pydantic import BaseModel
 from pydantic import Field
 
-from danswer.llm.llm_provider_options import fetch_models_for_provider
+from backend.danswer.llm.llm_provider_options import fetch_models_for_provider
 
 
 if TYPE_CHECKING:
-    from danswer.db.models import LLMProvider as LLMProviderModel
+    from backend.danswer.db.models import LLMProvider as LLMProviderModel
 
 
 class TestLLMRequest(BaseModel):

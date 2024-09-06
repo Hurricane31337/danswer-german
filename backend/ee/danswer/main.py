@@ -1,43 +1,43 @@
 from fastapi import FastAPI
 from httpx_oauth.clients.openid import OpenID
 
-from danswer.auth.users import auth_backend
-from danswer.auth.users import fastapi_users
-from danswer.configs.app_configs import AUTH_TYPE
-from danswer.configs.app_configs import OAUTH_CLIENT_ID
-from danswer.configs.app_configs import OAUTH_CLIENT_SECRET
-from danswer.configs.app_configs import USER_AUTH_SECRET
-from danswer.configs.app_configs import WEB_DOMAIN
-from danswer.configs.constants import AuthType
-from danswer.main import get_application as get_application_base
-from danswer.main import include_router_with_global_prefix_prepended
-from danswer.utils.logger import setup_logger
-from danswer.utils.variable_functionality import global_version
-from ee.danswer.configs.app_configs import OPENID_CONFIG_URL
-from ee.danswer.server.analytics.api import router as analytics_router
-from ee.danswer.server.api_key.api import router as api_key_router
-from ee.danswer.server.auth_check import check_ee_router_auth
-from ee.danswer.server.enterprise_settings.api import (
+from backend.danswer.auth.users import auth_backend
+from backend.danswer.auth.users import fastapi_users
+from backend.danswer.configs.app_configs import AUTH_TYPE
+from backend.danswer.configs.app_configs import OAUTH_CLIENT_ID
+from backend.danswer.configs.app_configs import OAUTH_CLIENT_SECRET
+from backend.danswer.configs.app_configs import USER_AUTH_SECRET
+from backend.danswer.configs.app_configs import WEB_DOMAIN
+from backend.danswer.configs.constants import AuthType
+from backend.danswer.main import get_application as get_application_base
+from backend.danswer.main import include_router_with_global_prefix_prepended
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.variable_functionality import global_version
+from backend.ee.danswer.configs.app_configs import OPENID_CONFIG_URL
+from backend.ee.danswer.server.analytics.api import router as analytics_router
+from backend.ee.danswer.server.api_key.api import router as api_key_router
+from backend.ee.danswer.server.auth_check import check_ee_router_auth
+from backend.ee.danswer.server.enterprise_settings.api import (
     admin_router as enterprise_settings_admin_router,
 )
-from ee.danswer.server.enterprise_settings.api import (
+from backend.ee.danswer.server.enterprise_settings.api import (
     basic_router as enterprise_settings_router,
 )
-from ee.danswer.server.query_and_chat.chat_backend import (
+from backend.ee.danswer.server.query_and_chat.chat_backend import (
     router as chat_router,
 )
-from ee.danswer.server.query_and_chat.query_backend import (
+from backend.ee.danswer.server.query_and_chat.query_backend import (
     basic_router as query_router,
 )
-from ee.danswer.server.query_history.api import router as query_history_router
-from ee.danswer.server.reporting.usage_export_api import router as usage_export_router
-from ee.danswer.server.saml import router as saml_router
-from ee.danswer.server.seeding import seed_db
-from ee.danswer.server.token_rate_limits.api import (
+from backend.ee.danswer.server.query_history.api import router as query_history_router
+from backend.ee.danswer.server.reporting.usage_export_api import router as usage_export_router
+from backend.ee.danswer.server.saml import router as saml_router
+from backend.ee.danswer.server.seeding import seed_db
+from backend.ee.danswer.server.token_rate_limits.api import (
     router as token_rate_limit_settings_router,
 )
-from ee.danswer.server.user_group.api import router as user_group_router
-from ee.danswer.utils.encryption import test_encryption
+from backend.ee.danswer.server.user_group.api import router as user_group_router
+from backend.ee.danswer.utils.encryption import test_encryption
 
 logger = setup_logger()
 

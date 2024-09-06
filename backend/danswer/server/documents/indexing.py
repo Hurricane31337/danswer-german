@@ -2,13 +2,13 @@ from fastapi import APIRouter
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.db.engine import get_session
-from danswer.db.index_attempt import (
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.index_attempt import (
     get_index_attempt_errors,
 )
-from danswer.db.models import User
-from danswer.server.documents.models import IndexAttemptError
+from backend.danswer.db.models import User
+from backend.danswer.server.documents.models import IndexAttemptError
 
 router = APIRouter(prefix="/manage")
 

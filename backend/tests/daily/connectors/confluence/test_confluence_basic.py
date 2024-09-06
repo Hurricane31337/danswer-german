@@ -3,7 +3,7 @@ import time
 
 import pytest
 
-from danswer.connectors.confluence.connector import ConfluenceConnector
+from backend.danswer.connectors.confluence.connector import ConfluenceConnector
 
 
 @pytest.fixture

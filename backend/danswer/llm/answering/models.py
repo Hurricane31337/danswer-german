@@ -11,16 +11,16 @@ from pydantic import ConfigDict
 from pydantic import Field
 from pydantic import model_validator
 
-from danswer.chat.models import AnswerQuestionStreamReturn
-from danswer.configs.constants import MessageType
-from danswer.file_store.models import InMemoryChatFile
-from danswer.llm.override_models import PromptOverride
-from danswer.llm.utils import build_content_with_imgs
-from danswer.tools.models import ToolCallFinalResult
+from backend.danswer.chat.models import AnswerQuestionStreamReturn
+from backend.danswer.configs.constants import MessageType
+from backend.danswer.file_store.models import InMemoryChatFile
+from backend.danswer.llm.override_models import PromptOverride
+from backend.danswer.llm.utils import build_content_with_imgs
+from backend.danswer.tools.models import ToolCallFinalResult
 
 if TYPE_CHECKING:
-    from danswer.db.models import ChatMessage
-    from danswer.db.models import Prompt
+    from backend.danswer.db.models import ChatMessage
+    from backend.danswer.db.models import Prompt
 
 
 StreamProcessor = Callable[[Iterator[str]], AnswerQuestionStreamReturn]

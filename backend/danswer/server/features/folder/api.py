@@ -4,25 +4,25 @@ from fastapi import HTTPException
 from fastapi import Path
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_user
-from danswer.db.chat import get_chat_session_by_id
-from danswer.db.engine import get_session
-from danswer.db.folder import add_chat_to_folder
-from danswer.db.folder import create_folder
-from danswer.db.folder import delete_folder
-from danswer.db.folder import get_user_folders
-from danswer.db.folder import remove_chat_from_folder
-from danswer.db.folder import rename_folder
-from danswer.db.folder import update_folder_display_priority
-from danswer.db.models import User
-from danswer.server.features.folder.models import DeleteFolderOptions
-from danswer.server.features.folder.models import FolderChatSessionRequest
-from danswer.server.features.folder.models import FolderCreationRequest
-from danswer.server.features.folder.models import FolderResponse
-from danswer.server.features.folder.models import FolderUpdateRequest
-from danswer.server.features.folder.models import GetUserFoldersResponse
-from danswer.server.models import DisplayPriorityRequest
-from danswer.server.query_and_chat.models import ChatSessionDetails
+from backend.danswer.auth.users import current_user
+from backend.danswer.db.chat import get_chat_session_by_id
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.folder import add_chat_to_folder
+from backend.danswer.db.folder import create_folder
+from backend.danswer.db.folder import delete_folder
+from backend.danswer.db.folder import get_user_folders
+from backend.danswer.db.folder import remove_chat_from_folder
+from backend.danswer.db.folder import rename_folder
+from backend.danswer.db.folder import update_folder_display_priority
+from backend.danswer.db.models import User
+from backend.danswer.server.features.folder.models import DeleteFolderOptions
+from backend.danswer.server.features.folder.models import FolderChatSessionRequest
+from backend.danswer.server.features.folder.models import FolderCreationRequest
+from backend.danswer.server.features.folder.models import FolderResponse
+from backend.danswer.server.features.folder.models import FolderUpdateRequest
+from backend.danswer.server.features.folder.models import GetUserFoldersResponse
+from backend.danswer.server.models import DisplayPriorityRequest
+from backend.danswer.server.query_and_chat.models import ChatSessionDetails
 
 router = APIRouter(prefix="/folder")
 

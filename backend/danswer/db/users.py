@@ -4,7 +4,7 @@ from uuid import UUID
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from danswer.db.models import User
+from backend.danswer.db.models import User
 
 
 def list_users(

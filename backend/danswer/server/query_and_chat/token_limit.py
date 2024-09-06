@@ -11,15 +11,15 @@ from sqlalchemy import func
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_user
-from danswer.db.engine import get_session_context_manager
-from danswer.db.models import ChatMessage
-from danswer.db.models import ChatSession
-from danswer.db.models import TokenRateLimit
-from danswer.db.models import User
-from danswer.utils.logger import setup_logger
-from danswer.utils.variable_functionality import fetch_versioned_implementation
-from ee.danswer.db.token_limit import fetch_all_global_token_rate_limits
+from backend.danswer.auth.users import current_user
+from backend.danswer.db.engine import get_session_context_manager
+from backend.danswer.db.models import ChatMessage
+from backend.danswer.db.models import ChatSession
+from backend.danswer.db.models import TokenRateLimit
+from backend.danswer.db.models import User
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.variable_functionality import fetch_versioned_implementation
+from backend.ee.danswer.db.token_limit import fetch_all_global_token_rate_limits
 
 
 logger = setup_logger()

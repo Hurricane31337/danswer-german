@@ -5,22 +5,22 @@ from typing import TypeVar
 
 from pydantic import BaseModel
 
-from danswer.chat.models import (
+from backend.danswer.chat.models import (
     LlmDoc,
 )
-from danswer.configs.constants import IGNORE_FOR_QA
-from danswer.configs.model_configs import DOC_EMBEDDING_CONTEXT_SIZE
-from danswer.llm.answering.models import ContextualPruningConfig
-from danswer.llm.answering.models import PromptConfig
-from danswer.llm.answering.prompts.citations_prompt import compute_max_document_tokens
-from danswer.llm.interfaces import LLMConfig
-from danswer.natural_language_processing.utils import get_tokenizer
-from danswer.natural_language_processing.utils import tokenizer_trim_content
-from danswer.prompts.prompt_utils import build_doc_context_str
-from danswer.search.models import InferenceChunk
-from danswer.search.models import InferenceSection
-from danswer.tools.search.search_utils import section_to_dict
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.constants import IGNORE_FOR_QA
+from backend.danswer.configs.model_configs import DOC_EMBEDDING_CONTEXT_SIZE
+from backend.danswer.llm.answering.models import ContextualPruningConfig
+from backend.danswer.llm.answering.models import PromptConfig
+from backend.danswer.llm.answering.prompts.citations_prompt import compute_max_document_tokens
+from backend.danswer.llm.interfaces import LLMConfig
+from backend.danswer.natural_language_processing.utils import get_tokenizer
+from backend.danswer.natural_language_processing.utils import tokenizer_trim_content
+from backend.danswer.prompts.prompt_utils import build_doc_context_str
+from backend.danswer.search.models import InferenceChunk
+from backend.danswer.search.models import InferenceSection
+from backend.danswer.tools.search.search_utils import section_to_dict
+from backend.danswer.utils.logger import setup_logger
 
 
 logger = setup_logger()

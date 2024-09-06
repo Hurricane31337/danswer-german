@@ -6,41 +6,41 @@ from datetime import timezone
 import httpx
 from retry import retry
 
-from danswer.connectors.cross_connector_utils.miscellaneous_utils import (
+from backend.danswer.connectors.cross_connector_utils.miscellaneous_utils import (
     get_experts_stores_representations,
 )
-from danswer.document_index.document_index_utils import get_uuid_from_chunk
-from danswer.document_index.vespa.shared_utils.utils import remove_invalid_unicode_chars
-from danswer.document_index.vespa.shared_utils.utils import (
+from backend.danswer.document_index.document_index_utils import get_uuid_from_chunk
+from backend.danswer.document_index.vespa.shared_utils.utils import remove_invalid_unicode_chars
+from backend.danswer.document_index.vespa.shared_utils.utils import (
     replace_invalid_doc_id_characters,
 )
-from danswer.document_index.vespa_constants import ACCESS_CONTROL_LIST
-from danswer.document_index.vespa_constants import BLURB
-from danswer.document_index.vespa_constants import BOOST
-from danswer.document_index.vespa_constants import CHUNK_ID
-from danswer.document_index.vespa_constants import CONTENT
-from danswer.document_index.vespa_constants import CONTENT_SUMMARY
-from danswer.document_index.vespa_constants import DOC_UPDATED_AT
-from danswer.document_index.vespa_constants import DOCUMENT_ID
-from danswer.document_index.vespa_constants import DOCUMENT_ID_ENDPOINT
-from danswer.document_index.vespa_constants import DOCUMENT_SETS
-from danswer.document_index.vespa_constants import EMBEDDINGS
-from danswer.document_index.vespa_constants import LARGE_CHUNK_REFERENCE_IDS
-from danswer.document_index.vespa_constants import METADATA
-from danswer.document_index.vespa_constants import METADATA_LIST
-from danswer.document_index.vespa_constants import METADATA_SUFFIX
-from danswer.document_index.vespa_constants import NUM_THREADS
-from danswer.document_index.vespa_constants import PRIMARY_OWNERS
-from danswer.document_index.vespa_constants import SECONDARY_OWNERS
-from danswer.document_index.vespa_constants import SECTION_CONTINUATION
-from danswer.document_index.vespa_constants import SEMANTIC_IDENTIFIER
-from danswer.document_index.vespa_constants import SKIP_TITLE_EMBEDDING
-from danswer.document_index.vespa_constants import SOURCE_LINKS
-from danswer.document_index.vespa_constants import SOURCE_TYPE
-from danswer.document_index.vespa_constants import TITLE
-from danswer.document_index.vespa_constants import TITLE_EMBEDDING
-from danswer.indexing.models import DocMetadataAwareIndexChunk
-from danswer.utils.logger import setup_logger
+from backend.danswer.document_index.vespa_constants import ACCESS_CONTROL_LIST
+from backend.danswer.document_index.vespa_constants import BLURB
+from backend.danswer.document_index.vespa_constants import BOOST
+from backend.danswer.document_index.vespa_constants import CHUNK_ID
+from backend.danswer.document_index.vespa_constants import CONTENT
+from backend.danswer.document_index.vespa_constants import CONTENT_SUMMARY
+from backend.danswer.document_index.vespa_constants import DOC_UPDATED_AT
+from backend.danswer.document_index.vespa_constants import DOCUMENT_ID
+from backend.danswer.document_index.vespa_constants import DOCUMENT_ID_ENDPOINT
+from backend.danswer.document_index.vespa_constants import DOCUMENT_SETS
+from backend.danswer.document_index.vespa_constants import EMBEDDINGS
+from backend.danswer.document_index.vespa_constants import LARGE_CHUNK_REFERENCE_IDS
+from backend.danswer.document_index.vespa_constants import METADATA
+from backend.danswer.document_index.vespa_constants import METADATA_LIST
+from backend.danswer.document_index.vespa_constants import METADATA_SUFFIX
+from backend.danswer.document_index.vespa_constants import NUM_THREADS
+from backend.danswer.document_index.vespa_constants import PRIMARY_OWNERS
+from backend.danswer.document_index.vespa_constants import SECONDARY_OWNERS
+from backend.danswer.document_index.vespa_constants import SECTION_CONTINUATION
+from backend.danswer.document_index.vespa_constants import SEMANTIC_IDENTIFIER
+from backend.danswer.document_index.vespa_constants import SKIP_TITLE_EMBEDDING
+from backend.danswer.document_index.vespa_constants import SOURCE_LINKS
+from backend.danswer.document_index.vespa_constants import SOURCE_TYPE
+from backend.danswer.document_index.vespa_constants import TITLE
+from backend.danswer.document_index.vespa_constants import TITLE_EMBEDDING
+from backend.danswer.indexing.models import DocMetadataAwareIndexChunk
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

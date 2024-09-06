@@ -7,29 +7,29 @@ from google.oauth2.credentials import Credentials as OAuthCredentials  # type: i
 from google.oauth2.service_account import Credentials as ServiceAccountCredentials  # type: ignore
 from googleapiclient import discovery  # type: ignore
 
-from danswer.configs.app_configs import INDEX_BATCH_SIZE
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.cross_connector_utils.miscellaneous_utils import time_str_to_utc
-from danswer.connectors.gmail.connector_auth import (
+from backend.danswer.configs.app_configs import INDEX_BATCH_SIZE
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.cross_connector_utils.miscellaneous_utils import time_str_to_utc
+from backend.danswer.connectors.gmail.connector_auth import (
     get_gmail_creds_for_authorized_user,
 )
-from danswer.connectors.gmail.connector_auth import (
+from backend.danswer.connectors.gmail.connector_auth import (
     get_gmail_creds_for_service_account,
 )
-from danswer.connectors.gmail.constants import (
+from backend.danswer.connectors.gmail.constants import (
     DB_CREDENTIALS_DICT_DELEGATED_USER_KEY,
 )
-from danswer.connectors.gmail.constants import DB_CREDENTIALS_DICT_TOKEN_KEY
-from danswer.connectors.gmail.constants import (
+from backend.danswer.connectors.gmail.constants import DB_CREDENTIALS_DICT_TOKEN_KEY
+from backend.danswer.connectors.gmail.constants import (
     GMAIL_DB_CREDENTIALS_DICT_SERVICE_ACCOUNT_KEY,
 )
-from danswer.connectors.interfaces import GenerateDocumentsOutput
-from danswer.connectors.interfaces import LoadConnector
-from danswer.connectors.interfaces import PollConnector
-from danswer.connectors.interfaces import SecondsSinceUnixEpoch
-from danswer.connectors.models import Document
-from danswer.connectors.models import Section
-from danswer.utils.logger import setup_logger
+from backend.danswer.connectors.interfaces import GenerateDocumentsOutput
+from backend.danswer.connectors.interfaces import LoadConnector
+from backend.danswer.connectors.interfaces import PollConnector
+from backend.danswer.connectors.interfaces import SecondsSinceUnixEpoch
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import Section
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

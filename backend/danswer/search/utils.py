@@ -1,13 +1,13 @@
 from collections.abc import Sequence
 from typing import TypeVar
 
-from danswer.chat.models import SectionRelevancePiece
-from danswer.db.models import SearchDoc as DBSearchDoc
-from danswer.search.models import InferenceChunk
-from danswer.search.models import InferenceSection
-from danswer.search.models import SavedSearchDoc
-from danswer.search.models import SavedSearchDocWithContent
-from danswer.search.models import SearchDoc
+from backend.danswer.chat.models import SectionRelevancePiece
+from backend.danswer.db.models import SearchDoc as DBSearchDoc
+from backend.danswer.search.models import InferenceChunk
+from backend.danswer.search.models import InferenceSection
+from backend.danswer.search.models import SavedSearchDoc
+from backend.danswer.search.models import SavedSearchDocWithContent
+from backend.danswer.search.models import SearchDoc
 
 
 T = TypeVar(

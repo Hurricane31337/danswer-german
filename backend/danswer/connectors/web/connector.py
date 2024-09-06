@@ -17,20 +17,20 @@ from playwright.sync_api import sync_playwright
 from requests_oauthlib import OAuth2Session  # type:ignore
 from urllib3.exceptions import MaxRetryError
 
-from danswer.configs.app_configs import INDEX_BATCH_SIZE
-from danswer.configs.app_configs import WEB_CONNECTOR_OAUTH_CLIENT_ID
-from danswer.configs.app_configs import WEB_CONNECTOR_OAUTH_CLIENT_SECRET
-from danswer.configs.app_configs import WEB_CONNECTOR_OAUTH_TOKEN_URL
-from danswer.configs.app_configs import WEB_CONNECTOR_VALIDATE_URLS
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.interfaces import GenerateDocumentsOutput
-from danswer.connectors.interfaces import LoadConnector
-from danswer.connectors.models import Document
-from danswer.connectors.models import Section
-from danswer.file_processing.extract_file_text import read_pdf_file
-from danswer.file_processing.html_utils import web_html_cleanup
-from danswer.utils.logger import setup_logger
-from danswer.utils.sitemap import list_pages_for_site
+from backend.danswer.configs.app_configs import INDEX_BATCH_SIZE
+from backend.danswer.configs.app_configs import WEB_CONNECTOR_OAUTH_CLIENT_ID
+from backend.danswer.configs.app_configs import WEB_CONNECTOR_OAUTH_CLIENT_SECRET
+from backend.danswer.configs.app_configs import WEB_CONNECTOR_OAUTH_TOKEN_URL
+from backend.danswer.configs.app_configs import WEB_CONNECTOR_VALIDATE_URLS
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.interfaces import GenerateDocumentsOutput
+from backend.danswer.connectors.interfaces import LoadConnector
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import Section
+from backend.danswer.file_processing.extract_file_text import read_pdf_file
+from backend.danswer.file_processing.html_utils import web_html_cleanup
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.sitemap import list_pages_for_site
 
 logger = setup_logger()
 

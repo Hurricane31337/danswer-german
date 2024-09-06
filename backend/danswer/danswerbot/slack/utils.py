@@ -14,35 +14,35 @@ from slack_sdk.models.blocks import Block
 from slack_sdk.models.metadata import Metadata
 from sqlalchemy.orm import Session
 
-from danswer.configs.app_configs import DISABLE_TELEMETRY
-from danswer.configs.constants import ID_SEPARATOR
-from danswer.configs.constants import MessageType
-from danswer.configs.danswerbot_configs import DANSWER_BOT_FEEDBACK_VISIBILITY
-from danswer.configs.danswerbot_configs import DANSWER_BOT_MAX_QPM
-from danswer.configs.danswerbot_configs import DANSWER_BOT_MAX_WAIT_TIME
-from danswer.configs.danswerbot_configs import DANSWER_BOT_NUM_RETRIES
-from danswer.configs.danswerbot_configs import (
+from backend.danswer.configs.app_configs import DISABLE_TELEMETRY
+from backend.danswer.configs.constants import ID_SEPARATOR
+from backend.danswer.configs.constants import MessageType
+from backend.danswer.configs.danswerbot_configs import DANSWER_BOT_FEEDBACK_VISIBILITY
+from backend.danswer.configs.danswerbot_configs import DANSWER_BOT_MAX_QPM
+from backend.danswer.configs.danswerbot_configs import DANSWER_BOT_MAX_WAIT_TIME
+from backend.danswer.configs.danswerbot_configs import DANSWER_BOT_NUM_RETRIES
+from backend.danswer.configs.danswerbot_configs import (
     DANSWER_BOT_RESPONSE_LIMIT_PER_TIME_PERIOD,
 )
-from danswer.configs.danswerbot_configs import (
+from backend.danswer.configs.danswerbot_configs import (
     DANSWER_BOT_RESPONSE_LIMIT_TIME_PERIOD_SECONDS,
 )
-from danswer.connectors.slack.utils import make_slack_api_rate_limited
-from danswer.connectors.slack.utils import SlackTextCleaner
-from danswer.danswerbot.slack.constants import FeedbackVisibility
-from danswer.danswerbot.slack.tokens import fetch_tokens
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.db.users import get_user_by_email
-from danswer.llm.exceptions import GenAIDisabledException
-from danswer.llm.factory import get_default_llms
-from danswer.llm.utils import dict_based_prompt_to_langchain_prompt
-from danswer.llm.utils import message_to_string
-from danswer.one_shot_answer.models import ThreadMessage
-from danswer.prompts.miscellaneous_prompts import SLACK_LANGUAGE_REPHRASE_PROMPT
-from danswer.utils.logger import setup_logger
-from danswer.utils.telemetry import optional_telemetry
-from danswer.utils.telemetry import RecordType
-from danswer.utils.text_processing import replace_whitespaces_w_space
+from backend.danswer.connectors.slack.utils import make_slack_api_rate_limited
+from backend.danswer.connectors.slack.utils import SlackTextCleaner
+from backend.danswer.danswerbot.slack.constants import FeedbackVisibility
+from backend.danswer.danswerbot.slack.tokens import fetch_tokens
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.db.users import get_user_by_email
+from backend.danswer.llm.exceptions import GenAIDisabledException
+from backend.danswer.llm.factory import get_default_llms
+from backend.danswer.llm.utils import dict_based_prompt_to_langchain_prompt
+from backend.danswer.llm.utils import message_to_string
+from backend.danswer.one_shot_answer.models import ThreadMessage
+from backend.danswer.prompts.miscellaneous_prompts import SLACK_LANGUAGE_REPHRASE_PROMPT
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.telemetry import optional_telemetry
+from backend.danswer.utils.telemetry import RecordType
+from backend.danswer.utils.text_processing import replace_whitespaces_w_space
 
 logger = setup_logger()
 

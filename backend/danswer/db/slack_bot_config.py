@@ -3,19 +3,19 @@ from collections.abc import Sequence
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from danswer.configs.chat_configs import MAX_CHUNKS_FED_TO_CHAT
-from danswer.db.constants import SLACK_BOT_PERSONA_PREFIX
-from danswer.db.models import ChannelConfig
-from danswer.db.models import Persona
-from danswer.db.models import Persona__DocumentSet
-from danswer.db.models import SlackBotConfig
-from danswer.db.models import SlackBotResponseType
-from danswer.db.models import User
-from danswer.db.persona import get_default_prompt
-from danswer.db.persona import mark_persona_as_deleted
-from danswer.db.persona import upsert_persona
-from danswer.db.standard_answer import fetch_standard_answer_categories_by_ids
-from danswer.search.enums import RecencyBiasSetting
+from backend.danswer.configs.chat_configs import MAX_CHUNKS_FED_TO_CHAT
+from backend.danswer.db.constants import SLACK_BOT_PERSONA_PREFIX
+from backend.danswer.db.models import ChannelConfig
+from backend.danswer.db.models import Persona
+from backend.danswer.db.models import Persona__DocumentSet
+from backend.danswer.db.models import SlackBotConfig
+from backend.danswer.db.models import SlackBotResponseType
+from backend.danswer.db.models import User
+from backend.danswer.db.persona import get_default_prompt
+from backend.danswer.db.persona import mark_persona_as_deleted
+from backend.danswer.db.persona import upsert_persona
+from backend.danswer.db.standard_answer import fetch_standard_answer_categories_by_ids
+from backend.danswer.search.enums import RecencyBiasSetting
 
 
 def _build_persona_name(channel_names: list[str]) -> str:

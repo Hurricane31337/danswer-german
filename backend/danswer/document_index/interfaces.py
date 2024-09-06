@@ -3,11 +3,11 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
 
-from danswer.access.models import DocumentAccess
-from danswer.indexing.models import DocMetadataAwareIndexChunk
-from danswer.search.models import IndexFilters
-from danswer.search.models import InferenceChunkUncleaned
-from shared_configs.model_server_models import Embedding
+from backend.danswer.access.models import DocumentAccess
+from backend.danswer.indexing.models import DocMetadataAwareIndexChunk
+from backend.danswer.search.models import IndexFilters
+from backend.danswer.search.models import InferenceChunkUncleaned
+from backend.shared_configs.model_server_models import Embedding
 
 
 @dataclass(frozen=True)

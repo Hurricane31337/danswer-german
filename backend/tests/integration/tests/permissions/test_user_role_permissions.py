@@ -4,10 +4,10 @@ This file tests the ability of different user types to set the role of other use
 import pytest
 from requests.exceptions import HTTPError
 
-from danswer.db.models import UserRole
-from tests.integration.common_utils.managers.user import TestUser
-from tests.integration.common_utils.managers.user import UserManager
-from tests.integration.common_utils.managers.user_group import UserGroupManager
+from backend.danswer.db.models import UserRole
+from backend.tests.integration.common_utils.managers.user import TestUser
+from backend.tests.integration.common_utils.managers.user import UserManager
+from backend.tests.integration.common_utils.managers.user_group import UserGroupManager
 
 
 def test_user_role_setting_permissions(reset: None) -> None:

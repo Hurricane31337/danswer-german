@@ -3,16 +3,16 @@ from fastapi import HTTPException
 from fastapi import Request
 from sqlalchemy.orm import Session
 
-from danswer.configs.app_configs import AUTH_TYPE
-from danswer.configs.constants import AuthType
-from danswer.db.engine import get_session
-from danswer.db.models import User
-from danswer.utils.logger import setup_logger
-from ee.danswer.auth.api_key import get_hashed_api_key_from_request
-from ee.danswer.db.api_key import fetch_user_for_api_key
-from ee.danswer.db.saml import get_saml_account
-from ee.danswer.server.seeding import get_seed_config
-from ee.danswer.utils.secrets import extract_hashed_cookie
+from backend.danswer.configs.app_configs import AUTH_TYPE
+from backend.danswer.configs.constants import AuthType
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import User
+from backend.danswer.utils.logger import setup_logger
+from backend.ee.danswer.auth.api_key import get_hashed_api_key_from_request
+from backend.ee.danswer.db.api_key import fetch_user_for_api_key
+from backend.ee.danswer.db.saml import get_saml_account
+from backend.ee.danswer.server.seeding import get_seed_config
+from backend.ee.danswer.utils.secrets import extract_hashed_cookie
 
 logger = setup_logger()
 

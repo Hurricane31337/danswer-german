@@ -4,11 +4,11 @@ from sqlalchemy import or_
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from danswer.configs.constants import DocumentSource
-from danswer.db.models import Document
-from danswer.db.models import Document__Tag
-from danswer.db.models import Tag
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.db.models import Document
+from backend.danswer.db.models import Document__Tag
+from backend.danswer.db.models import Tag
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

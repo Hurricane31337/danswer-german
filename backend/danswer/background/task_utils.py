@@ -8,10 +8,10 @@ from celery import Task
 from celery.result import AsyncResult
 from sqlalchemy.orm import Session
 
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.db.tasks import mark_task_finished
-from danswer.db.tasks import mark_task_start
-from danswer.db.tasks import register_task
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.db.tasks import mark_task_finished
+from backend.danswer.db.tasks import mark_task_start
+from backend.danswer.db.tasks import register_task
 
 
 def name_cc_cleanup_task(connector_id: int, credential_id: int) -> str:

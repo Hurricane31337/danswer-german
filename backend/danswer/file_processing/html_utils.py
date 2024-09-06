@@ -5,10 +5,10 @@ from typing import IO
 
 import bs4
 
-from danswer.configs.app_configs import HTML_BASED_CONNECTOR_TRANSFORM_LINKS_STRATEGY
-from danswer.configs.app_configs import WEB_CONNECTOR_IGNORED_CLASSES
-from danswer.configs.app_configs import WEB_CONNECTOR_IGNORED_ELEMENTS
-from danswer.file_processing.enums import HtmlBasedConnectorTransformLinksStrategy
+from backend.danswer.configs.app_configs import HTML_BASED_CONNECTOR_TRANSFORM_LINKS_STRATEGY
+from backend.danswer.configs.app_configs import WEB_CONNECTOR_IGNORED_CLASSES
+from backend.danswer.configs.app_configs import WEB_CONNECTOR_IGNORED_ELEMENTS
+from backend.danswer.file_processing.enums import HtmlBasedConnectorTransformLinksStrategy
 
 MINTLIFY_UNWANTED = ["sticky", "hidden"]
 

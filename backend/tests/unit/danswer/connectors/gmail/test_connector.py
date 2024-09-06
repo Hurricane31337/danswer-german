@@ -3,10 +3,10 @@ import datetime
 import pytest
 from pytest_mock import MockFixture
 
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.cross_connector_utils.miscellaneous_utils import time_str_to_utc
-from danswer.connectors.gmail.connector import GmailConnector
-from danswer.connectors.models import Document
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.cross_connector_utils.miscellaneous_utils import time_str_to_utc
+from backend.danswer.connectors.gmail.connector import GmailConnector
+from backend.danswer.connectors.models import Document
 
 
 def test_email_to_document() -> None:

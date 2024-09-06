@@ -6,24 +6,24 @@ from typing import cast
 
 import httpx
 
-from danswer.chat.chat_utils import combine_message_chain
-from danswer.chat.models import LlmDoc
-from danswer.configs.constants import DocumentSource
-from danswer.configs.model_configs import GEN_AI_HISTORY_CUTOFF
-from danswer.dynamic_configs.interface import JSON_ro
-from danswer.llm.answering.models import PreviousMessage
-from danswer.llm.interfaces import LLM
-from danswer.llm.utils import message_to_string
-from danswer.prompts.chat_prompts import INTERNET_SEARCH_QUERY_REPHRASE
-from danswer.prompts.constants import GENERAL_SEP_PAT
-from danswer.search.models import SearchDoc
-from danswer.secondary_llm_flows.query_expansion import history_based_query_rephrase
-from danswer.tools.internet_search.models import InternetSearchResponse
-from danswer.tools.internet_search.models import InternetSearchResult
-from danswer.tools.search.search_tool import FINAL_CONTEXT_DOCUMENTS
-from danswer.tools.tool import Tool
-from danswer.tools.tool import ToolResponse
-from danswer.utils.logger import setup_logger
+from backend.danswer.chat.chat_utils import combine_message_chain
+from backend.danswer.chat.models import LlmDoc
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.configs.model_configs import GEN_AI_HISTORY_CUTOFF
+from backend.danswer.dynamic_configs.interface import JSON_ro
+from backend.danswer.llm.answering.models import PreviousMessage
+from backend.danswer.llm.interfaces import LLM
+from backend.danswer.llm.utils import message_to_string
+from backend.danswer.prompts.chat_prompts import INTERNET_SEARCH_QUERY_REPHRASE
+from backend.danswer.prompts.constants import GENERAL_SEP_PAT
+from backend.danswer.search.models import SearchDoc
+from backend.danswer.secondary_llm_flows.query_expansion import history_based_query_rephrase
+from backend.danswer.tools.internet_search.models import InternetSearchResponse
+from backend.danswer.tools.internet_search.models import InternetSearchResult
+from backend.danswer.tools.search.search_tool import FINAL_CONTEXT_DOCUMENTS
+from backend.danswer.tools.tool import Tool
+from backend.danswer.tools.tool import ToolResponse
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

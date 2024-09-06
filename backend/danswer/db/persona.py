@@ -15,27 +15,27 @@ from sqlalchemy.orm import aliased
 from sqlalchemy.orm import joinedload
 from sqlalchemy.orm import Session
 
-from danswer.auth.schemas import UserRole
-from danswer.configs.chat_configs import BING_API_KEY
-from danswer.configs.chat_configs import CONTEXT_CHUNKS_ABOVE
-from danswer.configs.chat_configs import CONTEXT_CHUNKS_BELOW
-from danswer.db.constants import SLACK_BOT_PERSONA_PREFIX
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.db.models import DocumentSet
-from danswer.db.models import Persona
-from danswer.db.models import Persona__User
-from danswer.db.models import Persona__UserGroup
-from danswer.db.models import Prompt
-from danswer.db.models import StarterMessage
-from danswer.db.models import Tool
-from danswer.db.models import User
-from danswer.db.models import User__UserGroup
-from danswer.db.models import UserGroup
-from danswer.search.enums import RecencyBiasSetting
-from danswer.server.features.persona.models import CreatePersonaRequest
-from danswer.server.features.persona.models import PersonaSnapshot
-from danswer.utils.logger import setup_logger
-from danswer.utils.variable_functionality import fetch_versioned_implementation
+from backend.danswer.auth.schemas import UserRole
+from backend.danswer.configs.chat_configs import BING_API_KEY
+from backend.danswer.configs.chat_configs import CONTEXT_CHUNKS_ABOVE
+from backend.danswer.configs.chat_configs import CONTEXT_CHUNKS_BELOW
+from backend.danswer.db.constants import SLACK_BOT_PERSONA_PREFIX
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.db.models import DocumentSet
+from backend.danswer.db.models import Persona
+from backend.danswer.db.models import Persona__User
+from backend.danswer.db.models import Persona__UserGroup
+from backend.danswer.db.models import Prompt
+from backend.danswer.db.models import StarterMessage
+from backend.danswer.db.models import Tool
+from backend.danswer.db.models import User
+from backend.danswer.db.models import User__UserGroup
+from backend.danswer.db.models import UserGroup
+from backend.danswer.search.enums import RecencyBiasSetting
+from backend.danswer.server.features.persona.models import CreatePersonaRequest
+from backend.danswer.server.features.persona.models import PersonaSnapshot
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.variable_functionality import fetch_versioned_implementation
 
 logger = setup_logger()
 

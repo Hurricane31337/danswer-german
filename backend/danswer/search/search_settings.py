@@ -1,10 +1,10 @@
 from typing import cast
 
-from danswer.configs.constants import KV_SEARCH_SETTINGS
-from danswer.dynamic_configs.factory import get_dynamic_config_store
-from danswer.dynamic_configs.interface import ConfigNotFoundError
-from danswer.search.models import SavedSearchSettings
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.constants import KV_SEARCH_SETTINGS
+from backend.danswer.dynamic_configs.factory import get_dynamic_config_store
+from backend.danswer.dynamic_configs.interface import ConfigNotFoundError
+from backend.danswer.search.models import SavedSearchSettings
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

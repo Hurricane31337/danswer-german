@@ -2,7 +2,7 @@ from typing import Any
 
 from pydantic import BaseModel
 
-from danswer.db.models import Tool
+from backend.danswer.db.models import Tool
 
 
 class ToolSnapshot(BaseModel):

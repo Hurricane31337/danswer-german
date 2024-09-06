@@ -1,6 +1,6 @@
-from danswer.configs.constants import DocumentSource
-from ee.danswer.connectors.confluence.perm_sync import confluence_update_db_group
-from ee.danswer.connectors.confluence.perm_sync import confluence_update_index_acl
+from backend.danswer.configs.constants import DocumentSource
+from backend.ee.danswer.connectors.confluence.perm_sync import confluence_update_db_group
+from backend.ee.danswer.connectors.confluence.perm_sync import confluence_update_index_acl
 
 
 CONNECTOR_PERMISSION_FUNC_MAP = {

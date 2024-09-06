@@ -4,17 +4,17 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from starlette import status
 
-from danswer.auth.users import current_user
-from danswer.db.engine import get_session
-from danswer.db.models import User
-from danswer.db.persona import get_personas_by_ids
-from danswer.db.persona import get_prompt_by_id
-from danswer.db.persona import get_prompts
-from danswer.db.persona import mark_prompt_as_deleted
-from danswer.db.persona import upsert_prompt
-from danswer.server.features.prompt.models import CreatePromptRequest
-from danswer.server.features.prompt.models import PromptSnapshot
-from danswer.utils.logger import setup_logger
+from backend.danswer.auth.users import current_user
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import User
+from backend.danswer.db.persona import get_personas_by_ids
+from backend.danswer.db.persona import get_prompt_by_id
+from backend.danswer.db.persona import get_prompts
+from backend.danswer.db.persona import mark_prompt_as_deleted
+from backend.danswer.db.persona import upsert_prompt
+from backend.danswer.server.features.prompt.models import CreatePromptRequest
+from backend.danswer.server.features.prompt.models import PromptSnapshot
+from backend.danswer.utils.logger import setup_logger
 
 
 # Note: As prompts are fairly innocuous/harmless, there are no protections

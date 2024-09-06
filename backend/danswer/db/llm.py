@@ -3,17 +3,17 @@ from sqlalchemy import or_
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from danswer.db.models import CloudEmbeddingProvider as CloudEmbeddingProviderModel
-from danswer.db.models import LLMProvider as LLMProviderModel
-from danswer.db.models import LLMProvider__UserGroup
-from danswer.db.models import SearchSettings
-from danswer.db.models import User
-from danswer.db.models import User__UserGroup
-from danswer.server.manage.embedding.models import CloudEmbeddingProvider
-from danswer.server.manage.embedding.models import CloudEmbeddingProviderCreationRequest
-from danswer.server.manage.llm.models import FullLLMProvider
-from danswer.server.manage.llm.models import LLMProviderUpsertRequest
-from shared_configs.enums import EmbeddingProvider
+from backend.danswer.db.models import CloudEmbeddingProvider as CloudEmbeddingProviderModel
+from backend.danswer.db.models import LLMProvider as LLMProviderModel
+from backend.danswer.db.models import LLMProvider__UserGroup
+from backend.danswer.db.models import SearchSettings
+from backend.danswer.db.models import User
+from backend.danswer.db.models import User__UserGroup
+from backend.danswer.server.manage.embedding.models import CloudEmbeddingProvider
+from backend.danswer.server.manage.embedding.models import CloudEmbeddingProviderCreationRequest
+from backend.danswer.server.manage.llm.models import FullLLMProvider
+from backend.danswer.server.manage.llm.models import LLMProviderUpsertRequest
+from backend.shared_configs.enums import EmbeddingProvider
 
 
 def update_group_llm_provider_relationships__no_commit(

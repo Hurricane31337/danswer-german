@@ -13,56 +13,56 @@ from typing import cast
 import httpx
 import requests
 
-from danswer.configs.chat_configs import DOC_TIME_DECAY
-from danswer.configs.chat_configs import NUM_RETURNED_HITS
-from danswer.configs.chat_configs import TITLE_CONTENT_RATIO
-from danswer.configs.constants import KV_REINDEX_KEY
-from danswer.document_index.interfaces import DocumentIndex
-from danswer.document_index.interfaces import DocumentInsertionRecord
-from danswer.document_index.interfaces import UpdateRequest
-from danswer.document_index.interfaces import VespaChunkRequest
-from danswer.document_index.vespa.chunk_retrieval import batch_search_api_retrieval
-from danswer.document_index.vespa.chunk_retrieval import (
+from backend.danswer.configs.chat_configs import DOC_TIME_DECAY
+from backend.danswer.configs.chat_configs import NUM_RETURNED_HITS
+from backend.danswer.configs.chat_configs import TITLE_CONTENT_RATIO
+from backend.danswer.configs.constants import KV_REINDEX_KEY
+from backend.danswer.document_index.interfaces import DocumentIndex
+from backend.danswer.document_index.interfaces import DocumentInsertionRecord
+from backend.danswer.document_index.interfaces import UpdateRequest
+from backend.danswer.document_index.interfaces import VespaChunkRequest
+from backend.danswer.document_index.vespa.chunk_retrieval import batch_search_api_retrieval
+from backend.danswer.document_index.vespa.chunk_retrieval import (
     get_all_vespa_ids_for_document_id,
 )
-from danswer.document_index.vespa.chunk_retrieval import (
+from backend.danswer.document_index.vespa.chunk_retrieval import (
     parallel_visit_api_retrieval,
 )
-from danswer.document_index.vespa.chunk_retrieval import query_vespa
-from danswer.document_index.vespa.deletion import delete_vespa_docs
-from danswer.document_index.vespa.indexing_utils import batch_index_vespa_chunks
-from danswer.document_index.vespa.indexing_utils import clean_chunk_id_copy
-from danswer.document_index.vespa.indexing_utils import (
+from backend.danswer.document_index.vespa.chunk_retrieval import query_vespa
+from backend.danswer.document_index.vespa.deletion import delete_vespa_docs
+from backend.danswer.document_index.vespa.indexing_utils import batch_index_vespa_chunks
+from backend.danswer.document_index.vespa.indexing_utils import clean_chunk_id_copy
+from backend.danswer.document_index.vespa.indexing_utils import (
     get_existing_documents_from_chunks,
 )
-from danswer.document_index.vespa.shared_utils.utils import (
+from backend.danswer.document_index.vespa.shared_utils.utils import (
     replace_invalid_doc_id_characters,
 )
-from danswer.document_index.vespa.shared_utils.vespa_request_builders import (
+from backend.danswer.document_index.vespa.shared_utils.vespa_request_builders import (
     build_vespa_filters,
 )
-from danswer.document_index.vespa_constants import ACCESS_CONTROL_LIST
-from danswer.document_index.vespa_constants import BATCH_SIZE
-from danswer.document_index.vespa_constants import BOOST
-from danswer.document_index.vespa_constants import CONTENT_SUMMARY
-from danswer.document_index.vespa_constants import DANSWER_CHUNK_REPLACEMENT_PAT
-from danswer.document_index.vespa_constants import DATE_REPLACEMENT
-from danswer.document_index.vespa_constants import DOCUMENT_ID_ENDPOINT
-from danswer.document_index.vespa_constants import DOCUMENT_REPLACEMENT_PAT
-from danswer.document_index.vespa_constants import DOCUMENT_SETS
-from danswer.document_index.vespa_constants import HIDDEN
-from danswer.document_index.vespa_constants import NUM_THREADS
-from danswer.document_index.vespa_constants import VESPA_APPLICATION_ENDPOINT
-from danswer.document_index.vespa_constants import VESPA_DIM_REPLACEMENT_PAT
-from danswer.document_index.vespa_constants import VESPA_TIMEOUT
-from danswer.document_index.vespa_constants import YQL_BASE
-from danswer.dynamic_configs.factory import get_dynamic_config_store
-from danswer.indexing.models import DocMetadataAwareIndexChunk
-from danswer.search.models import IndexFilters
-from danswer.search.models import InferenceChunkUncleaned
-from danswer.utils.batching import batch_generator
-from danswer.utils.logger import setup_logger
-from shared_configs.model_server_models import Embedding
+from backend.danswer.document_index.vespa_constants import ACCESS_CONTROL_LIST
+from backend.danswer.document_index.vespa_constants import BATCH_SIZE
+from backend.danswer.document_index.vespa_constants import BOOST
+from backend.danswer.document_index.vespa_constants import CONTENT_SUMMARY
+from backend.danswer.document_index.vespa_constants import DANSWER_CHUNK_REPLACEMENT_PAT
+from backend.danswer.document_index.vespa_constants import DATE_REPLACEMENT
+from backend.danswer.document_index.vespa_constants import DOCUMENT_ID_ENDPOINT
+from backend.danswer.document_index.vespa_constants import DOCUMENT_REPLACEMENT_PAT
+from backend.danswer.document_index.vespa_constants import DOCUMENT_SETS
+from backend.danswer.document_index.vespa_constants import HIDDEN
+from backend.danswer.document_index.vespa_constants import NUM_THREADS
+from backend.danswer.document_index.vespa_constants import VESPA_APPLICATION_ENDPOINT
+from backend.danswer.document_index.vespa_constants import VESPA_DIM_REPLACEMENT_PAT
+from backend.danswer.document_index.vespa_constants import VESPA_TIMEOUT
+from backend.danswer.document_index.vespa_constants import YQL_BASE
+from backend.danswer.dynamic_configs.factory import get_dynamic_config_store
+from backend.danswer.indexing.models import DocMetadataAwareIndexChunk
+from backend.danswer.search.models import IndexFilters
+from backend.danswer.search.models import InferenceChunkUncleaned
+from backend.danswer.utils.batching import batch_generator
+from backend.danswer.utils.logger import setup_logger
+from backend.shared_configs.model_server_models import Embedding
 
 logger = setup_logger()
 

@@ -1,16 +1,16 @@
 import requests
 
-from danswer.configs.constants import MessageType
-from tests.integration.common_utils.constants import API_SERVER_URL
-from tests.integration.common_utils.constants import NUM_DOCS
-from tests.integration.common_utils.llm import LLMProviderManager
-from tests.integration.common_utils.managers.api_key import APIKeyManager
-from tests.integration.common_utils.managers.cc_pair import CCPairManager
-from tests.integration.common_utils.managers.document import DocumentManager
-from tests.integration.common_utils.managers.user import UserManager
-from tests.integration.common_utils.test_models import TestAPIKey
-from tests.integration.common_utils.test_models import TestCCPair
-from tests.integration.common_utils.test_models import TestUser
+from backend.danswer.configs.constants import MessageType
+from backend.tests.integration.common_utils.constants import API_SERVER_URL
+from backend.tests.integration.common_utils.constants import NUM_DOCS
+from backend.tests.integration.common_utils.llm import LLMProviderManager
+from backend.tests.integration.common_utils.managers.api_key import APIKeyManager
+from backend.tests.integration.common_utils.managers.cc_pair import CCPairManager
+from backend.tests.integration.common_utils.managers.document import DocumentManager
+from backend.tests.integration.common_utils.managers.user import UserManager
+from backend.tests.integration.common_utils.test_models import TestAPIKey
+from backend.tests.integration.common_utils.test_models import TestCCPair
+from backend.tests.integration.common_utils.test_models import TestUser
 
 
 def test_send_message_simple_with_history(reset: None) -> None:

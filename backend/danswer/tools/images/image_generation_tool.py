@@ -7,19 +7,19 @@ from typing import cast
 from litellm import image_generation  # type: ignore
 from pydantic import BaseModel
 
-from danswer.chat.chat_utils import combine_message_chain
-from danswer.configs.model_configs import GEN_AI_HISTORY_CUTOFF
-from danswer.dynamic_configs.interface import JSON_ro
-from danswer.llm.answering.models import PreviousMessage
-from danswer.llm.headers import build_llm_extra_headers
-from danswer.llm.interfaces import LLM
-from danswer.llm.utils import build_content_with_imgs
-from danswer.llm.utils import message_to_string
-from danswer.prompts.constants import GENERAL_SEP_PAT
-from danswer.tools.tool import Tool
-from danswer.tools.tool import ToolResponse
-from danswer.utils.logger import setup_logger
-from danswer.utils.threadpool_concurrency import run_functions_tuples_in_parallel
+from backend.danswer.chat.chat_utils import combine_message_chain
+from backend.danswer.configs.model_configs import GEN_AI_HISTORY_CUTOFF
+from backend.danswer.dynamic_configs.interface import JSON_ro
+from backend.danswer.llm.answering.models import PreviousMessage
+from backend.danswer.llm.headers import build_llm_extra_headers
+from backend.danswer.llm.interfaces import LLM
+from backend.danswer.llm.utils import build_content_with_imgs
+from backend.danswer.llm.utils import message_to_string
+from backend.danswer.prompts.constants import GENERAL_SEP_PAT
+from backend.danswer.tools.tool import Tool
+from backend.danswer.tools.tool import ToolResponse
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.threadpool_concurrency import run_functions_tuples_in_parallel
 
 
 logger = setup_logger()

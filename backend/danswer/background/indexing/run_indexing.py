@@ -6,33 +6,33 @@ from datetime import timezone
 
 from sqlalchemy.orm import Session
 
-from danswer.background.indexing.checkpointing import get_time_windows_for_index_attempt
-from danswer.background.indexing.tracer import DanswerTracer
-from danswer.configs.app_configs import INDEXING_SIZE_WARNING_THRESHOLD
-from danswer.configs.app_configs import INDEXING_TRACER_INTERVAL
-from danswer.configs.app_configs import POLL_CONNECTOR_OFFSET
-from danswer.connectors.connector_runner import ConnectorRunner
-from danswer.connectors.factory import instantiate_connector
-from danswer.connectors.models import IndexAttemptMetadata
-from danswer.db.connector_credential_pair import get_last_successful_attempt_time
-from danswer.db.connector_credential_pair import update_connector_credential_pair
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.db.enums import ConnectorCredentialPairStatus
-from danswer.db.index_attempt import get_index_attempt
-from danswer.db.index_attempt import mark_attempt_failed
-from danswer.db.index_attempt import mark_attempt_in_progress
-from danswer.db.index_attempt import mark_attempt_partially_succeeded
-from danswer.db.index_attempt import mark_attempt_succeeded
-from danswer.db.index_attempt import update_docs_indexed
-from danswer.db.models import IndexAttempt
-from danswer.db.models import IndexingStatus
-from danswer.db.models import IndexModelStatus
-from danswer.document_index.factory import get_default_document_index
-from danswer.indexing.embedder import DefaultIndexingEmbedder
-from danswer.indexing.indexing_pipeline import build_indexing_pipeline
-from danswer.utils.logger import IndexAttemptSingleton
-from danswer.utils.logger import setup_logger
-from danswer.utils.variable_functionality import global_version
+from backend.danswer.background.indexing.checkpointing import get_time_windows_for_index_attempt
+from backend.danswer.background.indexing.tracer import DanswerTracer
+from backend.danswer.configs.app_configs import INDEXING_SIZE_WARNING_THRESHOLD
+from backend.danswer.configs.app_configs import INDEXING_TRACER_INTERVAL
+from backend.danswer.configs.app_configs import POLL_CONNECTOR_OFFSET
+from backend.danswer.connectors.connector_runner import ConnectorRunner
+from backend.danswer.connectors.factory import instantiate_connector
+from backend.danswer.connectors.models import IndexAttemptMetadata
+from backend.danswer.db.connector_credential_pair import get_last_successful_attempt_time
+from backend.danswer.db.connector_credential_pair import update_connector_credential_pair
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.db.enums import ConnectorCredentialPairStatus
+from backend.danswer.db.index_attempt import get_index_attempt
+from backend.danswer.db.index_attempt import mark_attempt_failed
+from backend.danswer.db.index_attempt import mark_attempt_in_progress
+from backend.danswer.db.index_attempt import mark_attempt_partially_succeeded
+from backend.danswer.db.index_attempt import mark_attempt_succeeded
+from backend.danswer.db.index_attempt import update_docs_indexed
+from backend.danswer.db.models import IndexAttempt
+from backend.danswer.db.models import IndexingStatus
+from backend.danswer.db.models import IndexModelStatus
+from backend.danswer.document_index.factory import get_default_document_index
+from backend.danswer.indexing.embedder import DefaultIndexingEmbedder
+from backend.danswer.indexing.indexing_pipeline import build_indexing_pipeline
+from backend.danswer.utils.logger import IndexAttemptSingleton
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.variable_functionality import global_version
 
 logger = setup_logger()
 

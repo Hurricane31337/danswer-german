@@ -4,10 +4,10 @@ from uuid import UUID
 from pydantic import BaseModel
 from pydantic import Field
 
-from danswer.auth.schemas import UserRole
-from danswer.search.enums import RecencyBiasSetting
-from danswer.server.documents.models import DocumentSource
-from danswer.server.documents.models import InputType
+from backend.danswer.auth.schemas import UserRole
+from backend.danswer.search.enums import RecencyBiasSetting
+from backend.danswer.server.documents.models import DocumentSource
+from backend.danswer.server.documents.models import InputType
 
 """
 These data models are used to represent the data on the testing side of things.

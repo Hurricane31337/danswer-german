@@ -33,31 +33,31 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.types import LargeBinary
 from sqlalchemy.types import TypeDecorator
 
-from danswer.auth.schemas import UserRole
-from danswer.configs.chat_configs import NUM_POSTPROCESSED_RESULTS
-from danswer.configs.constants import DEFAULT_BOOST
-from danswer.configs.constants import DocumentSource
-from danswer.configs.constants import FileOrigin
-from danswer.configs.constants import MessageType
-from danswer.configs.constants import NotificationType
-from danswer.configs.constants import SearchFeedbackType
-from danswer.configs.constants import TokenRateLimitScope
-from danswer.connectors.models import InputType
-from danswer.db.enums import ChatSessionSharedStatus
-from danswer.db.enums import ConnectorCredentialPairStatus
-from danswer.db.enums import IndexingStatus
-from danswer.db.enums import IndexModelStatus
-from danswer.db.enums import TaskStatus
-from danswer.db.pydantic_type import PydanticType
-from danswer.dynamic_configs.interface import JSON_ro
-from danswer.file_store.models import FileDescriptor
-from danswer.llm.override_models import LLMOverride
-from danswer.llm.override_models import PromptOverride
-from danswer.search.enums import RecencyBiasSetting
-from danswer.utils.encryption import decrypt_bytes_to_string
-from danswer.utils.encryption import encrypt_string_to_bytes
-from shared_configs.enums import EmbeddingProvider
-from shared_configs.enums import RerankerProvider
+from backend.danswer.auth.schemas import UserRole
+from backend.danswer.configs.chat_configs import NUM_POSTPROCESSED_RESULTS
+from backend.danswer.configs.constants import DEFAULT_BOOST
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.configs.constants import FileOrigin
+from backend.danswer.configs.constants import MessageType
+from backend.danswer.configs.constants import NotificationType
+from backend.danswer.configs.constants import SearchFeedbackType
+from backend.danswer.configs.constants import TokenRateLimitScope
+from backend.danswer.connectors.models import InputType
+from backend.danswer.db.enums import ChatSessionSharedStatus
+from backend.danswer.db.enums import ConnectorCredentialPairStatus
+from backend.danswer.db.enums import IndexingStatus
+from backend.danswer.db.enums import IndexModelStatus
+from backend.danswer.db.enums import TaskStatus
+from backend.danswer.db.pydantic_type import PydanticType
+from backend.danswer.dynamic_configs.interface import JSON_ro
+from backend.danswer.file_store.models import FileDescriptor
+from backend.danswer.llm.override_models import LLMOverride
+from backend.danswer.llm.override_models import PromptOverride
+from backend.danswer.search.enums import RecencyBiasSetting
+from backend.danswer.utils.encryption import decrypt_bytes_to_string
+from backend.danswer.utils.encryption import encrypt_string_to_bytes
+from backend.shared_configs.enums import EmbeddingProvider
+from backend.shared_configs.enums import RerankerProvider
 
 
 class Base(DeclarativeBase):

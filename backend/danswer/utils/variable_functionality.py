@@ -3,8 +3,8 @@ import importlib
 from typing import Any
 from typing import TypeVar
 
-from danswer.configs.app_configs import ENTERPRISE_EDITION_ENABLED
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.app_configs import ENTERPRISE_EDITION_ENABLED
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

@@ -1,6 +1,6 @@
-from danswer.chat.models import LlmDoc
-from danswer.prompts.prompt_utils import clean_up_source
-from danswer.search.models import InferenceSection
+from backend.danswer.chat.models import LlmDoc
+from backend.danswer.prompts.prompt_utils import clean_up_source
+from backend.danswer.search.models import InferenceSection
 
 
 def llm_doc_to_dict(llm_doc: LlmDoc, doc_num: int) -> dict:

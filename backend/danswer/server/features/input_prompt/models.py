@@ -2,8 +2,8 @@ from uuid import UUID
 
 from pydantic import BaseModel
 
-from danswer.db.models import InputPrompt
-from danswer.utils.logger import setup_logger
+from backend.danswer.db.models import InputPrompt
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

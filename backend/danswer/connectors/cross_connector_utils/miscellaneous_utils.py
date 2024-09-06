@@ -6,9 +6,9 @@ from typing import TypeVar
 
 from dateutil.parser import parse
 
-from danswer.configs.constants import IGNORE_FOR_QA
-from danswer.connectors.models import BasicExpertInfo
-from danswer.utils.text_processing import is_valid_email
+from backend.danswer.configs.constants import IGNORE_FOR_QA
+from backend.danswer.connectors.models import BasicExpertInfo
+from backend.danswer.utils.text_processing import is_valid_email
 
 
 def datetime_to_utc(dt: datetime) -> datetime:

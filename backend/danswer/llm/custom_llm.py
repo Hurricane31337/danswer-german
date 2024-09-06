@@ -7,11 +7,11 @@ from langchain_core.messages import AIMessage
 from langchain_core.messages import BaseMessage
 from requests import Timeout
 
-from danswer.configs.model_configs import GEN_AI_NUM_RESERVED_OUTPUT_TOKENS
-from danswer.llm.interfaces import LLM
-from danswer.llm.interfaces import ToolChoiceOptions
-from danswer.llm.utils import convert_lm_input_to_basic_string
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.model_configs import GEN_AI_NUM_RESERVED_OUTPUT_TOKENS
+from backend.danswer.llm.interfaces import LLM
+from backend.danswer.llm.interfaces import ToolChoiceOptions
+from backend.danswer.llm.utils import convert_lm_input_to_basic_string
+from backend.danswer.utils.logger import setup_logger
 
 
 logger = setup_logger()

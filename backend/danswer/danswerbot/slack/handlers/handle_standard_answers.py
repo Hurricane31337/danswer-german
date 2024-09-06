@@ -1,26 +1,26 @@
 from slack_sdk import WebClient
 from sqlalchemy.orm import Session
 
-from danswer.configs.constants import MessageType
-from danswer.configs.danswerbot_configs import DANSWER_REACT_EMOJI
-from danswer.danswerbot.slack.blocks import build_standard_answer_blocks
-from danswer.danswerbot.slack.blocks import get_restate_blocks
-from danswer.danswerbot.slack.handlers.utils import send_team_member_message
-from danswer.danswerbot.slack.models import SlackMessageInfo
-from danswer.danswerbot.slack.utils import respond_in_thread
-from danswer.danswerbot.slack.utils import update_emote_react
-from danswer.db.chat import create_chat_session
-from danswer.db.chat import create_new_chat_message
-from danswer.db.chat import get_chat_messages_by_sessions
-from danswer.db.chat import get_chat_sessions_by_slack_thread_id
-from danswer.db.chat import get_or_create_root_message
-from danswer.db.models import Prompt
-from danswer.db.models import SlackBotConfig
-from danswer.db.standard_answer import fetch_standard_answer_categories_by_names
-from danswer.db.standard_answer import find_matching_standard_answers
-from danswer.server.manage.models import StandardAnswer
-from danswer.utils.logger import DanswerLoggingAdapter
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.constants import MessageType
+from backend.danswer.configs.danswerbot_configs import DANSWER_REACT_EMOJI
+from backend.danswer.danswerbot.slack.blocks import build_standard_answer_blocks
+from backend.danswer.danswerbot.slack.blocks import get_restate_blocks
+from backend.danswer.danswerbot.slack.handlers.utils import send_team_member_message
+from backend.danswer.danswerbot.slack.models import SlackMessageInfo
+from backend.danswer.danswerbot.slack.utils import respond_in_thread
+from backend.danswer.danswerbot.slack.utils import update_emote_react
+from backend.danswer.db.chat import create_chat_session
+from backend.danswer.db.chat import create_new_chat_message
+from backend.danswer.db.chat import get_chat_messages_by_sessions
+from backend.danswer.db.chat import get_chat_sessions_by_slack_thread_id
+from backend.danswer.db.chat import get_or_create_root_message
+from backend.danswer.db.models import Prompt
+from backend.danswer.db.models import SlackBotConfig
+from backend.danswer.db.standard_answer import fetch_standard_answer_categories_by_names
+from backend.danswer.db.standard_answer import find_matching_standard_answers
+from backend.danswer.server.manage.models import StandardAnswer
+from backend.danswer.utils.logger import DanswerLoggingAdapter
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

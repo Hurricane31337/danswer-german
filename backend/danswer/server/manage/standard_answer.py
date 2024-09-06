@@ -3,22 +3,22 @@ from fastapi import Depends
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.db.engine import get_session
-from danswer.db.models import User
-from danswer.db.standard_answer import fetch_standard_answer
-from danswer.db.standard_answer import fetch_standard_answer_categories
-from danswer.db.standard_answer import fetch_standard_answer_category
-from danswer.db.standard_answer import fetch_standard_answers
-from danswer.db.standard_answer import insert_standard_answer
-from danswer.db.standard_answer import insert_standard_answer_category
-from danswer.db.standard_answer import remove_standard_answer
-from danswer.db.standard_answer import update_standard_answer
-from danswer.db.standard_answer import update_standard_answer_category
-from danswer.server.manage.models import StandardAnswer
-from danswer.server.manage.models import StandardAnswerCategory
-from danswer.server.manage.models import StandardAnswerCategoryCreationRequest
-from danswer.server.manage.models import StandardAnswerCreationRequest
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import User
+from backend.danswer.db.standard_answer import fetch_standard_answer
+from backend.danswer.db.standard_answer import fetch_standard_answer_categories
+from backend.danswer.db.standard_answer import fetch_standard_answer_category
+from backend.danswer.db.standard_answer import fetch_standard_answers
+from backend.danswer.db.standard_answer import insert_standard_answer
+from backend.danswer.db.standard_answer import insert_standard_answer_category
+from backend.danswer.db.standard_answer import remove_standard_answer
+from backend.danswer.db.standard_answer import update_standard_answer
+from backend.danswer.db.standard_answer import update_standard_answer_category
+from backend.danswer.server.manage.models import StandardAnswer
+from backend.danswer.server.manage.models import StandardAnswerCategory
+from backend.danswer.server.manage.models import StandardAnswerCategoryCreationRequest
+from backend.danswer.server.manage.models import StandardAnswerCreationRequest
 
 router = APIRouter(prefix="/manage")
 

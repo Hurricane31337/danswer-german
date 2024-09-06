@@ -1,5 +1,5 @@
-from danswer.document_index.interfaces import DocumentIndex
-from danswer.document_index.vespa.index import VespaIndex
+from backend.danswer.document_index.interfaces import DocumentIndex
+from backend.danswer.document_index.vespa.index import VespaIndex
 
 
 def get_default_document_index(

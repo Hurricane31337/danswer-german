@@ -6,7 +6,7 @@ from typing import TypeVar
 
 from requests import HTTPError
 
-from danswer.utils.logger import setup_logger
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

@@ -2,13 +2,13 @@ from collections.abc import Callable
 from collections.abc import Generator
 from typing import Any
 
-from danswer.llm.answering.models import PreviousMessage
-from danswer.llm.interfaces import LLM
-from danswer.tools.models import ToolCallFinalResult
-from danswer.tools.models import ToolCallKickoff
-from danswer.tools.tool import Tool
-from danswer.tools.tool import ToolResponse
-from danswer.utils.threadpool_concurrency import run_functions_tuples_in_parallel
+from backend.danswer.llm.answering.models import PreviousMessage
+from backend.danswer.llm.interfaces import LLM
+from backend.danswer.tools.models import ToolCallFinalResult
+from backend.danswer.tools.models import ToolCallKickoff
+from backend.danswer.tools.tool import Tool
+from backend.danswer.tools.tool import ToolResponse
+from backend.danswer.utils.threadpool_concurrency import run_functions_tuples_in_parallel
 
 
 class ToolRunner:

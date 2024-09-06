@@ -3,7 +3,7 @@ from urllib import robotparser
 
 from usp.tree import sitemap_tree_for_homepage  # type: ignore
 
-from danswer.utils.logger import setup_logger
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

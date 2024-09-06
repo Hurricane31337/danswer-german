@@ -1,8 +1,8 @@
 from typing import ClassVar
 
-from danswer.configs.app_configs import INDEX_BATCH_SIZE
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.mediawiki import wiki
+from backend.danswer.configs.app_configs import INDEX_BATCH_SIZE
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.mediawiki import wiki
 
 
 class WikipediaConnector(wiki.MediaWikiConnector):

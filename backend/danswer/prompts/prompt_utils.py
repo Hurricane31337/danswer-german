@@ -4,15 +4,15 @@ from typing import cast
 
 from langchain_core.messages import BaseMessage
 
-from danswer.chat.models import LlmDoc
-from danswer.configs.chat_configs import LANGUAGE_HINT
-from danswer.configs.constants import DocumentSource
-from danswer.db.models import Prompt
-from danswer.llm.answering.models import PromptConfig
-from danswer.prompts.chat_prompts import ADDITIONAL_INFO
-from danswer.prompts.chat_prompts import CITATION_REMINDER
-from danswer.prompts.constants import CODE_BLOCK_PAT
-from danswer.search.models import InferenceChunk
+from backend.danswer.chat.models import LlmDoc
+from backend.danswer.configs.chat_configs import LANGUAGE_HINT
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.db.models import Prompt
+from backend.danswer.llm.answering.models import PromptConfig
+from backend.danswer.prompts.chat_prompts import ADDITIONAL_INFO
+from backend.danswer.prompts.chat_prompts import CITATION_REMINDER
+from backend.danswer.prompts.constants import CODE_BLOCK_PAT
+from backend.danswer.search.models import InferenceChunk
 
 
 MOST_BASIC_PROMPT = "You are a helpful AI assistant."

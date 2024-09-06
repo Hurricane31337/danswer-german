@@ -3,8 +3,8 @@ from enum import Enum
 
 from pydantic import BaseModel
 
-from danswer.configs.constants import NotificationType
-from danswer.db.models import Notification as NotificationDBModel
+from backend.danswer.configs.constants import NotificationType
+from backend.danswer.db.models import Notification as NotificationDBModel
 
 
 class PageType(str, Enum):

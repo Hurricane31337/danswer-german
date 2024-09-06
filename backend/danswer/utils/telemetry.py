@@ -6,14 +6,14 @@ from typing import cast
 import requests
 from sqlalchemy.orm import Session
 
-from danswer.configs.app_configs import DISABLE_TELEMETRY
-from danswer.configs.app_configs import ENTERPRISE_EDITION_ENABLED
-from danswer.configs.constants import KV_CUSTOMER_UUID_KEY
-from danswer.configs.constants import KV_INSTANCE_DOMAIN_KEY
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.db.models import User
-from danswer.dynamic_configs.factory import get_dynamic_config_store
-from danswer.dynamic_configs.interface import ConfigNotFoundError
+from backend.danswer.configs.app_configs import DISABLE_TELEMETRY
+from backend.danswer.configs.app_configs import ENTERPRISE_EDITION_ENABLED
+from backend.danswer.configs.constants import KV_CUSTOMER_UUID_KEY
+from backend.danswer.configs.constants import KV_INSTANCE_DOMAIN_KEY
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.db.models import User
+from backend.danswer.dynamic_configs.factory import get_dynamic_config_store
+from backend.danswer.dynamic_configs.interface import ConfigNotFoundError
 
 _DANSWER_TELEMETRY_ENDPOINT = "https://telemetry.danswer.ai/anonymous_telemetry"
 _CACHED_UUID: str | None = None

@@ -2,9 +2,9 @@ import os
 
 import pytest
 
-from danswer.natural_language_processing.search_nlp_models import EmbeddingModel
-from shared_configs.enums import EmbedTextType
-from shared_configs.model_server_models import EmbeddingProvider
+from backend.danswer.natural_language_processing.search_nlp_models import EmbeddingModel
+from backend.shared_configs.enums import EmbedTextType
+from backend.shared_configs.model_server_models import EmbeddingProvider
 
 VALID_SAMPLE = ["hi", "hello my name is bob", "woah there!!!. 😃"]
 # openai limit is 2048, cohere is supposed to be 96 but in practice that doesn't

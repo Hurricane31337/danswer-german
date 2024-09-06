@@ -1,8 +1,8 @@
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.models import Document
-from danswer.connectors.models import Section
-from danswer.indexing.chunker import Chunker
-from danswer.indexing.embedder import DefaultIndexingEmbedder
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import Section
+from backend.danswer.indexing.chunker import Chunker
+from backend.danswer.indexing.embedder import DefaultIndexingEmbedder
 
 
 def test_chunk_document() -> None:

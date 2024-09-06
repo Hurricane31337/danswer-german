@@ -11,13 +11,13 @@ from sqlalchemy import func
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from danswer.auth.schemas import UserRole
-from danswer.db.engine import get_async_session
-from danswer.db.engine import get_sqlalchemy_async_engine
-from danswer.db.models import AccessToken
-from danswer.db.models import OAuthAccount
-from danswer.db.models import User
-from danswer.utils.variable_functionality import (
+from backend.danswer.auth.schemas import UserRole
+from backend.danswer.db.engine import get_async_session
+from backend.danswer.db.engine import get_sqlalchemy_async_engine
+from backend.danswer.db.models import AccessToken
+from backend.danswer.db.models import OAuthAccount
+from backend.danswer.db.models import User
+from backend.danswer.utils.variable_functionality import (
     fetch_versioned_implementation_with_fallback,
 )
 

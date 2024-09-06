@@ -3,24 +3,24 @@ from fastapi import Depends
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.db.engine import get_session
-from danswer.db.llm import fetch_existing_embedding_providers
-from danswer.db.llm import remove_embedding_provider
-from danswer.db.llm import upsert_cloud_embedding_provider
-from danswer.db.models import User
-from danswer.db.search_settings import get_all_search_settings
-from danswer.db.search_settings import get_current_db_embedding_provider
-from danswer.indexing.models import EmbeddingModelDetail
-from danswer.natural_language_processing.search_nlp_models import EmbeddingModel
-from danswer.server.manage.embedding.models import CloudEmbeddingProvider
-from danswer.server.manage.embedding.models import CloudEmbeddingProviderCreationRequest
-from danswer.server.manage.embedding.models import TestEmbeddingRequest
-from danswer.utils.logger import setup_logger
-from shared_configs.configs import MODEL_SERVER_HOST
-from shared_configs.configs import MODEL_SERVER_PORT
-from shared_configs.enums import EmbeddingProvider
-from shared_configs.enums import EmbedTextType
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.llm import fetch_existing_embedding_providers
+from backend.danswer.db.llm import remove_embedding_provider
+from backend.danswer.db.llm import upsert_cloud_embedding_provider
+from backend.danswer.db.models import User
+from backend.danswer.db.search_settings import get_all_search_settings
+from backend.danswer.db.search_settings import get_current_db_embedding_provider
+from backend.danswer.indexing.models import EmbeddingModelDetail
+from backend.danswer.natural_language_processing.search_nlp_models import EmbeddingModel
+from backend.danswer.server.manage.embedding.models import CloudEmbeddingProvider
+from backend.danswer.server.manage.embedding.models import CloudEmbeddingProviderCreationRequest
+from backend.danswer.server.manage.embedding.models import TestEmbeddingRequest
+from backend.danswer.utils.logger import setup_logger
+from backend.shared_configs.configs import MODEL_SERVER_HOST
+from backend.shared_configs.configs import MODEL_SERVER_PORT
+from backend.shared_configs.enums import EmbeddingProvider
+from backend.shared_configs.enums import EmbedTextType
 
 
 logger = setup_logger()

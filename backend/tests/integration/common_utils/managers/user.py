@@ -4,13 +4,13 @@ from uuid import uuid4
 
 import requests
 
-from danswer.db.models import UserRole
-from danswer.server.manage.models import AllUsersResponse
-from danswer.server.models import FullUserSnapshot
-from danswer.server.models import InvitedUserSnapshot
-from tests.integration.common_utils.constants import API_SERVER_URL
-from tests.integration.common_utils.constants import GENERAL_HEADERS
-from tests.integration.common_utils.test_models import TestUser
+from backend.danswer.db.models import UserRole
+from backend.danswer.server.manage.models import AllUsersResponse
+from backend.danswer.server.models import FullUserSnapshot
+from backend.danswer.server.models import InvitedUserSnapshot
+from backend.tests.integration.common_utils.constants import API_SERVER_URL
+from backend.tests.integration.common_utils.constants import GENERAL_HEADERS
+from backend.tests.integration.common_utils.test_models import TestUser
 
 
 class UserManager:

@@ -1,9 +1,9 @@
 import pytest
 
-from danswer.configs.constants import DocumentSource
-from danswer.llm.answering.prune_and_merge import _merge_sections
-from danswer.search.models import InferenceChunk
-from danswer.search.models import InferenceSection
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.llm.answering.prune_and_merge import _merge_sections
+from backend.danswer.search.models import InferenceChunk
+from backend.danswer.search.models import InferenceSection
 
 
 # This large test accounts for all of the following:

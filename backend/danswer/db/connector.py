@@ -7,16 +7,16 @@ from sqlalchemy import select
 from sqlalchemy.orm import aliased
 from sqlalchemy.orm import Session
 
-from danswer.configs.app_configs import DEFAULT_PRUNING_FREQ
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.models import InputType
-from danswer.db.models import Connector
-from danswer.db.models import ConnectorCredentialPair
-from danswer.db.models import IndexAttempt
-from danswer.server.documents.models import ConnectorBase
-from danswer.server.documents.models import ObjectCreationIdResponse
-from danswer.server.models import StatusResponse
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.app_configs import DEFAULT_PRUNING_FREQ
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.models import InputType
+from backend.danswer.db.models import Connector
+from backend.danswer.db.models import ConnectorCredentialPair
+from backend.danswer.db.models import IndexAttempt
+from backend.danswer.server.documents.models import ConnectorBase
+from backend.danswer.server.documents.models import ObjectCreationIdResponse
+from backend.danswer.server.models import StatusResponse
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

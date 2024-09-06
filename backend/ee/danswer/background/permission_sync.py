@@ -8,26 +8,26 @@ from dask.distributed import Future
 from distributed import LocalCluster
 from sqlalchemy.orm import Session
 
-from danswer.background.indexing.dask_utils import ResourceLogger
-from danswer.background.indexing.job_client import SimpleJob
-from danswer.background.indexing.job_client import SimpleJobClient
-from danswer.configs.app_configs import CLEANUP_INDEXING_JOBS_TIMEOUT
-from danswer.configs.app_configs import DASK_JOB_CLIENT_ENABLED
-from danswer.configs.constants import DocumentSource
-from danswer.configs.constants import POSTGRES_PERMISSIONS_APP_NAME
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.db.engine import init_sqlalchemy_engine
-from danswer.db.models import PermissionSyncStatus
-from danswer.utils.logger import setup_logger
-from ee.danswer.configs.app_configs import NUM_PERMISSION_WORKERS
-from ee.danswer.connectors.factory import CONNECTOR_PERMISSION_FUNC_MAP
-from ee.danswer.db.connector import fetch_sources_with_connectors
-from ee.danswer.db.connector_credential_pair import get_cc_pairs_by_source
-from ee.danswer.db.permission_sync import create_perm_sync
-from ee.danswer.db.permission_sync import expire_perm_sync_timed_out
-from ee.danswer.db.permission_sync import get_perm_sync_attempt
-from ee.danswer.db.permission_sync import mark_all_inprogress_permission_sync_failed
-from shared_configs.configs import LOG_LEVEL
+from backend.danswer.background.indexing.dask_utils import ResourceLogger
+from backend.danswer.background.indexing.job_client import SimpleJob
+from backend.danswer.background.indexing.job_client import SimpleJobClient
+from backend.danswer.configs.app_configs import CLEANUP_INDEXING_JOBS_TIMEOUT
+from backend.danswer.configs.app_configs import DASK_JOB_CLIENT_ENABLED
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.configs.constants import POSTGRES_PERMISSIONS_APP_NAME
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.db.engine import init_sqlalchemy_engine
+from backend.danswer.db.models import PermissionSyncStatus
+from backend.danswer.utils.logger import setup_logger
+from backend.ee.danswer.configs.app_configs import NUM_PERMISSION_WORKERS
+from backend.ee.danswer.connectors.factory import CONNECTOR_PERMISSION_FUNC_MAP
+from backend.ee.danswer.db.connector import fetch_sources_with_connectors
+from backend.ee.danswer.db.connector_credential_pair import get_cc_pairs_by_source
+from backend.ee.danswer.db.permission_sync import create_perm_sync
+from backend.ee.danswer.db.permission_sync import expire_perm_sync_timed_out
+from backend.ee.danswer.db.permission_sync import get_perm_sync_attempt
+from backend.ee.danswer.db.permission_sync import mark_all_inprogress_permission_sync_failed
+from backend.shared_configs.configs import LOG_LEVEL
 
 logger = setup_logger()
 

@@ -1,13 +1,13 @@
-from danswer.server.documents.models import DocumentSource
-from tests.integration.common_utils.constants import NUM_DOCS
-from tests.integration.common_utils.managers.api_key import APIKeyManager
-from tests.integration.common_utils.managers.cc_pair import CCPairManager
-from tests.integration.common_utils.managers.document import DocumentManager
-from tests.integration.common_utils.managers.document_set import DocumentSetManager
-from tests.integration.common_utils.managers.user import UserManager
-from tests.integration.common_utils.test_models import TestAPIKey
-from tests.integration.common_utils.test_models import TestUser
-from tests.integration.common_utils.vespa import TestVespaClient
+from backend.danswer.server.documents.models import DocumentSource
+from backend.tests.integration.common_utils.constants import NUM_DOCS
+from backend.tests.integration.common_utils.managers.api_key import APIKeyManager
+from backend.tests.integration.common_utils.managers.cc_pair import CCPairManager
+from backend.tests.integration.common_utils.managers.document import DocumentManager
+from backend.tests.integration.common_utils.managers.document_set import DocumentSetManager
+from backend.tests.integration.common_utils.managers.user import UserManager
+from backend.tests.integration.common_utils.test_models import TestAPIKey
+from backend.tests.integration.common_utils.test_models import TestUser
+from backend.tests.integration.common_utils.vespa import TestVespaClient
 
 
 def test_multiple_document_sets_syncing_same_connnector(

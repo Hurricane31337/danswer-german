@@ -5,15 +5,15 @@ from huggingface_hub import snapshot_download  # type: ignore
 from transformers import AutoTokenizer  # type: ignore
 from transformers import BatchEncoding
 
-from danswer.utils.logger import setup_logger
-from model_server.constants import MODEL_WARM_UP_STRING
-from model_server.danswer_torch_model import HybridClassifier
-from model_server.utils import simple_log_function_time
-from shared_configs.configs import INDEXING_ONLY
-from shared_configs.configs import INTENT_MODEL_TAG
-from shared_configs.configs import INTENT_MODEL_VERSION
-from shared_configs.model_server_models import IntentRequest
-from shared_configs.model_server_models import IntentResponse
+from backend.danswer.utils.logger import setup_logger
+from backend.model_server.constants import MODEL_WARM_UP_STRING
+from backend.model_server.danswer_torch_model import HybridClassifier
+from backend.model_server.utils import simple_log_function_time
+from backend.shared_configs.configs import INDEXING_ONLY
+from backend.shared_configs.configs import INTENT_MODEL_TAG
+from backend.shared_configs.configs import INTENT_MODEL_VERSION
+from backend.shared_configs.model_server_models import IntentRequest
+from backend.shared_configs.model_server_models import IntentResponse
 
 logger = setup_logger()
 

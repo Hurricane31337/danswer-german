@@ -16,110 +16,110 @@ from fastapi.responses import JSONResponse
 from httpx_oauth.clients.google import GoogleOAuth2
 from sqlalchemy.orm import Session
 
-from danswer import __version__
-from danswer.auth.schemas import UserCreate
-from danswer.auth.schemas import UserRead
-from danswer.auth.schemas import UserUpdate
-from danswer.auth.users import auth_backend
-from danswer.auth.users import fastapi_users
-from danswer.chat.load_yamls import load_chat_yamls
-from danswer.configs.app_configs import APP_API_PREFIX
-from danswer.configs.app_configs import APP_HOST
-from danswer.configs.app_configs import APP_PORT
-from danswer.configs.app_configs import AUTH_TYPE
-from danswer.configs.app_configs import DISABLE_GENERATIVE_AI
-from danswer.configs.app_configs import DISABLE_INDEX_UPDATE_ON_SWAP
-from danswer.configs.app_configs import LOG_ENDPOINT_LATENCY
-from danswer.configs.app_configs import OAUTH_CLIENT_ID
-from danswer.configs.app_configs import OAUTH_CLIENT_SECRET
-from danswer.configs.app_configs import USER_AUTH_SECRET
-from danswer.configs.app_configs import WEB_DOMAIN
-from danswer.configs.constants import AuthType
-from danswer.configs.constants import KV_REINDEX_KEY
-from danswer.configs.constants import KV_SEARCH_SETTINGS
-from danswer.configs.constants import POSTGRES_WEB_APP_NAME
-from danswer.db.connector import check_connectors_exist
-from danswer.db.connector import create_initial_default_connector
-from danswer.db.connector_credential_pair import associate_default_cc_pair
-from danswer.db.connector_credential_pair import get_connector_credential_pairs
-from danswer.db.connector_credential_pair import resync_cc_pair
-from danswer.db.credentials import create_initial_public_credential
-from danswer.db.document import check_docs_exist
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.db.engine import init_sqlalchemy_engine
-from danswer.db.engine import warm_up_connections
-from danswer.db.index_attempt import cancel_indexing_attempts_past_model
-from danswer.db.index_attempt import expire_index_attempts
-from danswer.db.persona import delete_old_default_personas
-from danswer.db.search_settings import get_current_search_settings
-from danswer.db.search_settings import get_secondary_search_settings
-from danswer.db.search_settings import update_current_search_settings
-from danswer.db.search_settings import update_secondary_search_settings
-from danswer.db.standard_answer import create_initial_default_standard_answer_category
-from danswer.db.swap_index import check_index_swap
-from danswer.document_index.factory import get_default_document_index
-from danswer.document_index.interfaces import DocumentIndex
-from danswer.dynamic_configs.factory import get_dynamic_config_store
-from danswer.dynamic_configs.interface import ConfigNotFoundError
-from danswer.indexing.models import IndexingSetting
-from danswer.natural_language_processing.search_nlp_models import EmbeddingModel
-from danswer.natural_language_processing.search_nlp_models import warm_up_bi_encoder
-from danswer.natural_language_processing.search_nlp_models import warm_up_cross_encoder
-from danswer.search.models import SavedSearchSettings
-from danswer.search.retrieval.search_runner import download_nltk_data
-from danswer.server.auth_check import check_router_auth
-from danswer.server.danswer_api.ingestion import router as danswer_api_router
-from danswer.server.documents.cc_pair import router as cc_pair_router
-from danswer.server.documents.connector import router as connector_router
-from danswer.server.documents.credential import router as credential_router
-from danswer.server.documents.document import router as document_router
-from danswer.server.documents.indexing import router as indexing_router
-from danswer.server.features.document_set.api import router as document_set_router
-from danswer.server.features.folder.api import router as folder_router
-from danswer.server.features.input_prompt.api import (
+from backend.danswer import __version__
+from backend.danswer.auth.schemas import UserCreate
+from backend.danswer.auth.schemas import UserRead
+from backend.danswer.auth.schemas import UserUpdate
+from backend.danswer.auth.users import auth_backend
+from backend.danswer.auth.users import fastapi_users
+from backend.danswer.chat.load_yamls import load_chat_yamls
+from backend.danswer.configs.app_configs import APP_API_PREFIX
+from backend.danswer.configs.app_configs import APP_HOST
+from backend.danswer.configs.app_configs import APP_PORT
+from backend.danswer.configs.app_configs import AUTH_TYPE
+from backend.danswer.configs.app_configs import DISABLE_GENERATIVE_AI
+from backend.danswer.configs.app_configs import DISABLE_INDEX_UPDATE_ON_SWAP
+from backend.danswer.configs.app_configs import LOG_ENDPOINT_LATENCY
+from backend.danswer.configs.app_configs import OAUTH_CLIENT_ID
+from backend.danswer.configs.app_configs import OAUTH_CLIENT_SECRET
+from backend.danswer.configs.app_configs import USER_AUTH_SECRET
+from backend.danswer.configs.app_configs import WEB_DOMAIN
+from backend.danswer.configs.constants import AuthType
+from backend.danswer.configs.constants import KV_REINDEX_KEY
+from backend.danswer.configs.constants import KV_SEARCH_SETTINGS
+from backend.danswer.configs.constants import POSTGRES_WEB_APP_NAME
+from backend.danswer.db.connector import check_connectors_exist
+from backend.danswer.db.connector import create_initial_default_connector
+from backend.danswer.db.connector_credential_pair import associate_default_cc_pair
+from backend.danswer.db.connector_credential_pair import get_connector_credential_pairs
+from backend.danswer.db.connector_credential_pair import resync_cc_pair
+from backend.danswer.db.credentials import create_initial_public_credential
+from backend.danswer.db.document import check_docs_exist
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.db.engine import init_sqlalchemy_engine
+from backend.danswer.db.engine import warm_up_connections
+from backend.danswer.db.index_attempt import cancel_indexing_attempts_past_model
+from backend.danswer.db.index_attempt import expire_index_attempts
+from backend.danswer.db.persona import delete_old_default_personas
+from backend.danswer.db.search_settings import get_current_search_settings
+from backend.danswer.db.search_settings import get_secondary_search_settings
+from backend.danswer.db.search_settings import update_current_search_settings
+from backend.danswer.db.search_settings import update_secondary_search_settings
+from backend.danswer.db.standard_answer import create_initial_default_standard_answer_category
+from backend.danswer.db.swap_index import check_index_swap
+from backend.danswer.document_index.factory import get_default_document_index
+from backend.danswer.document_index.interfaces import DocumentIndex
+from backend.danswer.dynamic_configs.factory import get_dynamic_config_store
+from backend.danswer.dynamic_configs.interface import ConfigNotFoundError
+from backend.danswer.indexing.models import IndexingSetting
+from backend.danswer.natural_language_processing.search_nlp_models import EmbeddingModel
+from backend.danswer.natural_language_processing.search_nlp_models import warm_up_bi_encoder
+from backend.danswer.natural_language_processing.search_nlp_models import warm_up_cross_encoder
+from backend.danswer.search.models import SavedSearchSettings
+from backend.danswer.search.retrieval.search_runner import download_nltk_data
+from backend.danswer.server.auth_check import check_router_auth
+from backend.danswer.server.danswer_api.ingestion import router as danswer_api_router
+from backend.danswer.server.documents.cc_pair import router as cc_pair_router
+from backend.danswer.server.documents.connector import router as connector_router
+from backend.danswer.server.documents.credential import router as credential_router
+from backend.danswer.server.documents.document import router as document_router
+from backend.danswer.server.documents.indexing import router as indexing_router
+from backend.danswer.server.features.document_set.api import router as document_set_router
+from backend.danswer.server.features.folder.api import router as folder_router
+from backend.danswer.server.features.input_prompt.api import (
     admin_router as admin_input_prompt_router,
 )
-from danswer.server.features.input_prompt.api import basic_router as input_prompt_router
-from danswer.server.features.persona.api import admin_router as admin_persona_router
-from danswer.server.features.persona.api import basic_router as persona_router
-from danswer.server.features.prompt.api import basic_router as prompt_router
-from danswer.server.features.tool.api import admin_router as admin_tool_router
-from danswer.server.features.tool.api import router as tool_router
-from danswer.server.gpts.api import router as gpts_router
-from danswer.server.manage.administrative import router as admin_router
-from danswer.server.manage.embedding.api import admin_router as embedding_admin_router
-from danswer.server.manage.embedding.api import basic_router as embedding_router
-from danswer.server.manage.get_state import router as state_router
-from danswer.server.manage.llm.api import admin_router as llm_admin_router
-from danswer.server.manage.llm.api import basic_router as llm_router
-from danswer.server.manage.search_settings import router as search_settings_router
-from danswer.server.manage.slack_bot import router as slack_bot_management_router
-from danswer.server.manage.standard_answer import router as standard_answer_router
-from danswer.server.manage.users import router as user_router
-from danswer.server.middleware.latency_logging import add_latency_logging_middleware
-from danswer.server.query_and_chat.chat_backend import router as chat_router
-from danswer.server.query_and_chat.query_backend import (
+from backend.danswer.server.features.input_prompt.api import basic_router as input_prompt_router
+from backend.danswer.server.features.persona.api import admin_router as admin_persona_router
+from backend.danswer.server.features.persona.api import basic_router as persona_router
+from backend.danswer.server.features.prompt.api import basic_router as prompt_router
+from backend.danswer.server.features.tool.api import admin_router as admin_tool_router
+from backend.danswer.server.features.tool.api import router as tool_router
+from backend.danswer.server.gpts.api import router as gpts_router
+from backend.danswer.server.manage.administrative import router as admin_router
+from backend.danswer.server.manage.embedding.api import admin_router as embedding_admin_router
+from backend.danswer.server.manage.embedding.api import basic_router as embedding_router
+from backend.danswer.server.manage.get_state import router as state_router
+from backend.danswer.server.manage.llm.api import admin_router as llm_admin_router
+from backend.danswer.server.manage.llm.api import basic_router as llm_router
+from backend.danswer.server.manage.search_settings import router as search_settings_router
+from backend.danswer.server.manage.slack_bot import router as slack_bot_management_router
+from backend.danswer.server.manage.standard_answer import router as standard_answer_router
+from backend.danswer.server.manage.users import router as user_router
+from backend.danswer.server.middleware.latency_logging import add_latency_logging_middleware
+from backend.danswer.server.query_and_chat.chat_backend import router as chat_router
+from backend.danswer.server.query_and_chat.query_backend import (
     admin_router as admin_query_router,
 )
-from danswer.server.query_and_chat.query_backend import basic_router as query_router
-from danswer.server.settings.api import admin_router as settings_admin_router
-from danswer.server.settings.api import basic_router as settings_router
-from danswer.server.token_rate_limits.api import (
+from backend.danswer.server.query_and_chat.query_backend import basic_router as query_router
+from backend.danswer.server.settings.api import admin_router as settings_admin_router
+from backend.danswer.server.settings.api import basic_router as settings_router
+from backend.danswer.server.token_rate_limits.api import (
     router as token_rate_limit_settings_router,
 )
-from danswer.tools.built_in_tools import auto_add_search_tool_to_personas
-from danswer.tools.built_in_tools import load_builtin_tools
-from danswer.tools.built_in_tools import refresh_built_in_tools_cache
-from danswer.utils.gpu_utils import gpu_status_request
-from danswer.utils.logger import setup_logger
-from danswer.utils.telemetry import get_or_generate_uuid
-from danswer.utils.telemetry import optional_telemetry
-from danswer.utils.telemetry import RecordType
-from danswer.utils.variable_functionality import fetch_versioned_implementation
-from danswer.utils.variable_functionality import global_version
-from danswer.utils.variable_functionality import set_is_ee_based_on_env_variable
-from shared_configs.configs import MODEL_SERVER_HOST
-from shared_configs.configs import MODEL_SERVER_PORT
+from backend.danswer.tools.built_in_tools import auto_add_search_tool_to_personas
+from backend.danswer.tools.built_in_tools import load_builtin_tools
+from backend.danswer.tools.built_in_tools import refresh_built_in_tools_cache
+from backend.danswer.utils.gpu_utils import gpu_status_request
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.telemetry import get_or_generate_uuid
+from backend.danswer.utils.telemetry import optional_telemetry
+from backend.danswer.utils.telemetry import RecordType
+from backend.danswer.utils.variable_functionality import fetch_versioned_implementation
+from backend.danswer.utils.variable_functionality import global_version
+from backend.danswer.utils.variable_functionality import set_is_ee_based_on_env_variable
+from backend.shared_configs.configs import MODEL_SERVER_HOST
+from backend.shared_configs.configs import MODEL_SERVER_PORT
 
 
 logger = setup_logger()

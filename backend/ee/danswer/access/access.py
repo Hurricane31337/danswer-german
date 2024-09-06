@@ -1,14 +1,14 @@
 from sqlalchemy.orm import Session
 
-from danswer.access.access import (
+from backend.danswer.access.access import (
     _get_access_for_documents as get_access_for_documents_without_groups,
 )
-from danswer.access.access import _get_acl_for_user as get_acl_for_user_without_groups
-from danswer.access.models import DocumentAccess
-from danswer.access.utils import prefix_user_group
-from danswer.db.models import User
-from ee.danswer.db.user_group import fetch_user_groups_for_documents
-from ee.danswer.db.user_group import fetch_user_groups_for_user
+from backend.danswer.access.access import _get_acl_for_user as get_acl_for_user_without_groups
+from backend.danswer.access.models import DocumentAccess
+from backend.danswer.access.utils import prefix_user_group
+from backend.danswer.db.models import User
+from backend.ee.danswer.db.user_group import fetch_user_groups_for_documents
+from backend.ee.danswer.db.user_group import fetch_user_groups_for_user
 
 
 def _get_access_for_documents(

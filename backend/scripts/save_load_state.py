@@ -9,13 +9,13 @@ import requests
 
 from alembic import command
 from alembic.config import Config
-from danswer.configs.app_configs import POSTGRES_DB
-from danswer.configs.app_configs import POSTGRES_HOST
-from danswer.configs.app_configs import POSTGRES_PASSWORD
-from danswer.configs.app_configs import POSTGRES_PORT
-from danswer.configs.app_configs import POSTGRES_USER
-from danswer.document_index.vespa.index import DOCUMENT_ID_ENDPOINT
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.app_configs import POSTGRES_DB
+from backend.danswer.configs.app_configs import POSTGRES_HOST
+from backend.danswer.configs.app_configs import POSTGRES_PASSWORD
+from backend.danswer.configs.app_configs import POSTGRES_PORT
+from backend.danswer.configs.app_configs import POSTGRES_USER
+from backend.danswer.document_index.vespa.index import DOCUMENT_ID_ENDPOINT
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

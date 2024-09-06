@@ -8,25 +8,25 @@ from typing import IO
 
 from sqlalchemy.orm import Session
 
-from danswer.configs.app_configs import INDEX_BATCH_SIZE
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.cross_connector_utils.miscellaneous_utils import time_str_to_utc
-from danswer.connectors.interfaces import GenerateDocumentsOutput
-from danswer.connectors.interfaces import LoadConnector
-from danswer.connectors.models import BasicExpertInfo
-from danswer.connectors.models import Document
-from danswer.connectors.models import Section
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.file_processing.extract_file_text import check_file_ext_is_valid
-from danswer.file_processing.extract_file_text import detect_encoding
-from danswer.file_processing.extract_file_text import extract_file_text
-from danswer.file_processing.extract_file_text import get_file_ext
-from danswer.file_processing.extract_file_text import is_text_file_extension
-from danswer.file_processing.extract_file_text import load_files_from_zip
-from danswer.file_processing.extract_file_text import read_pdf_file
-from danswer.file_processing.extract_file_text import read_text_file
-from danswer.file_store.file_store import get_default_file_store
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.app_configs import INDEX_BATCH_SIZE
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.cross_connector_utils.miscellaneous_utils import time_str_to_utc
+from backend.danswer.connectors.interfaces import GenerateDocumentsOutput
+from backend.danswer.connectors.interfaces import LoadConnector
+from backend.danswer.connectors.models import BasicExpertInfo
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import Section
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.file_processing.extract_file_text import check_file_ext_is_valid
+from backend.danswer.file_processing.extract_file_text import detect_encoding
+from backend.danswer.file_processing.extract_file_text import extract_file_text
+from backend.danswer.file_processing.extract_file_text import get_file_ext
+from backend.danswer.file_processing.extract_file_text import is_text_file_extension
+from backend.danswer.file_processing.extract_file_text import load_files_from_zip
+from backend.danswer.file_processing.extract_file_text import read_pdf_file
+from backend.danswer.file_processing.extract_file_text import read_text_file
+from backend.danswer.file_store.file_store import get_default_file_store
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

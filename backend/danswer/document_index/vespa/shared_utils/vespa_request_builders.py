@@ -2,18 +2,18 @@ from datetime import datetime
 from datetime import timedelta
 from datetime import timezone
 
-from danswer.configs.constants import INDEX_SEPARATOR
-from danswer.document_index.interfaces import VespaChunkRequest
-from danswer.document_index.vespa_constants import ACCESS_CONTROL_LIST
-from danswer.document_index.vespa_constants import CHUNK_ID
-from danswer.document_index.vespa_constants import DOC_UPDATED_AT
-from danswer.document_index.vespa_constants import DOCUMENT_ID
-from danswer.document_index.vespa_constants import DOCUMENT_SETS
-from danswer.document_index.vespa_constants import HIDDEN
-from danswer.document_index.vespa_constants import METADATA_LIST
-from danswer.document_index.vespa_constants import SOURCE_TYPE
-from danswer.search.models import IndexFilters
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.constants import INDEX_SEPARATOR
+from backend.danswer.document_index.interfaces import VespaChunkRequest
+from backend.danswer.document_index.vespa_constants import ACCESS_CONTROL_LIST
+from backend.danswer.document_index.vespa_constants import CHUNK_ID
+from backend.danswer.document_index.vespa_constants import DOC_UPDATED_AT
+from backend.danswer.document_index.vespa_constants import DOCUMENT_ID
+from backend.danswer.document_index.vespa_constants import DOCUMENT_SETS
+from backend.danswer.document_index.vespa_constants import HIDDEN
+from backend.danswer.document_index.vespa_constants import METADATA_LIST
+from backend.danswer.document_index.vespa_constants import SOURCE_TYPE
+from backend.danswer.search.models import IndexFilters
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

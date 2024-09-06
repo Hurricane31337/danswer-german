@@ -4,14 +4,14 @@ from typing import IO
 
 from sqlalchemy.orm import Session
 
-from danswer.configs.constants import FileOrigin
-from danswer.db.models import PGFileStore
-from danswer.db.pg_file_store import create_populate_lobj
-from danswer.db.pg_file_store import delete_lobj_by_id
-from danswer.db.pg_file_store import delete_pgfilestore_by_file_name
-from danswer.db.pg_file_store import get_pgfilestore_by_file_name
-from danswer.db.pg_file_store import read_lobj
-from danswer.db.pg_file_store import upsert_pgfilestore
+from backend.danswer.configs.constants import FileOrigin
+from backend.danswer.db.models import PGFileStore
+from backend.danswer.db.pg_file_store import create_populate_lobj
+from backend.danswer.db.pg_file_store import delete_lobj_by_id
+from backend.danswer.db.pg_file_store import delete_pgfilestore_by_file_name
+from backend.danswer.db.pg_file_store import get_pgfilestore_by_file_name
+from backend.danswer.db.pg_file_store import read_lobj
+from backend.danswer.db.pg_file_store import upsert_pgfilestore
 
 
 class FileStore(ABC):

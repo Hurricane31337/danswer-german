@@ -5,8 +5,8 @@ from uuid import UUID
 
 from pydantic import BaseModel
 
-from danswer.auth.schemas import UserRole
-from danswer.auth.schemas import UserStatus
+from backend.danswer.auth.schemas import UserRole
+from backend.danswer.auth.schemas import UserStatus
 
 
 DataT = TypeVar("DataT")

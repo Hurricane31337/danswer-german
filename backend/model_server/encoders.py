@@ -16,23 +16,23 @@ from sentence_transformers import SentenceTransformer  # type: ignore
 from vertexai.language_models import TextEmbeddingInput  # type: ignore
 from vertexai.language_models import TextEmbeddingModel  # type: ignore
 
-from danswer.utils.logger import setup_logger
-from model_server.constants import DEFAULT_COHERE_MODEL
-from model_server.constants import DEFAULT_OPENAI_MODEL
-from model_server.constants import DEFAULT_VERTEX_MODEL
-from model_server.constants import DEFAULT_VOYAGE_MODEL
-from model_server.constants import EmbeddingModelTextType
-from model_server.constants import EmbeddingProvider
-from model_server.utils import simple_log_function_time
-from shared_configs.configs import INDEXING_ONLY
-from shared_configs.enums import EmbedTextType
-from shared_configs.enums import RerankerProvider
-from shared_configs.model_server_models import Embedding
-from shared_configs.model_server_models import EmbedRequest
-from shared_configs.model_server_models import EmbedResponse
-from shared_configs.model_server_models import RerankRequest
-from shared_configs.model_server_models import RerankResponse
-from shared_configs.utils import batch_list
+from backend.danswer.utils.logger import setup_logger
+from backend.model_server.constants import DEFAULT_COHERE_MODEL
+from backend.model_server.constants import DEFAULT_OPENAI_MODEL
+from backend.model_server.constants import DEFAULT_VERTEX_MODEL
+from backend.model_server.constants import DEFAULT_VOYAGE_MODEL
+from backend.model_server.constants import EmbeddingModelTextType
+from backend.model_server.constants import EmbeddingProvider
+from backend.model_server.utils import simple_log_function_time
+from backend.shared_configs.configs import INDEXING_ONLY
+from backend.shared_configs.enums import EmbedTextType
+from backend.shared_configs.enums import RerankerProvider
+from backend.shared_configs.model_server_models import Embedding
+from backend.shared_configs.model_server_models import EmbedRequest
+from backend.shared_configs.model_server_models import EmbedResponse
+from backend.shared_configs.model_server_models import RerankRequest
+from backend.shared_configs.model_server_models import RerankResponse
+from backend.shared_configs.utils import batch_list
 
 
 logger = setup_logger()

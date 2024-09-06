@@ -1,20 +1,20 @@
 from collections.abc import Callable
 
-from danswer.chat.chat_utils import combine_message_chain
-from danswer.configs.chat_configs import DISABLE_LLM_QUERY_REPHRASE
-from danswer.configs.model_configs import GEN_AI_HISTORY_CUTOFF
-from danswer.db.models import ChatMessage
-from danswer.llm.answering.models import PreviousMessage
-from danswer.llm.exceptions import GenAIDisabledException
-from danswer.llm.factory import get_default_llms
-from danswer.llm.interfaces import LLM
-from danswer.llm.utils import dict_based_prompt_to_langchain_prompt
-from danswer.llm.utils import message_to_string
-from danswer.prompts.chat_prompts import HISTORY_QUERY_REPHRASE
-from danswer.prompts.miscellaneous_prompts import LANGUAGE_REPHRASE_PROMPT
-from danswer.utils.logger import setup_logger
-from danswer.utils.text_processing import count_punctuation
-from danswer.utils.threadpool_concurrency import run_functions_tuples_in_parallel
+from backend.danswer.chat.chat_utils import combine_message_chain
+from backend.danswer.configs.chat_configs import DISABLE_LLM_QUERY_REPHRASE
+from backend.danswer.configs.model_configs import GEN_AI_HISTORY_CUTOFF
+from backend.danswer.db.models import ChatMessage
+from backend.danswer.llm.answering.models import PreviousMessage
+from backend.danswer.llm.exceptions import GenAIDisabledException
+from backend.danswer.llm.factory import get_default_llms
+from backend.danswer.llm.interfaces import LLM
+from backend.danswer.llm.utils import dict_based_prompt_to_langchain_prompt
+from backend.danswer.llm.utils import message_to_string
+from backend.danswer.prompts.chat_prompts import HISTORY_QUERY_REPHRASE
+from backend.danswer.prompts.miscellaneous_prompts import LANGUAGE_REPHRASE_PROMPT
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.text_processing import count_punctuation
+from backend.danswer.utils.threadpool_concurrency import run_functions_tuples_in_parallel
 
 logger = setup_logger()
 

@@ -5,16 +5,16 @@ from sqlalchemy import select
 from sqlalchemy.orm import joinedload
 from sqlalchemy.orm import Session
 
-from danswer.configs.constants import DANSWER_API_KEY_DUMMY_EMAIL_DOMAIN
-from danswer.configs.constants import DANSWER_API_KEY_PREFIX
-from danswer.configs.constants import UNNAMED_KEY_PLACEHOLDER
-from danswer.db.models import ApiKey
-from danswer.db.models import User
-from ee.danswer.auth.api_key import ApiKeyDescriptor
-from ee.danswer.auth.api_key import build_displayable_api_key
-from ee.danswer.auth.api_key import generate_api_key
-from ee.danswer.auth.api_key import hash_api_key
-from ee.danswer.server.api_key.models import APIKeyArgs
+from backend.danswer.configs.constants import DANSWER_API_KEY_DUMMY_EMAIL_DOMAIN
+from backend.danswer.configs.constants import DANSWER_API_KEY_PREFIX
+from backend.danswer.configs.constants import UNNAMED_KEY_PLACEHOLDER
+from backend.danswer.db.models import ApiKey
+from backend.danswer.db.models import User
+from backend.ee.danswer.auth.api_key import ApiKeyDescriptor
+from backend.ee.danswer.auth.api_key import build_displayable_api_key
+from backend.ee.danswer.auth.api_key import generate_api_key
+from backend.ee.danswer.auth.api_key import hash_api_key
+from backend.ee.danswer.server.api_key.models import APIKeyArgs
 
 
 def is_api_key_email_address(email: str) -> bool:

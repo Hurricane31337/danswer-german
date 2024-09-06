@@ -7,21 +7,21 @@ from typing import Tuple
 
 from zulip import Client
 
-from danswer.configs.app_configs import INDEX_BATCH_SIZE
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.interfaces import GenerateDocumentsOutput
-from danswer.connectors.interfaces import LoadConnector
-from danswer.connectors.interfaces import PollConnector
-from danswer.connectors.interfaces import SecondsSinceUnixEpoch
-from danswer.connectors.models import ConnectorMissingCredentialError
-from danswer.connectors.models import Document
-from danswer.connectors.models import Section
-from danswer.connectors.zulip.schemas import GetMessagesResponse
-from danswer.connectors.zulip.schemas import Message
-from danswer.connectors.zulip.utils import build_search_narrow
-from danswer.connectors.zulip.utils import call_api
-from danswer.connectors.zulip.utils import encode_zulip_narrow_operand
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.app_configs import INDEX_BATCH_SIZE
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.interfaces import GenerateDocumentsOutput
+from backend.danswer.connectors.interfaces import LoadConnector
+from backend.danswer.connectors.interfaces import PollConnector
+from backend.danswer.connectors.interfaces import SecondsSinceUnixEpoch
+from backend.danswer.connectors.models import ConnectorMissingCredentialError
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import Section
+from backend.danswer.connectors.zulip.schemas import GetMessagesResponse
+from backend.danswer.connectors.zulip.schemas import Message
+from backend.danswer.connectors.zulip.utils import build_search_narrow
+from backend.danswer.connectors.zulip.utils import call_api
+from backend.danswer.connectors.zulip.utils import encode_zulip_narrow_operand
+from backend.danswer.utils.logger import setup_logger
 
 # Potential improvements
 # 1. Group documents messages into topics, make 1 document per topic per week

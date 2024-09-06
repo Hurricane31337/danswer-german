@@ -3,25 +3,25 @@ from fastapi import Depends
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.models import Document
-from danswer.connectors.models import IndexAttemptMetadata
-from danswer.db.connector_credential_pair import get_connector_credential_pair_from_id
-from danswer.db.document import get_documents_by_cc_pair
-from danswer.db.document import get_ingestion_documents
-from danswer.db.engine import get_session
-from danswer.db.models import User
-from danswer.db.search_settings import get_current_search_settings
-from danswer.db.search_settings import get_secondary_search_settings
-from danswer.document_index.document_index_utils import get_both_index_names
-from danswer.document_index.factory import get_default_document_index
-from danswer.indexing.embedder import DefaultIndexingEmbedder
-from danswer.indexing.indexing_pipeline import build_indexing_pipeline
-from danswer.server.danswer_api.models import DocMinimalInfo
-from danswer.server.danswer_api.models import IngestionDocument
-from danswer.server.danswer_api.models import IngestionResult
-from danswer.utils.logger import setup_logger
-from ee.danswer.auth.users import api_key_dep
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import IndexAttemptMetadata
+from backend.danswer.db.connector_credential_pair import get_connector_credential_pair_from_id
+from backend.danswer.db.document import get_documents_by_cc_pair
+from backend.danswer.db.document import get_ingestion_documents
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import User
+from backend.danswer.db.search_settings import get_current_search_settings
+from backend.danswer.db.search_settings import get_secondary_search_settings
+from backend.danswer.document_index.document_index_utils import get_both_index_names
+from backend.danswer.document_index.factory import get_default_document_index
+from backend.danswer.indexing.embedder import DefaultIndexingEmbedder
+from backend.danswer.indexing.indexing_pipeline import build_indexing_pipeline
+from backend.danswer.server.danswer_api.models import DocMinimalInfo
+from backend.danswer.server.danswer_api.models import IngestionDocument
+from backend.danswer.server.danswer_api.models import IngestionResult
+from backend.danswer.utils.logger import setup_logger
+from backend.ee.danswer.auth.users import api_key_dep
 
 logger = setup_logger()
 

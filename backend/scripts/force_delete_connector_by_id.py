@@ -5,7 +5,7 @@ import sys
 from sqlalchemy import delete
 from sqlalchemy.orm import Session
 
-from danswer.db.enums import ConnectorCredentialPairStatus
+from backend.danswer.db.enums import ConnectorCredentialPairStatus
 
 # Modify sys.path
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -16,29 +16,29 @@ sys.path.append(parent_dir)
 # flake8: noqa: E402
 
 # Now import Danswer modules
-from danswer.db.models import (
+from backend.danswer.db.models import (
     DocumentSet__ConnectorCredentialPair,
     UserGroup__ConnectorCredentialPair,
 )
-from danswer.db.connector import fetch_connector_by_id
-from danswer.db.document import get_documents_for_connector_credential_pair
-from danswer.db.index_attempt import (
+from backend.danswer.db.connector import fetch_connector_by_id
+from backend.danswer.db.document import get_documents_for_connector_credential_pair
+from backend.danswer.db.index_attempt import (
     delete_index_attempts,
     cancel_indexing_attempts_for_ccpair,
 )
-from danswer.db.models import ConnectorCredentialPair
-from danswer.document_index.interfaces import DocumentIndex
-from danswer.utils.logger import setup_logger
-from danswer.configs.constants import DocumentSource
-from danswer.db.connector_credential_pair import (
+from backend.danswer.db.models import ConnectorCredentialPair
+from backend.danswer.document_index.interfaces import DocumentIndex
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.db.connector_credential_pair import (
     get_connector_credential_pair_from_id,
     get_connector_credential_pair,
 )
-from danswer.db.engine import get_session_context_manager
-from danswer.document_index.factory import get_default_document_index
-from danswer.file_store.file_store import get_default_file_store
-from danswer.document_index.document_index_utils import get_both_index_names
-from danswer.db.document import delete_documents_complete__no_commit
+from backend.danswer.db.engine import get_session_context_manager
+from backend.danswer.document_index.factory import get_default_document_index
+from backend.danswer.file_store.file_store import get_default_file_store
+from backend.danswer.document_index.document_index_utils import get_both_index_names
+from backend.danswer.db.document import delete_documents_complete__no_commit
 
 # pylint: enable=E402
 # flake8: noqa: E402

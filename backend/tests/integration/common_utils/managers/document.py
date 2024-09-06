@@ -2,15 +2,15 @@ from uuid import uuid4
 
 import requests
 
-from danswer.configs.constants import DocumentSource
-from tests.integration.common_utils.constants import API_SERVER_URL
-from tests.integration.common_utils.constants import GENERAL_HEADERS
-from tests.integration.common_utils.constants import NUM_DOCS
-from tests.integration.common_utils.managers.api_key import TestAPIKey
-from tests.integration.common_utils.managers.cc_pair import TestCCPair
-from tests.integration.common_utils.test_models import SimpleTestDocument
-from tests.integration.common_utils.test_models import TestUser
-from tests.integration.common_utils.vespa import TestVespaClient
+from backend.danswer.configs.constants import DocumentSource
+from backend.tests.integration.common_utils.constants import API_SERVER_URL
+from backend.tests.integration.common_utils.constants import GENERAL_HEADERS
+from backend.tests.integration.common_utils.constants import NUM_DOCS
+from backend.tests.integration.common_utils.managers.api_key import TestAPIKey
+from backend.tests.integration.common_utils.managers.cc_pair import TestCCPair
+from backend.tests.integration.common_utils.test_models import SimpleTestDocument
+from backend.tests.integration.common_utils.test_models import TestUser
+from backend.tests.integration.common_utils.vespa import TestVespaClient
 
 
 def _verify_document_permissions(

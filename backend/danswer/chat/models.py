@@ -5,12 +5,12 @@ from typing import Any
 
 from pydantic import BaseModel
 
-from danswer.configs.constants import DocumentSource
-from danswer.search.enums import QueryFlow
-from danswer.search.enums import SearchType
-from danswer.search.models import RetrievalDocs
-from danswer.search.models import SearchResponse
-from danswer.tools.custom.base_tool_types import ToolResultType
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.search.enums import QueryFlow
+from backend.danswer.search.enums import SearchType
+from backend.danswer.search.models import RetrievalDocs
+from backend.danswer.search.models import SearchResponse
+from backend.danswer.tools.custom.base_tool_types import ToolResultType
 
 
 class LlmDoc(BaseModel):

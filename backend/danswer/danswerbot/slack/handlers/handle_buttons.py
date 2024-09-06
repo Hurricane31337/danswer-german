@@ -8,39 +8,39 @@ from slack_sdk.socket_mode import SocketModeClient
 from slack_sdk.socket_mode.request import SocketModeRequest
 from sqlalchemy.orm import Session
 
-from danswer.configs.constants import MessageType
-from danswer.configs.constants import SearchFeedbackType
-from danswer.configs.danswerbot_configs import DANSWER_FOLLOWUP_EMOJI
-from danswer.connectors.slack.utils import make_slack_api_rate_limited
-from danswer.danswerbot.slack.blocks import build_follow_up_resolved_blocks
-from danswer.danswerbot.slack.blocks import get_document_feedback_blocks
-from danswer.danswerbot.slack.config import get_slack_bot_config_for_channel
-from danswer.danswerbot.slack.constants import DISLIKE_BLOCK_ACTION_ID
-from danswer.danswerbot.slack.constants import FeedbackVisibility
-from danswer.danswerbot.slack.constants import LIKE_BLOCK_ACTION_ID
-from danswer.danswerbot.slack.constants import VIEW_DOC_FEEDBACK_ID
-from danswer.danswerbot.slack.handlers.handle_message import (
+from backend.danswer.configs.constants import MessageType
+from backend.danswer.configs.constants import SearchFeedbackType
+from backend.danswer.configs.danswerbot_configs import DANSWER_FOLLOWUP_EMOJI
+from backend.danswer.connectors.slack.utils import make_slack_api_rate_limited
+from backend.danswer.danswerbot.slack.blocks import build_follow_up_resolved_blocks
+from backend.danswer.danswerbot.slack.blocks import get_document_feedback_blocks
+from backend.danswer.danswerbot.slack.config import get_slack_bot_config_for_channel
+from backend.danswer.danswerbot.slack.constants import DISLIKE_BLOCK_ACTION_ID
+from backend.danswer.danswerbot.slack.constants import FeedbackVisibility
+from backend.danswer.danswerbot.slack.constants import LIKE_BLOCK_ACTION_ID
+from backend.danswer.danswerbot.slack.constants import VIEW_DOC_FEEDBACK_ID
+from backend.danswer.danswerbot.slack.handlers.handle_message import (
     remove_scheduled_feedback_reminder,
 )
-from danswer.danswerbot.slack.handlers.handle_regular_answer import (
+from backend.danswer.danswerbot.slack.handlers.handle_regular_answer import (
     handle_regular_answer,
 )
-from danswer.danswerbot.slack.models import SlackMessageInfo
-from danswer.danswerbot.slack.utils import build_feedback_id
-from danswer.danswerbot.slack.utils import decompose_action_id
-from danswer.danswerbot.slack.utils import fetch_group_ids_from_names
-from danswer.danswerbot.slack.utils import fetch_user_ids_from_emails
-from danswer.danswerbot.slack.utils import get_channel_name_from_id
-from danswer.danswerbot.slack.utils import get_feedback_visibility
-from danswer.danswerbot.slack.utils import read_slack_thread
-from danswer.danswerbot.slack.utils import respond_in_thread
-from danswer.danswerbot.slack.utils import update_emote_react
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.db.feedback import create_chat_message_feedback
-from danswer.db.feedback import create_doc_retrieval_feedback
-from danswer.document_index.document_index_utils import get_both_index_names
-from danswer.document_index.factory import get_default_document_index
-from danswer.utils.logger import setup_logger
+from backend.danswer.danswerbot.slack.models import SlackMessageInfo
+from backend.danswer.danswerbot.slack.utils import build_feedback_id
+from backend.danswer.danswerbot.slack.utils import decompose_action_id
+from backend.danswer.danswerbot.slack.utils import fetch_group_ids_from_names
+from backend.danswer.danswerbot.slack.utils import fetch_user_ids_from_emails
+from backend.danswer.danswerbot.slack.utils import get_channel_name_from_id
+from backend.danswer.danswerbot.slack.utils import get_feedback_visibility
+from backend.danswer.danswerbot.slack.utils import read_slack_thread
+from backend.danswer.danswerbot.slack.utils import respond_in_thread
+from backend.danswer.danswerbot.slack.utils import update_emote_react
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.db.feedback import create_chat_message_feedback
+from backend.danswer.db.feedback import create_doc_retrieval_feedback
+from backend.danswer.document_index.document_index_utils import get_both_index_names
+from backend.danswer.document_index.factory import get_default_document_index
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

@@ -6,16 +6,16 @@ from pydantic import ConfigDict
 from pydantic import Field
 from pydantic import field_validator
 
-from danswer.configs.chat_configs import NUM_RETURNED_HITS
-from danswer.configs.constants import DocumentSource
-from danswer.db.models import Persona
-from danswer.db.models import SearchSettings
-from danswer.indexing.models import BaseChunk
-from danswer.indexing.models import IndexingSetting
-from danswer.search.enums import LLMEvaluationType
-from danswer.search.enums import OptionalSearchSetting
-from danswer.search.enums import SearchType
-from shared_configs.enums import RerankerProvider
+from backend.danswer.configs.chat_configs import NUM_RETURNED_HITS
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.db.models import Persona
+from backend.danswer.db.models import SearchSettings
+from backend.danswer.indexing.models import BaseChunk
+from backend.danswer.indexing.models import IndexingSetting
+from backend.danswer.search.enums import LLMEvaluationType
+from backend.danswer.search.enums import OptionalSearchSetting
+from backend.danswer.search.enums import SearchType
+from backend.shared_configs.enums import RerankerProvider
 
 
 MAX_METRICS_CONTENT = (

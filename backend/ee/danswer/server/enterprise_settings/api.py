@@ -11,24 +11,24 @@ from fastapi import status
 from fastapi import UploadFile
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.auth.users import current_user
-from danswer.auth.users import get_user_manager
-from danswer.auth.users import UserManager
-from danswer.db.engine import get_session
-from danswer.db.models import User
-from danswer.file_store.file_store import get_default_file_store
-from danswer.utils.logger import setup_logger
-from ee.danswer.server.enterprise_settings.models import AnalyticsScriptUpload
-from ee.danswer.server.enterprise_settings.models import EnterpriseSettings
-from ee.danswer.server.enterprise_settings.store import _LOGO_FILENAME
-from ee.danswer.server.enterprise_settings.store import _LOGOTYPE_FILENAME
-from ee.danswer.server.enterprise_settings.store import load_analytics_script
-from ee.danswer.server.enterprise_settings.store import load_settings
-from ee.danswer.server.enterprise_settings.store import store_analytics_script
-from ee.danswer.server.enterprise_settings.store import store_settings
-from ee.danswer.server.enterprise_settings.store import upload_logo
-from shared_configs.configs import CUSTOM_REFRESH_URL
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.auth.users import current_user
+from backend.danswer.auth.users import get_user_manager
+from backend.danswer.auth.users import UserManager
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import User
+from backend.danswer.file_store.file_store import get_default_file_store
+from backend.danswer.utils.logger import setup_logger
+from backend.ee.danswer.server.enterprise_settings.models import AnalyticsScriptUpload
+from backend.ee.danswer.server.enterprise_settings.models import EnterpriseSettings
+from backend.ee.danswer.server.enterprise_settings.store import _LOGO_FILENAME
+from backend.ee.danswer.server.enterprise_settings.store import _LOGOTYPE_FILENAME
+from backend.ee.danswer.server.enterprise_settings.store import load_analytics_script
+from backend.ee.danswer.server.enterprise_settings.store import load_settings
+from backend.ee.danswer.server.enterprise_settings.store import store_analytics_script
+from backend.ee.danswer.server.enterprise_settings.store import store_settings
+from backend.ee.danswer.server.enterprise_settings.store import upload_logo
+from backend.shared_configs.configs import CUSTOM_REFRESH_URL
 
 admin_router = APIRouter(prefix="/admin/enterprise-settings")
 basic_router = APIRouter(prefix="/enterprise-settings")

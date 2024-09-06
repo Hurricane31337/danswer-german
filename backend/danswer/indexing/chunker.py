@@ -1,19 +1,19 @@
-from danswer.configs.app_configs import BLURB_SIZE
-from danswer.configs.app_configs import LARGE_CHUNK_RATIO
-from danswer.configs.app_configs import MINI_CHUNK_SIZE
-from danswer.configs.app_configs import SKIP_METADATA_IN_CHUNK
-from danswer.configs.constants import DocumentSource
-from danswer.configs.constants import RETURN_SEPARATOR
-from danswer.configs.constants import SECTION_SEPARATOR
-from danswer.configs.model_configs import DOC_EMBEDDING_CONTEXT_SIZE
-from danswer.connectors.cross_connector_utils.miscellaneous_utils import (
+from backend.danswer.configs.app_configs import BLURB_SIZE
+from backend.danswer.configs.app_configs import LARGE_CHUNK_RATIO
+from backend.danswer.configs.app_configs import MINI_CHUNK_SIZE
+from backend.danswer.configs.app_configs import SKIP_METADATA_IN_CHUNK
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.configs.constants import RETURN_SEPARATOR
+from backend.danswer.configs.constants import SECTION_SEPARATOR
+from backend.danswer.configs.model_configs import DOC_EMBEDDING_CONTEXT_SIZE
+from backend.danswer.connectors.cross_connector_utils.miscellaneous_utils import (
     get_metadata_keys_to_ignore,
 )
-from danswer.connectors.models import Document
-from danswer.indexing.models import DocAwareChunk
-from danswer.natural_language_processing.utils import BaseTokenizer
-from danswer.utils.logger import setup_logger
-from danswer.utils.text_processing import shared_precompare_cleanup
+from backend.danswer.connectors.models import Document
+from backend.danswer.indexing.models import DocAwareChunk
+from backend.danswer.natural_language_processing.utils import BaseTokenizer
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.text_processing import shared_precompare_cleanup
 
 
 # Not supporting overlaps, we need a clean combination of chunks and it is unclear if overlaps

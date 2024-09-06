@@ -1,21 +1,21 @@
 import yaml
 from sqlalchemy.orm import Session
 
-from danswer.configs.chat_configs import INPUT_PROMPT_YAML
-from danswer.configs.chat_configs import MAX_CHUNKS_FED_TO_CHAT
-from danswer.configs.chat_configs import PERSONAS_YAML
-from danswer.configs.chat_configs import PROMPTS_YAML
-from danswer.db.document_set import get_or_create_document_set_by_name
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.db.input_prompt import insert_input_prompt_if_not_exists
-from danswer.db.models import DocumentSet as DocumentSetDBModel
-from danswer.db.models import Persona
-from danswer.db.models import Prompt as PromptDBModel
-from danswer.db.models import Tool as ToolDBModel
-from danswer.db.persona import get_prompt_by_name
-from danswer.db.persona import upsert_persona
-from danswer.db.persona import upsert_prompt
-from danswer.search.enums import RecencyBiasSetting
+from backend.danswer.configs.chat_configs import INPUT_PROMPT_YAML
+from backend.danswer.configs.chat_configs import MAX_CHUNKS_FED_TO_CHAT
+from backend.danswer.configs.chat_configs import PERSONAS_YAML
+from backend.danswer.configs.chat_configs import PROMPTS_YAML
+from backend.danswer.db.document_set import get_or_create_document_set_by_name
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.db.input_prompt import insert_input_prompt_if_not_exists
+from backend.danswer.db.models import DocumentSet as DocumentSetDBModel
+from backend.danswer.db.models import Persona
+from backend.danswer.db.models import Prompt as PromptDBModel
+from backend.danswer.db.models import Tool as ToolDBModel
+from backend.danswer.db.persona import get_prompt_by_name
+from backend.danswer.db.persona import upsert_persona
+from backend.danswer.db.persona import upsert_prompt
+from backend.danswer.search.enums import RecencyBiasSetting
 
 
 def load_prompts_from_yaml(prompts_yaml: str = PROMPTS_YAML) -> None:

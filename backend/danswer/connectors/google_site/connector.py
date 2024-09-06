@@ -7,18 +7,18 @@ from bs4 import BeautifulSoup
 from bs4 import Tag
 from sqlalchemy.orm import Session
 
-from danswer.configs.app_configs import INDEX_BATCH_SIZE
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.interfaces import GenerateDocumentsOutput
-from danswer.connectors.interfaces import LoadConnector
-from danswer.connectors.models import Document
-from danswer.connectors.models import Section
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.file_processing.extract_file_text import load_files_from_zip
-from danswer.file_processing.extract_file_text import read_text_file
-from danswer.file_processing.html_utils import web_html_cleanup
-from danswer.file_store.file_store import get_default_file_store
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.app_configs import INDEX_BATCH_SIZE
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.interfaces import GenerateDocumentsOutput
+from backend.danswer.connectors.interfaces import LoadConnector
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import Section
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.file_processing.extract_file_text import load_files_from_zip
+from backend.danswer.file_processing.extract_file_text import read_text_file
+from backend.danswer.file_processing.html_utils import web_html_cleanup
+from backend.danswer.file_store.file_store import get_default_file_store
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

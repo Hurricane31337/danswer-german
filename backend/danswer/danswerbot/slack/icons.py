@@ -1,4 +1,4 @@
-from danswer.configs.constants import DocumentSource
+from backend.danswer.configs.constants import DocumentSource
 
 
 def source_to_github_img_link(source: DocumentSource) -> str | None:

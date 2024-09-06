@@ -8,21 +8,21 @@ from typing import Optional
 
 import regex
 
-from danswer.chat.models import AnswerQuestionStreamReturn
-from danswer.chat.models import DanswerAnswer
-from danswer.chat.models import DanswerAnswerPiece
-from danswer.chat.models import DanswerQuote
-from danswer.chat.models import DanswerQuotes
-from danswer.chat.models import LlmDoc
-from danswer.configs.chat_configs import QUOTE_ALLOWED_ERROR_PERCENT
-from danswer.prompts.constants import ANSWER_PAT
-from danswer.prompts.constants import QUOTE_PAT
-from danswer.search.models import InferenceChunk
-from danswer.utils.logger import setup_logger
-from danswer.utils.text_processing import clean_model_quote
-from danswer.utils.text_processing import clean_up_code_blocks
-from danswer.utils.text_processing import extract_embedded_json
-from danswer.utils.text_processing import shared_precompare_cleanup
+from backend.danswer.chat.models import AnswerQuestionStreamReturn
+from backend.danswer.chat.models import DanswerAnswer
+from backend.danswer.chat.models import DanswerAnswerPiece
+from backend.danswer.chat.models import DanswerQuote
+from backend.danswer.chat.models import DanswerQuotes
+from backend.danswer.chat.models import LlmDoc
+from backend.danswer.configs.chat_configs import QUOTE_ALLOWED_ERROR_PERCENT
+from backend.danswer.prompts.constants import ANSWER_PAT
+from backend.danswer.prompts.constants import QUOTE_PAT
+from backend.danswer.search.models import InferenceChunk
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.text_processing import clean_model_quote
+from backend.danswer.utils.text_processing import clean_up_code_blocks
+from backend.danswer.utils.text_processing import extract_embedded_json
+from backend.danswer.utils.text_processing import shared_precompare_cleanup
 
 
 logger = setup_logger()

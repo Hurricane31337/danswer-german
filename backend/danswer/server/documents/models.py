@@ -5,19 +5,19 @@ from uuid import UUID
 from pydantic import BaseModel
 from pydantic import Field
 
-from danswer.configs.app_configs import MASK_CREDENTIAL_PREFIX
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.models import DocumentErrorSummary
-from danswer.connectors.models import InputType
-from danswer.db.enums import ConnectorCredentialPairStatus
-from danswer.db.models import Connector
-from danswer.db.models import ConnectorCredentialPair
-from danswer.db.models import Credential
-from danswer.db.models import IndexAttempt
-from danswer.db.models import IndexAttemptError as DbIndexAttemptError
-from danswer.db.models import IndexingStatus
-from danswer.db.models import TaskStatus
-from danswer.server.utils import mask_credential_dict
+from backend.danswer.configs.app_configs import MASK_CREDENTIAL_PREFIX
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.models import DocumentErrorSummary
+from backend.danswer.connectors.models import InputType
+from backend.danswer.db.enums import ConnectorCredentialPairStatus
+from backend.danswer.db.models import Connector
+from backend.danswer.db.models import ConnectorCredentialPair
+from backend.danswer.db.models import Credential
+from backend.danswer.db.models import IndexAttempt
+from backend.danswer.db.models import IndexAttemptError as DbIndexAttemptError
+from backend.danswer.db.models import IndexingStatus
+from backend.danswer.db.models import TaskStatus
+from backend.danswer.server.utils import mask_credential_dict
 
 
 class DocumentInfo(BaseModel):

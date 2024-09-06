@@ -12,17 +12,17 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.auth.users import get_display_email
-from danswer.chat.chat_utils import create_chat_chain
-from danswer.configs.constants import MessageType
-from danswer.configs.constants import QAFeedbackType
-from danswer.db.chat import get_chat_session_by_id
-from danswer.db.engine import get_session
-from danswer.db.models import ChatMessage
-from danswer.db.models import ChatSession
-from danswer.db.models import User
-from ee.danswer.db.query_history import fetch_chat_sessions_eagerly_by_time
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.auth.users import get_display_email
+from backend.danswer.chat.chat_utils import create_chat_chain
+from backend.danswer.configs.constants import MessageType
+from backend.danswer.configs.constants import QAFeedbackType
+from backend.danswer.db.chat import get_chat_session_by_id
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import ChatMessage
+from backend.danswer.db.models import ChatSession
+from backend.danswer.db.models import User
+from backend.ee.danswer.db.query_history import fetch_chat_sessions_eagerly_by_time
 
 router = APIRouter()
 

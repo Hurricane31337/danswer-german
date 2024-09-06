@@ -3,11 +3,11 @@ from uuid import uuid4
 
 import requests
 
-from danswer.server.manage.llm.models import LLMProviderUpsertRequest
-from tests.integration.common_utils.constants import API_SERVER_URL
-from tests.integration.common_utils.constants import GENERAL_HEADERS
-from tests.integration.common_utils.test_models import TestLLMProvider
-from tests.integration.common_utils.test_models import TestUser
+from backend.danswer.server.manage.llm.models import LLMProviderUpsertRequest
+from backend.tests.integration.common_utils.constants import API_SERVER_URL
+from backend.tests.integration.common_utils.constants import GENERAL_HEADERS
+from backend.tests.integration.common_utils.test_models import TestLLMProvider
+from backend.tests.integration.common_utils.test_models import TestUser
 
 
 class LLMProviderManager:

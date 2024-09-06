@@ -1,9 +1,9 @@
 from typing import cast
 
-from danswer.configs.constants import KV_USER_STORE_KEY
-from danswer.dynamic_configs.factory import get_dynamic_config_store
-from danswer.dynamic_configs.interface import ConfigNotFoundError
-from danswer.dynamic_configs.interface import JSON_ro
+from backend.danswer.configs.constants import KV_USER_STORE_KEY
+from backend.danswer.dynamic_configs.factory import get_dynamic_config_store
+from backend.danswer.dynamic_configs.interface import ConfigNotFoundError
+from backend.danswer.dynamic_configs.interface import JSON_ro
 
 
 def get_invited_users() -> list[str]:

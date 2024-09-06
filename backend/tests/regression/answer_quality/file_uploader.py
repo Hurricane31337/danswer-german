@@ -8,12 +8,12 @@ from types import SimpleNamespace
 
 import yaml
 
-from tests.regression.answer_quality.api_utils import check_indexing_status
-from tests.regression.answer_quality.api_utils import create_cc_pair
-from tests.regression.answer_quality.api_utils import create_connector
-from tests.regression.answer_quality.api_utils import create_credential
-from tests.regression.answer_quality.api_utils import run_cc_once
-from tests.regression.answer_quality.api_utils import upload_file
+from backend.tests.regression.answer_quality.api_utils import check_indexing_status
+from backend.tests.regression.answer_quality.api_utils import create_cc_pair
+from backend.tests.regression.answer_quality.api_utils import create_connector
+from backend.tests.regression.answer_quality.api_utils import create_credential
+from backend.tests.regression.answer_quality.api_utils import run_cc_once
+from backend.tests.regression.answer_quality.api_utils import upload_file
 
 
 def unzip_and_get_file_paths(zip_file_path: str) -> list[str]:

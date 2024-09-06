@@ -6,9 +6,9 @@ import time
 
 import yaml
 
-from tests.regression.answer_quality.api_utils import get_answer_from_query
-from tests.regression.answer_quality.cli_utils import get_current_commit_sha
-from tests.regression.answer_quality.cli_utils import get_docker_container_env_vars
+from backend.tests.regression.answer_quality.api_utils import get_answer_from_query
+from backend.tests.regression.answer_quality.cli_utils import get_current_commit_sha
+from backend.tests.regression.answer_quality.cli_utils import get_docker_container_env_vars
 
 RESULTS_FILENAME = "results.jsonl"
 METADATA_FILENAME = "metadata.yaml"

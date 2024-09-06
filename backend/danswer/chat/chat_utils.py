@@ -3,13 +3,13 @@ from typing import cast
 
 from sqlalchemy.orm import Session
 
-from danswer.chat.models import CitationInfo
-from danswer.chat.models import LlmDoc
-from danswer.db.chat import get_chat_messages_by_session
-from danswer.db.models import ChatMessage
-from danswer.llm.answering.models import PreviousMessage
-from danswer.search.models import InferenceSection
-from danswer.utils.logger import setup_logger
+from backend.danswer.chat.models import CitationInfo
+from backend.danswer.chat.models import LlmDoc
+from backend.danswer.db.chat import get_chat_messages_by_session
+from backend.danswer.db.models import ChatMessage
+from backend.danswer.llm.answering.models import PreviousMessage
+from backend.danswer.search.models import InferenceSection
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

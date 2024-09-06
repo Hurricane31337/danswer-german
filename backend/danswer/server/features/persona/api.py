@@ -8,28 +8,28 @@ from fastapi import UploadFile
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.auth.users import current_curator_or_admin_user
-from danswer.auth.users import current_user
-from danswer.configs.constants import FileOrigin
-from danswer.db.engine import get_session
-from danswer.db.models import User
-from danswer.db.persona import create_update_persona
-from danswer.db.persona import get_persona_by_id
-from danswer.db.persona import get_personas
-from danswer.db.persona import mark_persona_as_deleted
-from danswer.db.persona import mark_persona_as_not_deleted
-from danswer.db.persona import update_all_personas_display_priority
-from danswer.db.persona import update_persona_shared_users
-from danswer.db.persona import update_persona_visibility
-from danswer.file_store.file_store import get_default_file_store
-from danswer.file_store.models import ChatFileType
-from danswer.llm.answering.prompts.utils import build_dummy_prompt
-from danswer.server.features.persona.models import CreatePersonaRequest
-from danswer.server.features.persona.models import PersonaSnapshot
-from danswer.server.features.persona.models import PromptTemplateResponse
-from danswer.server.models import DisplayPriorityRequest
-from danswer.utils.logger import setup_logger
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.auth.users import current_curator_or_admin_user
+from backend.danswer.auth.users import current_user
+from backend.danswer.configs.constants import FileOrigin
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import User
+from backend.danswer.db.persona import create_update_persona
+from backend.danswer.db.persona import get_persona_by_id
+from backend.danswer.db.persona import get_personas
+from backend.danswer.db.persona import mark_persona_as_deleted
+from backend.danswer.db.persona import mark_persona_as_not_deleted
+from backend.danswer.db.persona import update_all_personas_display_priority
+from backend.danswer.db.persona import update_persona_shared_users
+from backend.danswer.db.persona import update_persona_visibility
+from backend.danswer.file_store.file_store import get_default_file_store
+from backend.danswer.file_store.models import ChatFileType
+from backend.danswer.llm.answering.prompts.utils import build_dummy_prompt
+from backend.danswer.server.features.persona.models import CreatePersonaRequest
+from backend.danswer.server.features.persona.models import PersonaSnapshot
+from backend.danswer.server.features.persona.models import PromptTemplateResponse
+from backend.danswer.server.models import DisplayPriorityRequest
+from backend.danswer.utils.logger import setup_logger
 
 
 logger = setup_logger()

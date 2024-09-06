@@ -3,12 +3,12 @@ import concurrent.futures
 import httpx
 from retry import retry
 
-from danswer.document_index.vespa.chunk_retrieval import (
+from backend.danswer.document_index.vespa.chunk_retrieval import (
     get_all_vespa_ids_for_document_id,
 )
-from danswer.document_index.vespa_constants import DOCUMENT_ID_ENDPOINT
-from danswer.document_index.vespa_constants import NUM_THREADS
-from danswer.utils.logger import setup_logger
+from backend.danswer.document_index.vespa_constants import DOCUMENT_ID_ENDPOINT
+from backend.danswer.document_index.vespa_constants import NUM_THREADS
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

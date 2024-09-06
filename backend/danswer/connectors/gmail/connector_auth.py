@@ -10,26 +10,26 @@ from google.oauth2.service_account import Credentials as ServiceAccountCredentia
 from google_auth_oauthlib.flow import InstalledAppFlow  # type: ignore
 from sqlalchemy.orm import Session
 
-from danswer.configs.app_configs import WEB_DOMAIN
-from danswer.configs.constants import DocumentSource
-from danswer.configs.constants import KV_CRED_KEY
-from danswer.configs.constants import KV_GMAIL_CRED_KEY
-from danswer.configs.constants import KV_GMAIL_SERVICE_ACCOUNT_KEY
-from danswer.connectors.gmail.constants import (
+from backend.danswer.configs.app_configs import WEB_DOMAIN
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.configs.constants import KV_CRED_KEY
+from backend.danswer.configs.constants import KV_GMAIL_CRED_KEY
+from backend.danswer.configs.constants import KV_GMAIL_SERVICE_ACCOUNT_KEY
+from backend.danswer.connectors.gmail.constants import (
     DB_CREDENTIALS_DICT_DELEGATED_USER_KEY,
 )
-from danswer.connectors.gmail.constants import DB_CREDENTIALS_DICT_TOKEN_KEY
-from danswer.connectors.gmail.constants import (
+from backend.danswer.connectors.gmail.constants import DB_CREDENTIALS_DICT_TOKEN_KEY
+from backend.danswer.connectors.gmail.constants import (
     GMAIL_DB_CREDENTIALS_DICT_SERVICE_ACCOUNT_KEY,
 )
-from danswer.connectors.gmail.constants import SCOPES
-from danswer.db.credentials import update_credential_json
-from danswer.db.models import User
-from danswer.dynamic_configs.factory import get_dynamic_config_store
-from danswer.server.documents.models import CredentialBase
-from danswer.server.documents.models import GoogleAppCredentials
-from danswer.server.documents.models import GoogleServiceAccountKey
-from danswer.utils.logger import setup_logger
+from backend.danswer.connectors.gmail.constants import SCOPES
+from backend.danswer.db.credentials import update_credential_json
+from backend.danswer.db.models import User
+from backend.danswer.dynamic_configs.factory import get_dynamic_config_store
+from backend.danswer.server.documents.models import CredentialBase
+from backend.danswer.server.documents.models import GoogleAppCredentials
+from backend.danswer.server.documents.models import GoogleServiceAccountKey
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

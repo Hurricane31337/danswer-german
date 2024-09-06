@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from danswer.db.models import TokenRateLimit
+from backend.danswer.db.models import TokenRateLimit
 
 
 class TokenRateLimitArgs(BaseModel):

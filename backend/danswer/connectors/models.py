@@ -4,10 +4,10 @@ from typing import Any
 
 from pydantic import BaseModel
 
-from danswer.configs.constants import DocumentSource
-from danswer.configs.constants import INDEX_SEPARATOR
-from danswer.configs.constants import RETURN_SEPARATOR
-from danswer.utils.text_processing import make_url_compatible
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.configs.constants import INDEX_SEPARATOR
+from backend.danswer.configs.constants import RETURN_SEPARATOR
+from backend.danswer.utils.text_processing import make_url_compatible
 
 
 class InputType(str, Enum):

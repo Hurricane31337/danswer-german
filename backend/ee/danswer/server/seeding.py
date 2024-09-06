@@ -3,23 +3,23 @@ import os
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from danswer.db.engine import get_session_context_manager
-from danswer.db.llm import update_default_provider
-from danswer.db.llm import upsert_llm_provider
-from danswer.db.persona import upsert_persona
-from danswer.search.enums import RecencyBiasSetting
-from danswer.server.features.persona.models import CreatePersonaRequest
-from danswer.server.manage.llm.models import LLMProviderUpsertRequest
-from danswer.server.settings.models import Settings
-from danswer.server.settings.store import store_settings as store_base_settings
-from danswer.utils.logger import setup_logger
-from ee.danswer.server.enterprise_settings.models import AnalyticsScriptUpload
-from ee.danswer.server.enterprise_settings.models import EnterpriseSettings
-from ee.danswer.server.enterprise_settings.store import store_analytics_script
-from ee.danswer.server.enterprise_settings.store import (
+from backend.danswer.db.engine import get_session_context_manager
+from backend.danswer.db.llm import update_default_provider
+from backend.danswer.db.llm import upsert_llm_provider
+from backend.danswer.db.persona import upsert_persona
+from backend.danswer.search.enums import RecencyBiasSetting
+from backend.danswer.server.features.persona.models import CreatePersonaRequest
+from backend.danswer.server.manage.llm.models import LLMProviderUpsertRequest
+from backend.danswer.server.settings.models import Settings
+from backend.danswer.server.settings.store import store_settings as store_base_settings
+from backend.danswer.utils.logger import setup_logger
+from backend.ee.danswer.server.enterprise_settings.models import AnalyticsScriptUpload
+from backend.ee.danswer.server.enterprise_settings.models import EnterpriseSettings
+from backend.ee.danswer.server.enterprise_settings.store import store_analytics_script
+from backend.ee.danswer.server.enterprise_settings.store import (
     store_settings as store_ee_settings,
 )
-from ee.danswer.server.enterprise_settings.store import upload_logo
+from backend.ee.danswer.server.enterprise_settings.store import upload_logo
 
 logger = setup_logger()
 

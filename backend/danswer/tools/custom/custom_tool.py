@@ -8,25 +8,25 @@ from langchain_core.messages import HumanMessage
 from langchain_core.messages import SystemMessage
 from pydantic import BaseModel
 
-from danswer.dynamic_configs.interface import JSON_ro
-from danswer.llm.answering.models import PreviousMessage
-from danswer.llm.interfaces import LLM
-from danswer.tools.custom.base_tool_types import ToolResultType
-from danswer.tools.custom.custom_tool_prompts import (
+from backend.danswer.dynamic_configs.interface import JSON_ro
+from backend.danswer.llm.answering.models import PreviousMessage
+from backend.danswer.llm.interfaces import LLM
+from backend.danswer.tools.custom.base_tool_types import ToolResultType
+from backend.danswer.tools.custom.custom_tool_prompts import (
     SHOULD_USE_CUSTOM_TOOL_SYSTEM_PROMPT,
 )
-from danswer.tools.custom.custom_tool_prompts import SHOULD_USE_CUSTOM_TOOL_USER_PROMPT
-from danswer.tools.custom.custom_tool_prompts import TOOL_ARG_SYSTEM_PROMPT
-from danswer.tools.custom.custom_tool_prompts import TOOL_ARG_USER_PROMPT
-from danswer.tools.custom.custom_tool_prompts import USE_TOOL
-from danswer.tools.custom.openapi_parsing import MethodSpec
-from danswer.tools.custom.openapi_parsing import openapi_to_method_specs
-from danswer.tools.custom.openapi_parsing import openapi_to_url
-from danswer.tools.custom.openapi_parsing import REQUEST_BODY
-from danswer.tools.custom.openapi_parsing import validate_openapi_schema
-from danswer.tools.tool import Tool
-from danswer.tools.tool import ToolResponse
-from danswer.utils.logger import setup_logger
+from backend.danswer.tools.custom.custom_tool_prompts import SHOULD_USE_CUSTOM_TOOL_USER_PROMPT
+from backend.danswer.tools.custom.custom_tool_prompts import TOOL_ARG_SYSTEM_PROMPT
+from backend.danswer.tools.custom.custom_tool_prompts import TOOL_ARG_USER_PROMPT
+from backend.danswer.tools.custom.custom_tool_prompts import USE_TOOL
+from backend.danswer.tools.custom.openapi_parsing import MethodSpec
+from backend.danswer.tools.custom.openapi_parsing import openapi_to_method_specs
+from backend.danswer.tools.custom.openapi_parsing import openapi_to_url
+from backend.danswer.tools.custom.openapi_parsing import REQUEST_BODY
+from backend.danswer.tools.custom.openapi_parsing import validate_openapi_schema
+from backend.danswer.tools.tool import Tool
+from backend.danswer.tools.tool import ToolResponse
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

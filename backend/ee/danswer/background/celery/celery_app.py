@@ -5,24 +5,24 @@ from celery.signals import beat_init
 from celery.signals import worker_init
 from sqlalchemy.orm import Session
 
-from danswer.background.celery.celery_app import celery_app
-from danswer.background.task_utils import build_celery_task_wrapper
-from danswer.configs.app_configs import JOB_TIMEOUT
-from danswer.configs.constants import POSTGRES_CELERY_BEAT_APP_NAME
-from danswer.configs.constants import POSTGRES_CELERY_WORKER_APP_NAME
-from danswer.db.chat import delete_chat_sessions_older_than
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.db.engine import init_sqlalchemy_engine
-from danswer.server.settings.store import load_settings
-from danswer.utils.logger import setup_logger
-from danswer.utils.variable_functionality import global_version
-from ee.danswer.background.celery_utils import should_perform_chat_ttl_check
-from ee.danswer.background.celery_utils import should_sync_user_groups
-from ee.danswer.background.task_name_builders import name_chat_ttl_task
-from ee.danswer.background.task_name_builders import name_user_group_sync_task
-from ee.danswer.db.user_group import fetch_user_groups
-from ee.danswer.server.reporting.usage_export_generation import create_new_usage_report
-from ee.danswer.user_groups.sync import sync_user_groups
+from backend.danswer.background.celery.celery_app import celery_app
+from backend.danswer.background.task_utils import build_celery_task_wrapper
+from backend.danswer.configs.app_configs import JOB_TIMEOUT
+from backend.danswer.configs.constants import POSTGRES_CELERY_BEAT_APP_NAME
+from backend.danswer.configs.constants import POSTGRES_CELERY_WORKER_APP_NAME
+from backend.danswer.db.chat import delete_chat_sessions_older_than
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.db.engine import init_sqlalchemy_engine
+from backend.danswer.server.settings.store import load_settings
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.variable_functionality import global_version
+from backend.ee.danswer.background.celery_utils import should_perform_chat_ttl_check
+from backend.ee.danswer.background.celery_utils import should_sync_user_groups
+from backend.ee.danswer.background.task_name_builders import name_chat_ttl_task
+from backend.ee.danswer.background.task_name_builders import name_user_group_sync_task
+from backend.ee.danswer.db.user_group import fetch_user_groups
+from backend.ee.danswer.server.reporting.usage_export_generation import create_new_usage_report
+from backend.ee.danswer.user_groups.sync import sync_user_groups
 
 logger = setup_logger()
 

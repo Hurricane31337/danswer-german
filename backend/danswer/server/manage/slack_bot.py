@@ -3,25 +3,25 @@ from fastapi import Depends
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.danswerbot.slack.config import validate_channel_names
-from danswer.danswerbot.slack.tokens import fetch_tokens
-from danswer.danswerbot.slack.tokens import save_tokens
-from danswer.db.constants import SLACK_BOT_PERSONA_PREFIX
-from danswer.db.engine import get_session
-from danswer.db.models import ChannelConfig
-from danswer.db.models import User
-from danswer.db.persona import get_persona_by_id
-from danswer.db.slack_bot_config import create_slack_bot_persona
-from danswer.db.slack_bot_config import fetch_slack_bot_config
-from danswer.db.slack_bot_config import fetch_slack_bot_configs
-from danswer.db.slack_bot_config import insert_slack_bot_config
-from danswer.db.slack_bot_config import remove_slack_bot_config
-from danswer.db.slack_bot_config import update_slack_bot_config
-from danswer.dynamic_configs.interface import ConfigNotFoundError
-from danswer.server.manage.models import SlackBotConfig
-from danswer.server.manage.models import SlackBotConfigCreationRequest
-from danswer.server.manage.models import SlackBotTokens
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.danswerbot.slack.config import validate_channel_names
+from backend.danswer.danswerbot.slack.tokens import fetch_tokens
+from backend.danswer.danswerbot.slack.tokens import save_tokens
+from backend.danswer.db.constants import SLACK_BOT_PERSONA_PREFIX
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import ChannelConfig
+from backend.danswer.db.models import User
+from backend.danswer.db.persona import get_persona_by_id
+from backend.danswer.db.slack_bot_config import create_slack_bot_persona
+from backend.danswer.db.slack_bot_config import fetch_slack_bot_config
+from backend.danswer.db.slack_bot_config import fetch_slack_bot_configs
+from backend.danswer.db.slack_bot_config import insert_slack_bot_config
+from backend.danswer.db.slack_bot_config import remove_slack_bot_config
+from backend.danswer.db.slack_bot_config import update_slack_bot_config
+from backend.danswer.dynamic_configs.interface import ConfigNotFoundError
+from backend.danswer.server.manage.models import SlackBotConfig
+from backend.danswer.server.manage.models import SlackBotConfigCreationRequest
+from backend.danswer.server.manage.models import SlackBotTokens
 
 
 router = APIRouter(prefix="/manage")

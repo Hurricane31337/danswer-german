@@ -4,34 +4,34 @@ from fastapi import HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_user
-from danswer.configs.danswerbot_configs import DANSWER_BOT_TARGET_CHUNK_PERCENTAGE
-from danswer.danswerbot.slack.handlers.handle_standard_answers import (
+from backend.danswer.auth.users import current_user
+from backend.danswer.configs.danswerbot_configs import DANSWER_BOT_TARGET_CHUNK_PERCENTAGE
+from backend.danswer.danswerbot.slack.handlers.handle_standard_answers import (
     oneoff_standard_answers,
 )
-from danswer.db.engine import get_session
-from danswer.db.models import User
-from danswer.db.persona import get_persona_by_id
-from danswer.llm.answering.prompts.citations_prompt import (
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import User
+from backend.danswer.db.persona import get_persona_by_id
+from backend.danswer.llm.answering.prompts.citations_prompt import (
     compute_max_document_tokens_for_persona,
 )
-from danswer.llm.factory import get_default_llms
-from danswer.llm.factory import get_llms_for_persona
-from danswer.llm.factory import get_main_llm_from_tuple
-from danswer.llm.utils import get_max_input_tokens
-from danswer.one_shot_answer.answer_question import get_search_answer
-from danswer.one_shot_answer.models import DirectQARequest
-from danswer.one_shot_answer.models import OneShotQAResponse
-from danswer.search.models import SavedSearchDocWithContent
-from danswer.search.models import SearchRequest
-from danswer.search.pipeline import SearchPipeline
-from danswer.search.utils import dedupe_documents
-from danswer.search.utils import drop_llm_indices
-from danswer.search.utils import relevant_sections_to_indices
-from danswer.utils.logger import setup_logger
-from ee.danswer.server.query_and_chat.models import DocumentSearchRequest
-from ee.danswer.server.query_and_chat.models import StandardAnswerRequest
-from ee.danswer.server.query_and_chat.models import StandardAnswerResponse
+from backend.danswer.llm.factory import get_default_llms
+from backend.danswer.llm.factory import get_llms_for_persona
+from backend.danswer.llm.factory import get_main_llm_from_tuple
+from backend.danswer.llm.utils import get_max_input_tokens
+from backend.danswer.one_shot_answer.answer_question import get_search_answer
+from backend.danswer.one_shot_answer.models import DirectQARequest
+from backend.danswer.one_shot_answer.models import OneShotQAResponse
+from backend.danswer.search.models import SavedSearchDocWithContent
+from backend.danswer.search.models import SearchRequest
+from backend.danswer.search.pipeline import SearchPipeline
+from backend.danswer.search.utils import dedupe_documents
+from backend.danswer.search.utils import drop_llm_indices
+from backend.danswer.search.utils import relevant_sections_to_indices
+from backend.danswer.utils.logger import setup_logger
+from backend.ee.danswer.server.query_and_chat.models import DocumentSearchRequest
+from backend.ee.danswer.server.query_and_chat.models import StandardAnswerRequest
+from backend.ee.danswer.server.query_and_chat.models import StandardAnswerResponse
 
 
 logger = setup_logger()

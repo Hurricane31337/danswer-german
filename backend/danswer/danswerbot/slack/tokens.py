@@ -1,9 +1,9 @@
 import os
 from typing import cast
 
-from danswer.configs.constants import KV_SLACK_BOT_TOKENS_CONFIG_KEY
-from danswer.dynamic_configs.factory import get_dynamic_config_store
-from danswer.server.manage.models import SlackBotTokens
+from backend.danswer.configs.constants import KV_SLACK_BOT_TOKENS_CONFIG_KEY
+from backend.danswer.dynamic_configs.factory import get_dynamic_config_store
+from backend.danswer.server.manage.models import SlackBotTokens
 
 
 def fetch_tokens() -> SlackBotTokens:

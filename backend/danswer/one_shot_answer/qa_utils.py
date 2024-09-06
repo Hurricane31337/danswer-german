@@ -1,9 +1,9 @@
 from collections.abc import Generator
 
-from danswer.configs.constants import MessageType
-from danswer.natural_language_processing.utils import BaseTokenizer
-from danswer.one_shot_answer.models import ThreadMessage
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.constants import MessageType
+from backend.danswer.natural_language_processing.utils import BaseTokenizer
+from backend.danswer.one_shot_answer.models import ThreadMessage
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

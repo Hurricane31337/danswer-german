@@ -1,5 +1,5 @@
-from shared_configs.enums import EmbeddingProvider
-from shared_configs.enums import EmbedTextType
+from backend.shared_configs.enums import EmbeddingProvider
+from backend.shared_configs.enums import EmbedTextType
 
 
 MODEL_WARM_UP_STRING = "hi " * 512

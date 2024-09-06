@@ -2,12 +2,12 @@ from uuid import uuid4
 
 import requests
 
-from danswer.db.models import UserRole
-from ee.danswer.server.api_key.models import APIKeyArgs
-from tests.integration.common_utils.constants import API_SERVER_URL
-from tests.integration.common_utils.constants import GENERAL_HEADERS
-from tests.integration.common_utils.test_models import TestAPIKey
-from tests.integration.common_utils.test_models import TestUser
+from backend.danswer.db.models import UserRole
+from backend.ee.danswer.server.api_key.models import APIKeyArgs
+from backend.tests.integration.common_utils.constants import API_SERVER_URL
+from backend.tests.integration.common_utils.constants import GENERAL_HEADERS
+from backend.tests.integration.common_utils.test_models import TestAPIKey
+from backend.tests.integration.common_utils.test_models import TestUser
 
 
 class APIKeyManager:

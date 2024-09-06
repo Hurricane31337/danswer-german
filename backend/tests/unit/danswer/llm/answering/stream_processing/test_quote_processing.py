@@ -1,11 +1,11 @@
 import json
 from datetime import datetime
 
-from danswer.chat.models import DanswerAnswerPiece
-from danswer.chat.models import DanswerQuotes
-from danswer.chat.models import LlmDoc
-from danswer.configs.constants import DocumentSource
-from danswer.llm.answering.stream_processing.quotes_processing import (
+from backend.danswer.chat.models import DanswerAnswerPiece
+from backend.danswer.chat.models import DanswerQuotes
+from backend.danswer.chat.models import LlmDoc
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.llm.answering.stream_processing.quotes_processing import (
     process_model_tokens,
 )
 

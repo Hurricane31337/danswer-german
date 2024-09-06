@@ -1,14 +1,14 @@
 import re
 from typing import Any
 
-from danswer.chat.chat_utils import combine_message_chain
-from danswer.configs.model_configs import GEN_AI_HISTORY_CUTOFF
-from danswer.llm.answering.models import PreviousMessage
-from danswer.llm.interfaces import LLM
-from danswer.llm.utils import message_to_string
-from danswer.prompts.constants import GENERAL_SEP_PAT
-from danswer.tools.tool import Tool
-from danswer.utils.logger import setup_logger
+from backend.danswer.chat.chat_utils import combine_message_chain
+from backend.danswer.configs.model_configs import GEN_AI_HISTORY_CUTOFF
+from backend.danswer.llm.answering.models import PreviousMessage
+from backend.danswer.llm.interfaces import LLM
+from backend.danswer.llm.utils import message_to_string
+from backend.danswer.prompts.constants import GENERAL_SEP_PAT
+from backend.danswer.tools.tool import Tool
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

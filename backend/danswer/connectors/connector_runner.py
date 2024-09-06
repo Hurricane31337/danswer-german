@@ -1,11 +1,11 @@
 import sys
 from datetime import datetime
 
-from danswer.connectors.interfaces import BaseConnector
-from danswer.connectors.interfaces import GenerateDocumentsOutput
-from danswer.connectors.interfaces import LoadConnector
-from danswer.connectors.interfaces import PollConnector
-from danswer.utils.logger import setup_logger
+from backend.danswer.connectors.interfaces import BaseConnector
+from backend.danswer.connectors.interfaces import GenerateDocumentsOutput
+from backend.danswer.connectors.interfaces import LoadConnector
+from backend.danswer.connectors.interfaces import PollConnector
+from backend.danswer.utils.logger import setup_logger
 
 
 logger = setup_logger()

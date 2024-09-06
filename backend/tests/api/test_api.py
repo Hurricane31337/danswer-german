@@ -5,8 +5,8 @@ from typing import Any
 import pytest
 from fastapi.testclient import TestClient
 
-from danswer.main import fetch_versioned_implementation
-from danswer.utils.logger import setup_logger
+from backend.danswer.utils.variable_functionality import fetch_versioned_implementation
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

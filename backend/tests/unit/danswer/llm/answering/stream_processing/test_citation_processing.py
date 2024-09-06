@@ -2,14 +2,14 @@ from datetime import datetime
 
 import pytest
 
-from danswer.chat.models import CitationInfo
-from danswer.chat.models import DanswerAnswerPiece
-from danswer.chat.models import LlmDoc
-from danswer.configs.constants import DocumentSource
-from danswer.llm.answering.stream_processing.citation_processing import (
+from backend.danswer.chat.models import CitationInfo
+from backend.danswer.chat.models import DanswerAnswerPiece
+from backend.danswer.chat.models import LlmDoc
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.llm.answering.stream_processing.citation_processing import (
     extract_citations_from_stream,
 )
-from danswer.llm.answering.stream_processing.utils import DocumentIdOrderMapping
+from backend.danswer.llm.answering.stream_processing.utils import DocumentIdOrderMapping
 
 
 """

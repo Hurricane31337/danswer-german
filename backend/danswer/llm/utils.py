@@ -29,20 +29,20 @@ from litellm.exceptions import RateLimitError  # type: ignore
 from litellm.exceptions import Timeout  # type: ignore
 from litellm.exceptions import UnprocessableEntityError  # type: ignore
 
-from danswer.configs.constants import MessageType
-from danswer.configs.model_configs import GEN_AI_MAX_TOKENS
-from danswer.configs.model_configs import GEN_AI_MODEL_FALLBACK_MAX_TOKENS
-from danswer.configs.model_configs import GEN_AI_NUM_RESERVED_OUTPUT_TOKENS
-from danswer.db.models import ChatMessage
-from danswer.file_store.models import ChatFileType
-from danswer.file_store.models import InMemoryChatFile
-from danswer.llm.interfaces import LLM
-from danswer.prompts.constants import CODE_BLOCK_PAT
-from danswer.utils.logger import setup_logger
-from shared_configs.configs import LOG_LEVEL
+from backend.danswer.configs.constants import MessageType
+from backend.danswer.configs.model_configs import GEN_AI_MAX_TOKENS
+from backend.danswer.configs.model_configs import GEN_AI_MODEL_FALLBACK_MAX_TOKENS
+from backend.danswer.configs.model_configs import GEN_AI_NUM_RESERVED_OUTPUT_TOKENS
+from backend.danswer.db.models import ChatMessage
+from backend.danswer.file_store.models import ChatFileType
+from backend.danswer.file_store.models import InMemoryChatFile
+from backend.danswer.llm.interfaces import LLM
+from backend.danswer.prompts.constants import CODE_BLOCK_PAT
+from backend.danswer.utils.logger import setup_logger
+from backend.shared_configs.configs import LOG_LEVEL
 
 if TYPE_CHECKING:
-    from danswer.llm.answering.models import PreviousMessage
+    from backend.danswer.llm.answering.models import PreviousMessage
 
 logger = setup_logger()
 

@@ -10,15 +10,15 @@ import pywikibot.time  # type: ignore[import-untyped]
 from pywikibot import pagegenerators  # type: ignore[import-untyped]
 from pywikibot import textlib  # type: ignore[import-untyped]
 
-from danswer.configs.app_configs import INDEX_BATCH_SIZE
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.interfaces import GenerateDocumentsOutput
-from danswer.connectors.interfaces import LoadConnector
-from danswer.connectors.interfaces import PollConnector
-from danswer.connectors.interfaces import SecondsSinceUnixEpoch
-from danswer.connectors.mediawiki.family import family_class_dispatch
-from danswer.connectors.models import Document
-from danswer.connectors.models import Section
+from backend.danswer.configs.app_configs import INDEX_BATCH_SIZE
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.connectors.interfaces import GenerateDocumentsOutput
+from backend.danswer.connectors.interfaces import LoadConnector
+from backend.danswer.connectors.interfaces import PollConnector
+from backend.danswer.connectors.interfaces import SecondsSinceUnixEpoch
+from backend.danswer.connectors.mediawiki.family import family_class_dispatch
+from backend.danswer.connectors.models import Document
+from backend.danswer.connectors.models import Section
 
 
 def pywikibot_timestamp_to_utc_datetime(

@@ -3,18 +3,18 @@ import random
 
 from sqlalchemy.orm import Session
 
-from danswer.configs.constants import DocumentSource
-from danswer.db.connector import fetch_unique_document_sources
-from danswer.db.engine import get_sqlalchemy_engine
-from danswer.llm.interfaces import LLM
-from danswer.llm.utils import dict_based_prompt_to_langchain_prompt
-from danswer.llm.utils import message_to_string
-from danswer.prompts.constants import SOURCES_KEY
-from danswer.prompts.filter_extration import FILE_SOURCE_WARNING
-from danswer.prompts.filter_extration import SOURCE_FILTER_PROMPT
-from danswer.prompts.filter_extration import WEB_SOURCE_WARNING
-from danswer.utils.logger import setup_logger
-from danswer.utils.text_processing import extract_embedded_json
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.db.connector import fetch_unique_document_sources
+from backend.danswer.db.engine import get_sqlalchemy_engine
+from backend.danswer.llm.interfaces import LLM
+from backend.danswer.llm.utils import dict_based_prompt_to_langchain_prompt
+from backend.danswer.llm.utils import message_to_string
+from backend.danswer.prompts.constants import SOURCES_KEY
+from backend.danswer.prompts.filter_extration import FILE_SOURCE_WARNING
+from backend.danswer.prompts.filter_extration import SOURCE_FILTER_PROMPT
+from backend.danswer.prompts.filter_extration import WEB_SOURCE_WARNING
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.text_processing import extract_embedded_json
 
 logger = setup_logger()
 
@@ -159,7 +159,7 @@ def extract_source_filter(
 
 
 if __name__ == "__main__":
-    from danswer.llm.factory import get_default_llms, get_main_llm_from_tuple
+    from backend.danswer.llm.factory import get_default_llms, get_main_llm_from_tuple
 
     # Just for testing purposes
     with Session(get_sqlalchemy_engine()) as db_session:

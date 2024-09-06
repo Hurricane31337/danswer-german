@@ -3,21 +3,21 @@ from abc import abstractmethod
 
 from sqlalchemy.orm import Session
 
-from danswer.db.models import IndexModelStatus
-from danswer.db.models import SearchSettings
-from danswer.db.search_settings import get_current_search_settings
-from danswer.db.search_settings import get_secondary_search_settings
-from danswer.indexing.models import ChunkEmbedding
-from danswer.indexing.models import DocAwareChunk
-from danswer.indexing.models import IndexChunk
-from danswer.natural_language_processing.search_nlp_models import EmbeddingModel
-from danswer.utils.logger import setup_logger
-from danswer.utils.timing import log_function_time
-from shared_configs.configs import INDEXING_MODEL_SERVER_HOST
-from shared_configs.configs import INDEXING_MODEL_SERVER_PORT
-from shared_configs.enums import EmbeddingProvider
-from shared_configs.enums import EmbedTextType
-from shared_configs.model_server_models import Embedding
+from backend.danswer.db.models import IndexModelStatus
+from backend.danswer.db.models import SearchSettings
+from backend.danswer.db.search_settings import get_current_search_settings
+from backend.danswer.db.search_settings import get_secondary_search_settings
+from backend.danswer.indexing.models import ChunkEmbedding
+from backend.danswer.indexing.models import DocAwareChunk
+from backend.danswer.indexing.models import IndexChunk
+from backend.danswer.natural_language_processing.search_nlp_models import EmbeddingModel
+from backend.danswer.utils.logger import setup_logger
+from backend.danswer.utils.timing import log_function_time
+from backend.shared_configs.configs import INDEXING_MODEL_SERVER_HOST
+from backend.shared_configs.configs import INDEXING_MODEL_SERVER_PORT
+from backend.shared_configs.enums import EmbeddingProvider
+from backend.shared_configs.enums import EmbedTextType
+from backend.shared_configs.model_server_models import Embedding
 
 
 logger = setup_logger()

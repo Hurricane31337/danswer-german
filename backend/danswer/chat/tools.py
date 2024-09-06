@@ -2,13 +2,13 @@ from typing_extensions import TypedDict  # noreorder
 
 from pydantic import BaseModel
 
-from danswer.prompts.chat_tools import DANSWER_TOOL_DESCRIPTION
-from danswer.prompts.chat_tools import DANSWER_TOOL_NAME
-from danswer.prompts.chat_tools import TOOL_FOLLOWUP
-from danswer.prompts.chat_tools import TOOL_LESS_FOLLOWUP
-from danswer.prompts.chat_tools import TOOL_LESS_PROMPT
-from danswer.prompts.chat_tools import TOOL_TEMPLATE
-from danswer.prompts.chat_tools import USER_INPUT
+from backend.danswer.prompts.chat_tools import DANSWER_TOOL_DESCRIPTION
+from backend.danswer.prompts.chat_tools import DANSWER_TOOL_NAME
+from backend.danswer.prompts.chat_tools import TOOL_FOLLOWUP
+from backend.danswer.prompts.chat_tools import TOOL_LESS_FOLLOWUP
+from backend.danswer.prompts.chat_tools import TOOL_LESS_PROMPT
+from backend.danswer.prompts.chat_tools import TOOL_TEMPLATE
+from backend.danswer.prompts.chat_tools import USER_INPUT
 
 
 class ToolInfo(TypedDict):

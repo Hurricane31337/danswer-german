@@ -7,9 +7,9 @@ from langchain_core.messages import AIMessageChunk
 from langchain_core.messages import BaseMessage
 from pydantic import BaseModel
 
-from danswer.configs.app_configs import DISABLE_GENERATIVE_AI
-from danswer.configs.app_configs import LOG_DANSWER_MODEL_INTERACTIONS
-from danswer.utils.logger import setup_logger
+from backend.danswer.configs.app_configs import DISABLE_GENERATIVE_AI
+from backend.danswer.configs.app_configs import LOG_DANSWER_MODEL_INTERACTIONS
+from backend.danswer.utils.logger import setup_logger
 
 
 logger = setup_logger()

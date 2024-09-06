@@ -1,20 +1,20 @@
 import re
 from collections.abc import Iterator
 
-from danswer.chat.models import DanswerAnswerPiece
-from danswer.chat.models import StreamingError
-from danswer.configs.chat_configs import DISABLE_LLM_QUERY_ANSWERABILITY
-from danswer.llm.exceptions import GenAIDisabledException
-from danswer.llm.factory import get_default_llms
-from danswer.llm.utils import dict_based_prompt_to_langchain_prompt
-from danswer.llm.utils import message_generator_to_string_generator
-from danswer.llm.utils import message_to_string
-from danswer.prompts.constants import ANSWERABLE_PAT
-from danswer.prompts.constants import THOUGHT_PAT
-from danswer.prompts.query_validation import ANSWERABLE_PROMPT
-from danswer.server.query_and_chat.models import QueryValidationResponse
-from danswer.server.utils import get_json_line
-from danswer.utils.logger import setup_logger
+from backend.danswer.chat.models import DanswerAnswerPiece
+from backend.danswer.chat.models import StreamingError
+from backend.danswer.configs.chat_configs import DISABLE_LLM_QUERY_ANSWERABILITY
+from backend.danswer.llm.exceptions import GenAIDisabledException
+from backend.danswer.llm.factory import get_default_llms
+from backend.danswer.llm.utils import dict_based_prompt_to_langchain_prompt
+from backend.danswer.llm.utils import message_generator_to_string_generator
+from backend.danswer.llm.utils import message_to_string
+from backend.danswer.prompts.constants import ANSWERABLE_PAT
+from backend.danswer.prompts.constants import THOUGHT_PAT
+from backend.danswer.prompts.query_validation import ANSWERABLE_PROMPT
+from backend.danswer.server.query_and_chat.models import QueryValidationResponse
+from backend.danswer.server.utils import get_json_line
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

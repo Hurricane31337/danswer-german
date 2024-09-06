@@ -6,19 +6,19 @@ from fastapi import HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.auth.users import current_user
-from danswer.db.engine import get_session
-from danswer.db.models import User
-from danswer.db.tools import create_tool
-from danswer.db.tools import delete_tool
-from danswer.db.tools import get_tool_by_id
-from danswer.db.tools import get_tools
-from danswer.db.tools import update_tool
-from danswer.server.features.tool.models import ToolSnapshot
-from danswer.tools.custom.openapi_parsing import MethodSpec
-from danswer.tools.custom.openapi_parsing import openapi_to_method_specs
-from danswer.tools.custom.openapi_parsing import validate_openapi_schema
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.auth.users import current_user
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import User
+from backend.danswer.db.tools import create_tool
+from backend.danswer.db.tools import delete_tool
+from backend.danswer.db.tools import get_tool_by_id
+from backend.danswer.db.tools import get_tools
+from backend.danswer.db.tools import update_tool
+from backend.danswer.server.features.tool.models import ToolSnapshot
+from backend.danswer.tools.custom.openapi_parsing import MethodSpec
+from backend.danswer.tools.custom.openapi_parsing import openapi_to_method_specs
+from backend.danswer.tools.custom.openapi_parsing import validate_openapi_schema
 
 router = APIRouter(prefix="/tool")
 admin_router = APIRouter(prefix="/admin/tool")

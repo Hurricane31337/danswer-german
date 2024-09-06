@@ -2,12 +2,12 @@ from collections.abc import Mapping
 from typing import Any
 from typing import cast
 
-from danswer.auth.schemas import UserRole
-from danswer.configs.constants import KV_NO_AUTH_USER_PREFERENCES_KEY
-from danswer.dynamic_configs.store import ConfigNotFoundError
-from danswer.dynamic_configs.store import DynamicConfigStore
-from danswer.server.manage.models import UserInfo
-from danswer.server.manage.models import UserPreferences
+from backend.danswer.auth.schemas import UserRole
+from backend.danswer.configs.constants import KV_NO_AUTH_USER_PREFERENCES_KEY
+from backend.danswer.dynamic_configs.store import ConfigNotFoundError
+from backend.danswer.dynamic_configs.store import DynamicConfigStore
+from backend.danswer.server.manage.models import UserInfo
+from backend.danswer.server.manage.models import UserPreferences
 
 
 def set_no_auth_user_preferences(

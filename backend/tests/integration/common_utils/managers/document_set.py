@@ -3,11 +3,11 @@ from uuid import uuid4
 
 import requests
 
-from tests.integration.common_utils.constants import API_SERVER_URL
-from tests.integration.common_utils.constants import GENERAL_HEADERS
-from tests.integration.common_utils.constants import MAX_DELAY
-from tests.integration.common_utils.test_models import TestDocumentSet
-from tests.integration.common_utils.test_models import TestUser
+from backend.tests.integration.common_utils.constants import API_SERVER_URL
+from backend.tests.integration.common_utils.constants import GENERAL_HEADERS
+from backend.tests.integration.common_utils.constants import MAX_DELAY
+from backend.tests.integration.common_utils.test_models import TestDocumentSet
+from backend.tests.integration.common_utils.test_models import TestUser
 
 
 class DocumentSetManager:

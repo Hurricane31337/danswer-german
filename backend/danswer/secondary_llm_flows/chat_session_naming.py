@@ -1,13 +1,13 @@
-from danswer.chat.chat_utils import combine_message_chain
-from danswer.configs.chat_configs import LANGUAGE_CHAT_NAMING_HINT
-from danswer.configs.model_configs import GEN_AI_HISTORY_CUTOFF
-from danswer.db.models import ChatMessage
-from danswer.db.search_settings import get_multilingual_expansion
-from danswer.llm.interfaces import LLM
-from danswer.llm.utils import dict_based_prompt_to_langchain_prompt
-from danswer.llm.utils import message_to_string
-from danswer.prompts.chat_prompts import CHAT_NAMING
-from danswer.utils.logger import setup_logger
+from backend.danswer.chat.chat_utils import combine_message_chain
+from backend.danswer.configs.chat_configs import LANGUAGE_CHAT_NAMING_HINT
+from backend.danswer.configs.model_configs import GEN_AI_HISTORY_CUTOFF
+from backend.danswer.db.models import ChatMessage
+from backend.danswer.db.search_settings import get_multilingual_expansion
+from backend.danswer.llm.interfaces import LLM
+from backend.danswer.llm.utils import dict_based_prompt_to_langchain_prompt
+from backend.danswer.llm.utils import message_to_string
+from backend.danswer.prompts.chat_prompts import CHAT_NAMING
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

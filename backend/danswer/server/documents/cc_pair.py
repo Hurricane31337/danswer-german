@@ -7,32 +7,32 @@ from fastapi import Query
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_curator_or_admin_user
-from danswer.auth.users import current_user
-from danswer.background.celery.celery_utils import get_deletion_attempt_snapshot
-from danswer.db.connector_credential_pair import add_credential_to_connector
-from danswer.db.connector_credential_pair import get_connector_credential_pair_from_id
-from danswer.db.connector_credential_pair import remove_credential_from_connector
-from danswer.db.connector_credential_pair import (
+from backend.danswer.auth.users import current_curator_or_admin_user
+from backend.danswer.auth.users import current_user
+from backend.danswer.background.celery.celery_utils import get_deletion_attempt_snapshot
+from backend.danswer.db.connector_credential_pair import add_credential_to_connector
+from backend.danswer.db.connector_credential_pair import get_connector_credential_pair_from_id
+from backend.danswer.db.connector_credential_pair import remove_credential_from_connector
+from backend.danswer.db.connector_credential_pair import (
     update_connector_credential_pair_from_id,
 )
-from danswer.db.document import get_document_cnts_for_cc_pairs
-from danswer.db.engine import get_session
-from danswer.db.enums import ConnectorCredentialPairStatus
-from danswer.db.index_attempt import cancel_indexing_attempts_for_ccpair
-from danswer.db.index_attempt import cancel_indexing_attempts_past_model
-from danswer.db.index_attempt import count_index_attempts_for_connector
-from danswer.db.index_attempt import get_latest_index_attempt_for_cc_pair_id
-from danswer.db.index_attempt import get_paginated_index_attempts_for_cc_pair_id
-from danswer.db.models import User
-from danswer.server.documents.models import CCPairFullInfo
-from danswer.server.documents.models import CCStatusUpdateRequest
-from danswer.server.documents.models import ConnectorCredentialPairIdentifier
-from danswer.server.documents.models import ConnectorCredentialPairMetadata
-from danswer.server.documents.models import PaginatedIndexAttempts
-from danswer.server.models import StatusResponse
-from danswer.utils.logger import setup_logger
-from ee.danswer.db.user_group import validate_user_creation_permissions
+from backend.danswer.db.document import get_document_cnts_for_cc_pairs
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.enums import ConnectorCredentialPairStatus
+from backend.danswer.db.index_attempt import cancel_indexing_attempts_for_ccpair
+from backend.danswer.db.index_attempt import cancel_indexing_attempts_past_model
+from backend.danswer.db.index_attempt import count_index_attempts_for_connector
+from backend.danswer.db.index_attempt import get_latest_index_attempt_for_cc_pair_id
+from backend.danswer.db.index_attempt import get_paginated_index_attempts_for_cc_pair_id
+from backend.danswer.db.models import User
+from backend.danswer.server.documents.models import CCPairFullInfo
+from backend.danswer.server.documents.models import CCStatusUpdateRequest
+from backend.danswer.server.documents.models import ConnectorCredentialPairIdentifier
+from backend.danswer.server.documents.models import ConnectorCredentialPairMetadata
+from backend.danswer.server.documents.models import PaginatedIndexAttempts
+from backend.danswer.server.models import StatusResponse
+from backend.danswer.utils.logger import setup_logger
+from backend.ee.danswer.db.user_group import validate_user_creation_permissions
 
 logger = setup_logger()
 

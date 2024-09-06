@@ -1,8 +1,8 @@
-from danswer.configs.app_configs import VESPA_CONFIG_SERVER_HOST
-from danswer.configs.app_configs import VESPA_HOST
-from danswer.configs.app_configs import VESPA_PORT
-from danswer.configs.app_configs import VESPA_TENANT_PORT
-from danswer.configs.constants import SOURCE_TYPE
+from backend.danswer.configs.app_configs import VESPA_CONFIG_SERVER_HOST
+from backend.danswer.configs.app_configs import VESPA_HOST
+from backend.danswer.configs.app_configs import VESPA_PORT
+from backend.danswer.configs.app_configs import VESPA_TENANT_PORT
+from backend.danswer.configs.constants import SOURCE_TYPE
 
 VESPA_DIM_REPLACEMENT_PAT = "VARIABLE_DIM"
 DANSWER_CHUNK_REPLACEMENT_PAT = "DANSWER_CHUNK_NAME"

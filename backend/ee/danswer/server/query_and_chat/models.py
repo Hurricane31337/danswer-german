@@ -1,14 +1,14 @@
 from pydantic import BaseModel
 from pydantic import Field
 
-from danswer.configs.constants import DocumentSource
-from danswer.one_shot_answer.models import ThreadMessage
-from danswer.search.enums import LLMEvaluationType
-from danswer.search.enums import SearchType
-from danswer.search.models import ChunkContext
-from danswer.search.models import RerankingDetails
-from danswer.search.models import RetrievalDetails
-from danswer.server.manage.models import StandardAnswer
+from backend.danswer.configs.constants import DocumentSource
+from backend.danswer.one_shot_answer.models import ThreadMessage
+from backend.danswer.search.enums import LLMEvaluationType
+from backend.danswer.search.enums import SearchType
+from backend.danswer.search.models import ChunkContext
+from backend.danswer.search.models import RerankingDetails
+from backend.danswer.search.models import RetrievalDetails
+from backend.danswer.server.manage.models import StandardAnswer
 
 
 class StandardAnswerRequest(BaseModel):

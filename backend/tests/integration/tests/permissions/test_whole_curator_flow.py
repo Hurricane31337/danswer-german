@@ -1,14 +1,14 @@
 """
 This test tests the happy path for curator permissions
 """
-from danswer.db.models import UserRole
-from danswer.server.documents.models import DocumentSource
-from tests.integration.common_utils.managers.cc_pair import CCPairManager
-from tests.integration.common_utils.managers.connector import ConnectorManager
-from tests.integration.common_utils.managers.credential import CredentialManager
-from tests.integration.common_utils.managers.user import TestUser
-from tests.integration.common_utils.managers.user import UserManager
-from tests.integration.common_utils.managers.user_group import UserGroupManager
+from backend.danswer.db.models import UserRole
+from backend.danswer.server.documents.models import DocumentSource
+from backend.tests.integration.common_utils.managers.cc_pair import CCPairManager
+from backend.tests.integration.common_utils.managers.connector import ConnectorManager
+from backend.tests.integration.common_utils.managers.credential import CredentialManager
+from backend.tests.integration.common_utils.managers.user import TestUser
+from backend.tests.integration.common_utils.managers.user import UserManager
+from backend.tests.integration.common_utils.managers.user_group import UserGroupManager
 
 
 def test_whole_curator_flow(reset: None) -> None:

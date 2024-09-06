@@ -3,21 +3,21 @@ from fastapi import Depends
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_admin_user
-from danswer.auth.users import current_user
-from danswer.db.engine import get_session
-from danswer.db.input_prompt import fetch_input_prompt_by_id
-from danswer.db.input_prompt import fetch_input_prompts_by_user
-from danswer.db.input_prompt import fetch_public_input_prompts
-from danswer.db.input_prompt import insert_input_prompt
-from danswer.db.input_prompt import remove_input_prompt
-from danswer.db.input_prompt import remove_public_input_prompt
-from danswer.db.input_prompt import update_input_prompt
-from danswer.db.models import User
-from danswer.server.features.input_prompt.models import CreateInputPromptRequest
-from danswer.server.features.input_prompt.models import InputPromptSnapshot
-from danswer.server.features.input_prompt.models import UpdateInputPromptRequest
-from danswer.utils.logger import setup_logger
+from backend.danswer.auth.users import current_admin_user
+from backend.danswer.auth.users import current_user
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.input_prompt import fetch_input_prompt_by_id
+from backend.danswer.db.input_prompt import fetch_input_prompts_by_user
+from backend.danswer.db.input_prompt import fetch_public_input_prompts
+from backend.danswer.db.input_prompt import insert_input_prompt
+from backend.danswer.db.input_prompt import remove_input_prompt
+from backend.danswer.db.input_prompt import remove_public_input_prompt
+from backend.danswer.db.input_prompt import update_input_prompt
+from backend.danswer.db.models import User
+from backend.danswer.server.features.input_prompt.models import CreateInputPromptRequest
+from backend.danswer.server.features.input_prompt.models import InputPromptSnapshot
+from backend.danswer.server.features.input_prompt.models import UpdateInputPromptRequest
+from backend.danswer.utils.logger import setup_logger
 
 logger = setup_logger()
 

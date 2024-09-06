@@ -4,21 +4,21 @@ from fastapi import HTTPException
 from fastapi import Query
 from sqlalchemy.orm import Session
 
-from danswer.auth.users import current_curator_or_admin_user
-from danswer.auth.users import current_user
-from danswer.db.document_set import check_document_sets_are_public
-from danswer.db.document_set import fetch_all_document_sets_for_user
-from danswer.db.document_set import insert_document_set
-from danswer.db.document_set import mark_document_set_as_to_be_deleted
-from danswer.db.document_set import update_document_set
-from danswer.db.engine import get_session
-from danswer.db.models import User
-from danswer.server.features.document_set.models import CheckDocSetPublicRequest
-from danswer.server.features.document_set.models import CheckDocSetPublicResponse
-from danswer.server.features.document_set.models import DocumentSet
-from danswer.server.features.document_set.models import DocumentSetCreationRequest
-from danswer.server.features.document_set.models import DocumentSetUpdateRequest
-from ee.danswer.db.user_group import validate_user_creation_permissions
+from backend.danswer.auth.users import current_curator_or_admin_user
+from backend.danswer.auth.users import current_user
+from backend.danswer.db.document_set import check_document_sets_are_public
+from backend.danswer.db.document_set import fetch_all_document_sets_for_user
+from backend.danswer.db.document_set import insert_document_set
+from backend.danswer.db.document_set import mark_document_set_as_to_be_deleted
+from backend.danswer.db.document_set import update_document_set
+from backend.danswer.db.engine import get_session
+from backend.danswer.db.models import User
+from backend.danswer.server.features.document_set.models import CheckDocSetPublicRequest
+from backend.danswer.server.features.document_set.models import CheckDocSetPublicResponse
+from backend.danswer.server.features.document_set.models import DocumentSet
+from backend.danswer.server.features.document_set.models import DocumentSetCreationRequest
+from backend.danswer.server.features.document_set.models import DocumentSetUpdateRequest
+from backend.ee.danswer.db.user_group import validate_user_creation_permissions
 
 
 router = APIRouter(prefix="/manage")

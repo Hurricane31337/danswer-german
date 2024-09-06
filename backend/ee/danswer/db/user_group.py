@@ -9,24 +9,24 @@ from sqlalchemy import select
 from sqlalchemy import update
 from sqlalchemy.orm import Session
 
-from danswer.db.connector_credential_pair import get_connector_credential_pair_from_id
-from danswer.db.enums import ConnectorCredentialPairStatus
-from danswer.db.models import ConnectorCredentialPair
-from danswer.db.models import Credential__UserGroup
-from danswer.db.models import Document
-from danswer.db.models import DocumentByConnectorCredentialPair
-from danswer.db.models import LLMProvider__UserGroup
-from danswer.db.models import TokenRateLimit__UserGroup
-from danswer.db.models import User
-from danswer.db.models import User__UserGroup
-from danswer.db.models import UserGroup
-from danswer.db.models import UserGroup__ConnectorCredentialPair
-from danswer.db.models import UserRole
-from danswer.db.users import fetch_user_by_id
-from danswer.utils.logger import setup_logger
-from ee.danswer.server.user_group.models import SetCuratorRequest
-from ee.danswer.server.user_group.models import UserGroupCreate
-from ee.danswer.server.user_group.models import UserGroupUpdate
+from backend.danswer.db.connector_credential_pair import get_connector_credential_pair_from_id
+from backend.danswer.db.enums import ConnectorCredentialPairStatus
+from backend.danswer.db.models import ConnectorCredentialPair
+from backend.danswer.db.models import Credential__UserGroup
+from backend.danswer.db.models import Document
+from backend.danswer.db.models import DocumentByConnectorCredentialPair
+from backend.danswer.db.models import LLMProvider__UserGroup
+from backend.danswer.db.models import TokenRateLimit__UserGroup
+from backend.danswer.db.models import User
+from backend.danswer.db.models import User__UserGroup
+from backend.danswer.db.models import UserGroup
+from backend.danswer.db.models import UserGroup__ConnectorCredentialPair
+from backend.danswer.db.models import UserRole
+from backend.danswer.db.users import fetch_user_by_id
+from backend.danswer.utils.logger import setup_logger
+from backend.ee.danswer.server.user_group.models import SetCuratorRequest
+from backend.ee.danswer.server.user_group.models import UserGroupCreate
+from backend.ee.danswer.server.user_group.models import UserGroupUpdate
 
 logger = setup_logger()
 
