@@ -312,6 +312,10 @@ class WebConnector(LoadConnector):
                         continue
                     visited_links.add(current_url)
 
+                # Wait a bit to ensure that the website is fully loaded and processed by JavaScript
+                page.wait_for_load_state('networkidle')
+                page.wait_for_timeout(100)
+
                 content = page.content()
                 soup = BeautifulSoup(content, "html.parser")
 
