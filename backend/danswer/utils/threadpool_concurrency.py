@@ -39,7 +39,7 @@ def run_functions_tuples_in_parallel(
         return []
 
     results = []
-    with ThreadPoolExecutor(max_workers=workers) as executor:
+    with ThreadPoolExecutor(max_workers=max(len(workers), 1)) as executor:
         future_to_index = {
             executor.submit(func, *args): i
             for i, (func, args) in enumerate(functions_with_args)
