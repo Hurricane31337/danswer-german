@@ -75,8 +75,8 @@ Tokenizer.from_pretrained('jinaai/jina-embeddings-v2-base-de')"
 # Pre-downloading NLTK for setups with limited egress
 RUN python -c "import nltk; \
 nltk.download('stopwords', quiet=True); \
-nltk.download('wordnet', quiet=True); \
 nltk.download('punkt', quiet=True);"
+# nltk.download('wordnet', quiet=True); introduce this back if lemmatization is needed
 
 # Set up application files
 WORKDIR /app
