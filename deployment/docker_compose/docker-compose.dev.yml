@@ -1,7 +1,7 @@
 version: '3'
 services:
   api_server:
-    image: danswer/danswer-backend:${IMAGE_TAG:-latest}
+    #image: danswer/danswer-backend:${IMAGE_TAG:-latest}
     build:
       context: ../../backend
       dockerfile: Dockerfile
@@ -101,7 +101,7 @@ services:
         max-file: "6"
 
   background:
-    image: danswer/danswer-backend:${IMAGE_TAG:-latest}
+    #image: danswer/danswer-backend:${IMAGE_TAG:-latest}
     build:
       context: ../../backend
       dockerfile: Dockerfile
@@ -198,7 +198,7 @@ services:
         max-file: "6"
 
   web_server:
-    image: danswer/danswer-web-server:${IMAGE_TAG:-latest}
+    #image: danswer/danswer-web-server:${IMAGE_TAG:-latest}
     build:
       context: ../../web
       dockerfile: Dockerfile
@@ -228,7 +228,7 @@ services:
       - CUSTOM_REFRESH_URL=${CUSTOM_REFRESH_URL:-}
 
   inference_model_server:
-    image: danswer/danswer-model-server:${IMAGE_TAG:-latest}
+    #image: danswer/danswer-model-server:${IMAGE_TAG:-latest}
     build:
       context: ../../backend
       dockerfile: Dockerfile.model_server
@@ -254,7 +254,7 @@ services:
         max-file: "6"
 
   indexing_model_server:
-    image: danswer/danswer-model-server:${IMAGE_TAG:-latest}
+    #image: danswer/danswer-model-server:${IMAGE_TAG:-latest}
     build:
       context: ../../backend
       dockerfile: Dockerfile.model_server
@@ -345,9 +345,23 @@ services:
     volumes: 
       - cache_volume:/data
 
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    depends_on:
+      - relational_db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: info@label-software.de
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "3001:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
 volumes:
   cache_volume:
   db_volume:
+  pgadmin-data:
   vespa_volume: # Created by the container itself
 
   model_cache_huggingface:
