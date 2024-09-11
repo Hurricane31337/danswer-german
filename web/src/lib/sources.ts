@@ -36,6 +36,7 @@ import {
   OCIStorageIcon,
   GoogleStorageIcon,
   ColorSlackIcon,
+  LabelIcon,
 } from "@/components/icons/icons";
 import { ValidSources } from "./types";
 import {
@@ -275,6 +276,11 @@ const SOURCE_METADATA_MAP: SourceMap = {
   ingestion_api: {
     icon: GlobeIcon,
     displayName: "Ingestion",
+    category: SourceCategory.Other,
+  },
+  label_manual: {
+    icon: LabelIcon,
+    displayName: "Label Handbuch",
     category: SourceCategory.Other,
   },
   // currently used for the Internet Search tool docs, which is why
