@@ -7,6 +7,9 @@ from enum import Enum
 from typing import Any
 from typing import cast
 from typing import Tuple
+from typing import List
+from typing import Dict
+from typing import Optional
 from urllib.parse import urljoin
 from urllib.parse import urlparse
 
@@ -254,7 +257,7 @@ class WebConnector(LoadConnector):
             logger.warning("Unexpected credentials provided for Web Connector")
         return None
 
-    def load_from_state(self) -> GenerateDocumentsOutput:
+    def load_from_state(self, document_source: Optional[DocumentSource] = DocumentSource.WEB, cookies: Optional[List[Dict]] = None) -> GenerateDocumentsOutput:
         """Traverses through all pages found on the website
         and converts them into documents"""
         visited_links: set[str] = set()
@@ -271,6 +274,8 @@ class WebConnector(LoadConnector):
         last_error = None
 
         playwright, context = start_playwright()
+        if cookies:
+            context.add_cookies(cookies)
         restart_playwright = False
         while to_visit:
             current_url = to_visit.pop()
@@ -291,6 +296,8 @@ class WebConnector(LoadConnector):
                 check_internet_connection(current_url)
                 if restart_playwright:
                     playwright, context = start_playwright()
+                    if cookies:
+                        context.add_cookies(cookies)
                     restart_playwright = False
 
                 if current_url.split(".")[-1] == "pdf":
@@ -305,7 +312,7 @@ class WebConnector(LoadConnector):
                         Document(
                             id=current_url,
                             sections=[Section(link=current_url, text=page_text)],
-                            source=DocumentSource.WEB,
+                            source=document_source,
                             semantic_identifier=current_url.split("/")[-1],
                             metadata=metadata,
                             doc_updated_at=_get_datetime_from_last_modified_header(
@@ -356,7 +363,7 @@ class WebConnector(LoadConnector):
                         sections=[
                             Section(link=current_url, text=parsed_html.cleaned_text)
                         ],
-                        source=DocumentSource.WEB,
+                        source=document_source,
                         semantic_identifier=parsed_html.title or current_url,
                         metadata={},
                         doc_updated_at=_get_datetime_from_last_modified_header(

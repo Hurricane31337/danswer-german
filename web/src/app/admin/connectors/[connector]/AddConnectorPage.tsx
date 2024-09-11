@@ -235,7 +235,7 @@ export default function AddConnector({
     const { message, isSuccess, response } = await submitConnector<any>(
       {
         connector_specific_config: transformedConnectorSpecificConfig,
-        input_type: connector == "web" ? "load_state" : "poll", // single case
+        input_type: connector == "web" || "label_manual" ? "load_state" : "poll", // single case
         name: name,
         source: connector,
         refresh_freq: refreshFreq * 60 || null,

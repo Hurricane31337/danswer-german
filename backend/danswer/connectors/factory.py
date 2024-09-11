@@ -43,8 +43,12 @@ from danswer.connectors.web.connector import WebConnector
 from danswer.connectors.wikipedia.connector import WikipediaConnector
 from danswer.connectors.zendesk.connector import ZendeskConnector
 from danswer.connectors.zulip.connector import ZulipConnector
+from danswer.connectors.label_manual.connector import LabelManualConnector
 from danswer.db.credentials import backend_update_credential_json
 from danswer.db.models import Credential
+from danswer.utils.logger import setup_logger
+
+logger = setup_logger()
 
 
 class ConnectorMissingException(Exception):
@@ -56,6 +60,7 @@ def identify_connector_class(
     input_type: InputType | None = None,
 ) -> Type[BaseConnector]:
     connector_map = {
+        DocumentSource.LABEL_MANUAL: LabelManualConnector,
         DocumentSource.WEB: WebConnector,
         DocumentSource.FILE: LocalFileConnector,
         DocumentSource.SLACK: {
@@ -98,13 +103,18 @@ def identify_connector_class(
     }
     connector_by_source = connector_map.get(source, {})
 
+    logger.info(f"identify_connector_class: source: {source}, input_type: {input_type}")
+
     if isinstance(connector_by_source, dict):
+        logger.info(f"isinstance(connector_by_source, dict) is True")
         if input_type is None:
             # If not specified, default to most exhaustive update
+            logger.info(f"input_type is None: {source}")
             connector = connector_by_source.get(InputType.LOAD_STATE)
         else:
             connector = connector_by_source.get(input_type)
     else:
+        logger.info(f"isinstance(connector_by_source, dict) is False")
         connector = connector_by_source
     if connector is None:
         raise ConnectorMissingException(f"Connector not found for source={source}")
@@ -130,8 +140,14 @@ def instantiate_connector(
     credential: Credential,
     db_session: Session,
 ) -> BaseConnector:
+    logger.info(f"Instantiating connector for source: {source}, input_type: {input_type}")
+
     connector_class = identify_connector_class(source, input_type)
+    logger.info(f"Identified connector class: {connector_class.__name__}")
+
     connector = connector_class(**connector_specific_config)
+    logger.info(f"Instantiated connector: {connector}")
+
     new_credentials = connector.load_credentials(credential.credential_json)
 
     if new_credentials is not None:

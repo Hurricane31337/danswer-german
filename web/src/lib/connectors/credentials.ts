@@ -289,6 +289,7 @@ export const credentialTemplates: Record<ValidSources, any> = {
   web: null,
   not_applicable: null,
   ingestion_api: null,
+  label_manual: null,
 
   // NOTE: These are Special Cases
   google_drive: { google_drive_tokens: "" } as GoogleDriveCredentialJson,

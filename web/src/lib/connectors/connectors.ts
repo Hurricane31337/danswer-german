@@ -807,6 +807,34 @@ For example, specifying .*-support.* as a "channel" will cause the connector to 
       },
     ],
   },
+  label_manual: {
+    description: "Label-Handbuch-Anbindung einrichten",
+    values: [
+      {
+        type: "text",
+        query:
+          "Gib die Website-URL zum Einlesen ein, z.B. https://handbuch.mylabelwin.de/100/:",
+        label: "Basis-URL",
+        name: "base_url",
+        description:
+          "Die Handbuch-Version am Ende muss zwingend mit angegeben sein und sollte immer auf die neuste aktuell verfügbare Labelwin-Version gestellt werden. Mehrere Handbuch-Versionen parallel zu indizieren ergibt wahrscheinlich wenig Sinn.",
+        optional: false,
+      },
+      {
+        type: "select",
+        query: "Wähle die Durchsuch-Methode aus:",
+        label: "Durchsuch-Methode",
+        name: "web_connector_type",
+        optional: true,
+        options: [
+          { name: "recursive", value: "recursive" },
+          { name: "single", value: "single" },
+          { name: "sitemap", value: "sitemap" },
+        ],
+      },
+    ],
+    overrideDefaultFreq: 60 * 60 * 24,
+  },
 };
 
 // CONNECTORS
@@ -993,3 +1021,8 @@ export interface MediaWikiConfig extends MediaWikiBaseConfig {
 }
 
 export interface WikipediaConfig extends MediaWikiBaseConfig {}
+
+export interface LabelManualConfig {
+  base_url: string;
+  web_connector_type?: "recursive" | "single" | "sitemap";
+}
