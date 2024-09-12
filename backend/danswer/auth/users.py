@@ -160,14 +160,14 @@ def send_user_verification_email(
     mail_from: str = EMAIL_FROM,
 ) -> None:
     msg = MIMEMultipart()
-    msg["Subject"] = "Danswer Email Verification"
+    msg["Subject"] = "Label KI E-Mail-Verifikation"
     msg["To"] = user_email
     if mail_from:
         msg["From"] = mail_from
 
     link = f"{WEB_DOMAIN}/auth/verify-email?token={token}"
 
-    body = MIMEText(f"Click the following link to verify your email address: {link}")
+    body = MIMEText(f"Klicke auf den folgenden Link, um deine E-Mail-Adresse zu bestätigen: {link}")
     msg.attach(body)
 
     with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as s:
