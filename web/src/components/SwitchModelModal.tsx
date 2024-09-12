@@ -24,7 +24,7 @@ export function SwitchModelModal({
           <br />
           Bitte klicke auf die Schaltfläche unten, um ein neues Modell auszuwählen.
           Keine Sorge: Die für den Wechsel notwendige Neuindizierung erfolgt im
-          Hintergrund – deine Nutzung von Danswer wird nicht unterbrochen.
+          Hintergrund – deine Nutzung von Label KI wird nicht unterbrochen.
         </Text>
 
         <div className="flex mt-4">
