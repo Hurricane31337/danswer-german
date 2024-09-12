@@ -59,11 +59,11 @@ export default function LogoType({
             <div className="w-full">
               <HeaderTitle>{enterpriseSettings.application_name}</HeaderTitle>
               {!NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED && (
-                <p className="text-xs text-subtle">Powered by Danswer</p>
+                <p className="text-xs text-subtle">Powered by Label Sofware</p>
               )}
             </div>
           ) : (
-            <HeaderTitle>Danswer</HeaderTitle>
+            <HeaderTitle>Label KI</HeaderTitle>
           )}
         </div>
       </div>
