@@ -476,7 +476,7 @@ def log_http_error(_: Request, exc: Exception) -> JSONResponse:
 
 def get_application() -> FastAPI:
     application = FastAPI(
-        title="Danswer Backend", version=__version__, lifespan=lifespan
+        title="Label KI Backend", version=__version__, lifespan=lifespan
     )
 
     # Add the custom exception handler

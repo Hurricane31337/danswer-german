@@ -160,7 +160,7 @@ def send_user_verification_email(
     mail_from: str = EMAIL_FROM,
 ) -> None:
     msg = MIMEMultipart()
-    msg["Subject"] = "Danswer E-Mail-Verifikation"
+    msg["Subject"] = "Label KI E-Mail-Verifikation"
     msg["To"] = user_email
     if mail_from:
         msg["From"] = mail_from

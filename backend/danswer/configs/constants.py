@@ -24,9 +24,9 @@ DANSWER_METADATA_FILENAME = ".danswer_metadata.json"
 
 # Messages
 DISABLED_GEN_AI_MSG = (
-    "Dein System-Administrator hat die generativen KI-Funktionen von Danswer deaktiviert.\n"
+    "Dein System-Administrator hat die generativen KI-Funktionen der Label KI deaktiviert.\n"
     "Bitte wende dich an ihn, wenn du diese aktiviert haben möchtest.\n"
-    "Du kannst Danswer weiterhin als Suchmaschine verwenden."
+    "Du kannst die Label KI weiterhin als Suchmaschine verwenden."
 )
 
 # Postgres connection constants for application_name
