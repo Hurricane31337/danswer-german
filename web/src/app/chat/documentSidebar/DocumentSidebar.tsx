@@ -72,14 +72,14 @@ export const DocumentSidebar = forwardRef<HTMLDivElement, DocumentSidebarProps>(
           <div className="pb-6 flex-initial overflow-y-hidden flex flex-col h-screen">
             {popup}
             <div className="pl-3 mx-2 pr-6 mt-3 flex text-text-800 flex-col text-2xl text-emphasis flex font-semibold">
-              {dedupedDocuments.length} Documents
+              {dedupedDocuments.length} Dokumente
               <p className="text-sm font-semibold flex flex-wrap gap-x-2 text-text-600 mt-1">
-                Select to add to continuous context
+                Auswählen, um zum kontinuierlichen Kontext hinzuzufügen
                 <a
                   href="https://docs.danswer.dev/introduction"
                   className="underline cursor-pointer hover:text-strong"
                 >
-                  Learn more
+                  Weitere Informationen
                 </a>
               </p>
             </div>
@@ -119,7 +119,7 @@ export const DocumentSidebar = forwardRef<HTMLDivElement, DocumentSidebarProps>(
                   ))
                 ) : (
                   <div className="mx-3">
-                    <Text>No documents found for the query.</Text>
+                    <Text>Keine Dokumente zu dieser Anfrage gefunden.</Text>
                   </div>
                 )}
               </div>
@@ -127,8 +127,8 @@ export const DocumentSidebar = forwardRef<HTMLDivElement, DocumentSidebarProps>(
               !isLoading && (
                 <div className="ml-4 mr-3">
                   <Text>
-                    When you run ask a question, the retrieved documents will
-                    show up here!
+                    Wenn du Eine Frage stellen ausführst, werden die abgerufenen
+                    Dokumente hier erscheinen!
                   </Text>
                 </div>
               )
@@ -141,7 +141,7 @@ export const DocumentSidebar = forwardRef<HTMLDivElement, DocumentSidebarProps>(
               className="bg-[#84e49e] text-xs p-2 rounded text-text-800"
               onClick={() => closeSidebar()}
             >
-              Save Changes
+              Änderungen speichern
             </button>
 
             <button
@@ -152,7 +152,7 @@ export const DocumentSidebar = forwardRef<HTMLDivElement, DocumentSidebarProps>(
                 closeSidebar();
               }}
             >
-              Delete Context
+              Kontext löschen
             </button>
           </div>
         </div>

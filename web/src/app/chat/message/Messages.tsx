@@ -483,7 +483,7 @@ export const AIMessage = ({
                               className="cursor-pointer w-[200px] rounded-lg flex-none transition-all duration-500 hover:bg-background-125 bg-text-100 px-4 py-2 border-b"
                             >
                               <div className="text-sm flex justify-between font-semibold text-text-700">
-                                <p className="line-clamp-1">See context</p>
+                                <p className="line-clamp-1">Kontext anzeigen</p>
                                 <div className="flex gap-x-1">
                                   {uniqueSources.map((sourceType, ind) => {
                                     return (
@@ -498,7 +498,7 @@ export const AIMessage = ({
                                 </div>
                               </div>
                               <div className="line-clamp-3 text-xs break-words pt-1">
-                                See more
+                                Mehr anzeigen
                               </div>
                             </div>
                           </div>

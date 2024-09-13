@@ -93,7 +93,7 @@ export function SearchSummary({
         !text-sm !line-clamp-1 !break-all px-0.5`}
         ref={searchingForRef}
       >
-        {finished ? "Searched" : "Searching"} for: <i> {finalQuery}</i>
+        {finished ? "Gesucht" : "Suche"} nach: <i> {finalQuery}</i>
       </div>
     </div>
   );
