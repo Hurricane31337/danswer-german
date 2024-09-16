@@ -19,6 +19,7 @@ import { Card } from "@tremor/react";
 import { HeaderTitle } from "@/components/header/HeaderTitle";
 import { Logo } from "@/components/Logo";
 import { UserProvider } from "@/components/user/UserProvider";
+import { ProviderContextProvider } from "@/components/chat_search/ProviderContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,7 +40,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: enterpriseSettings?.application_name ?? "Danswer",
-    description: "Question answering for your documents",
+    description: "Fragen-Beantwortung für deine Dokumente",
     icons: {
       icon: logoLocation,
     },
@@ -138,9 +139,11 @@ export default async function RootLayout({
           }`}
         >
           <UserProvider>
-            <SettingsProvider settings={combinedSettings}>
-              {children}
-            </SettingsProvider>
+            <ProviderContextProvider>
+              <SettingsProvider settings={combinedSettings}>
+                {children}
+              </SettingsProvider>
+            </ProviderContextProvider>
           </UserProvider>
         </div>
       </body>

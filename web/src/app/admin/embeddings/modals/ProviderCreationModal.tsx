@@ -158,14 +158,7 @@ export function ProviderCreationModal({
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({
-            values,
-            errors,
-            touched,
-            isSubmitting,
-            handleSubmit,
-            setFieldValue,
-          }) => (
+          {({ isSubmitting, handleSubmit, setFieldValue }) => (
             <Form onSubmit={handleSubmit} className="space-y-4">
               <Text className="text-lg mb-2">
                 Du legst die Anmeldeinformationen für diesen Anbieter fest. Um
@@ -221,7 +214,7 @@ export function ProviderCreationModal({
                 ) : (
                   <TextFormField
                     name="api_key"
-                    label={`API-Schlüssel ${isProxy && "(für nicht-lokale Umgebungen)"}`}
+                    label={`API-Schlüssel ${isProxy ? "(für nicht-lokale Umgebungen)" : ""}`}
                     placeholder="API-Schlüssel"
                     type="password"
                   />
