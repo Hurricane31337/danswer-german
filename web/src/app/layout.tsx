@@ -39,7 +39,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: enterpriseSettings?.application_name ?? "Danswer",
-    description: "Question answering for your documents",
+    description: "Fragen-Beantwortung für deine Dokumente",
     icons: {
       icon: logoLocation,
     },
