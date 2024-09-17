@@ -47,7 +47,7 @@ export const ApiKeyForm = ({
                 {provider.display_name || provider.name}
               </Tab>
             ))}
-            <Tab key="custom">Custom</Tab>
+            <Tab key="custom">Benutzerdefiniert</Tab>
           </>
         </TabList>
         <TabPanels>

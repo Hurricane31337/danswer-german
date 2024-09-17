@@ -62,7 +62,7 @@ export default async function RootLayout({
     return (
       <html lang="en" className={`${inter.variable} font-sans`}>
         <Head>
-          <title>Settings Unavailable | Label KI</title>
+          <title>Einstellungen nicht erreichbar | Label KI</title>
         </Head>
         <body className="bg-background text-default">
           <div className="flex flex-col items-center justify-center min-h-screen">
@@ -72,28 +72,30 @@ export default async function RootLayout({
             </div>
 
             <Card className="p-8 max-w-md">
-              <h1 className="text-2xl font-bold mb-4 text-error">Error</h1>
+              <h1 className="text-2xl font-bold mb-4 text-error">Fehler</h1>
               <p className="text-text-500">
-                Your Label KI instance was not configured properly and your
-                settings could not be loaded. This could be due to an admin
-                configuration issue or an incomplete setup.
+                Deine Label KI-Instanz wurde nicht richtig konfiguriert und
+                deine Einstellungen konnten nicht geladen werden. Das kann an
+                einem Admin-Konfigurationsproblem oder einer unvollständigen
+                Einrichtung liegen.
               </p>
               <p className="mt-4">
-                If you&apos;re an admin, please check{" "}
+                Wenn du ein Admin bist, schaue bitte in{" "}
                 <a
                   className="text-link"
                   href="https://docs.danswer.dev/introduction?utm_source=app&utm_medium=error_page&utm_campaign=config_error"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  our docs
+                  unsere Doku
                 </a>{" "}
-                to see how to configure Label KI properly. If you&apos;re a user,
-                please contact your admin to fix this error.
+                um zu sehen wie man die Label KI richtig konfiguriert. Wenn du ein
+                Benutzer bist, kontaktiere bitte deinen Admin um das Problem zu
+                beheben.
               </p>
               <p className="mt-4">
-                For additional support and guidance, you can reach out to our
-                community on{" "}
+                Für zusätzliche Unterstützung und Ratschläge kannst du dich an
+                unsere Community auf{" "}
                 <a
                   className="text-link"
                   href="https://danswer.ai?utm_source=app&utm_medium=error_page&utm_campaign=config_error"
@@ -102,7 +104,7 @@ export default async function RootLayout({
                 >
                   Slack
                 </a>
-                .
+                {" "}wenden.
               </p>
             </Card>
           </div>

@@ -65,7 +65,7 @@ export function Modal({
             <button
               onClick={onOutsideClick}
               className="cursor-pointer text-text-500 hover:text-text-700 transition-colors duration-200 p-2"
-              aria-label="Close modal"
+              aria-label="Modal schließen"
             >
               <XIcon className="w-5 h-5" />
             </button>

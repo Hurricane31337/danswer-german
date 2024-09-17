@@ -20,20 +20,20 @@ export const ApiKeyModal = ({ hide }: { hide: () => void }) => {
 
   return (
     <Modal
-      title="Set an API Key!"
+      title="Stelle einen API-Schlüssel ein!"
       className="max-w-3xl"
       onOutsideClick={() => hide()}
     >
       <div className="max-h-[75vh] overflow-y-auto flex flex-col px-4">
         <div>
           <div className="mb-5 text-sm">
-            Please provide an API Key below in order to start using
-            Danswer – you can always change this later.
+            Bitte gib unten einen API-Schlüssel ein, um mit der Nutzung
+            der Label KI zu beginnen – du kannst ihn später jederzeit ändern.
             <br />
-            If you&apos;d rather look around first, you can
+            Wenn du dich lieber erst einmal umsehen möchtest, kannst du
             <strong onClick={() => hide()} className="text-link cursor-pointer">
               {" "}
-              skip this step
+              diesen Schritt überspringen
             </strong>
             .
           </div>
