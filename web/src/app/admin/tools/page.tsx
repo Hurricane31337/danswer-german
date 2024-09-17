@@ -14,8 +14,8 @@ export default async function Page() {
   if (!toolResponse.ok) {
     return (
       <ErrorCallout
-        errorTitle="Something went wrong :("
-        errorMsg={`Failed to fetch tools - ${await toolResponse.text()}`}
+        errorTitle="Etwas ist schief gelaufen :("
+        errorMsg={`Werkzeuge konnten nicht abgerufen werden - ${await toolResponse.text()}`}
       />
     );
   }
@@ -26,17 +26,17 @@ export default async function Page() {
     <div className="mx-auto container">
       <AdminPageTitle
         icon={<ToolIcon size={32} className="my-auto" />}
-        title="Tools"
+        title="Werkzeuge"
       />
 
       <Text className="mb-2">
-        Tools allow assistants to retrieve information or take actions.
+        Werkzeuge ermöglichen es den Assistenten, Informationen abzurufen oder Aktionen durchzuführen.
       </Text>
 
       <div>
         <Divider />
 
-        <Title>Create a Tool</Title>
+        <Title>Erstelle ein Werkzeug</Title>
         <Link
           href="/admin/tools/new"
           className="
@@ -55,13 +55,13 @@ export default async function Page() {
         >
           <div className="mx-auto flex">
             <FiPlusSquare className="my-auto mr-2" />
-            New Tool
+            Neues Werkzeug
           </div>
         </Link>
 
         <Divider />
 
-        <Title>Existing Tools</Title>
+        <Title>Bestehende Werkzeuge</Title>
         <ToolsTable tools={tools} />
       </div>
     </div>

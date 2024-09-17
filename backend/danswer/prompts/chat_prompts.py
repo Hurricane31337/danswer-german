@@ -81,7 +81,7 @@ besser beantworten zu können.
 Deine Standardantwort lautet {YES_SEARCH}.
 Wenn du dir auch nur leicht unsicher bist, antworte mit {YES_SEARCH}.
 
-Antworte mit „{SKIP_SEARCH}", wenn einer dieser Punkte zutrifft:
+Antworte mit „{SKIP_SEARCH}“, wenn einer dieser Punkte zutrifft:
 - Es gibt genügend Informationen im Chatverlauf, um die Anfrage VOLLSTÄNDIG und GENAU zu beantworten.
 - Es handelt sich um eine Anfrage, für deren Bearbeitung keine weiteren Informationen erforderlich sind.
 - Du bist dir bei der Frage absolut sicher und die Antwort oder die Frage ist nicht mehrdeutig.
