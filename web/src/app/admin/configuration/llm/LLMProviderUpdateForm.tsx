@@ -55,7 +55,7 @@ export function LLMProviderUpdateForm({
 
   // Define the initial values based on the provider's requirements
   const initialValues = {
-    name: existingLlmProvider?.name || (hideAdvanced ? "Default" : ""),
+    name: existingLlmProvider?.name || (hideAdvanced ? "Standard" : ""),
     api_key: existingLlmProvider?.api_key ?? "",
     api_base: existingLlmProvider?.api_base ?? "",
     api_version: existingLlmProvider?.api_version ?? "",
@@ -85,15 +85,15 @@ export function LLMProviderUpdateForm({
 
   // Setup validation schema if required
   const validationSchema = Yup.object({
-    name: Yup.string().required("Display Name is required"),
+    name: Yup.string().required("Angezeiger Name ist erforderlich"),
     api_key: llmProviderDescriptor.api_key_required
-      ? Yup.string().required("API Key is required")
+      ? Yup.string().required("API-Schlüssel ist erforderlich")
       : Yup.string(),
     api_base: llmProviderDescriptor.api_base_required
-      ? Yup.string().required("API Base is required")
+      ? Yup.string().required("API-Basis ist erforderlich")
       : Yup.string(),
     api_version: llmProviderDescriptor.api_version_required
-      ? Yup.string().required("API Version is required")
+      ? Yup.string().required("API-Version ist erforderlich")
       : Yup.string(),
     ...(llmProviderDescriptor.custom_config_keys
       ? {
@@ -166,8 +166,8 @@ export function LLMProviderUpdateForm({
         if (!response.ok) {
           const errorMsg = (await response.json()).detail;
           const fullErrorMsg = existingLlmProvider
-            ? `Failed to update provider: ${errorMsg}`
-            : `Failed to enable provider: ${errorMsg}`;
+            ? `Anbieter konnte nicht aktualisiert werden: ${errorMsg}`
+            : `Anbieter konnte nicht aktiviert werden: ${errorMsg}`;
           if (setPopup) {
             setPopup({
               type: "error",
@@ -189,7 +189,7 @@ export function LLMProviderUpdateForm({
           );
           if (!setDefaultResponse.ok) {
             const errorMsg = (await setDefaultResponse.json()).detail;
-            const fullErrorMsg = `Failed to set provider as default: ${errorMsg}`;
+            const fullErrorMsg = `Anbieter konnte nicht als Standard festgelegt werden: ${errorMsg}`;
             if (setPopup) {
               setPopup({
                 type: "error",
@@ -206,8 +206,8 @@ export function LLMProviderUpdateForm({
         onClose();
 
         const successMsg = existingLlmProvider
-          ? "Provider updated successfully!"
-          : "Provider enabled successfully!";
+          ? "Anbieter erfolgreich aktualisiert!"
+          : "Anbieter erfolgreich aktiviert!";
         if (setPopup) {
           setPopup({
             type: "success",
@@ -225,9 +225,9 @@ export function LLMProviderUpdateForm({
           {!hideAdvanced && (
             <TextFormField
               name="name"
-              label="Display Name"
-              subtext="A name which you can use to identify this provider when selecting it in the UI."
-              placeholder="Display Name"
+              label="Angezeigter Name"
+              subtext="Ein Name, den du verwenden kannst, um diesen Anbieter bei der Auswahl in der Benutzeroberfläche zu identifizieren."
+              placeholder="Angezeigter Name"
               disabled={existingLlmProvider ? true : false}
             />
           )}
@@ -236,8 +236,8 @@ export function LLMProviderUpdateForm({
             <TextFormField
               small={hideAdvanced}
               name="api_key"
-              label="API Key"
-              placeholder="API Key"
+              label="API-Schlüssel"
+              placeholder="API-Schlüssel"
               type="password"
             />
           )}
@@ -246,8 +246,8 @@ export function LLMProviderUpdateForm({
             <TextFormField
               small={hideAdvanced}
               name="api_base"
-              label="API Base"
-              placeholder="API Base"
+              label="API-Basis"
+              placeholder="API-Basis"
             />
           )}
 
@@ -255,8 +255,8 @@ export function LLMProviderUpdateForm({
             <TextFormField
               small={hideAdvanced}
               name="api_version"
-              label="API Version"
-              placeholder="API Version"
+              label="API-Version"
+              placeholder="API-Version"
             />
           )}
 
@@ -282,8 +282,8 @@ export function LLMProviderUpdateForm({
               {llmProviderDescriptor.llm_names.length > 0 ? (
                 <SelectorFormField
                   name="default_model_name"
-                  subtext="The model to use by default for this provider unless otherwise specified."
-                  label="Default Model"
+                  subtext="Das Modell, das standardmäßig für diesen Anbieter verwendet wird, sofern nicht anders angegeben."
+                  label="Standard-Modell"
                   options={llmProviderDescriptor.llm_names.map((name) => ({
                     name: getDisplayNameForModel(name),
                     value: name,
@@ -293,18 +293,19 @@ export function LLMProviderUpdateForm({
               ) : (
                 <TextFormField
                   name="default_model_name"
-                  subtext="The model to use by default for this provider unless otherwise specified."
-                  label="Default Model"
-                  placeholder="E.g. gpt-4"
+                  subtext="Das Modell, das standardmäßig für diesen Anbieter verwendet wird, sofern nicht anders angegeben."
+                  label="Standard-Modell"
+                  placeholder="Z.B. gpt-4"
                 />
               )}
 
               {llmProviderDescriptor.llm_names.length > 0 ? (
                 <SelectorFormField
                   name="fast_default_model_name"
-                  subtext={`The model to use for lighter flows like \`LLM Chunk Filter\` 
-                for this provider. If \`Default\` is specified, will use 
-                the Default Model configured above.`}
+                  subtext={`Das Modell, das für leichtere Abläufe wie
+                „LLM Chunk Filter“ für diesen Anbieter verwendet
+                wird. Wenn „Standard“ eingestellt ist, wird das oben konfigurierte
+                Standardmodell verwendet.`}
                   label="[Optional] Fast Model"
                   options={llmProviderDescriptor.llm_names.map((name) => ({
                     name: getDisplayNameForModel(name),
@@ -316,9 +317,10 @@ export function LLMProviderUpdateForm({
               ) : (
                 <TextFormField
                   name="fast_default_model_name"
-                  subtext={`The model to use for lighter flows like \`LLM Chunk Filter\` 
-                for this provider. If \`Default\` is specified, will use 
-                the Default Model configured above.`}
+                  subtext={`Das Modell, das für leichtere Abläufe wie
+                „LLM Chunk Filter“ für diesen Anbieter verwendet
+                wird. Wenn „Standard“ eingestellt ist, wird das oben konfigurierte
+                Standardmodell verwendet.`}
                   label="[Optional] Fast Model"
                   placeholder="E.g. gpt-4"
                 />
@@ -342,8 +344,8 @@ export function LLMProviderUpdateForm({
                           formikProps.values.display_model_names
                         }
                         name="display_model_names"
-                        label="Display Models"
-                        subtext="Select the models to make available to users. Unselected models will not be available."
+                        label="Angezeigte Modelle"
+                        subtext="Wähle die Modelle aus, die für die Benutzer verfügbar sein sollen. Nicht ausgewählte Modelle werden nicht verfügbar sein."
                         options={llmProviderDescriptor.llm_names.map(
                           (name) => ({
                             value: name,
@@ -362,7 +364,7 @@ export function LLMProviderUpdateForm({
 
                   <IsPublicGroupSelector
                     formikProps={formikProps}
-                    objectName="LLM Provider"
+                    objectName="LLM-Anbieter"
                     publicToWhom="all users"
                     enforceGroupSelection={true}
                   />
@@ -379,9 +381,9 @@ export function LLMProviderUpdateForm({
                 {isTesting ? (
                   <LoadingAnimation text="Testing" />
                 ) : existingLlmProvider ? (
-                  "Update"
+                  "Aktualisieren"
                 ) : (
-                  "Enable"
+                  "Aktivieren"
                 )}
               </Button>
               {existingLlmProvider && (
@@ -400,7 +402,7 @@ export function LLMProviderUpdateForm({
                     );
                     if (!response.ok) {
                       const errorMsg = (await response.json()).detail;
-                      alert(`Failed to delete provider: ${errorMsg}`);
+                      alert(`Anbieter konnte nicht gelöscht werden: ${errorMsg}`);
                       return;
                     }
 
@@ -420,7 +422,7 @@ export function LLMProviderUpdateForm({
                           }
                         );
                         if (!setDefaultResponse.ok) {
-                          console.error("Failed to set new default provider");
+                          console.error("Neuer Standardanbieter konnte nicht festgelegt werden");
                         }
                       }
                     }
@@ -429,7 +431,7 @@ export function LLMProviderUpdateForm({
                     onClose();
                   }}
                 >
-                  Delete
+                  Löschen
                 </Button>
               )}
             </div>
