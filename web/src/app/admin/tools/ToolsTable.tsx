@@ -31,9 +31,9 @@ export function ToolsTable({ tools }: { tools: ToolSnapshot[] }) {
         <TableHead>
           <TableRow>
             <TableHeaderCell>Name</TableHeaderCell>
-            <TableHeaderCell>Description</TableHeaderCell>
-            <TableHeaderCell>Built In?</TableHeaderCell>
-            <TableHeaderCell>Delete</TableHeaderCell>
+            <TableHeaderCell>Beschreibung</TableHeaderCell>
+            <TableHeaderCell>Eingebaut?</TableHeaderCell>
+            <TableHeaderCell>Löschen</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -63,12 +63,12 @@ export function ToolsTable({ tools }: { tools: ToolSnapshot[] }) {
                 {tool.in_code_tool_id === null ? (
                   <span>
                     <FiXCircle className="inline-block mr-1 my-auto" />
-                    No
+                    Nein
                   </span>
                 ) : (
                   <span>
                     <FiCheckCircle className="inline-block mr-1 my-auto" />
-                    Yes
+                    Ja
                   </span>
                 )}
               </TableCell>
@@ -84,7 +84,7 @@ export function ToolsTable({ tools }: { tools: ToolSnapshot[] }) {
                             router.refresh();
                           } else {
                             setPopup({
-                              message: `Failed to delete tool - ${response.error}`,
+                              message: `Werkzeug konnte nicht gelöscht werden - ${response.error}`,
                               type: "error",
                             });
                           }

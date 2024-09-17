@@ -8,13 +8,13 @@ export default async function Page() {
   return (
     <div className="mx-auto container">
       <AdminPageTitle
-        title="Workspace Settings"
+        title="Workspace-Einstellungen"
         icon={<SettingsIcon size={32} className="my-auto" />}
       />
 
       <Text className="mb-8">
-        Manage general Danswer settings applicable to all users in the
-        workspace.
+        Verwalte allgemeine Danswer-Einstellungen, die für alle Benutzer
+        im Workspace gelten.
       </Text>
 
       <SettingsForm />

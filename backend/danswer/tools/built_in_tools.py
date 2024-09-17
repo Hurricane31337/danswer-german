@@ -28,15 +28,15 @@ class InCodeToolInfo(TypedDict):
 BUILT_IN_TOOLS: list[InCodeToolInfo] = [
     InCodeToolInfo(
         cls=SearchTool,
-        description="The Search Tool allows the Assistant to search through connected knowledge to help build an answer.",
+        description="Mit dem Suchwerkzeug kann der Assistent die verbundenen Wissensquellen durchsuchen, um eine Antwort zu finden.",
         in_code_tool_id=SearchTool.__name__,
         display_name=SearchTool._DISPLAY_NAME,
     ),
     InCodeToolInfo(
         cls=ImageGenerationTool,
         description=(
-            "The Image Generation Tool allows the assistant to use DALL-E 3 to generate images. "
-            "The tool will be used when the user asks the assistant to generate an image."
+            "Mit dem Bildgenerierungswerkzeug kann der Assistent DALL-E 3 verwenden, um Bilder zu generieren. "
+            "Das Werkzeug wird verwendet, wenn der Benutzer den Assistenten auffordert, ein Bild zu erzeugen."
         ),
         in_code_tool_id=ImageGenerationTool.__name__,
         display_name=ImageGenerationTool._DISPLAY_NAME,
@@ -47,8 +47,8 @@ BUILT_IN_TOOLS: list[InCodeToolInfo] = [
             InCodeToolInfo(
                 cls=InternetSearchTool,
                 description=(
-                    "The Internet Search Tool allows the assistant "
-                    "to perform internet searches for up-to-date information."
+                    "Das Internet-Suchwerkzeug ermöglicht dem Assistenten "
+                    "die Suche nach aktuellen Informationen im Internet."
                 ),
                 in_code_tool_id=InternetSearchTool.__name__,
                 display_name=InternetSearchTool._DISPLAY_NAME,
