@@ -20,31 +20,31 @@ export function NoSourcesModal() {
   return (
     <Modal
       className="max-w-4xl"
-      title="🧐 No sources connected"
+      title="🧐 Keine Quellen verbunden"
       onOutsideClick={() => setIsHidden(true)}
     >
       <div className="text-base">
         <div>
           <Text>
-            Before using Search you&apos;ll need to connect at least one source.
-            Without any connected knowledge sources, there isn&apos;t anything
-            to search over.
+            Bevor du die Suche verwenden kannst, musst du mindestens eine Quelle
+            verbinden. Ohne verbundene Wissensquellen gibt es nichts, was du
+            durchsuchen könntest.
           </Text>
           <Link href="/admin/add-connector">
             <Button className="mt-3" size="xs" icon={FiShare2}>
-              Connect a Source!
+              Verbinde eine Quelle!
             </Button>
           </Link>
           <Divider />
           <div>
             <Text>
-              Or, if you&apos;re looking for a pure ChatGPT-like experience
-              without any organization specific knowledge, then you can head
-              over to the Chat page and start chatting with Danswer right away!
+              Oder, wenn du nach einer reinen ChatGPT-ähnlichen Oberfläche ohne
+              organisationsspezifischem Wissen suchst, dann kannst du zur
+              Chat-Seite gehen und sofort mit der Label KI chatten!
             </Text>
             <Link href="/chat">
               <Button className="mt-3" size="xs" icon={FiMessageSquare}>
-                Start Chatting!
+                Beginne zu chatten!
               </Button>
             </Link>
           </div>

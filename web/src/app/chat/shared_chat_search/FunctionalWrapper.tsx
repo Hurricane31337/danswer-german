@@ -54,7 +54,7 @@ const ToggleSwitch = () => {
       >
         <SearchIcon size={16} className="mr-2" />
         <div className="flex  items-center">
-          Search
+          Suche
           <div className="ml-2 flex content-center">
             <span className="leading-none pb-[1px] my-auto">
               {commandSymbol}

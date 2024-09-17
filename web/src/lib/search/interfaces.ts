@@ -105,13 +105,13 @@ export interface SearchResponse {
 }
 
 export enum SourceCategory {
-  Storage = "Storage",
+  Storage = "Speicher",
   Wiki = "Wiki",
-  CustomerSupport = "Customer Support",
+  CustomerSupport = "Kundendienst",
   Messaging = "Messaging",
-  ProjectManagement = "Project Management",
-  CodeRepository = "Code Repository",
-  Other = "Other",
+  ProjectManagement = "Projektmanagement",
+  CodeRepository = "Code-Repository",
+  Other = "Sonstiges",
 }
 
 export interface SourceMetadata {

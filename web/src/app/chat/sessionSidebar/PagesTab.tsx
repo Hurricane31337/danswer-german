@@ -56,7 +56,7 @@ export function PagesTab({
         router.refresh(); // Refresh the page to reflect the changes
       } catch (error) {
         setPopup({
-          message: "Failed to remove chat from folder",
+          message: "Chat konnte nicht aus Ordner entfernt werden",
           type: "error",
         });
       }
@@ -101,8 +101,8 @@ export function PagesTab({
         {isHistoryEmpty ? (
           <p className="text-sm text-subtle mt-2 w-[250px]">
             {page === "search"
-              ? "Try running a search! Your search history will appear here."
-              : "Try sending a message! Your chat history will appear here."}
+              ? "Versuche eine Suche zu starten! Dein Suchverlauf wird hier erscheinen."
+              : "Versuche eine Nachricht zu senden! Dein Chatverlauf wird hier erscheinen."}
           </p>
         ) : (
           Object.entries(groupedChatSessions).map(

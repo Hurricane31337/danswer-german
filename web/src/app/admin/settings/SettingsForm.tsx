@@ -74,7 +74,7 @@ function IntegerInput({
   value,
   onChange,
   id,
-  placeholder = "Enter a number", // Default placeholder if none is provided
+  placeholder = "Gib eine Zahl ein", // Default placeholder if none is provided
 }: {
   label: string;
   sublabel: string;
@@ -154,7 +154,7 @@ export function SettingsForm() {
 
       router.refresh();
       setPopup({
-        message: "Settings updated successfully!",
+        message: "Einstellungen erfolgreich aktualisiert!",
         type: "success",
       });
     } catch (error) {
@@ -219,11 +219,11 @@ export function SettingsForm() {
   return (
     <div>
       {popup}
-      <Title className="mb-4">Page Visibility</Title>
+      <Title className="mb-4">Sichtbarkeit der Seiten</Title>
 
       <Checkbox
-        label="Search Page Enabled?"
-        sublabel="If set, then the 'Search' page will be accessible to all users and will show up as an option on the top navbar. If unset, then this page will not be available."
+        label="Such-Seite aktiviert?"
+        sublabel="Wenn diese Einstellung eingeschaltet ist, ist die Seite „Suchen“ für alle Benutzer zugänglich und wird als Option in der oberen Navigationsleiste angezeigt. Wenn sie nicht eingeschaltet ist, ist diese Seite nicht verfügbar."
         checked={settings.search_page_enabled}
         onChange={(e) =>
           handleToggleSettingsField("search_page_enabled", e.target.checked)
@@ -231,8 +231,8 @@ export function SettingsForm() {
       />
 
       <Checkbox
-        label="Chat Page Enabled?"
-        sublabel="If set, then the 'Chat' page will be accessible to all users and will show up as an option on the top navbar. If unset, then this page will not be available."
+        label="Chat-Seite aktiviert?"
+        sublabel="Wenn diese Einstellung eingeschaltet ist, ist die Seite „Chat“ für alle Benutzer zugänglich und wird als Option in der oberen Navigationsleiste angezeigt. Wenn sie nicht eingeschaltet ist, ist diese Seite nicht verfügbar."
         checked={settings.chat_page_enabled}
         onChange={(e) =>
           handleToggleSettingsField("chat_page_enabled", e.target.checked)
@@ -240,10 +240,10 @@ export function SettingsForm() {
       />
 
       <Selector
-        label="Default Page"
-        subtext="The page that users will be redirected to after logging in. Can only be set to a page that is enabled."
+        label="Standard-Seite"
+        subtext="Die Seite, zu der die Benutzer nach der Anmeldung weitergeleitet werden. Kann nur auf eine Seite gesetzt werden, die verfügbar ist."
         options={[
-          { value: "search", name: "Search" },
+          { value: "search", name: "Suche" },
           { value: "chat", name: "Chat" },
         ]}
         selected={settings.default_page}
@@ -259,8 +259,8 @@ export function SettingsForm() {
         <>
           <Title className="mb-4">Chat Settings</Title>
           <IntegerInput
-            label="Chat Retention"
-            sublabel="Enter the maximum number of days you would like Danswer to retain chat messages. Leaving this field empty will cause Danswer to never delete chat messages."
+            label="Chat-Aufbewahrung"
+            sublabel="Gebe die maximale Anzahl von Tagen ein, die die Label KI Chat-Nachrichten aufbewahren soll. Wenn du dieses Feld leer lässt, löscht die Label KI die Chatnachrichten nie."
             value={chatRetention === "" ? null : Number(chatRetention)}
             onChange={(e) => {
               const numValue = parseInt(e.target.value, 10);
@@ -269,7 +269,7 @@ export function SettingsForm() {
               }
             }}
             id="chatRetentionInput"
-            placeholder="Infinite Retention"
+            placeholder="Unbegrenzte Aufbewahrung"
           />
           <Button
             onClick={handleSetChatRetention}
@@ -277,10 +277,10 @@ export function SettingsForm() {
             size="xs"
             className="mr-3"
           >
-            Set Retention Limit
+            Aufbewahrungsfrist festlegen
           </Button>
           <Button onClick={handleClearChatRetention} color="blue" size="xs">
-            Retain All
+            Alles aufbewahren
           </Button>
         </>
       )}
