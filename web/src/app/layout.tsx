@@ -62,19 +62,19 @@ export default async function RootLayout({
     return (
       <html lang="en" className={`${inter.variable} font-sans`}>
         <Head>
-          <title>Einstellungen nicht erreichbar | Danswer</title>
+          <title>Einstellungen nicht erreichbar | Label KI</title>
         </Head>
         <body className="bg-background text-default">
           <div className="flex flex-col items-center justify-center min-h-screen">
             <div className="mb-2 flex items-center max-w-[175px]">
-              <HeaderTitle>Danswer</HeaderTitle>
+              <HeaderTitle>Label KI</HeaderTitle>
               <Logo height={40} width={40} />
             </div>
 
             <Card className="p-8 max-w-md">
               <h1 className="text-2xl font-bold mb-4 text-error">Fehler</h1>
               <p className="text-text-500">
-                Deine Danswer-Instanz wurde nicht richtig konfiguriert und
+                Deine Label KI-Instanz wurde nicht richtig konfiguriert und
                 deine Einstellungen konnten nicht geladen werden. Das kann an
                 einem Admin-Konfigurationsproblem oder einer unvollständigen
                 Einrichtung liegen.
@@ -89,7 +89,7 @@ export default async function RootLayout({
                 >
                   unsere Doku
                 </a>{" "}
-                um zu sehen wie man Danswer richtig konfiguriert. Wenn du ein
+                um zu sehen wie man die Label KI richtig konfiguriert. Wenn du ein
                 Benutzer bist, kontaktiere bitte deinen Admin um das Problem zu
                 beheben.
               </p>
