@@ -40,7 +40,7 @@ export function NoSourcesModal() {
             <Text>
               Oder, wenn du nach einer reinen ChatGPT-ähnlichen Oberfläche ohne
               organisationsspezifischem Wissen suchst, dann kannst du zur
-              Chat-Seite gehen und sofort mit Danswer chatten!
+              Chat-Seite gehen und sofort mit der Label KI chatten!
             </Text>
             <Link href="/chat">
               <Button className="mt-3" size="xs" icon={FiMessageSquare}>
