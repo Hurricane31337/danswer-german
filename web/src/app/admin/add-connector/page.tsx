@@ -95,11 +95,11 @@ export default function Page() {
     <div className="mx-auto container">
       <AdminPageTitle
         icon={<ConnectorIcon size={32} />}
-        title="Add Connector"
+        title="Anbindung hinzufügen"
         farRightElement={
           <Link href="/admin/indexing/status">
             <Button color="green" size="xs">
-              See Connectors
+              Anbindungen zeigen
             </Button>
           </Link>
         }
@@ -108,7 +108,7 @@ export default function Page() {
       <input
         type="text"
         ref={searchInputRef}
-        placeholder="Search connectors..."
+        placeholder="Anbindungen suchen..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         onKeyDown={handleKeyPress}
@@ -143,20 +143,20 @@ export default function Page() {
 function getCategoryDescription(category: SourceCategory): string {
   switch (category) {
     case SourceCategory.Messaging:
-      return "Integrate with messaging and communication platforms.";
+      return "Integration mit Messaging- und Kommunikationsplattformen.";
     case SourceCategory.ProjectManagement:
-      return "Link to project management and task tracking tools.";
+      return "Verknüpfung mit Werkzeugen für Projektmanagement und Aufgabenverfolgung.";
     case SourceCategory.CustomerSupport:
-      return "Connect to customer support and helpdesk systems.";
+      return "Verbindung zu Kundensupport- und Helpdesk-Systemen.";
     case SourceCategory.CodeRepository:
-      return "Integrate with code repositories and version control systems.";
+      return "Integration mit Code-Repositories und Versionskontrollsystemen.";
     case SourceCategory.Storage:
-      return "Connect to cloud storage and file hosting services.";
+      return "Verbindung zu Cloud-Speicher- und Datei-Hosting-Diensten.";
     case SourceCategory.Wiki:
-      return "Link to wiki and knowledge base platforms.";
+      return "Verknüpfung mit Wiki- und Wissensdatenbank-Plattformen.";
     case SourceCategory.Other:
-      return "Connect to other miscellaneous knowledge sources.";
+      return "Verbindung zu sonstigen Wissensquellen.";
     default:
-      return "Connect to various knowledge sources.";
+      return "Verbindung zu verschiedenen Wissensquellen.";
   }
 }

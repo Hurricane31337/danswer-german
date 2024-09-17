@@ -297,7 +297,7 @@ export function ClientLayout({
                         ]
                       : []),
                     {
-                      name: "Settings",
+                      name: "Einstellungen",
                       items: [
                         {
                           name: (

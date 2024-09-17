@@ -31,39 +31,39 @@ export default async function Page() {
 
   return (
     <div className="mx-auto container">
-      <AdminPageTitle icon={<AssistantsIcon size={32} />} title="Assistants" />
+      <AdminPageTitle icon={<AssistantsIcon size={32} />} title="Assistenten" />
 
       <Text className="mb-2">
-        Assistants are a way to build custom search/question-answering
-        experiences for different use cases.
+        Assistenten sind eine Möglichkeit, benutzerdefinierte Such-/Frage-Antwort-Experiences
+        für verschiedene Anwendungsfälle zu erstellen.
       </Text>
-      <Text className="mt-2">They allow you to customize:</Text>
+      <Text className="mt-2">Sie ermöglichen dir die Anpassung von:</Text>
       <div className="text-sm">
         <ul className="list-disc mt-2 ml-4">
           <li>
-            The prompt used by your LLM of choice to respond to the user query
+            Der Eingabeaufforderung, die vom LLM deiner Wahl zur Beantwortung der Benutzeranfrage verwendet wird
           </li>
-          <li>The documents that are used as context</li>
+          <li>Den Dokumenten, die als Kontext verwendet werden</li>
         </ul>
       </div>
 
       <div>
         <Divider />
 
-        <Title>Create an Assistant</Title>
+        <Title>Erstelle einen Assistenten</Title>
         <Link
           href="/admin/assistants/new"
           className="flex py-2 px-4 mt-2 border border-border h-fit cursor-pointer hover:bg-hover text-sm w-40"
         >
           <div className="mx-auto flex">
             <FiPlusSquare className="my-auto mr-2" />
-            New Assistant
+            Neuer Assistent
           </div>
         </Link>
 
         <Divider />
 
-        <Title>Existing Assistants</Title>
+        <Title>Bestehende Assistenten</Title>
         <PersonasTable
           allPersonas={allPersonas}
           editablePersonas={editablePersonas}

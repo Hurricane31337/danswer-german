@@ -106,7 +106,7 @@ export function AdminSidebar({ collections }: { collections: Collection[] }) {
                         </TooltipTrigger>
                         <TooltipContent>
                           <p className="max-w-xs text-text-100 mb-1 p-2 rounded-lg bg-background-900">
-                            Navigate here to update your search settings
+                            Navigiere hierher, um deine Sucheinstellungen zu aktualisieren
                           </p>
                         </TooltipContent>
                       </Tooltip>
@@ -124,7 +124,7 @@ export function AdminSidebar({ collections }: { collections: Collection[] }) {
           key={"danswerVersion"}
         >
           <h2 className="text-xs text-text w-52 font-medium pb-2">
-            Danswer version: {combinedSettings.webVersion}
+            Danswer-Version: {combinedSettings.webVersion}
           </h2>
         </div>
       )}

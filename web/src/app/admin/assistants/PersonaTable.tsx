@@ -21,7 +21,7 @@ import { useUser } from "@/components/user/UserProvider";
 
 function PersonaTypeDisplay({ persona }: { persona: Persona }) {
   if (persona.default_persona) {
-    return <Text>Built-In</Text>;
+    return <Text>Eingebaut</Text>;
   }
 
   if (persona.is_public) {
@@ -29,10 +29,10 @@ function PersonaTypeDisplay({ persona }: { persona: Persona }) {
   }
 
   if (persona.groups.length > 0 || persona.users.length > 0) {
-    return <Text>Shared</Text>;
+    return <Text>Geteilt</Text>;
   }
 
-  return <Text>Personal {persona.owner && <>({persona.owner.email})</>}</Text>;
+  return <Text>Persönlich {persona.owner && <>({persona.owner.email})</>}</Text>;
 }
 
 export function PersonasTable({
@@ -90,7 +90,7 @@ export function PersonasTable({
     if (!response.ok) {
       setPopup({
         type: "error",
-        message: `Failed to update persona order - ${await response.text()}`,
+        message: `Aktualisierung der Persona-Reihenfolge fehlgeschlagen - ${await response.text()}`,
       });
       router.refresh();
     }
@@ -105,13 +105,14 @@ export function PersonasTable({
       {popup}
 
       <Text className="my-2">
-        Assistants will be displayed as options on the Chat / Search interfaces
-        in the order they are displayed below. Assistants marked as hidden will
-        not be displayed. Editable assistants are shown at the top.
+        Assistenten werden als Optionen in den Chat-/Such-Oberflächen in der
+        Reihenfolge angezeigt, in der sie unten angezeigt werden. Als unsichtbar
+        markierte Assistenten werden nicht angezeigt. Bearbeitbare Assistenten
+        werden oben angezeigt.
       </Text>
 
       <DraggableTable
-        headers={["Name", "Description", "Type", "Is Visible", "Delete"]}
+        headers={["Name", "Beschreibung", "Typ", "Ist sichtbar", "Löschen"]}
         isAdmin={isAdmin}
         rows={finalPersonaValues.map((persona) => {
           const isEditable = editablePersonaIds.has(persona.id.toString());
@@ -153,7 +154,7 @@ export function PersonasTable({
                     } else {
                       setPopup({
                         type: "error",
-                        message: `Failed to update persona - ${await response.text()}`,
+                        message: `Persona konnte nicht aktualisiert werden - ${await response.text()}`,
                       });
                     }
                   }
@@ -162,9 +163,9 @@ export function PersonasTable({
               >
                 <div className="my-auto w-12">
                   {!persona.is_visible ? (
-                    <div className="text-error">Hidden</div>
+                    <div className="text-error">Unsichtbar</div>
                   ) : (
-                    "Visible"
+                    "Sichtbar"
                   )}
                 </div>
                 <div className="ml-1 my-auto">
@@ -182,7 +183,7 @@ export function PersonasTable({
                           router.refresh();
                         } else {
                           alert(
-                            `Failed to delete persona - ${await response.text()}`
+                            `Persona konnte nicht gelöscht werden - ${await response.text()}`
                           );
                         }
                       }}

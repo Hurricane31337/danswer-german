@@ -13,15 +13,15 @@ export default function CredentialNotConfigured({
 
   return (
     <p className="text-base text-center w-full text-subtle">
-      Please note that you have not yet configured an LLM provider. You can
-      configure one{" "}
+      Bitte beachte, dass du noch keinen LLM-Anbieter konfiguriert hast. Du
+      kannst{" "}
       <button
         onClick={showConfigureAPIKey}
         className="text-link hover:underline cursor-pointer"
       >
-        here
+        hier
       </button>
-      .
+      {" "}einen einrichten.
     </p>
   );
 }
