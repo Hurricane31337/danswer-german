@@ -104,7 +104,7 @@ function LLMProviderDisplay({
                 });
               }}
             >
-              Set as default
+              Als Standard festlegen
             </div>
           )}
         </div>
@@ -113,11 +113,11 @@ function LLMProviderDisplay({
           <div className="my-auto ml-3">
             {existingLlmProvider.is_default_provider ? (
               <Badge color="orange" size="xs">
-                Default
+                Standard
               </Badge>
             ) : (
               <Badge color="green" size="xs">
-                Enabled
+                Aktiviert
               </Badge>
             )}
           </div>
