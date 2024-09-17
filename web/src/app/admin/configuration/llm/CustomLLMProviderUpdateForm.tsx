@@ -156,8 +156,8 @@ export function CustomLLMProviderUpdateForm({
         if (!response.ok) {
           const errorMsg = (await response.json()).detail;
           const fullErrorMsg = existingLlmProvider
-            ? `Failed to update provider: ${errorMsg}`
-            : `Failed to enable provider: ${errorMsg}`;
+            ? `Anbieter konnte nicht aktualisiert werden: ${errorMsg}`
+            : `Anbieter konnte nicht aktiviert werden: ${errorMsg}`;
           if (setPopup) {
             setPopup({
               type: "error",
@@ -179,7 +179,7 @@ export function CustomLLMProviderUpdateForm({
           );
           if (!setDefaultResponse.ok) {
             const errorMsg = (await setDefaultResponse.json()).detail;
-            const fullErrorMsg = `Failed to set provider as default: ${errorMsg}`;
+            const fullErrorMsg = `Anbieter konnte nicht als Standard festgelegt werden: ${errorMsg}`;
             if (setPopup) {
               setPopup({
                 type: "error",
@@ -196,8 +196,8 @@ export function CustomLLMProviderUpdateForm({
         onClose();
 
         const successMsg = existingLlmProvider
-          ? "Provider updated successfully!"
-          : "Provider enabled successfully!";
+          ? "Anbieter erfolgreich aktualisiert!"
+          : "Anbieter erfolgreich aktiviert!";
         if (setPopup) {
           setPopup({
             type: "success",
@@ -215,17 +215,17 @@ export function CustomLLMProviderUpdateForm({
           <Form className="gap-y-6 mt-8">
             <TextFormField
               name="name"
-              label="Display Name"
-              subtext="A name which you can use to identify this provider when selecting it in the UI."
-              placeholder="Display Name"
+              label="Angezeigter Name"
+              subtext="Ein Name, den du verwenden kannst, um diesen Anbieter bei der Auswahl in der Benutzeroberfläche zu identifizieren."
+              placeholder="Angezeigter Name"
             />
 
             <TextFormField
               name="provider"
-              label="Provider Name"
+              label="Anbietername"
               subtext={
                 <>
-                  Should be one of the providers listed at{" "}
+                  Sollte einer der Anbieter sein, die unter{" "}
                   <a
                     target="_blank"
                     href="https://docs.litellm.ai/docs/providers"
@@ -233,51 +233,51 @@ export function CustomLLMProviderUpdateForm({
                   >
                     https://docs.litellm.ai/docs/providers
                   </a>
-                  .
+                  {" "}aufgeführt sind.
                 </>
               }
-              placeholder="Name of the custom provider"
+              placeholder="Name des benutzerdefinierten Anbieters"
             />
 
             <Divider />
 
             <SubLabel>
-              Fill in the following as is needed. Refer to the LiteLLM
-              documentation for the model provider name specified above in order
-              to determine which fields are required.
+              Fülle das Folgende nach Bedarf aus. Um zu ermitteln welche Felder
+              erforderlich sind, schaue in der LiteLLM-Dokumentation zum oben
+              angegebenen Modell-Anbieternamen nach.
             </SubLabel>
 
             <TextFormField
               name="api_key"
-              label="[Optional] API Key"
-              placeholder="API Key"
+              label="[Optional] API-Schlüssel"
+              placeholder="API-Schlüssel"
               type="password"
             />
 
             <TextFormField
               name="api_base"
-              label="[Optional] API Base"
-              placeholder="API Base"
+              label="[Optional] API-Basis"
+              placeholder="API-Basis"
             />
 
             <TextFormField
               name="api_version"
-              label="[Optional] API Version"
-              placeholder="API Version"
+              label="[Optional] API-Version"
+              placeholder="API-Version"
             />
 
-            <Label>[Optional] Custom Configs</Label>
+            <Label>[Optional] Benutzerdefinierte Konfigurationen</Label>
             <SubLabel>
               <>
                 <div>
-                  Additional configurations needed by the model provider. Are
-                  passed to litellm via environment variables.
+                  Zusätzliche Konfigurationen, die der Modellanbieter benötigt.
+                  Werden über Umgebungsvariablen an litellm übergeben.
                 </div>
 
                 <div className="mt-2">
-                  For example, when configuring the Cloudflare provider, you
-                  would need to set `CLOUDFLARE_ACCOUNT_ID` as the key and your
-                  Cloudflare account ID as the value.
+                  Um zum Beispiel den Cloudflare-Provider zu konfigurieren, musst
+                  du „CLOUDFLARE_ACCOUNT_ID“ als Schlüssel und deine
+                  Cloudflare-Konto-ID als Wert angeben.
                 </div>
               </>
             </SubLabel>
@@ -295,7 +295,7 @@ export function CustomLLMProviderUpdateForm({
                         <div className="flex">
                           <div className="w-full mr-6 border border-border p-3 rounded">
                             <div>
-                              <Label>Key</Label>
+                              <Label>Schlüssel</Label>
                               <Field
                                 name={`custom_config_list[${index}][0]`}
                                 className={`
@@ -318,7 +318,7 @@ export function CustomLLMProviderUpdateForm({
                             </div>
 
                             <div className="mt-3">
-                              <Label>Value</Label>
+                              <Label>Wert</Label>
                               <Field
                                 name={`custom_config_list[${index}][1]`}
                                 className={`
@@ -361,7 +361,7 @@ export function CustomLLMProviderUpdateForm({
                     type="button"
                     icon={FiPlus}
                   >
-                    Add New
+                    Neu hinzufügen
                   </Button>
                 </div>
               )}
@@ -375,18 +375,18 @@ export function CustomLLMProviderUpdateForm({
               values={formikProps.values}
               subtext={
                 <>
-                  List the individual models that you want to make available as
-                  a part of this provider. At least one must be specified. For
-                  the best experience your [Provider Name]/[Model Name] should
-                  match one of the pairs listed{" "}
+                  Liste die einzelnen Modelle auf, die du als Teil dieses Anbieters
+                  verfügbar machen möchten. Mindestens eines muss angegeben werden.
+                  Für ein optimales Erlebnis sollte dein [Anbietername]/[Modellname]
+                  mit einem der{" "}
                   <a
                     target="_blank"
                     href="https://models.litellm.ai/"
                     className="text-link"
                   >
-                    here
+                    hier
                   </a>
-                  .
+                  {" "}aufgeführten Paare übereinstimmen.
                 </>
               }
             />
@@ -396,20 +396,21 @@ export function CustomLLMProviderUpdateForm({
             <TextFormField
               name="default_model_name"
               subtext={`
-              The model to use by default for this provider unless 
-              otherwise specified. Must be one of the models listed 
-              above.`}
-              label="Default Model"
-              placeholder="E.g. gpt-4"
+              Das Modell, das standardmäßig für diesen Anbieter verwendet
+              wird, sofern nicht anders angegeben. Muss eines der oben
+              aufgeführten Modelle sein.`}
+              label="Standard-Modell"
+              placeholder="Z.B. gpt-4"
             />
 
             <TextFormField
               name="fast_default_model_name"
-              subtext={`The model to use for lighter flows like \`LLM Chunk Filter\` 
-                for this provider. If not set, will use 
-                the Default Model configured above.`}
-              label="[Optional] Fast Model"
-              placeholder="E.g. gpt-4"
+              subtext={`Das Modell, das für leichtere Abläufe wie
+                „LLM Chunk Filter“ für diesen Anbieter verwendet
+                wird. Wenn nicht festgelegt, wird das oben konfigurierte
+                Standardmodell verwendet.`}
+              label="[Optional] Schnelles Modell"
+              placeholder="Z.B. gpt-4"
             />
 
             <Divider />
@@ -422,7 +423,7 @@ export function CustomLLMProviderUpdateForm({
             {showAdvancedOptions && (
               <IsPublicGroupSelector
                 formikProps={formikProps}
-                objectName="LLM Provider"
+                objectName="LLM-Anbieter"
                 publicToWhom="all users"
                 enforceGroupSelection={true}
               />
@@ -439,9 +440,9 @@ export function CustomLLMProviderUpdateForm({
                   {isTesting ? (
                     <LoadingAnimation text="Testing" />
                   ) : existingLlmProvider ? (
-                    "Update"
+                    "Aktualisieren"
                   ) : (
-                    "Enable"
+                    "Aktivieren"
                   )}
                 </Button>
                 {existingLlmProvider && (
@@ -460,7 +461,7 @@ export function CustomLLMProviderUpdateForm({
                       );
                       if (!response.ok) {
                         const errorMsg = (await response.json()).detail;
-                        alert(`Failed to delete provider: ${errorMsg}`);
+                        alert(`Anbieter konnte nicht gelöscht werden: ${errorMsg}`);
                         return;
                       }
 
@@ -468,7 +469,7 @@ export function CustomLLMProviderUpdateForm({
                       onClose();
                     }}
                   >
-                    Delete
+                    Löschen
                   </Button>
                 )}
               </div>
