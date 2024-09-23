@@ -3,6 +3,7 @@ from collections.abc import Callable
 from fastapi import APIRouter
 from fastapi import Depends
 from fastapi import HTTPException
+from fastapi import Query
 from sqlalchemy.orm import Session
 
 from danswer.auth.users import current_admin_user
@@ -17,6 +18,7 @@ from danswer.llm.factory import get_default_llms
 from danswer.llm.factory import get_llm
 from danswer.llm.llm_provider_options import fetch_available_well_known_llms
 from danswer.llm.llm_provider_options import WellKnownLLMProviderDescriptor
+from danswer.llm.utils import litellm_exception_to_error_msg
 from danswer.llm.utils import test_llm
 from danswer.server.manage.llm.models import FullLLMProvider
 from danswer.server.manage.llm.models import LLMProviderDescriptor
@@ -77,7 +79,10 @@ def test_llm_configuration(
     )
 
     if error:
-        raise HTTPException(status_code=400, detail=error)
+        client_error_msg = litellm_exception_to_error_msg(
+            error, llm, fallback_to_error_msg=True
+        )
+        raise HTTPException(status_code=400, detail=client_error_msg)
 
 
 @admin_router.post("/test/default")
@@ -118,10 +123,22 @@ def list_llm_providers(
 @admin_router.put("/provider")
 def put_llm_provider(
     llm_provider: LLMProviderUpsertRequest,
+    is_creation: bool = Query(
+        True,
+        description="True if updating an existing provider, False if creating a new one",
+    ),
     _: User | None = Depends(current_admin_user),
     db_session: Session = Depends(get_session),
 ) -> FullLLMProvider:
-    return upsert_llm_provider(llm_provider=llm_provider, db_session=db_session)
+    try:
+        return upsert_llm_provider(
+            llm_provider=llm_provider,
+            db_session=db_session,
+            is_creation=is_creation,
+        )
+    except ValueError as e:
+        logger.exception("Failed to upsert LLM Provider")
+        raise HTTPException(status_code=400, detail=str(e))
 
 
 @admin_router.delete("/provider/{provider_id}")
