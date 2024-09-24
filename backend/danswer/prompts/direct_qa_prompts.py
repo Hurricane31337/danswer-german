@@ -111,6 +111,9 @@ CITATIONS_PROMPT_FOR_TOOL_CALLING = f"""
 Beziehe dich auf die bereitgestellten Kontextdokumente, wenn du mir antwortest.{DEFAULT_IGNORE_STATEMENT} \
 Du solltest immer gleich auf den Punkt kommen und niemals überflüssige Worte verwenden.
 
+CHAT HISTORY:
+{{history_block}}
+
 {{task_prompt}}
 
 {QUESTION_PAT.upper()}

@@ -66,13 +66,13 @@ export const AnimatedToggle = ({
             Agentenbasierte Suche
           </h2>
           <p className="text-text-700 text-sm mb-4">
-            Die leistungsstärkste Suche &mdash; Lasse dich von einem
+            Die leistungsstärkste Suche &ndash; Lasse dich von einem
             KI-Agenten unterstützen, um genau das zu finden, wonach du suchst.
           </p>
           <Divider />
           <h2 className="text-xl text-text-800 font-bold mb-2">Schnelle Suche</h2>
           <p className="text-text-700 text-sm mb-4">
-            Erhalte direkt qualitativ hochwertige Ergebnisse &mdash; optimal
+            Erhalte direkt qualitativ hochwertige Ergebnisse &ndash; optimal
             für den sofortigen Zugriff auf deine Dokumente.
           </p>
           <p className="mt-2 flex text-xs">Shortcut: ({commandSymbol}/)</p>
