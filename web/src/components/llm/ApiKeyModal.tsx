@@ -28,7 +28,7 @@ export const ApiKeyModal = ({ hide }: { hide: () => void }) => {
         <div>
           <div className="mb-5 text-sm">
             Bitte gib unten einen API-Schlüssel ein, um mit der Nutzung
-            von Danswer zu beginnen – du kannst ihn später jederzeit ändern.
+            von Danswer zu beginnen &ndash; du kannst ihn später jederzeit ändern.
             <br />
             Wenn du dich lieber erst einmal umsehen möchtest, kannst du
             <strong onClick={() => hide()} className="text-link cursor-pointer">

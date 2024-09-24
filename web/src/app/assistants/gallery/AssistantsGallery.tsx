@@ -69,7 +69,7 @@ export function AssistantGalleryCard({
                     user.preferences?.chosen_assistants.length === 1
                   ) {
                     setPopup({
-                      message: `Cannot remove "${assistant.name}" - you must have at least one assistant.`,
+                      message: `Kann "${assistant.name}" nicht entfernen – du musst mindestens einen Assistenten haben.`,
                       type: "error",
                     });
                     return;
@@ -78,20 +78,20 @@ export function AssistantGalleryCard({
                   const success = await removeAssistantFromList(assistant.id);
                   if (success) {
                     setPopup({
-                      message: `"${assistant.name}" has been removed from your list.`,
+                      message: `"${assistant.name}" wurde aus deiner Liste entfernt.`,
                       type: "success",
                     });
                     router.refresh();
                   } else {
                     setPopup({
-                      message: `"${assistant.name}" could not be removed from your list.`,
+                      message: `"${assistant.name}" konnte nicht aus deiner Liste entfernt werden.`,
                       type: "error",
                     });
                   }
                 }}
                 size="xs"
               >
-                Deselect
+                Abwählen
               </Button>
             ) : (
               <Button
@@ -106,13 +106,13 @@ export function AssistantGalleryCard({
                   const success = await addAssistantToList(assistant.id);
                   if (success) {
                     setPopup({
-                      message: `"${assistant.name}" has been added to your list.`,
+                      message: `"${assistant.name}" wurde zu deiner Liste hinzugefügt.`,
                       type: "success",
                     });
                     router.refresh();
                   } else {
                     setPopup({
-                      message: `"${assistant.name}" could not be added to your list.`,
+                      message: `"${assistant.name}" konnte nicht zu deiner Liste hinzugefügt werden.`,
                       type: "error",
                     });
                   }
@@ -120,7 +120,7 @@ export function AssistantGalleryCard({
                 size="xs"
                 color="green"
               >
-                Add
+                Hinzufügen
               </Button>
             )}
           </div>
@@ -175,7 +175,7 @@ export function AssistantsGallery({
     <>
       {popup}
       <div className="mx-auto w-searchbar-xs 2xl:w-searchbar-sm 3xl:w-searchbar">
-        <AssistantsPageTitle>Assistant Gallery</AssistantsPageTitle>
+        <AssistantsPageTitle>Assistenten-Galerie</AssistantsPageTitle>
 
         <div className="grid grid-cols-2 gap-4 mt-4 mb-6">
           <Button
@@ -183,7 +183,7 @@ export function AssistantsGallery({
             className="w-full py-3 text-lg rounded-full bg-background-800 text-white hover:bg-background-800 transition duration-300 ease-in-out"
             icon={FiPlus}
           >
-            Create New Assistant
+            Neuen Assistenten erstellen
           </Button>
 
           <Button
@@ -191,7 +191,7 @@ export function AssistantsGallery({
             className="w-full hover:border-border-strong py-3 text-lg rounded-full bg-white border border-border shadow text-text-700 hover:bg-background-50 transition duration-300 ease-in-out"
             icon={FiList}
           >
-            Your Assistants
+            Deine Assistenten
           </Button>
         </div>
 
@@ -199,7 +199,7 @@ export function AssistantsGallery({
           <div className="relative">
             <input
               type="text"
-              placeholder="Search assistants..."
+              placeholder="Assistenten suchen..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="
@@ -241,7 +241,7 @@ export function AssistantsGallery({
           nonDefaultAssistants.length == 0 &&
           assistants.length != 0 && (
             <div className="text-text-500">
-              No assistants found for this search
+              Keine Assistenten für diese Suche gefunden
             </div>
           )}
 
@@ -249,11 +249,11 @@ export function AssistantsGallery({
           <>
             <section className="mb-8">
               <h2 className="text-2xl font-semibold mb-2 text-text-900">
-                Default Assistants
+                Standard-Assistenten
               </h2>
 
               <h3 className="text-lg text-text-500">
-                These are assistant created by your admins are and preferred.
+                Diese Assistenten wurden von deinen Admins erstellt und werden bevorzugt.
               </h3>
             </section>
             <div
@@ -282,10 +282,10 @@ export function AssistantsGallery({
           <section className="mt-12 mb-8 flex flex-col gap-y-2">
             <div className="flex flex-col">
               <h2 className="text-2xl font-semibold text-text-900">
-                Other Assistants
+                Andere Assistenten
               </h2>
               <h3 className="text-lg text-text-500">
-                These are community-contributed assistants.
+                Diese Assistenten wurden von der Community beigesteuert.
               </h3>
             </div>
 
