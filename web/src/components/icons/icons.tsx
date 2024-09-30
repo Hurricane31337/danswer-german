@@ -86,9 +86,8 @@ import clickupIcon from "../../../public/Clickup.svg";
 import cohereIcon from "../../../public/Cohere.svg";
 import voyageIcon from "../../../public/Voyage.png";
 import googleIcon from "../../../public/Google.webp";
-
+import xenforoIcon from "../../../public/Xenforo.svg";
 import labelIcon from "../../../public/Label.png";
-
 import { FaRobot } from "react-icons/fa";
 
 export interface IconProps {
@@ -2825,6 +2824,21 @@ export const WindowsIcon = ({
     </svg>
   );
 };
+
+export const XenforoIcon = ({
+  size = 16,
+  className = defaultTailwindCSS,
+}: IconProps) => {
+  return (
+    <div
+      style={{ width: `${size}px`, height: `${size}px` }}
+      className={`w-[${size}px] h-[${size}px] ` + className}
+    >
+      <Image src={xenforoIcon} alt="Logo" width="96" height="96" />
+    </div>
+  );
+};
+
 export const AsanaIcon = ({
   size = 16,
   className = defaultTailwindCSS,
