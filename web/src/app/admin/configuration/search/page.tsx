@@ -72,8 +72,6 @@ function Main() {
     return <ErrorCallout errorTitle="Der Status des Embedding-Modells konnte nicht abgerufen werden" />;
   }
 
-  const currentModelName = currentEmeddingModel?.model_name;
-
   return (
     <div className="h-screen">
       {!futureEmbeddingModel ? (
