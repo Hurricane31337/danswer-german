@@ -17,7 +17,7 @@ import {
 } from "../../../../components/embedding/interfaces";
 import { Connector } from "@/lib/connectors/connectors";
 import { FailedReIndexAttempts } from "@/components/embedding/FailedReIndexAttempts";
-import { PopupSpec, usePopup } from "@/components/admin/connectors/Popup";
+import { usePopup } from "@/components/admin/connectors/Popup";
 
 export default function UpgradingPage({
   futureEmbeddingModel,
@@ -58,7 +58,7 @@ export default function UpgradingPage({
       mutate("/api/search-settings/get-secondary-search-settings");
     } else {
       alert(
-        `Wechsel des Embedding-Modells konnte nicht abgebrochen werden – ${await response.text()}`
+        `Fehler beim Abbrechen des Embedding-Modell-Updates - ${await response.text()}`
       );
     }
     setIsCancelling(false);
@@ -87,25 +87,21 @@ export default function UpgradingPage({
     });
   }, [ongoingReIndexingStatus]);
 
-  if (!failedIndexingStatus) {
-    return <div>No failed index attempts</div>;
-  }
-
   return (
     <>
       {popup}
       {isCancelling && (
         <Modal
           onOutsideClick={() => setIsCancelling(false)}
-          title="Wechsel des Embedding-Modells abbrechen"
+          title="Embedding-Modell-Wechsel abbrechen"
         >
           <div>
             <div>
-              Bist du sicher, dass du abbrechen willst?
+              Bist du sicher, dass du abbrechen möchtest?
               <br />
               <br />
-              Beim Abbruch wird das vorherige Modell wiederhergestellt und alle
-              Fortschritte gehen verloren.
+              Ein Abbruch wird zum vorherigen Modell zurückkehren und alle
+              Fortschritte werden verloren gehen.
             </div>
             <div className="flex">
               <Button onClick={onCancel} className="mt-3 mx-auto" color="green">
@@ -116,12 +112,12 @@ export default function UpgradingPage({
         </Modal>
       )}
 
-      {futureEmbeddingModel && connectors && connectors.length > 0 && (
+      {futureEmbeddingModel && (
         <div>
-          <Title className="mt-8">Aktueller Stand der Aktualisierung</Title>
+          <Title className="mt-8">Aktueller Upgrade-Status</Title>
           <div className="mt-4">
             <div className="italic text-lg mb-2">
-              Aktuell beim Wechseln zu:{" "}
+              Derzeit im Prozess des Wechsels zu:{" "}
               {futureEmbeddingModel.model_name}
             </div>
 
@@ -133,29 +129,48 @@ export default function UpgradingPage({
             >
               Abbrechen
             </Button>
-            {failedIndexingStatus.length > 0 && (
-              <FailedReIndexAttempts
-                failedIndexingStatuses={failedIndexingStatus}
-                setPopup={setPopup}
-              />
-            )}
 
-            <Text className="my-4">
-              Die folgende Tabelle zeigt den Neuindizierungsfortschritt aller
-              vorhandenen Anbindungen. Sobald alle Anbindungen erfolgreich
-              reindiziert wurden, wird das neue Modell für alle Suchanfragen
-              verwendet. Bis dahin werden wir wir das alte Modell nutzen, sodass
-              während der Umstellung keine Ausfallzeiten entstehen.
-            </Text>
+            {connectors && connectors.length > 0 ? (
+              <>
+                {failedIndexingStatus && failedIndexingStatus.length > 0 && (
+                  <FailedReIndexAttempts
+                    failedIndexingStatuses={failedIndexingStatus}
+                    setPopup={setPopup}
+                  />
+                )}
 
-            {isLoadingOngoingReIndexingStatus ? (
-              <ThreeDotsLoader />
-            ) : sortedReindexingProgress ? (
-              <ReindexingProgressTable
-                reindexingProgress={sortedReindexingProgress}
-              />
+                <Text className="my-4">
+                  Die folgende Tabelle zeigt den Re-Indexierungsfortschritt aller
+                  vorhandenen Anbindungen. Sobald alle Anbindungen erfolgreich
+                  re-indexiert wurden, wird das neue Modell für alle Suchanfragen
+                  verwendet. Bis dahin wird das alte Modell verwendet, damit
+                  während dieser Übergangszeit keine Ausfallzeit notwendig ist.
+                </Text>
+
+                {isLoadingOngoingReIndexingStatus ? (
+                  <ThreeDotsLoader />
+                ) : sortedReindexingProgress ? (
+                  <ReindexingProgressTable
+                    reindexingProgress={sortedReindexingProgress}
+                  />
+                ) : (
+                  <ErrorCallout errorTitle="Fehler beim Abrufen des Re-Indexierungsfortschritts" />
+                )}
+              </>
             ) : (
-              <ErrorCallout errorTitle="Fortschritt der Neuindizierung konnte nicht abgerufen werden" />
+              <div className="mt-8 p-6 bg-background-100 border border-border-strong rounded-lg max-w-2xl">
+                <h3 className="text-lg font-semibold mb-2">
+                  Wechsel der Embedding-Modelle
+                </h3>
+                <p className="mb-4 text-text-800">
+                  Du wechselst derzeit die Embedding-Modelle, aber es gibt keine
+                  Anbindungen, die re-indexiert werden müssen. Das bedeutet,
+                  dass der Übergang schnell und nahtlos verläuft!
+                </p>
+                <p className="text-text-600">
+                  Das neue Modell wird bald aktiv sein.
+                </p>
+              </div>
             )}
           </div>
         </div>

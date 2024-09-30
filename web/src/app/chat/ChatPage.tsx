@@ -104,6 +104,7 @@ import {
   classifyAssistants,
   orderAssistantsForUser,
 } from "@/lib/assistants/utils";
+import BlurBackground from "./shared_chat_search/BlurBackground";
 
 const TEMP_USER_MESSAGE_ID = -1;
 const TEMP_ASSISTANT_MESSAGE_ID = -2;
@@ -161,6 +162,9 @@ export function ChatPage({
     user,
     availableAssistants
   );
+  const finalAssistants = user
+    ? orderAssistantsForUser(visibleAssistants, user)
+    : visibleAssistants;
 
   const existingChatSessionAssistantId = selectedChatSession?.persona_id;
   const [selectedAssistant, setSelectedAssistant] = useState<
@@ -215,7 +219,7 @@ export function ChatPage({
   const liveAssistant =
     alternativeAssistant ||
     selectedAssistant ||
-    visibleAssistants[0] ||
+    finalAssistants[0] ||
     availableAssistants[0];
 
   useEffect(() => {
@@ -685,7 +689,7 @@ export function ChatPage({
   useEffect(() => {
     if (messageHistory.length === 0 && chatSessionIdRef.current === null) {
       setSelectedAssistant(
-        visibleAssistants.find((persona) => persona.id === defaultAssistantId)
+        finalAssistants.find((persona) => persona.id === defaultAssistantId)
       );
     }
   }, [defaultAssistantId]);
@@ -1833,6 +1837,7 @@ export function ChatPage({
           onClose={() => setSharingModalVisible(false)}
         />
       )}
+
       <div className="fixed inset-0 flex flex-col text-default">
         <div className="h-[100dvh] overflow-y-hidden">
           <div className="w-full">
@@ -1842,7 +1847,7 @@ export function ChatPage({
                 flex-none
                 fixed
                 left-0
-                z-30
+                z-40
                 bg-background-100
                 h-screen
                 transition-all
@@ -1875,6 +1880,10 @@ export function ChatPage({
               </div>
             </div>
           </div>
+
+          <BlurBackground
+            visible={!untoggled && (showDocSidebar || toggledSidebar)}
+          />
 
           <div
             ref={masterFlexboxRef}
@@ -2384,10 +2393,7 @@ export function ChatPage({
                               showDocs={() => setDocumentSelection(true)}
                               selectedDocuments={selectedDocuments}
                               // assistant stuff
-                              assistantOptions={orderAssistantsForUser(
-                                visibleAssistants,
-                                user
-                              )}
+                              assistantOptions={finalAssistants}
                               selectedAssistant={liveAssistant}
                               setSelectedAssistant={onAssistantChange}
                               setAlternativeAssistant={setAlternativeAssistant}
