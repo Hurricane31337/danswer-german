@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { Button, Divider, Text } from "@tremor/react";
 import { Modal } from "../../Modal";
 import Cookies from "js-cookie";
@@ -12,6 +13,8 @@ import { checkLlmProvider } from "./lib";
 import { User } from "@/lib/types";
 import { useProviderStatus } from "@/components/chat_search/ProviderContext";
 
+import { usePopup } from "@/components/admin/connectors/Popup";
+
 function setWelcomeFlowComplete() {
   Cookies.set(COMPLETED_WELCOME_FLOW_COOKIE, "true", { expires: 365 });
 }
@@ -23,11 +26,12 @@ export function _CompletedWelcomeFlowDummyComponent() {
 
 export function _WelcomeModal({ user }: { user: User | null }) {
   const router = useRouter();
+
   const [canBegin, setCanBegin] = useState(false);
-  const [apiKeyVerified, setApiKeyVerified] = useState<boolean>(false);
   const [providerOptions, setProviderOptions] = useState<
     WellKnownLLMProviderDescriptor[]
   >([]);
+  const { popup, setPopup } = usePopup();
 
   const { refreshProviderInfo } = useProviderStatus();
   const clientSetWelcomeFlowComplete = async () => {
@@ -38,44 +42,54 @@ export function _WelcomeModal({ user }: { user: User | null }) {
 
   useEffect(() => {
     async function fetchProviderInfo() {
-      const { providers, options, defaultCheckSuccessful } =
-        await checkLlmProvider(user);
-      setApiKeyVerified(providers.length > 0 && defaultCheckSuccessful);
+      const { options } = await checkLlmProvider(user);
       setProviderOptions(options);
     }
 
     fetchProviderInfo();
-  }, []);
+  }, [user]);
+
+  // We should always have options
+  if (providerOptions.length === 0) {
+    return null;
+  }
 
   return (
-    <Modal title={"Willkommen bei Danswer!"} width="w-full max-w-3xl">
-      <div>
-        <Text className="mb-4">
-          Danswer bringt all das Wissen deiner Firma an deine
-          Fingerspitzen &ndash; bereit, sofort abgerufen zu werden.
-        </Text>
-        <Text className="mb-4">
-          Um zu beginnen, müssen wir einen API-Schlüssel für den LLM-Anbieter
-          einrichten. Dieser Schlüssel ermöglicht es Danswer, mit dem KI-Modell
-          zu interagieren und intelligente Antworten auf deine Anfragen zu liefern.
-        </Text>
+    <>
+      {popup}
 
-        <div className="max-h-[900px] overflow-y-scroll">
-          <ApiKeyForm
-            hidePopup
-            onSuccess={() => {
-              router.refresh();
-              refreshProviderInfo();
-              setCanBegin(true);
-            }}
-            providerOptions={providerOptions}
-          />
+      <Modal
+        title={"Willkommen bei Danswer!"}
+        width="w-full max-h-[900px] overflow-y-scroll max-w-3xl"
+      >
+        <div>
+          <Text className="mb-4">
+            Danswer bringt all das Wissen deiner Firma an deine
+            Fingerspitzen &ndash; bereit, sofort abgerufen zu werden.
+          </Text>
+          <Text className="mb-4">
+            Um zu beginnen, müssen wir einen API-Schlüssel für den LLM-Anbieter
+            einrichten. Dieser Schlüssel ermöglicht es Danswer, mit dem KI-Modell
+            zu interagieren und intelligente Antworten auf deine Anfragen zu liefern.
+          </Text>
+
+          <div className="max-h-[900px] overflow-y-scroll">
+            <ApiKeyForm
+              setPopup={setPopup}
+              onSuccess={() => {
+                router.refresh();
+                refreshProviderInfo();
+                setCanBegin(true);
+              }}
+              providerOptions={providerOptions}
+            />
+          </div>
+          <Divider />
+          <Button disabled={!canBegin} onClick={clientSetWelcomeFlowComplete}>
+            Loslegen
+          </Button>
         </div>
-        <Divider />
-        <Button disabled={!canBegin} onClick={clientSetWelcomeFlowComplete}>
-          Loslegen
-        </Button>
-      </div>
-    </Modal>
+      </Modal>
+    </>
   );
 }

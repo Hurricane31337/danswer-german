@@ -16,16 +16,11 @@ import {
   SubLabel,
   TextArrayField,
   TextFormField,
-  BooleanFormField,
 } from "@/components/admin/connectors/Field";
 import { useState } from "react";
-import { Bubble } from "@/components/Bubble";
-import { GroupsIcon } from "@/components/icons/icons";
 import { useSWRConfig } from "swr";
-import { useUserGroups } from "@/lib/hooks";
 import { FullLLMProvider } from "./interfaces";
 import { PopupSpec } from "@/components/admin/connectors/Popup";
-import { usePaidEnterpriseFeaturesEnabled } from "@/components/settings/usePaidEnterpriseFeaturesEnabled";
 import * as Yup from "yup";
 import isEqual from "lodash/isEqual";
 import { IsPublicGroupSelector } from "@/components/IsPublicGroupSelector";
@@ -72,6 +67,7 @@ export function CustomLLMProviderUpdateForm({
       : [],
     is_public: existingLlmProvider?.is_public ?? true,
     groups: existingLlmProvider?.groups ?? [],
+    deployment_name: existingLlmProvider?.deployment_name ?? null,
   };
 
   // Setup validation schema if required
@@ -88,6 +84,7 @@ export function CustomLLMProviderUpdateForm({
     // EE Only
     is_public: Yup.boolean().required(),
     groups: Yup.array().of(Yup.number()),
+    deployment_name: Yup.string().nullable(),
   });
 
   return (
@@ -213,6 +210,7 @@ export function CustomLLMProviderUpdateForm({
               label="Angezeigter Name"
               subtext="Ein Name, den du verwenden kannst, um diesen Anbieter bei der Auswahl in der Benutzeroberfläche zu identifizieren."
               placeholder="Angezeigter Name"
+              disabled={existingLlmProvider ? true : false}
             />
 
             <TextFormField
@@ -225,6 +223,7 @@ export function CustomLLMProviderUpdateForm({
                     target="_blank"
                     href="https://docs.litellm.ai/docs/providers"
                     className="text-link"
+                    rel="noreferrer"
                   >
                     https://docs.litellm.ai/docs/providers
                   </a>
@@ -248,6 +247,14 @@ export function CustomLLMProviderUpdateForm({
               placeholder="API-Schlüssel"
               type="password"
             />
+
+            {existingLlmProvider?.deployment_name && (
+              <TextFormField
+                name="deployment_name"
+                label="[Optional] Deployment Name"
+                placeholder="Deployment Name"
+              />
+            )}
 
             <TextFormField
               name="api_base"
@@ -364,27 +371,30 @@ export function CustomLLMProviderUpdateForm({
 
             <Divider />
 
-            <TextArrayField
-              name="model_names"
-              label="Model Names"
-              values={formikProps.values}
-              subtext={
-                <>
-                  Liste die einzelnen Modelle auf, die du als Teil dieses Anbieters
-                  verfügbar machen möchten. Mindestens eines muss angegeben werden.
-                  Für ein optimales Erlebnis sollte dein [Anbietername]/[Modellname]
-                  mit einem der{" "}
-                  <a
-                    target="_blank"
-                    href="https://models.litellm.ai/"
-                    className="text-link"
-                  >
-                    hier
-                  </a>
-                  {" "}aufgeführten Paare übereinstimmen.
-                </>
-              }
-            />
+            {!existingLlmProvider?.deployment_name && (
+              <TextArrayField
+                name="model_names"
+                label="Model Names"
+                values={formikProps.values}
+                subtext={
+                  <>
+                    Liste die einzelnen Modelle auf, die du als Teil dieses Anbieters
+                    verfügbar machen möchten. Mindestens eines muss angegeben werden.
+                    Für ein optimales Erlebnis sollte dein [Anbietername]/[Modellname]
+                    mit einem der{" "}
+                    <a
+                      target="_blank"
+                      href="https://models.litellm.ai/"
+                      className="text-link"
+                      rel="noreferrer"
+                    >
+                      hier
+                    </a>
+                    {" "}aufgeführten Paare übereinstimmen.
+                  </>
+                }
+              />
+            )}
 
             <Divider />
 
@@ -398,15 +408,17 @@ export function CustomLLMProviderUpdateForm({
               placeholder="Z.B. gpt-4"
             />
 
-            <TextFormField
-              name="fast_default_model_name"
-              subtext={`Das Modell, das für leichtere Abläufe wie
+            {!existingLlmProvider?.deployment_name && (
+              <TextFormField
+                name="fast_default_model_name"
+                subtext={`Das Modell, das für leichtere Abläufe wie
                 „LLM Chunk Filter“ für diesen Anbieter verwendet
                 wird. Wenn nicht festgelegt, wird das oben konfigurierte
                 Standardmodell verwendet.`}
-              label="[Optional] Schnelles Modell"
-              placeholder="Z.B. gpt-4"
-            />
+                label="[Optional] Schnelles Modell"
+                placeholder="E.g. gpt-4"
+              />
+            )}
 
             <Divider />
 

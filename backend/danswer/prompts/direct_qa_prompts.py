@@ -74,7 +74,8 @@ EMPTY_SAMPLE_JSON = {
 JSON_PROMPT = f"""
 {{system_prompt}}
 {REQUIRE_JSON}
-{{context_block}}{{history_block}}{{task_prompt}}
+{{context_block}}{{history_block}}
+{{task_prompt}}
 
 BEISPIEL-ANTWORT:
 ```
@@ -93,6 +94,7 @@ BEISPIEL-ANTWORT:
 # "conversation history" block
 CITATIONS_PROMPT = f"""
 Beziehe dich auf die folgenden Kontext-Dokumente wenn du mir antwortest.{DEFAULT_IGNORE_STATEMENT}
+
 KONTEXT:
 {GENERAL_SEP_PAT}
 {{context_docs_str}}
@@ -111,10 +113,7 @@ CITATIONS_PROMPT_FOR_TOOL_CALLING = f"""
 Beziehe dich auf die bereitgestellten Kontextdokumente, wenn du mir antwortest.{DEFAULT_IGNORE_STATEMENT} \
 Du solltest immer gleich auf den Punkt kommen und niemals überflüssige Worte verwenden.
 
-CHAT HISTORY:
-{{history_block}}
-
-{{task_prompt}}
+{{history_block}}{{task_prompt}}
 
 {QUESTION_PAT.upper()}
 {{user_query}}
