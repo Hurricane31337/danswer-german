@@ -113,8 +113,8 @@ beantworten und zusätzliche Informationen oder Details würden wenig bis keinen
 - Die Anfrage ist eine Aufgabe, für deren Bearbeitung keine zusätzlichen Informationen \
 erforderlich sind.
 
-{GENERAL_SEP_PAT}
 Konversationsverlauf:
+{GENERAL_SEP_PAT}
 {{chat_history}}
 {GENERAL_SEP_PAT}
 
@@ -139,8 +139,8 @@ Wenn sich das Thema eindeutig ändert, ignoriere die vorherigen Nachrichten.
 Entferne alle Informationen, die für die Suchaufgabe nicht relevant sind.
 Wenn die Folgenachricht ein Fehler oder ein Codeausschnitt ist, wiederhole dieselbe Eingabe EXAKT.
 
-{GENERAL_SEP_PAT}
 Chatverlauf:
+{GENERAL_SEP_PAT}
 {{chat_history}}
 {GENERAL_SEP_PAT}
 
@@ -157,8 +157,8 @@ Wenn es einen klaren Themenwechsel gibt, stelle sicher, dass die Abfrage das neu
 widerspiegelt.
 Entferne alle Informationen, die für die Internetsuche nicht relevant sind.
 
-{GENERAL_SEP_PAT}
 Chatverlauf:
+{GENERAL_SEP_PAT}
 {{chat_history}}
 {GENERAL_SEP_PAT}
 
@@ -217,6 +217,7 @@ WICHTIG: VERSUCHE NICHT MEHR ALS 5 WÖRTER ZU VERWENDEN UND FASSE DICH SICH SO K
 Fokussiere den Namen auf die wichtigen Schlüsselwörter, um das Thema des Gesprächs zu vermitteln.
 
 Chatverlauf:
+{GENERAL_SEP_PAT}
 {{chat_history}}
 {GENERAL_SEP_PAT}
 
