@@ -16,6 +16,7 @@ export function ChangeCredentialsModal({
   onDeleted,
   useFileUpload,
   isProxy = false,
+  isAzure = false,
 }: {
   provider: CloudEmbeddingProvider;
   onConfirm: () => void;
@@ -23,6 +24,7 @@ export function ChangeCredentialsModal({
   onDeleted: () => void;
   useFileUpload: boolean;
   isProxy?: boolean;
+  isAzure?: boolean;
 }) {
   const [apiKey, setApiKey] = useState("");
   const [apiUrl, setApiUrl] = useState("");
@@ -151,7 +153,6 @@ export function ChangeCredentialsModal({
       );
     }
   };
-
   return (
     <Modal
       width="max-w-3xl"
@@ -160,132 +161,130 @@ export function ChangeCredentialsModal({
       onOutsideClick={onCancel}
     >
       <>
-        <p className="mb-4">
-          Du kannst deine Konfiguration ändern, indem du einen neuen API-Schlüssel {isProxy ? " oder eine neue API-URL" : ""} angibst.
-        </p>
+        {!isAzure && (
+          <>
+            <p className="mb-4">
+              Du kannst deine Konfiguration ändern, indem du einen neuen API-Schlüssel {isProxy ? " oder eine neue API-URL" : ""} angibst.
+            </p>
 
-        <div className="mb-4 flex flex-col gap-y-2">
-          <Label className="mt-2">API-Schlüssel</Label>
-          {useFileUpload ? (
-            <>
-              <Label className="mt-2">JSON-Datei hochladen</Label>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".json"
-                onChange={handleFileUpload}
-                className="text-lg w-full p-1"
-              />
-              {fileName && <p>Hochgeladene Datei: {fileName}</p>}
-            </>
-          ) : (
-            <>
-              <input
-                className={`
-                    border 
-                    border-border 
-                    rounded 
-                    w-full 
-                    py-2 
-                    px-3 
-                    bg-background-emphasis
-                `}
-                value={apiKey}
-                onChange={(e: any) => setApiKey(e.target.value)}
-                placeholder="API-URL hier einfügen"
-              />
-            </>
-          )}
+            <div className="mb-4 flex flex-col gap-y-2">
+              <Label className="mt-2">API-Schlüssel</Label>
+              {useFileUpload ? (
+                <>
+                  <Label className="mt-2">JSON-Datei hochladen</Label>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".json"
+                    onChange={handleFileUpload}
+                    className="text-lg w-full p-1"
+                  />
+                  {fileName && <p>Hochgeladene Datei: {fileName}</p>}
+                </>
+              ) : (
+                <>
+                  <input
+                    className={`
+                        border 
+                        border-border 
+                        rounded 
+                        w-full 
+                        py-2 
+                        px-3 
+                        bg-background-emphasis
+                    `}
+                    value={apiKey}
+                    onChange={(e: any) => setApiKey(e.target.value)}
+                    placeholder="API-URL hier einfügen"
+                  />
+                </>
+              )}
 
-          {isProxy && (
-            <>
-              <Label className="mt-2">API-URL</Label>
+              {isProxy && (
+                <>
+                  <Label className="mt-2">API-URL</Label>
 
-              <input
-                className={`
-                    border 
-                    border-border 
-                    rounded 
-                    w-full 
-                    py-2 
-                    px-3 
-                    bg-background-emphasis
-                `}
-                value={apiUrl}
-                onChange={(e: any) => setApiUrl(e.target.value)}
-                placeholder="API-Schlüssel hier einfügen"
-              />
+                  <input
+                    className={`
+                        border 
+                        border-border 
+                        rounded 
+                        w-full 
+                        py-2 
+                        px-3 
+                        bg-background-emphasis
+                    `}
+                    value={apiUrl}
+                    onChange={(e: any) => setApiUrl(e.target.value)}
+                    placeholder="API-Schlüssel hier einfügen"
+                  />
 
-              {deletionError && (
-                <Callout title="Fehler" color="red" className="mt-4">
-                  {deletionError}
+                  {deletionError && (
+                    <Callout title="Fehler" color="red" className="mt-4">
+                      {deletionError}
+                    </Callout>
+                  )}
+
+                  <div>
+                    <Label className="mt-2">Test Model</Label>
+                    <p>
+                      Da du einen liteLLM-Proxy verwendest, benötigen wir einen
+                      Modellnamen, mit dem wir die Verbindung testen können.
+                    </p>
+                  </div>
+                  <input
+                    className={`
+                     border 
+                     border-border 
+                     rounded 
+                     w-full 
+                     py-2 
+                     px-3 
+                     bg-background-emphasis
+                 `}
+                    value={modelName}
+                    onChange={(e: any) => setModelName(e.target.value)}
+                    placeholder="Modellnamen hier einfügen"
+                  />
+                </>
+              )}
+
+              {testError && (
+                <Callout title="Fehler" color="red" className="my-4">
+                  {testError}
                 </Callout>
               )}
 
-              <div>
-                <Label className="mt-2">Test Model</Label>
-                <p>
-				  Da du einen liteLLM-Proxy verwendest, benötigen wir einen
-				  Modellnamen, mit dem wir die Verbindung testen können.
-                </p>
-              </div>
-              <input
-                className={`
-                 border 
-                 border-border 
-                 rounded 
-                 w-full 
-                 py-2 
-                 px-3 
-                 bg-background-emphasis
-             `}
-                value={modelName}
-                onChange={(e: any) => setModelName(e.target.value)}
-                placeholder="API-URL hier einfügen"
-              />
+              <Button
+                className="mr-auto mt-4"
+                color="blue"
+                onClick={() => handleSubmit()}
+                disabled={!apiKey}
+              >
+                Konfiguration aktualisieren
+              </Button>
 
-              {deletionError && (
-                <Callout title="Fehler" color="red" className="mt-4">
-                  {deletionError}
-                </Callout>
-              )}
-            </>
-          )}
-
-          {testError && (
-            <Callout title="Fehler" color="red" className="my-4">
-              {testError}
-            </Callout>
-          )}
-
-          <Button
-            className="mr-auto mt-4"
-            color="blue"
-            onClick={() => handleSubmit()}
-            disabled={!apiKey}
-          >
-            Konfiguration aktualisieren
-          </Button>
-
-          <Divider />
+              <Divider />
+            </div>
+          </>
+        )}
 
           <Subtitle className="mt-4 font-bold text-lg mb-2">
-		    Du kannst deine Konfiguration auch löschen.
+            Du kannst deine Konfiguration auch löschen.
           </Subtitle>
           <Text className="mb-2">
             Das ist nur möglich, wenn du schon auf eine andere Embedding-Art
             umgestiegen bist!
           </Text>
 
-          <Button className="mr-auto" onClick={handleDelete} color="red">
-            Konfiguration löschen
-          </Button>
-          {deletionError && (
-            <Callout title="Fehler" color="red" className="mt-4">
-              {deletionError}
-            </Callout>
-          )}
-        </div>
+        <Button className="mr-auto" onClick={handleDelete} color="red">
+          Konfiguration löschen
+        </Button>
+        {deletionError && (
+          <Callout title="Fehler" color="red" className="mt-4">
+            {deletionError}
+          </Callout>
+        )}
       </>
     </Modal>
   );
