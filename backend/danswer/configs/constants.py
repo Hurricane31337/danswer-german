@@ -31,6 +31,9 @@ DISABLED_GEN_AI_MSG = (
     "Du kannst Danswer weiterhin als Suchmaschine verwenden."
 )
 
+# Prefix used for all tenant ids
+TENANT_ID_PREFIX = "tenant_"
+
 # Postgres connection constants for application_name
 POSTGRES_WEB_APP_NAME = "web"
 POSTGRES_INDEXER_APP_NAME = "indexer"
@@ -114,6 +117,9 @@ class DocumentSource(str, Enum):
     XENFORO = "xenforo"
     LABEL_MANUAL = "label_manual"
     NOT_APPLICABLE = "not_applicable"
+
+
+DocumentSourceRequiringTenantContext: list[DocumentSource] = [DocumentSource.FILE]
 
 
 class NotificationType(str, Enum):

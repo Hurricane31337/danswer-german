@@ -9,8 +9,12 @@ import { redirect } from "next/navigation";
 import { BackendChatSession } from "../../interfaces";
 import { SharedChatDisplay } from "./SharedChatDisplay";
 import { Persona } from "@/app/admin/assistants/interfaces";
-import { fetchAssistantsSS } from "@/lib/assistants/fetchAssistantsSS";
+import {
+  FetchAssistantsResponse,
+  fetchAssistantsSS,
+} from "@/lib/assistants/fetchAssistantsSS";
 import FunctionalHeader from "@/components/chat_search/Header";
+import { defaultPersona } from "@/app/admin/assistants/lib";
 
 async function getSharedChat(chatId: string) {
   const response = await fetchSS(
@@ -43,7 +47,8 @@ export default async function Page({ params }: { params: { chatId: string } }) {
   const authTypeMetadata = results[0] as AuthTypeMetadata | null;
   const user = results[1] as User | null;
   const chatSession = results[2] as BackendChatSession | null;
-  const [availableAssistants, _] = results[3] as [Persona[], string | null];
+  const assistantsResponse = results[3] as FetchAssistantsResponse | null;
+  const [availableAssistants, _] = assistantsResponse ?? [[], null];
 
   const authDisabled = authTypeMetadata?.authType === "disabled";
   if (!authDisabled && !user) {
@@ -54,6 +59,12 @@ export default async function Page({ params }: { params: { chatId: string } }) {
     return redirect("/auth/waiting-on-verification");
   }
 
+  const persona: Persona =
+    chatSession?.persona_id && availableAssistants?.length
+      ? (availableAssistants.find((p) => p.id === chatSession.persona_id) ??
+        defaultPersona)
+      : (availableAssistants?.[0] ?? defaultPersona);
+
   return (
     <div>
       <div className="absolute top-0 z-40 w-full">
@@ -61,10 +72,7 @@ export default async function Page({ params }: { params: { chatId: string } }) {
       </div>
 
       <div className="flex relative bg-background text-default overflow-hidden pt-16 h-screen">
-        <SharedChatDisplay
-          chatSession={chatSession}
-          availableAssistants={availableAssistants}
-        />
+        <SharedChatDisplay chatSession={chatSession} persona={persona!} />
       </div>
     </div>
   );

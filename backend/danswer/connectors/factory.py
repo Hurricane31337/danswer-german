@@ -4,6 +4,7 @@ from typing import Type
 from sqlalchemy.orm import Session
 
 from danswer.configs.constants import DocumentSource
+from danswer.configs.constants import DocumentSourceRequiringTenantContext
 from danswer.connectors.asana.connector import AsanaConnector
 from danswer.connectors.axero.connector import AxeroConnector
 from danswer.connectors.blob.connector import BlobStorageConnector
@@ -144,11 +145,15 @@ def instantiate_connector(
     input_type: InputType,
     connector_specific_config: dict[str, Any],
     credential: Credential,
+    tenant_id: str | None = None,
 ) -> BaseConnector:
     logger.info(f"Instantiating connector for source: {source}, input_type: {input_type}")
 
     connector_class = identify_connector_class(source, input_type)
     logger.info(f"Identified connector class: {connector_class.__name__}")
+
+    if source in DocumentSourceRequiringTenantContext:
+        connector_specific_config["tenant_id"] = tenant_id
 
     connector = connector_class(**connector_specific_config)
     logger.info(f"Instantiated connector: {connector}")
