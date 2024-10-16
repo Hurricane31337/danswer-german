@@ -949,6 +949,7 @@ For example, specifying .*-support.* as a "channel" will cause the connector to 
       },
     ],
     overrideDefaultFreq: 60 * 60 * 24,
+    advanced_values: [],
   },
 };
 export function createConnectorInitialValues(
