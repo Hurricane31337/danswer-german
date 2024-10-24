@@ -1,6 +1,6 @@
 "use client";
 
-import { FetchError, errorHandlingFetcher } from "@/lib/fetcher";
+import { errorHandlingFetcher } from "@/lib/fetcher";
 import useSWR, { mutate } from "swr";
 import { HealthCheckBanner } from "@/components/health/healthcheck";
 
@@ -40,8 +40,6 @@ import {
   useGoogleDriveCredentials,
 } from "./pages/utils/hooks";
 import { Formik } from "formik";
-import { AccessTypeForm } from "@/components/admin/connectors/AccessTypeForm";
-import { AccessTypeGroupSelector } from "@/components/admin/connectors/AccessTypeGroupSelector";
 import NavigationRow from "./NavigationRow";
 import { useRouter } from "next/navigation";
 export interface AdvancedConfig {
@@ -270,6 +268,7 @@ export default function AddConnector({
             advancedConfiguration.pruneFreq,
             advancedConfiguration.indexingStart,
             values.access_type == "public",
+            groups,
             name
           );
           if (response) {
@@ -431,10 +430,8 @@ export default function AddConnector({
                   config={configuration}
                   setSelectedFiles={setSelectedFiles}
                   selectedFiles={selectedFiles}
+                  connector={connector}
                 />
-
-                <AccessTypeForm connector={connector} />
-                <AccessTypeGroupSelector />
               </Card>
             )}
 
