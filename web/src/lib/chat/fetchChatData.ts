@@ -47,6 +47,8 @@ interface FetchChatDataResult {
   finalDocumentSidebarInitialWidth?: number;
   shouldShowWelcomeModal: boolean;
   userInputPrompts: InputPrompt[];
+  hasAnyConnectors: boolean;
+  hasImageCompatibleModel: boolean;
 }
 
 export async function fetchChatData(searchParams: {
@@ -136,8 +138,10 @@ export async function fetchChatData(searchParams: {
     );
   }
 
-  // Larger ID -> created later
-  chatSessions.sort((a, b) => (a.id > b.id ? -1 : 1));
+  chatSessions.sort(
+    (a, b) =>
+      new Date(b.time_created).getTime() - new Date(a.time_created).getTime()
+  );
 
   let documentSets: DocumentSet[] = [];
   if (documentSetsResponse?.ok) {
@@ -249,5 +253,7 @@ export async function fetchChatData(searchParams: {
     toggleSidebar,
     shouldShowWelcomeModal,
     userInputPrompts,
+    hasAnyConnectors,
+    hasImageCompatibleModel,
   };
 }
