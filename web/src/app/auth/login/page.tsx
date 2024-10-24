@@ -11,7 +11,6 @@ import { SignInButton } from "./SignInButton";
 import { EmailPasswordForm } from "./EmailPasswordForm";
 import { Card, Title, Text } from "@tremor/react";
 import Link from "next/link";
-
 import { LoginText } from "./LoginText";
 import { getSecondsUntilExpiration } from "@/lib/time";
 import AuthFlowContainer from "@/components/auth/AuthFlowContainer";
@@ -79,7 +78,7 @@ const Page = async ({
         <HealthCheckBanner />
       </div>
 
-      <div>
+      <div className="flex flex-col w-full justify-center">
         {authUrl && authTypeMetadata && (
           <>
             <h2 className="text-center text-xl text-strong font-bold">
@@ -91,6 +90,26 @@ const Page = async ({
               authType={authTypeMetadata?.authType}
             />
           </>
+        )}
+
+        {authTypeMetadata?.authType === "cloud" && (
+          <div className="mt-4 w-full justify-center">
+            <div className="flex items-center w-full my-4">
+              <div className="flex-grow border-t border-gray-300"></div>
+              <span className="px-4 text-gray-500">or</span>
+              <div className="flex-grow border-t border-gray-300"></div>
+            </div>
+            <EmailPasswordForm shouldVerify={true} />
+
+            <div className="flex">
+              <Text className="mt-4 mx-auto">
+                Don&apos;t have an account?{" "}
+                <Link href="/auth/signup" className="text-link font-medium">
+                  Create an account
+                </Link>
+              </Text>
+            </div>
+          </div>
         )}
 
         {authTypeMetadata?.authType === "basic" && (
