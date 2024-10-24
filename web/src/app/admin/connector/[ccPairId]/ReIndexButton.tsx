@@ -95,12 +95,14 @@ export function ReIndexButton({
   connectorId,
   credentialId,
   isDisabled,
+  isIndexing,
   isDeleting,
 }: {
   ccPairId: number;
   connectorId: number;
   credentialId: number;
   isDisabled: boolean;
+  isIndexing: boolean;
   isDeleting: boolean;
 }) {
   const { popup, setPopup } = usePopup();
@@ -128,10 +130,12 @@ export function ReIndexButton({
         disabled={isDisabled || isDeleting}
         tooltip={
           isDeleting
-            ? "Während der die Anbindung löscht, ist keine Indizierung möglich"
-            : isDisabled
-              ? "Die Anbindung muss vor der Indizierung erneut aktiviert werden"
-              : undefined
+            ? "Kann nicht indizieren, während die Anbindung gelöscht wird"
+            : isIndexing
+              ? "Indizierung läuft bereits"
+              : isDisabled
+                ? "Anbindung muss vor der Indizierung wieder aktiviert werden"
+                : undefined
         }
       >
         Indizieren

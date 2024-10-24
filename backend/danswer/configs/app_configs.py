@@ -115,10 +115,16 @@ VESPA_HOST = os.environ.get("VESPA_HOST") or "localhost"
 VESPA_CONFIG_SERVER_HOST = os.environ.get("VESPA_CONFIG_SERVER_HOST") or VESPA_HOST
 VESPA_PORT = os.environ.get("VESPA_PORT") or "8081"
 VESPA_TENANT_PORT = os.environ.get("VESPA_TENANT_PORT") or "19071"
+
+VESPA_CLOUD_URL = os.environ.get("VESPA_CLOUD_URL", "")
+
 # The default below is for dockerized deployment
 VESPA_DEPLOYMENT_ZIP = (
     os.environ.get("VESPA_DEPLOYMENT_ZIP") or "/app/danswer/vespa-app.zip"
 )
+VESPA_CLOUD_CERT_PATH = os.environ.get("VESPA_CLOUD_CERT_PATH")
+VESPA_CLOUD_KEY_PATH = os.environ.get("VESPA_CLOUD_KEY_PATH")
+
 # Number of documents in a batch during indexing (further batching done by chunks before passing to bi-encoder)
 try:
     INDEX_BATCH_SIZE = int(os.environ.get("INDEX_BATCH_SIZE", 16))
@@ -192,6 +198,41 @@ try:
 except ValueError:
     CELERY_BROKER_POOL_LIMIT = CELERY_BROKER_POOL_LIMIT_DEFAULT
 
+CELERY_WORKER_LIGHT_CONCURRENCY_DEFAULT = 24
+try:
+    CELERY_WORKER_LIGHT_CONCURRENCY = int(
+        os.environ.get(
+            "CELERY_WORKER_LIGHT_CONCURRENCY", CELERY_WORKER_LIGHT_CONCURRENCY_DEFAULT
+        )
+    )
+except ValueError:
+    CELERY_WORKER_LIGHT_CONCURRENCY = CELERY_WORKER_LIGHT_CONCURRENCY_DEFAULT
+
+CELERY_WORKER_LIGHT_PREFETCH_MULTIPLIER_DEFAULT = 8
+try:
+    CELERY_WORKER_LIGHT_PREFETCH_MULTIPLIER = int(
+        os.environ.get(
+            "CELERY_WORKER_LIGHT_PREFETCH_MULTIPLIER",
+            CELERY_WORKER_LIGHT_PREFETCH_MULTIPLIER_DEFAULT,
+        )
+    )
+except ValueError:
+    CELERY_WORKER_LIGHT_PREFETCH_MULTIPLIER = (
+        CELERY_WORKER_LIGHT_PREFETCH_MULTIPLIER_DEFAULT
+    )
+
+CELERY_WORKER_INDEXING_CONCURRENCY_DEFAULT = 1
+try:
+    env_value = os.environ.get("CELERY_WORKER_INDEXING_CONCURRENCY")
+    if not env_value:
+        env_value = os.environ.get("NUM_INDEXING_WORKERS")
+
+    if not env_value:
+        env_value = str(CELERY_WORKER_INDEXING_CONCURRENCY_DEFAULT)
+    CELERY_WORKER_INDEXING_CONCURRENCY = int(env_value)
+except ValueError:
+    CELERY_WORKER_INDEXING_CONCURRENCY = CELERY_WORKER_INDEXING_CONCURRENCY_DEFAULT
+
 #####
 # Connector Configs
 #####
@@ -245,12 +286,6 @@ CONFLUENCE_CONNECTOR_LABELS_TO_SKIP = [
 # Avoid to get archived pages
 CONFLUENCE_CONNECTOR_INDEX_ARCHIVED_PAGES = (
     os.environ.get("CONFLUENCE_CONNECTOR_INDEX_ARCHIVED_PAGES", "").lower() == "true"
-)
-
-# Save pages labels as Danswer metadata tags
-# The reason to skip this would be to reduce the number of calls to Confluence due to rate limit concerns
-CONFLUENCE_CONNECTOR_SKIP_LABEL_INDEXING = (
-    os.environ.get("CONFLUENCE_CONNECTOR_SKIP_LABEL_INDEXING", "").lower() == "true"
 )
 
 # Attachments exceeding this size will not be retrieved (in bytes)
@@ -428,6 +463,10 @@ AZURE_DALLE_DEPLOYMENT_NAME = os.environ.get("AZURE_DALLE_DEPLOYMENT_NAME")
 
 # Multi-tenancy configuration
 MULTI_TENANT = os.environ.get("MULTI_TENANT", "").lower() == "true"
+
+# Use managed Vespa (Vespa Cloud). If set, must also set VESPA_CLOUD_URL, VESPA_CLOUD_CERT_PATH and VESPA_CLOUD_KEY_PATH
+MANAGED_VESPA = os.environ.get("MANAGED_VESPA", "").lower() == "true"
+
 ENABLE_EMAIL_INVITES = os.environ.get("ENABLE_EMAIL_INVITES", "").lower() == "true"
 
 # Security and authentication
