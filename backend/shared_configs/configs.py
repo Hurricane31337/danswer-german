@@ -1,4 +1,3 @@
-import contextvars
 import os
 from typing import List
 from urllib.parse import urlparse
@@ -129,12 +128,13 @@ else:
     CORS_ALLOWED_ORIGIN = ["*"]
 
 
+# Multi-tenancy configuration
+MULTI_TENANT = os.environ.get("MULTI_TENANT", "").lower() == "true"
+
 POSTGRES_DEFAULT_SCHEMA = os.environ.get("POSTGRES_DEFAULT_SCHEMA") or "public"
 
-CURRENT_TENANT_ID_CONTEXTVAR = contextvars.ContextVar(
-    "current_tenant_id", default=POSTGRES_DEFAULT_SCHEMA
-)
-
+# Prefix used for all tenant ids
+TENANT_ID_PREFIX = "tenant_"
 
 SUPPORTED_EMBEDDING_MODELS = [
     # Cloud-based models
