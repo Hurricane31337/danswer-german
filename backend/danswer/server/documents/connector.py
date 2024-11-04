@@ -9,13 +9,13 @@ from fastapi import Query
 from fastapi import Request
 from fastapi import Response
 from fastapi import UploadFile
+from google.oauth2.credentials import Credentials  # type: ignore
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from danswer.auth.users import current_admin_user
 from danswer.auth.users import current_curator_or_admin_user
 from danswer.auth.users import current_user
-from danswer.background.celery.celery_redis import RedisConnectorIndexing
 from danswer.background.celery.celery_utils import get_deletion_attempt_snapshot
 from danswer.background.celery.tasks.indexing.tasks import try_creating_indexing_task
 from danswer.background.celery.versioned_apps.primary import app as primary_app
@@ -35,6 +35,7 @@ from danswer.connectors.gmail.connector_auth import (
 )
 from danswer.connectors.gmail.connector_auth import upsert_google_app_gmail_cred
 from danswer.connectors.google_drive.connector_auth import build_service_account_creds
+from danswer.connectors.google_drive.connector_auth import DB_CREDENTIALS_DICT_TOKEN_KEY
 from danswer.connectors.google_drive.connector_auth import delete_google_app_cred
 from danswer.connectors.google_drive.connector_auth import delete_service_account_key
 from danswer.connectors.google_drive.connector_auth import get_auth_url
@@ -43,13 +44,13 @@ from danswer.connectors.google_drive.connector_auth import (
     get_google_drive_creds_for_authorized_user,
 )
 from danswer.connectors.google_drive.connector_auth import get_service_account_key
+from danswer.connectors.google_drive.connector_auth import GOOGLE_DRIVE_SCOPES
 from danswer.connectors.google_drive.connector_auth import (
     update_credential_access_tokens,
 )
 from danswer.connectors.google_drive.connector_auth import upsert_google_app_cred
 from danswer.connectors.google_drive.connector_auth import upsert_service_account_key
 from danswer.connectors.google_drive.connector_auth import verify_csrf
-from danswer.connectors.google_drive.constants import DB_CREDENTIALS_DICT_TOKEN_KEY
 from danswer.db.connector import create_connector
 from danswer.db.connector import delete_connector
 from danswer.db.connector import fetch_connector_by_id
@@ -83,6 +84,7 @@ from danswer.db.search_settings import get_current_search_settings
 from danswer.db.search_settings import get_secondary_search_settings
 from danswer.file_store.file_store import get_default_file_store
 from danswer.key_value_store.interface import KvKeyNotFoundError
+from danswer.redis.redis_connector import RedisConnector
 from danswer.redis.redis_pool import get_redis_client
 from danswer.server.documents.models import AuthStatus
 from danswer.server.documents.models import AuthUrl
@@ -294,7 +296,7 @@ def upsert_service_account_credential(
     try:
         credential_base = build_service_account_creds(
             DocumentSource.GOOGLE_DRIVE,
-            delegated_user_email=service_account_credential_request.google_drive_delegated_user,
+            primary_admin_email=service_account_credential_request.google_drive_primary_admin,
         )
     except KvKeyNotFoundError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -320,7 +322,7 @@ def upsert_gmail_service_account_credential(
     try:
         credential_base = build_service_account_creds(
             DocumentSource.GMAIL,
-            delegated_user_email=service_account_credential_request.gmail_delegated_user,
+            primary_admin_email=service_account_credential_request.gmail_delegated_user,
         )
     except KvKeyNotFoundError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -348,25 +350,12 @@ def check_drive_tokens(
         return AuthStatus(authenticated=False)
     token_json_str = str(db_credentials.credential_json[DB_CREDENTIALS_DICT_TOKEN_KEY])
     google_drive_creds = get_google_drive_creds_for_authorized_user(
-        token_json_str=token_json_str
+        token_json_str=token_json_str,
+        scopes=GOOGLE_DRIVE_SCOPES,
     )
     if google_drive_creds is None:
         return AuthStatus(authenticated=False)
     return AuthStatus(authenticated=True)
-
-
-@router.get("/admin/connector/google-drive/authorize/{credential_id}")
-def admin_google_drive_auth(
-    response: Response, credential_id: str, _: User = Depends(current_admin_user)
-) -> AuthUrl:
-    # set a cookie that we can read in the callback (used for `verify_csrf`)
-    response.set_cookie(
-        key=_GOOGLE_DRIVE_CREDENTIAL_ID_COOKIE_NAME,
-        value=credential_id,
-        httponly=True,
-        max_age=600,
-    )
-    return AuthUrl(auth_url=get_auth_url(credential_id=int(credential_id)))
 
 
 @router.post("/admin/connector/file/upload")
@@ -497,12 +486,10 @@ def get_connector_indexing_status(
 ) -> list[ConnectorIndexingStatus]:
     indexing_statuses: list[ConnectorIndexingStatus] = []
 
-    r = get_redis_client(tenant_id=tenant_id)
-
     # NOTE: If the connector is deleting behind the scenes,
     # accessing cc_pairs can be inconsistent and members like
     # connector or credential may be None.
-    # Additional checks are done to make sure the connector and credential still exists.
+    # Additional checks are done to make sure the connector and credential still exist.
     # TODO: make this one query ... possibly eager load or wrap in a read transaction
     # to avoid the complexity of trying to error check throughout the function
     cc_pairs = get_connector_credential_pairs(
@@ -569,8 +556,9 @@ def get_connector_indexing_status(
 
         in_progress = False
         if search_settings:
-            rci = RedisConnectorIndexing(cc_pair.id, search_settings.id)
-            if r.exists(rci.fence_key):
+            redis_connector = RedisConnector(tenant_id, cc_pair.id)
+            redis_connector_index = redis_connector.new_index(search_settings.id)
+            if redis_connector_index.fenced:
                 in_progress = True
 
         latest_index_attempt = cc_pair_to_latest_index_attempt.get(
@@ -951,10 +939,11 @@ def google_drive_callback(
         )
     credential_id = int(credential_id_cookie)
     verify_csrf(credential_id, callback.state)
-    if (
-        update_credential_access_tokens(callback.code, credential_id, user, db_session)
-        is None
-    ):
+
+    credentials: Credentials | None = update_credential_access_tokens(
+        callback.code, credential_id, user, db_session
+    )
+    if credentials is None:
         raise HTTPException(
             status_code=500, detail="Unable to fetch Google Drive access tokens"
         )
