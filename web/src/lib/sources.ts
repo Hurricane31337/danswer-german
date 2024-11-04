@@ -21,7 +21,6 @@ import {
   LoopioIcon,
   NotionIcon,
   ProductboardIcon,
-  RequestTrackerIcon,
   R2Icon,
   SalesforceIcon,
   SharepointIcon,
@@ -37,6 +36,7 @@ import {
   GoogleStorageIcon,
   ColorSlackIcon,
   XenforoIcon,
+  FreshdeskIcon,
   LabelIcon,
 } from "@/components/icons/icons";
 import { ValidSources } from "./types";
@@ -244,12 +244,6 @@ const SOURCE_METADATA_MAP: SourceMap = {
     category: SourceCategory.Wiki,
     docs: "https://docs.danswer.dev/connectors/mediawiki",
   },
-  requesttracker: {
-    icon: RequestTrackerIcon,
-    displayName: "Request Tracker",
-    category: SourceCategory.CustomerSupport,
-    docs: "https://docs.danswer.dev/connectors/requesttracker",
-  },
   clickup: {
     icon: ClickupIcon,
     displayName: "Clickup",
@@ -289,6 +283,12 @@ const SOURCE_METADATA_MAP: SourceMap = {
     icon: GlobeIcon,
     displayName: "Ingestion",
     category: SourceCategory.Other,
+  },
+  freshdesk: {
+    icon: FreshdeskIcon,
+    displayName: "Freshdesk",
+    category: SourceCategory.CustomerSupport,
+    docs: "https://docs.danswer.dev/connectors/freshdesk",
   },
   label_manual: {
     icon: LabelIcon,
