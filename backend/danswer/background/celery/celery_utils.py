@@ -1,11 +1,10 @@
-from collections.abc import Callable
 from datetime import datetime
 from datetime import timezone
 from typing import Any
 
 from sqlalchemy.orm import Session
 
-from danswer.background.celery.celery_redis import RedisConnectorDeletion
+from danswer.background.indexing.run_indexing import RunIndexingCallbackInterface
 from danswer.configs.app_configs import MAX_PRUNING_DOCUMENT_RETRIEVAL_PER_MINUTE
 from danswer.connectors.cross_connector_utils.rate_limit_wrapper import (
     rate_limit_builder,
@@ -18,7 +17,7 @@ from danswer.connectors.models import Document
 from danswer.db.connector_credential_pair import get_connector_credential_pair
 from danswer.db.enums import TaskStatus
 from danswer.db.models import TaskQueueState
-from danswer.redis.redis_pool import get_redis_client
+from danswer.redis.redis_connector import RedisConnector
 from danswer.server.documents.models import DeletionAttemptSnapshot
 from danswer.utils.logger import setup_logger
 
@@ -41,14 +40,14 @@ def _get_deletion_status(
     if not cc_pair:
         return None
 
-    rcd = RedisConnectorDeletion(cc_pair.id)
-
-    r = get_redis_client(tenant_id=tenant_id)
-    if not r.exists(rcd.fence_key):
+    redis_connector = RedisConnector(tenant_id, cc_pair.id)
+    if not redis_connector.delete.fenced:
         return None
 
     return TaskQueueState(
-        task_id="", task_name=rcd.fence_key, status=TaskStatus.STARTED
+        task_id="",
+        task_name=redis_connector.delete.fence_key,
+        status=TaskStatus.STARTED,
     )
 
 
@@ -79,7 +78,7 @@ def document_batch_to_ids(
 
 def extract_ids_from_runnable_connector(
     runnable_connector: BaseConnector,
-    progress_callback: Callable[[int], None] | None = None,
+    callback: RunIndexingCallbackInterface | None = None,
 ) -> set[str]:
     """
     If the PruneConnector hasnt been implemented for the given connector, just pull
@@ -110,8 +109,10 @@ def extract_ids_from_runnable_connector(
             max_calls=MAX_PRUNING_DOCUMENT_RETRIEVAL_PER_MINUTE, period=60
         )(document_batch_to_ids)
     for doc_batch in doc_batch_generator:
-        if progress_callback:
-            progress_callback(len(doc_batch))
+        if callback:
+            if callback.should_stop():
+                raise RuntimeError("Stop signal received")
+            callback.progress(len(doc_batch))
         all_connector_doc_ids.update(doc_batch_processing_func(doc_batch))
 
     return all_connector_doc_ids

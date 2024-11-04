@@ -734,9 +734,10 @@ class IndexAttempt(Base):
     full_exception_trace: Mapped[str | None] = mapped_column(Text, default=None)
     # Nullable because in the past, we didn't allow swapping out embedding models live
     search_settings_id: Mapped[int] = mapped_column(
-        ForeignKey("search_settings.id"),
-        nullable=False,
+        ForeignKey("search_settings.id", ondelete="SET NULL"),
+        nullable=True,
     )
+
     time_created: Mapped[datetime.datetime] = mapped_column(
         DateTime(timezone=True),
         server_default=func.now(),
@@ -756,7 +757,7 @@ class IndexAttempt(Base):
         "ConnectorCredentialPair", back_populates="index_attempts"
     )
 
-    search_settings: Mapped[SearchSettings] = relationship(
+    search_settings: Mapped[SearchSettings | None] = relationship(
         "SearchSettings", back_populates="index_attempts"
     )
 
@@ -917,10 +918,15 @@ class ToolCall(Base):
     tool_arguments: Mapped[dict[str, JSON_ro]] = mapped_column(postgresql.JSONB())
     tool_result: Mapped[JSON_ro] = mapped_column(postgresql.JSONB())
 
-    message_id: Mapped[int] = mapped_column(ForeignKey("chat_message.id"))
+    message_id: Mapped[int | None] = mapped_column(
+        ForeignKey("chat_message.id"), nullable=False
+    )
 
+    # Update the relationship
     message: Mapped["ChatMessage"] = relationship(
-        "ChatMessage", back_populates="tool_calls"
+        "ChatMessage",
+        back_populates="tool_call",
+        uselist=False,
     )
 
 
@@ -1051,12 +1057,13 @@ class ChatMessage(Base):
         secondary=ChatMessage__SearchDoc.__table__,
         back_populates="chat_messages",
     )
-    # NOTE: Should always be attached to the `assistant` message.
-    # represents the tool calls used to generate this message
-    tool_calls: Mapped[list["ToolCall"]] = relationship(
+
+    tool_call: Mapped["ToolCall"] = relationship(
         "ToolCall",
         back_populates="message",
+        uselist=False,
     )
+
     standard_answers: Mapped[list["StandardAnswer"]] = relationship(
         "StandardAnswer",
         secondary=ChatMessage__StandardAnswer.__table__,
