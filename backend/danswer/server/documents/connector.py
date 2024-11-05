@@ -127,7 +127,7 @@ def check_google_app_gmail_credentials_exist(
     try:
         return {"client_id": get_google_app_gmail_cred().web.client_id}
     except KvKeyNotFoundError:
-        raise HTTPException(status_code=404, detail="Google App Credentials not found")
+        raise HTTPException(status_code=404, detail="Google-App-Anmeldeinformationen nicht gefunden")
 
 
 @router.put("/admin/connector/gmail/app-credential")
@@ -140,7 +140,7 @@ def upsert_google_app_gmail_credentials(
         raise HTTPException(status_code=400, detail=str(e))
 
     return StatusResponse(
-        success=True, message="Successfully saved Google App Credentials"
+        success=True, message="Google-App-Anmeldeinformationen erfolgreich gespeichert"
     )
 
 
@@ -156,7 +156,7 @@ def delete_google_app_gmail_credentials(
         raise HTTPException(status_code=400, detail=str(e))
 
     return StatusResponse(
-        success=True, message="Successfully deleted Google App Credentials"
+        success=True, message="Google-App-Anmeldeinformationen erfolgreich gelöscht"
     )
 
 
@@ -167,7 +167,7 @@ def check_google_app_credentials_exist(
     try:
         return {"client_id": get_google_app_cred().web.client_id}
     except KvKeyNotFoundError:
-        raise HTTPException(status_code=404, detail="Google App Credentials not found")
+        raise HTTPException(status_code=404, detail="Google-App-Anmeldeinformationen nicht gefunden")
 
 
 @router.put("/admin/connector/google-drive/app-credential")
@@ -180,7 +180,7 @@ def upsert_google_app_credentials(
         raise HTTPException(status_code=400, detail=str(e))
 
     return StatusResponse(
-        success=True, message="Successfully saved Google App Credentials"
+        success=True, message="Google-App-Anmeldeinformationen erfolgreich gespeichert"
     )
 
 
@@ -196,7 +196,7 @@ def delete_google_app_credentials(
         raise HTTPException(status_code=400, detail=str(e))
 
     return StatusResponse(
-        success=True, message="Successfully deleted Google App Credentials"
+        success=True, message="Google-App-Anmeldeinformationen erfolgreich gelöscht"
     )
 
 
@@ -208,7 +208,7 @@ def check_google_service_gmail_account_key_exist(
         return {"service_account_email": get_gmail_service_account_key().client_email}
     except KvKeyNotFoundError:
         raise HTTPException(
-            status_code=404, detail="Google Service Account Key not found"
+            status_code=404, detail="Google Service Account Key nicht gefunden"
         )
 
 
@@ -222,7 +222,7 @@ def upsert_google_service_gmail_account_key(
         raise HTTPException(status_code=400, detail=str(e))
 
     return StatusResponse(
-        success=True, message="Successfully saved Google Service Account Key"
+        success=True, message="Google Service Account Key erfolgreich gespeichert"
     )
 
 
@@ -238,7 +238,7 @@ def delete_google_service_gmail_account_key(
         raise HTTPException(status_code=400, detail=str(e))
 
     return StatusResponse(
-        success=True, message="Successfully deleted Google Service Account Key"
+        success=True, message="Google Service Account Key erfolgreich gelöscht"
     )
 
 
@@ -250,7 +250,7 @@ def check_google_service_account_key_exist(
         return {"service_account_email": get_service_account_key().client_email}
     except KvKeyNotFoundError:
         raise HTTPException(
-            status_code=404, detail="Google Service Account Key not found"
+            status_code=404, detail="Google Service Account Key nicht gefunden"
         )
 
 
@@ -264,7 +264,7 @@ def upsert_google_service_account_key(
         raise HTTPException(status_code=400, detail=str(e))
 
     return StatusResponse(
-        success=True, message="Successfully saved Google Service Account Key"
+        success=True, message="Google Service Account Key erfolgreich gespeichert"
     )
 
 
@@ -280,7 +280,7 @@ def delete_google_service_account_key(
         raise HTTPException(status_code=400, detail=str(e))
 
     return StatusResponse(
-        success=True, message="Successfully deleted Google Service Account Key"
+        success=True, message="Google Service Account Key erfolgreich gelöscht"
     )
 
 
@@ -366,7 +366,7 @@ def upload_files(
 ) -> FileUploadResponse:
     for file in files:
         if not file.filename:
-            raise HTTPException(status_code=400, detail="File name cannot be empty")
+            raise HTTPException(status_code=400, detail="Dateiname darf nicht leer sein")
     try:
         file_store = get_default_file_store(db_session)
         deduped_file_paths = []
@@ -392,7 +392,7 @@ def get_currently_failed_indexing_status(
     user: User = Depends(current_curator_or_admin_user),
     db_session: Session = Depends(get_session),
     get_editable: bool = Query(
-        False, description="If true, return editable document sets"
+        False, description="Wenn true, zurückgebbare editierbare Dokumentensätze"
     ),
 ) -> list[FailedConnectorIndexingStatus]:
     # Get the latest failed indexing attempts
@@ -480,7 +480,7 @@ def get_connector_indexing_status(
     user: User = Depends(current_curator_or_admin_user),
     db_session: Session = Depends(get_session),
     get_editable: bool = Query(
-        False, description="If true, return editable document sets"
+        False, description="Wenn true, zurückgebbare editierbare Dokumentensätze"
     ),
     tenant_id: str | None = Depends(get_current_tenant_id),
 ) -> list[ConnectorIndexingStatus]:
@@ -633,8 +633,8 @@ def _validate_connector_allowed(source: DocumentSource) -> None:
             return
 
     raise ValueError(
-        "This connector type has been disabled by your system admin. "
-        "Please contact them to get it enabled if you wish to use it."
+        "Dieser Anbindungstyp wurde von deinem Systemadministrator deaktiviert. "
+        "Bitte kontaktiere ihn, um die Aktivierung anzufordern, wenn du ihn nutzen möchtest."
     )
 
 
@@ -658,7 +658,7 @@ def create_connector_from_model(
             connector_data=connector_base,
         )
     except ValueError as e:
-        logger.error(f"Error creating connector: {e}")
+        logger.error(f"Fehler beim Erstellen der Anbindung: {e}")
         raise HTTPException(status_code=400, detail=str(e))
 
 
@@ -672,12 +672,12 @@ def create_connector_with_mock_credential(
         if connector_data.is_public:
             raise HTTPException(
                 status_code=401,
-                detail="User does not have permission to create public credentials",
+                detail="Benutzer hat keine Berechtigung zur Erstellung öffentlicher Anmeldeinformationen",
             )
         if not connector_data.groups:
             raise HTTPException(
                 status_code=401,
-                detail="Curators must specify 1+ groups",
+                detail="Kuratoren müssen 1+ Gruppen angeben",
             )
     try:
         _validate_connector_allowed(connector_data.source)
@@ -733,7 +733,7 @@ def update_connector_from_model(
     updated_connector = update_connector(connector_id, connector_base, db_session)
     if updated_connector is None:
         raise HTTPException(
-            status_code=404, detail=f"Connector {connector_id} does not exist"
+            status_code=404, detail=f"Anbindung {connector_id} existiert nicht"
         )
 
     return ConnectorSnapshot(
@@ -766,7 +766,7 @@ def delete_connector_by_id(
                 connector_id=connector_id,
             )
     except AssertionError:
-        raise HTTPException(status_code=400, detail="Connector is not deletable")
+        raise HTTPException(status_code=400, detail="Anbindung ist nicht löschbar")
 
 
 @router.post("/admin/connector/run-once")
@@ -776,8 +776,7 @@ def connector_run_once(
     db_session: Session = Depends(get_session),
     tenant_id: str = Depends(get_current_tenant_id),
 ) -> StatusResponse[list[int]]:
-    """Used to trigger indexing on a set of cc_pairs associated with a
-    single connector."""
+    """Wird verwendet, um die Indexierung bei einem Satz von cc_pairs auszulösen, die mit einer einzelnen Anbindung verknüpft sind."""
 
     r = get_redis_client(tenant_id=tenant_id)
 
@@ -791,7 +790,7 @@ def connector_run_once(
     except ValueError:
         raise HTTPException(
             status_code=404,
-            detail=f"Connector by id {connector_id} does not exist.",
+            detail=f"Anbindung mit der ID {connector_id} existiert nicht.",
         )
 
     if not specified_credential_ids:
@@ -802,13 +801,13 @@ def connector_run_once(
         else:
             raise HTTPException(
                 status_code=400,
-                detail="Not all specified credentials are associated with connector",
+                detail="Nicht alle angegebenen Anmeldeinformationen sind mit der Anbindung verknüpft",
             )
 
     if not credential_ids:
         raise HTTPException(
             status_code=400,
-            detail="Connector has no valid credentials, cannot create index attempts.",
+            detail="Anbindung hat keine gültigen Anmeldeinformationen – kann keine Indexversuche erstellen.",
         )
 
     # Prevents index attempts for cc pairs that already have an index attempt currently running
@@ -848,21 +847,21 @@ def connector_run_once(
             )
             if attempt_id:
                 logger.info(
-                    f"try_creating_indexing_task succeeded: cc_pair={cc_pair.id} attempt_id={attempt_id}"
+                    f"try_creating_indexing_task erfolgreich: cc_pair={cc_pair.id} attempt_id={attempt_id}"
                 )
                 index_attempt_ids.append(attempt_id)
             else:
-                logger.info(f"try_creating_indexing_task failed: cc_pair={cc_pair.id}")
+                logger.info(f"try_creating_indexing_task fehlgeschlagen: cc_pair={cc_pair.id}")
 
     if not index_attempt_ids:
         raise HTTPException(
             status_code=400,
-            detail="No new indexing attempts created, indexing jobs are queued or running.",
+            detail="Keine neuen Indexierungsversuche erstellt, Indexierungsjobs sind in der Warteschlange oder werden ausgeführt.",
         )
 
     return StatusResponse(
         success=True,
-        message=f"Successfully created {len(index_attempt_ids)} index attempts",
+        message=f"Erfolgreich {len(index_attempt_ids)} Indexierungsversuche erstellt",
         data=index_attempt_ids,
     )
 
@@ -908,7 +907,7 @@ def gmail_callback(
     credential_id_cookie = request.cookies.get(_GMAIL_CREDENTIAL_ID_COOKIE_NAME)
     if credential_id_cookie is None or not credential_id_cookie.isdigit():
         raise HTTPException(
-            status_code=401, detail="Request did not pass CSRF verification."
+            status_code=401, detail="Anfrage hat die CSRF-Verifizierung nicht bestanden."
         )
     credential_id = int(credential_id_cookie)
     verify_csrf(credential_id, callback.state)
@@ -919,10 +918,10 @@ def gmail_callback(
         is None
     ):
         raise HTTPException(
-            status_code=500, detail="Unable to fetch Gmail access tokens"
+            status_code=500, detail="Konnte keine Gmail-Zugriffstoken abrufen"
         )
 
-    return StatusResponse(success=True, message="Updated Gmail access tokens")
+    return StatusResponse(success=True, message="Gmail-Zugriffstoken aktualisiert")
 
 
 @router.get("/connector/google-drive/callback")
@@ -935,7 +934,7 @@ def google_drive_callback(
     credential_id_cookie = request.cookies.get(_GOOGLE_DRIVE_CREDENTIAL_ID_COOKIE_NAME)
     if credential_id_cookie is None or not credential_id_cookie.isdigit():
         raise HTTPException(
-            status_code=401, detail="Request did not pass CSRF verification."
+            status_code=401, detail="Anfrage hat die CSRF-Verifizierung nicht bestanden."
         )
     credential_id = int(credential_id_cookie)
     verify_csrf(credential_id, callback.state)
@@ -945,10 +944,10 @@ def google_drive_callback(
     )
     if credentials is None:
         raise HTTPException(
-            status_code=500, detail="Unable to fetch Google Drive access tokens"
+            status_code=500, detail="Konnte keine Google Drive-Zugriffstoken abrufen"
         )
 
-    return StatusResponse(success=True, message="Updated Google Drive access tokens")
+    return StatusResponse(success=True, message="Google Drive-Zugriffstoken aktualisiert")
 
 
 @router.get("/connector")
@@ -975,7 +974,7 @@ def get_connector_by_id(
     connector = fetch_connector_by_id(connector_id, db_session)
     if connector is None:
         raise HTTPException(
-            status_code=404, detail=f"Connector {connector_id} does not exist"
+            status_code=404, detail=f"Anbindung {connector_id} existiert nicht"
         )
 
     return ConnectorSnapshot(

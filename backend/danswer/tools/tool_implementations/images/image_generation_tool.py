@@ -32,26 +32,26 @@ logger = setup_logger()
 
 IMAGE_GENERATION_RESPONSE_ID = "image_generation_response"
 
-YES_IMAGE_GENERATION = "Yes Image Generation"
-SKIP_IMAGE_GENERATION = "Skip Image Generation"
+YES_IMAGE_GENERATION = "Ja Bildgenerierung"
+SKIP_IMAGE_GENERATION = "Bildgenerierung überspringen" 
 
 IMAGE_GENERATION_TEMPLATE = f"""
-Given the conversation history and a follow up query, determine if the system should call \
-an external image generation tool to better answer the latest user input.
-Your default response is {SKIP_IMAGE_GENERATION}.
+Bestimme anhand des Gesprächsverlaufs und einer Folgeanfrage, ob das System ein \
+externes Bildgenerierungswerkzeug aufrufen soll, um die letzte Benutzereingabe besser zu beantworten.
+Deine Standardantwort ist {SKIP_IMAGE_GENERATION}.
 
-Respond "{YES_IMAGE_GENERATION}" if:
-- The user is asking for an image to be generated.
+Antworte mit "{YES_IMAGE_GENERATION}" wenn:
+- Der Benutzer nach einem zu generierenden Bild fragt.
 
-Conversation History:
+Gesprächsverlauf:
 {GENERAL_SEP_PAT}
 {{chat_history}}
 {GENERAL_SEP_PAT}
 
-If you are at all unsure, respond with {SKIP_IMAGE_GENERATION}.
-Respond with EXACTLY and ONLY "{YES_IMAGE_GENERATION}" or "{SKIP_IMAGE_GENERATION}"
+Wenn du dir nicht sicher bist, antworte mit {SKIP_IMAGE_GENERATION}.
+Antworte GENAU und AUSSCHLIESSLICH mit "{YES_IMAGE_GENERATION}" oder "{SKIP_IMAGE_GENERATION}"
 
-Follow Up Input:
+Folgeanfrage:
 {{final_query}}
 """.strip()
 
@@ -69,8 +69,8 @@ class ImageShape(str, Enum):
 
 class ImageGenerationTool(Tool):
     _NAME = "run_image_generation"
-    _DESCRIPTION = "Generate an image from a prompt."
-    _DISPLAY_NAME = "Image Generation Tool"
+    _DESCRIPTION = "Generiere ein Bild aus einem Prompt."
+    _DISPLAY_NAME = "Bildgenerierungs-Werkzeug"
 
     def __init__(
         self,
@@ -113,13 +113,13 @@ class ImageGenerationTool(Tool):
                     "properties": {
                         "prompt": {
                             "type": "string",
-                            "description": "Prompt used to generate the image",
+                            "description": "Prompt, der zur Generierung des Bildes verwendet wird",
                         },
                         "shape": {
                             "type": "string",
                             "description": (
-                                "Optional - only specify if you want a specific shape."
-                                " Image shape: 'square', 'portrait', or 'landscape'."
+                                "Optional - nur angeben, wenn du eine bestimmte Form möchtest."
+                                " Bildform: 'square' (quadratisch), 'portrait' (hochkant) oder 'landscape' (Querformat)."
                             ),
                             "enum": [shape.value for shape in ImageShape],
                         },
@@ -150,7 +150,7 @@ class ImageGenerationTool(Tool):
         use_image_generation_tool_output = message_to_string(llm.invoke(prompt))
 
         logger.debug(
-            f"Evaluated if should use ImageGenerationTool: {use_image_generation_tool_output}"
+            f"Ausgewertet, ob ImageGenerationTool verwendet werden soll: {use_image_generation_tool_output}"
         )
         if (
             YES_IMAGE_GENERATION.split()[0]
@@ -219,17 +219,17 @@ class ImageGenerationTool(Tool):
                     in error_message
                 ):
                     raise ValueError(
-                        "The image generation request was rejected due to OpenAI's content policy. Please try a different prompt."
+                        "Die Bildgenerierungsanfrage wurde aufgrund von OpenAIs Inhaltsrichtlinien abgelehnt. Bitte versuche einen anderen Prompt."
                     )
                 elif "Invalid image URL" in error_message:
-                    raise ValueError("Invalid image URL provided for image generation.")
+                    raise ValueError("Ungültige Bild-URL für die Bildgenerierung angegeben.")
                 elif "invalid_request_error" in error_message:
                     raise ValueError(
-                        "Invalid request for image generation. Please check your input."
+                        "Ungültige Anfrage für die Bildgenerierung. Bitte überprüfe deine Eingabe."
                     )
 
             raise ValueError(
-                "An error occurred during image generation. Please try again later."
+                "Bei der Bildgenerierung ist ein Fehler aufgetreten. Bitte versuche es später noch einmal."
             )
 
     def run(self, **kwargs: str) -> Generator[ToolResponse, None, None]:
@@ -286,7 +286,7 @@ class ImageGenerationTool(Tool):
             ),
         )
         if img_generation_response is None:
-            raise ValueError("No image generation response found")
+            raise ValueError("Keine Bildgenerierungsantwort gefunden")
 
         img_urls = [img.url for img in img_generation_response]
         prompt_builder.update_user_prompt(
