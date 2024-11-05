@@ -171,7 +171,7 @@ export function WhitelabelingForm() {
 
                 <SubLabel>
                   Überschreibe das aktuelle benutzerdefinierte Logo, indem du ein neues
-                  Bild unten hochlädst und auf die Schaltfläche "Aktualisieren" klickst.
+                  Bild unten hochlädst und auf die Schaltfläche &quot;Aktualisieren&quot; klickst.
                 </SubLabel>
               </div>
             ) : (
@@ -315,7 +315,7 @@ export function WhitelabelingForm() {
                       <SubLabel>
                         Überschreibe deinen hochgeladenen benutzerdefinierten Logotyp,
                         indem du unten ein neues Bild hochlädst und auf die Schaltfläche
-                        "Aktualisieren" klickst. Dieser Logotyp ist das textbasierte
+                        &quot;Aktualisieren&quot; klickst. Dieser Logotyp ist das textbasierte
                         Logo, das unten rechts auf dem Chat-Bildschirm angezeigt wird.
                       </SubLabel>
                     </div>
@@ -323,7 +323,7 @@ export function WhitelabelingForm() {
                     <SubLabel>
                       Füge einen benutzerdefinierten Logotyp hinzu, indem du unten
                       ein neues Bild hochlädst und auf die Schaltfläche
-                      "Aktualisieren" klickst. Dieser Logotyp ist das textbasierte
+                      &quot;Aktualisieren&quot; klickst. Dieser Logotyp ist das textbasierte
                       Logo, das unten rechts auf dem Chat-Bildschirm angezeigt wird.
                     </SubLabel>
                   )}
