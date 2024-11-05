@@ -1,6 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Modal } from "@/components/Modal";
-import { Button, Text, Callout, Subtitle, Divider } from "@tremor/react";
+import { Callout } from "@/components/ui/callout";
+import Text from "@/components/ui/text";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/admin/connectors/Field";
 import { CloudEmbeddingProvider } from "../../../../components/embedding/interfaces";
 import {
@@ -142,7 +145,9 @@ export function ChangeCredentialsModal({
         const errorData = await updateResponse.json();
         throw new Error(
           errorData.detail ||
-            `Ändern des Anbieters fehlgeschlagen – prüfe ${isProxy ? "deine API-URL" : "deinen API-Schlüssel"}`
+            `Ändern des Anbieters fehlgeschlagen – prüfe ${
+              isProxy ? "deine API-URL" : "deinen API-Schlüssel"
+            }`
         );
       }
 
@@ -157,7 +162,9 @@ export function ChangeCredentialsModal({
     <Modal
       width="max-w-3xl"
       icon={provider.icon}
-      title={`Ändere ${provider.provider_type} ${isProxy ? "deine URL" : "deinen Schlüssel"}`}
+      title={`Ändere ${provider.provider_type} ${
+        isProxy ? "deine URL" : "deinen Schlüssel"
+      }`}
       onOutsideClick={onCancel}
     >
       <>
@@ -220,7 +227,7 @@ export function ChangeCredentialsModal({
                   />
 
                   {deletionError && (
-                    <Callout title="Fehler" color="red" className="mt-4">
+                    <Callout type="danger" title="Fehler" className="mt-4">
                       {deletionError}
                     </Callout>
                   )}
@@ -250,38 +257,42 @@ export function ChangeCredentialsModal({
               )}
 
               {testError && (
-                <Callout title="Fehler" color="red" className="my-4">
+                <Callout type="danger" title="Fehler" className="my-4">
                   {testError}
                 </Callout>
               )}
 
               <Button
                 className="mr-auto mt-4"
-                color="blue"
+                variant="submit"
                 onClick={() => handleSubmit()}
                 disabled={!apiKey}
               >
                 Konfiguration aktualisieren
               </Button>
 
-              <Divider />
+              <Separator />
             </div>
           </>
         )}
 
-          <Subtitle className="mt-4 font-bold text-lg mb-2">
+          <Text className="mt-4 font-bold text-lg mb-2">
             Du kannst deine Konfiguration auch löschen.
-          </Subtitle>
+          </Text>
           <Text className="mb-2">
             Das ist nur möglich, wenn du schon auf eine andere Embedding-Art
             umgestiegen bist!
           </Text>
 
-        <Button className="mr-auto" onClick={handleDelete} color="red">
+        <Button
+          className="mr-auto"
+          onClick={handleDelete}
+          variant="destructive"
+        >
           Konfiguration löschen
         </Button>
         {deletionError && (
-          <Callout title="Fehler" color="red" className="mt-4">
+          <Callout type="danger" title="Fehler" className="mt-4">
             {deletionError}
           </Callout>
         )}

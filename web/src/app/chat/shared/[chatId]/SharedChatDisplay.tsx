@@ -9,12 +9,14 @@ import {
   processRawChatHistory,
 } from "../../lib";
 import { AIMessage, HumanMessage } from "../../message/Messages";
-import { Button, Callout, Divider } from "@tremor/react";
+import { Callout } from "@/components/ui/callout";
+import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { SettingsContext } from "@/components/settings/SettingsProvider";
 import { DanswerInitializingLoader } from "@/components/DanswerInitializingLoader";
 import { Persona } from "@/app/admin/assistants/interfaces";
+import { Button } from "@/components/ui/button";
 
 function BackToDanswerButton() {
   const router = useRouter();
@@ -27,7 +29,6 @@ function BackToDanswerButton() {
           Zurück zu {enterpriseSettings?.application_name || "Danswer Chat"}
         </Button>
       </div>
-      pr
     </div>
   );
 }
@@ -48,7 +49,7 @@ export function SharedChatDisplay({
     return (
       <div className="min-h-full w-full">
         <div className="mx-auto w-fit pt-8">
-          <Callout color="red" title="Shared Chat Not Found">
+          <Callout type="danger" title="Shared Chat Not Found">
             Es wurde kein geteilter Chat mit der angegebenen ID gefunden.
           </Callout>
         </div>
@@ -75,7 +76,7 @@ export function SharedChatDisplay({
                 {humanReadableFormat(chatSession.time_created)}
               </p>
 
-              <Divider />
+              <Separator />
             </div>
             {isReady ? (
               <div className="w-full pb-16">

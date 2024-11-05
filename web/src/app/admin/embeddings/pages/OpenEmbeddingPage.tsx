@@ -1,5 +1,8 @@
 "use client";
-import { Button, Card, Text, Title } from "@tremor/react";
+
+import { Button } from "@/components/ui/button";
+import Text from "@/components/ui/text";
+import Title from "@/components/ui/title";
 import { ModelSelector } from "../../../../components/embedding/ModelSelector";
 import {
   AVAILABLE_MODELS,
@@ -8,6 +11,7 @@ import {
 } from "../../../../components/embedding/interfaces";
 import { CustomModelForm } from "../../../../components/embedding/CustomModelForm";
 import { useState } from "react";
+import CardSection from "@/components/admin/CardSection";
 export default function OpenEmbeddingPage({
   onSelectOpenSource,
   selectedProvider,
@@ -19,11 +23,11 @@ export default function OpenEmbeddingPage({
   return (
     <div>
       <Title className="mt-8">
-        Here are some locally-hosted models to choose from.
+        Hier sind einige lokal gehostete Modelle, aus denen du wählen kannst.
       </Title>
       <Text className="mb-4">
-        These models can be used without any API keys, and can leverage a GPU
-        for faster inference.
+        Diese Modelle können ohne API-Schlüssel verwendet werden und können eine
+        GPU für schnellere Inferenz nutzen.
       </Text>
       <ModelSelector
         modelOptions={AVAILABLE_MODELS}
@@ -32,7 +36,7 @@ export default function OpenEmbeddingPage({
       />
 
       <Text className="mt-6">
-        Alternatively, (if you know what you&apos;re doing) you can specify a{" "}
+        Alternativ kannst du (wenn du weißt, was du tust) ein{" "}
         <a
           target="_blank"
           href="https://www.sbert.net/"
@@ -41,32 +45,36 @@ export default function OpenEmbeddingPage({
         >
           SentenceTransformers
         </a>
-        -compatible model of your choice below. The rough list of supported
-        models can be found{" "}
+        -kompatibles Modell deiner Wahl unten angeben. Die grobe Liste der
+        unterstützten Modelle findest du{" "}
         <a
           target="_blank"
           href="https://huggingface.co/models?library=sentence-transformers&sort=trending"
           className="text-link"
           rel="noreferrer"
         >
-          here
+          hier
         </a>
         .
         <br />
-        <b>NOTE:</b> not all models listed will work with Danswer, since some
-        have unique interfaces or special requirements. If in doubt, reach out
-        to the Danswer team.
+        <b>HINWEIS:</b> Nicht alle aufgeführten Modelle funktionieren mit Danswer,
+        da einige einzigartige Schnittstellen oder spezielle Anforderungen
+        haben. Im Zweifelsfall wende dich an das Danswer-Team.
       </Text>
       {!configureModel && (
-        <Button onClick={() => setConfigureModel(true)} className="mt-4">
-          Configure custom model
+        <Button
+          onClick={() => setConfigureModel(true)}
+          className="mt-4"
+          variant="secondary"
+        >
+          Konfiguriere benutzerdefiniertes Modell
         </Button>
       )}
       {configureModel && (
         <div className="w-full flex">
-          <Card className="mt-4 2xl:w-4/6 mx-auto">
+          <CardSection className="mt-4 2xl:w-4/6 mx-auto">
             <CustomModelForm onSubmit={onSelectOpenSource} />
-          </Card>
+          </CardSection>
         </div>
       )}
     </div>
