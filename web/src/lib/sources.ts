@@ -295,6 +295,11 @@ const SOURCE_METADATA_MAP: SourceMap = {
     category: SourceCategory.CustomerSupport,
     docs: "https://docs.danswer.dev/connectors/freshdesk",
   },
+  label_manual: {
+    icon: LabelIcon,
+    displayName: "Label Handbuch",
+    category: SourceCategory.Other,
+  },
   // currently used for the Internet Search tool docs, which is why
   // a globe is used
   not_applicable: {
