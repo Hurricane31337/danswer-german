@@ -2,11 +2,13 @@
 
 import { PopupSpec, usePopup } from "@/components/admin/connectors/Popup";
 import { runConnector } from "@/lib/connector";
-import { Button, Divider, Text } from "@tremor/react";
+import { Button } from "@/components/ui/button";
+import Text from "@/components/ui/text";
 import { mutate } from "swr";
 import { buildCCPairInfoUrl } from "./lib";
 import { useState } from "react";
 import { Modal } from "@/components/Modal";
+import { Separator } from "@/components/ui/separator";
 
 function ReIndexPopup({
   connectorId,
@@ -45,9 +47,8 @@ function ReIndexPopup({
     <Modal title="Indizierung ausführen" onOutsideClick={hide}>
       <div>
         <Button
+          variant="submit"
           className="ml-auto"
-          color="green"
-          size="xs"
           onClick={() => {
             triggerIndexing(false);
             hide();
@@ -62,12 +63,11 @@ function ReIndexPopup({
           abgerufen und indiziert.
         </Text>
 
-        <Divider />
+        <Separator />
 
         <Button
+          variant="submit"
           className="ml-auto"
-          color="green"
-          size="xs"
           onClick={() => {
             triggerIndexing(true);
             hide();
@@ -121,9 +121,8 @@ export function ReIndexButton({
       )}
       {popup}
       <Button
+        variant="success-reverse"
         className="ml-auto"
-        color="green"
-        size="xs"
         onClick={() => {
           setReIndexPopupVisible(true);
         }}

@@ -4,10 +4,10 @@ import {
   Table,
   TableHead,
   TableRow,
-  TableHeaderCell,
+  TableHeader,
   TableBody,
   TableCell,
-} from "@tremor/react";
+} from "@/components/ui/table";
 import { PageSelector } from "@/components/PageSelector";
 import { DocumentBoostStatus } from "@/lib/types";
 import { updateHiddenStatus } from "../lib";
@@ -94,13 +94,13 @@ export const DocumentFeedbackTable = ({
   return (
     <div>
       <Table className="overflow-visible">
-        <TableHead>
+        <TableHeader>
           <TableRow>
-            <TableHeaderCell>Dokumentname</TableHeaderCell>
-            <TableHeaderCell>Durchsuchbar?</TableHeaderCell>
-            <TableHeaderCell>Punktzahl</TableHeaderCell>
+            <TableHead>Dokumentname</TableHead>
+            <TableHead>Durchsuchbar?</TableHead>
+            <TableHead>Punktzahl</TableHead>
           </TableRow>
-        </TableHead>
+        </TableHeader>
         <TableBody>
           {documents
             .slice((page - 1) * numToDisplay, page * numToDisplay)

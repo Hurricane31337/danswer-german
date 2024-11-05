@@ -1,5 +1,7 @@
 import { Modal } from "@/components/Modal";
-import { Button, Text, Callout } from "@tremor/react";
+import Text from "@/components/ui/text";
+import { Callout } from "@/components/ui/callout";
+import { Button } from "@/components/ui/button";
 import { HostedEmbeddingModel } from "../../../../components/embedding/interfaces";
 
 export function ModelSelectionConfirmationModal({
@@ -38,7 +40,7 @@ export function ModelSelectionConfirmationModal({
           </Text>
 
           {isCustom && (
-            <Callout title="WICHTIG" color="yellow" className="mt-4">
+            <Callout type="warning" title="WICHTIG" className="mt-4">
               Wir haben festgestellt, dass dies ein benutzerdefiniertes
               Embedding-Modell ist. Da wir die Modell-Dateien herunterladen müssen
               um wir die Richtigkeit der Konfiguration überprüfen zu können, können
@@ -50,7 +52,7 @@ export function ModelSelectionConfirmationModal({
           )}
 
           <div className="flex mt-8">
-            <Button className="mx-auto" color="green" onClick={onConfirm}>
+            <Button className="mx-auto" variant="submit" onClick={onConfirm}>
               Bestätigen
             </Button>
           </div>
