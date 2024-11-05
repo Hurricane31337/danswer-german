@@ -284,11 +284,6 @@ const SOURCE_METADATA_MAP: SourceMap = {
     displayName: "Ingestion",
     category: SourceCategory.Other,
   },
-  label_manual: {
-    icon: LabelIcon,
-    displayName: "Label Handbuch",
-    category: SourceCategory.Other,
-  },
   freshdesk: {
     icon: FreshdeskIcon,
     displayName: "Freshdesk",
