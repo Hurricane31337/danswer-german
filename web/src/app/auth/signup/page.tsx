@@ -8,7 +8,7 @@ import {
 } from "@/lib/userSS";
 import { redirect } from "next/navigation";
 import { EmailPasswordForm } from "../login/EmailPasswordForm";
-import { Text } from "@tremor/react";
+import Text from "@/components/ui/text";
 import Link from "next/link";
 import { SignInButton } from "../login/SignInButton";
 import AuthFlowContainer from "@/components/auth/AuthFlowContainer";
@@ -60,7 +60,7 @@ const Page = async () => {
         <div className="absolute top-10x w-full"></div>
         <div className="flex w-full flex-col justify-center">
           <h2 className="text-center text-xl text-strong font-bold">
-            {cloud ? "Complete your sign up" : "Sign Up for Danswer"}
+            {cloud ? "Complete your sign up" : "Sign Up for Label KI"}
           </h2>
 
           {cloud && authUrl && (

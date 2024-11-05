@@ -26,18 +26,17 @@ export const ApiKeyModal = ({
   }
   return (
     <Modal
-      title="Stelle einen API-Schlüssel ein!"
+      title="Konfiguriere ein generatives KI-Modell"
       width="max-w-3xl w-full"
       onOutsideClick={() => hide()}
     >
       <>
         <div className="mb-5 text-sm text-gray-700">
-          Bitte gib unten einen API-Schlüssel ein, um mit der Nutzung
-          der Label KI zu beginnen &ndash; du kannst ihn später jederzeit ändern.
+          Bitte gib einen API-Schlüssel ein – du kannst dies später jederzeit ändern oder
+          das Modell wechseln.
           <br />
-          Wenn du dich lieber erst einmal umsehen möchtest, kannst du
+          Wenn du dich lieber zuerst umschauen möchtest, kannst du{" "}
           <strong onClick={() => hide()} className="text-link cursor-pointer">
-            {" "}
             diesen Schritt überspringen
           </strong>
           .

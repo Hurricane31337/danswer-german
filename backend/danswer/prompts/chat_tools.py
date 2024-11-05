@@ -1,43 +1,43 @@
 # These prompts are to support tool calling. Currently not used in the main flow or via any configs
 # The current generation of LLM is too unreliable for this task.
 # Danswer retrieval call as a tool option
-DANSWER_TOOL_NAME = "Current Search"
+DANSWER_TOOL_NAME = "Aktuelle Suche" 
 DANSWER_TOOL_DESCRIPTION = (
-    "A search tool that can find information on any topic "
-    "including up to date and proprietary knowledge."
+    "Ein Suchwerkzeug, das Informationen zu jedem Thema finden kann "
+    "einschließlich aktueller und proprietärer Kenntnisse."
 )
 
 
 # Tool calling format inspired from LangChain
 TOOL_TEMPLATE = """
-TOOLS
+WERKZEUGE
 ------
-You can use tools to look up information that may be helpful in answering the user's \
-original question. The available tools are:
+Du kannst Werkzeuge verwenden, um Informationen nachzuschlagen, die hilfreich sein könnten, um die ursprüngliche \
+Frage des Benutzers zu beantworten. Die verfügbaren Werkzeuge sind:
 
 {tool_overviews}
 
-RESPONSE FORMAT INSTRUCTIONS
+ANTWORTFORMAT-ANWEISUNGEN 
 ----------------------------
-When responding to me, please output a response in one of two formats:
+Bei der Antwort gib bitte eine Antwort in einem der beiden Formate aus:
 
 **Option 1:**
-Use this if you want to use a tool. Markdown code snippet formatted in the following schema:
+Nutze dies, wenn du ein Werkzeug verwenden möchtest. Markdown-Code-Snippet formatiert nach folgendem Schema:
 
 ```json
 {{
-    "action": string, \\ The action to take. {tool_names}
-    "action_input": string \\ The input to the action
+    "action": string, \\ Die auszuführende Aktion. {tool_names}
+    "action_input": string \\ Die Eingabe für die Aktion
 }}
 ```
 
 **Option #2:**
-Use this if you want to respond directly to the user. Markdown code snippet formatted in the following schema:
+Nutze dies, wenn du dem Benutzer direkt antworten möchtest. Markdown-Code-Snippet formatiert nach folgendem Schema:
 
 ```json
 {{
     "action": "Final Answer",
-    "action_input": string \\ You should put what you want to return to use here
+    "action_input": string \\ Hier solltest du eintragen, was du dem Benutzer zurückgeben möchtest
 }}
 ```
 """
@@ -45,12 +45,12 @@ Use this if you want to respond directly to the user. Markdown code snippet form
 # For the case where the user has not configured any tools to call, but still using the tool-flow
 # expected format
 TOOL_LESS_PROMPT = """
-Respond with a markdown code snippet in the following schema:
+Antworte mit einem Markdown-Code-Snippet im folgenden Schema:
 
 ```json
 {{
     "action": "Final Answer",
-    "action_input": string \\ You should put what you want to return to use here
+    "action_input": string \\ Hier solltest du eintragen, was du dem Benutzer zurückgeben möchtest
 }}
 ```
 """
@@ -58,10 +58,10 @@ Respond with a markdown code snippet in the following schema:
 
 # Second part of the prompt to include the user query
 USER_INPUT = """
-USER'S INPUT
+BENUTZEREINGABE
 --------------------
-Here is the user's input \
-(remember to respond with a markdown code snippet of a json blob with a single action, and NOTHING else):
+Hier ist die Benutzereingabe \
+(denk daran, mit einem Markdown-Code-Snippet eines JSON-Blocks mit einer einzigen Aktion zu antworten, und NICHTS anderes):
 
 {user_input}
 """
@@ -70,29 +70,29 @@ Here is the user's input \
 # After the tool call, this is the following message to get a final answer
 # Tools are not chained currently, the system must provide an answer after calling a tool
 TOOL_FOLLOWUP = """
-TOOL RESPONSE:
+WERKZEUG-ANTWORT:
 ---------------------
 {tool_output}
 
-USER'S INPUT
+BENUTZEREINGABE
 --------------------
-Okay, so what is the response to my last comment? If using information obtained from the tools you must \
-mention it explicitly without mentioning the tool names - I have forgotten all TOOL RESPONSES!
-If the tool response is not useful, ignore it completely.
+Ok, was ist also die Antwort auf meinen letzten Kommentar? Wenn du Informationen aus den Werkzeugen verwendest, musst du \
+sie ausdrücklich erwähnen ohne die Werkzeug-Namen zu nennen – ich habe alle WERKZEUG-ANTWORTEN vergessen!
+Wenn die Werkzeug-Antwort nicht nützlich ist, ignoriere sie komplett.
 {optional_reminder}{hint}
-IMPORTANT! You MUST respond with a markdown code snippet of a json blob with a single action, and NOTHING else.
+WICHTIG! Du MUSST mit einem Markdown-Code-Snippet eines JSON-Blocks mit einer einzigen Aktion antworten, und NICHTS anderes.
 """
 
 
 # If no tools were used, but retrieval is enabled, then follow up with this message to get the final answer
 TOOL_LESS_FOLLOWUP = """
-Refer to the following documents when responding to my final query. Ignore any documents that are not relevant.
+Beziehe dich bei der Beantwortung meiner endgültigen Frage auf die folgenden Dokumente. Ignoriere alle Dokumente, die nicht relevant sind.
 
-CONTEXT DOCUMENTS:
+KONTEXT-DOKUMENTE:
 ---------------------
 {context_str}
 
-FINAL QUERY:
+ENDGÜLTIGE FRAGE:
 --------------------
 {user_query}
 

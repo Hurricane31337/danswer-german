@@ -20,7 +20,7 @@ import {
   MixedBreadIcon,
 } from "@/components/icons/icons";
 import { Modal } from "@/components/Modal";
-import { Button } from "@tremor/react";
+import { Button } from "@/components/ui/button";
 import { TextFormField } from "@/components/admin/connectors/Field";
 import { SettingsContext } from "@/components/settings/SettingsProvider";
 
@@ -90,9 +90,10 @@ const RerankingDetailsForm = forwardRef<
 
           return (
             <div className="p-2 rounded-lg max-w-4xl mx-auto">
-              <h2 className="text-2xl font-bold mb-4 text-text-800">
-                Post-Processing
-              </h2>
+              <p className="mb-4">
+                Wähle aus Cloud-, selbstgehosteten Modellen oder benutze kein
+                Reranking-Modell.
+              </p>
               <div className="text-sm mr-auto mb-6 divide-x-2 flex">
                 {originalRerankingDetails.rerank_model_name && (
                   <button
@@ -107,7 +108,9 @@ const RerankingDetailsForm = forwardRef<
                   </button>
                 )}
                 <div
-                  className={`${originalRerankingDetails.rerank_model_name && "px-2 ml-2"}`}
+                  className={`${
+                    originalRerankingDetails.rerank_model_name && "px-2 ml-2"
+                  }`}
                 >
                   <button
                     onClick={() => setModelTab("cloud")}
@@ -148,24 +151,24 @@ const RerankingDetailsForm = forwardRef<
               <Form>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {(modelTab
-                    ? rerankingModels.filter(
+                      ? rerankingModels.filter(
                         (model) => model.cloud == (modelTab == "cloud")
                       )
-                    : rerankingModels.filter(
+                      : rerankingModels.filter(
                         (modelCard) =>
                           (modelCard.modelName ==
                             originalRerankingDetails.rerank_model_name &&
                             modelCard.rerank_provider_type ==
-                              originalRerankingDetails.rerank_provider_type) ||
+                            originalRerankingDetails.rerank_provider_type) ||
                           (modelCard.rerank_provider_type ==
                             RerankerProvider.LITELLM &&
                             originalRerankingDetails.rerank_provider_type ==
-                              RerankerProvider.LITELLM)
+                            RerankerProvider.LITELLM)
                       )
                   ).map((card) => {
                     const isSelected =
                       values.rerank_provider_type ===
-                        card.rerank_provider_type &&
+                      card.rerank_provider_type &&
                       (card.modelName == null ||
                         values.rerank_model_name === card.modelName);
 
@@ -214,12 +217,12 @@ const RerankingDetailsForm = forwardRef<
                           <div className="flex items-center">
                             {card.rerank_provider_type ===
                             RerankerProvider.LITELLM ? (
-                              <LiteLLMIcon size={24} className="mr-2" />
+                              <LiteLLMIcon size={24} className="mr-2"/>
                             ) : card.rerank_provider_type ===
-                              RerankerProvider.COHERE ? (
-                              <CohereIcon size={24} className="mr-2" />
+                            RerankerProvider.COHERE ? (
+                              <CohereIcon size={24} className="mr-2"/>
                             ) : (
-                              <MixedBreadIcon size={24} className="mr-2" />
+                              <MixedBreadIcon size={24} className="mr-2"/>
                             )}
                             <h3 className="font-bold text-lg">
                               {card.displayName}
@@ -233,7 +236,7 @@ const RerankingDetailsForm = forwardRef<
                               onClick={(e) => e.stopPropagation()}
                               className="text-blue-500 hover:text-blue-700 transition-colors duration-200"
                             >
-                              <FiExternalLink size={18} />
+                              <FiExternalLink size={18}/>
                             </a>
                           )}
                         </div>
@@ -266,8 +269,7 @@ const RerankingDetailsForm = forwardRef<
                       <div className="flex justify-end">
                         <Button
                           onClick={() => setShowGpuWarningModalModel(null)}
-                          color="blue"
-                          size="xs"
+                          variant="submit"
                         >
                           Verstanden
                         </Button>
@@ -347,8 +349,7 @@ const RerankingDetailsForm = forwardRef<
                           onClick={() => {
                             setShowLiteLLMConfigurationModal(false);
                           }}
-                          color="blue"
-                          size="xs"
+                          variant="submit"
                         >
                           Update
                         </Button>
@@ -365,7 +366,7 @@ const RerankingDetailsForm = forwardRef<
                           key,
                           originalRerankingDetails[
                             key as keyof RerankingDetails
-                          ]
+                            ]
                         );
                       });
 
@@ -396,8 +397,7 @@ const RerankingDetailsForm = forwardRef<
                       <div className="flex w-full justify-end mt-4">
                         <Button
                           onClick={() => setIsApiKeyModalOpen(false)}
-                          color="blue"
-                          size="xs"
+                          variant="submit"
                         >
                           Aktualisieren
                         </Button>
