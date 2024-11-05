@@ -110,25 +110,25 @@ export const connectorConfigs: Record<
   ConnectionConfiguration
 > = {
   web: {
-    description: "Configure Web connector",
+    description: "Konfiguriere Web-Connector",
     values: [
       {
         type: "text",
         query:
-          "Enter the website URL to scrape e.g. https://docs.danswer.dev/:",
-        label: "Base URL",
+          "Gib die Website-URL zum Scrapen ein, z.B.: https://docs.danswer.dev/:",
+        label: "Basis-URL",
         name: "base_url",
         optional: false,
       },
       {
         type: "select",
-        query: "Select the web connector type:",
-        label: "Scrape Method",
+        query: "Wähle den Web-Connector-Typ:",
+        label: "Scraping-Methode",
         name: "web_connector_type",
         options: [
-          { name: "recursive", value: "recursive" },
-          { name: "single", value: "single" },
-          { name: "sitemap", value: "sitemap" },
+          { name: "rekursiv", value: "recursive" },
+          { name: "einzeln", value: "single" },
+          { name: "Sitemap", value: "sitemap" },
         ],
       },
     ],
@@ -136,70 +136,70 @@ export const connectorConfigs: Record<
     overrideDefaultFreq: 60 * 60 * 24,
   },
   github: {
-    description: "Configure GitHub connector",
+    description: "Konfiguriere GitHub-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the repository owner:",
-        label: "Repository Owner",
+        query: "Gib den Repository-Besitzer ein:",
+        label: "Repository-Besitzer",
         name: "repo_owner",
         optional: false,
       },
       {
         type: "text",
-        query: "Enter the repository name:",
-        label: "Repository Name",
+        query: "Gib den Repository-Namen ein:",
+        label: "Repository-Name",
         name: "repo_name",
         optional: false,
       },
       {
         type: "checkbox",
-        query: "Include pull requests?",
-        label: "Include pull requests?",
-        description: "Index pull requests from this repository",
+        query: "Pull Requests einbeziehen?",
+        label: "Pull Requests einbeziehen?",
+        description: "Indexiere Pull Requests aus diesem Repository",
         name: "include_prs",
         optional: true,
       },
       {
         type: "checkbox",
-        query: "Include issues?",
-        label: "Include Issues",
+        query: "Issues einbeziehen?",
+        label: "Issues einbeziehen",
         name: "include_issues",
-        description: "Index issues from this repository",
+        description: "Indexiere Issues aus diesem Repository",
         optional: true,
       },
     ],
     advanced_values: [],
   },
   gitlab: {
-    description: "Configure GitLab connector",
+    description: "Konfiguriere GitLab-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the project owner:",
-        label: "Project Owner",
+        query: "Gib den Projektbesitzer ein:",
+        label: "Projektbesitzer",
         name: "project_owner",
         optional: false,
       },
       {
         type: "text",
-        query: "Enter the project name:",
-        label: "Project Name",
+        query: "Gib den Projektnamen ein:",
+        label: "Projektname",
         name: "project_name",
         optional: false,
       },
       {
         type: "checkbox",
-        query: "Include merge requests?",
-        label: "Include MRs",
+        query: "Merge Requests einbeziehen?",
+        label: "MRs einbeziehen",
         name: "include_mrs",
         default: true,
         hidden: true,
       },
       {
         type: "checkbox",
-        query: "Include issues?",
-        label: "Include Issues",
+        query: "Issues einbeziehen?",
+        label: "Issues einbeziehen",
         name: "include_issues",
         optional: true,
         hidden: true,
@@ -208,13 +208,13 @@ export const connectorConfigs: Record<
     advanced_values: [],
   },
   google_drive: {
-    description: "Configure Google Drive connector",
+    description: "Konfiguriere Google-Drive-Connector",
     values: [
       {
         type: "checkbox",
-        label: "Include shared drives?",
+        label: "Geteilte Laufwerke einbeziehen?",
         description:
-          "This will allow Danswer to index everything in your shared drives.",
+          "Dadurch kann Danswer alles in deinen geteilten Laufwerken indexieren.",
         name: "include_shared_drives",
         optional: true,
         default: true,
@@ -222,8 +222,8 @@ export const connectorConfigs: Record<
       {
         type: "text",
         description:
-          "Enter a comma separated list of the URLs of the shared drives to index. Leave blank to index all shared drives.",
-        label: "Shared Drive URLs",
+          "Gib eine durch Kommas getrennte Liste der URLs der zu indexierenden geteilten Laufwerke ein. Leer lassen, um alle geteilten Laufwerke zu indexieren.",
+        label: "URLs der geteilten Laufwerke",
         name: "shared_drive_urls",
         visibleCondition: (values) => values.include_shared_drives,
         optional: true,
@@ -232,12 +232,12 @@ export const connectorConfigs: Record<
         type: "checkbox",
         label: (currentCredential) =>
           currentCredential?.credential_json?.google_drive_tokens
-            ? "Include My Drive?"
-            : "Include Everyone's My Drive?",
+            ? "Mein Laufwerk einbeziehen?"
+            : "Alle Laufwerke einbeziehen?",
         description: (currentCredential) =>
           currentCredential?.credential_json?.google_drive_tokens
-            ? "This will allow Danswer to index everything in your My Drive."
-            : "This will allow Danswer to index everything in everyone's My Drives.",
+            ? "Dadurch kann Danswer alles in deinem 'Mein Laufwerk' indexieren."
+            : "Dadurch kann Danswer alles in den 'Mein Laufwerk' aller Benutzer indexieren.",
         name: "include_my_drives",
         optional: true,
         default: true,
@@ -245,8 +245,8 @@ export const connectorConfigs: Record<
       {
         type: "text",
         description:
-          "Enter a comma separated list of the emails of the users whose MyDrive you want to index. Leave blank to index all MyDrives.",
-        label: "My Drive Emails",
+          "Gib eine durch Kommas getrennte Liste der E-Mails der Benutzer ein, deren 'Mein Laufwerk' du indexieren möchtest. Leer lassen, um alle 'Mein Laufwerk'-Instanzen zu indexieren.",
+        label: "E-Mails der Benutzer für 'Mein Laufwerk'",
         name: "my_drive_emails",
         visibleCondition: (values, currentCredential) =>
           values.include_my_drives &&
@@ -258,170 +258,170 @@ export const connectorConfigs: Record<
       {
         type: "text",
         description:
-          "Enter a comma separated list of the URLs of the folders located in Shared Drives to index. The files located in these folders (and all subfolders) will be indexed. Note: This will be in addition to the 'Include Shared Drives' and 'Shared Drive URLs' settings, so leave those blank if you only want to index the folders specified here.",
-        label: "Folder URLs",
+          "Gib eine durch Kommas getrennte Liste der URLs der in geteilten Laufwerken befindlichen Ordner ein, die indexiert werden sollen. Die Dateien in diesen Ordnern (und allen Unterordnern) werden indexiert. Hinweis: Dies wird zusätzlich zu den Einstellungen 'Geteilte Laufwerke einbeziehen' und 'URLs der geteilten Laufwerke' verwendet – lass diese leer, wenn du nur die hier angegebenen Ordner indexieren möchtest.",
+        label: "Ordner-URLs",
         name: "shared_folder_urls",
         optional: true,
       },
     ],
   },
   gmail: {
-    description: "Configure Gmail connector",
+    description: "Konfiguriere Gmail-Connector",
     values: [],
     advanced_values: [],
   },
   bookstack: {
-    description: "Configure Bookstack connector",
+    description: "Konfiguriere Bookstack-Connector",
     values: [],
     advanced_values: [],
   },
   confluence: {
-    description: "Configure Confluence connector",
-    subtext: `Specify the base URL of your Confluence instance, the space name, and optionally a specific page ID to index. If no page ID is provided, the entire space will be indexed. If no space is specified, all available Confluence spaces will be indexed.`,
+    description: "Konfiguriere Confluence-Connector",
+    subtext: `Gebe die Basis-URL deiner Confluence-Instanz, den Namen des Bereichs und optional eine spezifische Seiten-ID an, die indexiert werden soll. Wenn keine Seiten-ID angegeben ist, wird der gesamte Bereich indexiert. Wird kein Bereich angegeben, werden alle verfügbaren Confluence-Bereiche indexiert.`,
     values: [
       {
         type: "text",
-        query: "Enter the wiki base URL:",
-        label: "Wiki Base URL",
+        query: "Gib die Wiki-Basis-URL ein:",
+        label: "Wiki-Basis-URL",
         name: "wiki_base",
         optional: false,
         description:
-          "The base URL of your Confluence instance (e.g., https://your-domain.atlassian.net/wiki)",
+          "Die Basis-URL deiner Confluence-Instanz (z.B., https://your-domain.atlassian.net/wiki)",
       },
       {
         type: "text",
-        query: "Enter the space:",
-        label: "Space",
+        query: "Gib den Bereich ein:",
+        label: "Bereich",
         name: "space",
         optional: true,
         description:
-          "The Confluence space name to index (e.g. `KB`). If no space is specified, all available Confluence spaces will be indexed.",
+          "Der Name des Confluence-Bereichs, der indexiert werden soll (z.B. `KB`). Wenn kein Bereich angegeben ist, werden alle verfügbaren Confluence-Bereiche indexiert.",
       },
       {
         type: "checkbox",
-        query: "Is this a Confluence Cloud instance?",
-        label: "Is Cloud",
+        query: "Ist dies eine Confluence-Cloud-Instanz?",
+        label: "Ist Cloud",
         name: "is_cloud",
         optional: false,
         default: true,
         description:
-          "Check if this is a Confluence Cloud instance, uncheck for Confluence Server/Data Center",
+          "Ankreuzen, wenn dies eine Confluence-Cloud-Instanz ist, abwählen für Confluence Server/Data Center",
       },
     ],
     advanced_values: [
       {
         type: "text",
-        query: "Enter the page ID (optional):",
-        label: "Page ID",
+        query: "Gib die Seiten-ID ein (optional):",
+        label: "Seiten-ID",
         name: "page_id",
         optional: true,
         description:
-          "Specific page ID to index  - leave empty to index the entire space (e.g. `131368`)",
+          "Spezifische Seiten-ID, die indexiert werden soll – leer lassen, um den gesamten Bereich zu indexieren (z.B. `131368`)",
       },
       {
         type: "checkbox",
-        query: "Should index pages recursively?",
-        label: "Index Recursively",
+        query: "Sollten Seiten rekursiv indexiert werden?",
+        label: "Rekursiv indexieren",
         name: "index_recursively",
         description:
-          "If this is set and the Wiki Page URL leads to a page, we will index the page and all of its children instead of just the page. This is set by default for Confluence connectors without a page ID specified.",
+          "Wenn dies aktiviert ist und die Wiki-Seiten-URL zu einer Seite führt, werden wir die Seite und alle ihre untergeordneten Seiten anstelle nur der Seite indexieren. Dies ist standardmäßig für Confluence-Connectoren festgelegt, bei denen keine Seiten-ID angegeben ist.",
         optional: false,
       },
       {
         type: "text",
-        query: "Enter the CQL query (optional):",
-        label: "CQL Query",
+        query: "Gib die CQL-Abfrage ein (optional):",
+        label: "CQL-Abfrage",
         name: "cql_query",
         optional: true,
         description:
-          "IMPORTANT: This will overwrite all other selected connector settings (besides Wiki Base URL). We currently only support CQL queries that return objects of type 'page'. This means all CQL queries must contain 'type=page' as the only type filter. It is also important that no filters for 'lastModified' are used as it will cause issues with our connector polling logic. We will still get all attachments and comments for the pages returned by the CQL query. Any 'lastmodified' filters will be overwritten. See https://developer.atlassian.com/server/confluence/advanced-searching-using-cql/ for more details.",
+          "WICHTIG: Dies überschreibt alle anderen ausgewählten Einstellungen des Connectors (außer der Wiki-Basis-URL). Wir unterstützen derzeit nur CQL-Abfragen, die Objekte des Typs 'Seite' zurückgeben. Das bedeutet, dass alle CQL-Abfragen 'type=page' als einzigen Typfilter enthalten müssen. Es ist auch wichtig, dass keine Filter für 'lastModified' verwendet werden, da dies Probleme mit unserer Connector-Abfrage-Logik verursachen würde. Wir werden dennoch alle Anhänge und Kommentare auf den von der CQL-Abfrage zurückgegebenen Seiten beziehen. Alle 'lastmodified'-Filter werden überschrieben. Weitere Informationen findest du unter https://developer.atlassian.com/server/confluence/advanced-searching-using-cql/.",
       },
     ],
   },
   jira: {
-    description: "Configure Jira connector",
-    subtext: `Specify any link to a Jira page below and click "Index" to Index. Based on the provided link, we will index the ENTIRE PROJECT, not just the specified page. For example, entering https://danswer.atlassian.net/jira/software/projects/DAN/boards/1 and clicking the Index button will index the whole DAN Jira project.`,
+    description: "Konfiguriere Jira-Connector",
+    subtext: `Gebe einen beliebigen Link zu einer Jira-Seite unten an und klicke auf "Indexieren", um ihn zu indexieren. Basierend auf dem bereitgestellten Link werden wir das GESAMTE PROJEKT indexieren, nicht nur die angegebene Seite. Zum Beispiel: Wenn du https://danswer.atlassian.net/jira/software/projects/DAN/boards/1 angibst und auf den Index-Button klickst, wird das gesamte Jira-Projekt DAN indexiert.`,
     values: [
       {
         type: "text",
-        query: "Enter the Jira project URL:",
-        label: "Jira Project URL",
+        query: "Gib die Jira-Projekt-URL ein:",
+        label: "Jira-Projekt-URL",
         name: "jira_project_url",
         optional: false,
       },
       {
         type: "list",
-        query: "Enter email addresses to blacklist from comments:",
-        label: "Comment Email Blacklist",
+        query: "Gib die zu ignorierenden E-Mail-Adressen aus Kommentaren ein:",
+        label: "E-Mail-Blacklist für Kommentare",
         name: "comment_email_blacklist",
         description:
-          "This is generally useful to ignore certain bots. Add user emails which comments should NOT be indexed.",
+          "Dies ist normalerweise nützlich, um bestimmte Bots zu ignorieren. Füge Benutzer-E-Mail-Adressen hinzu, deren Kommentare NICHT indexiert werden sollen.",
         optional: true,
       },
     ],
     advanced_values: [],
   },
   salesforce: {
-    description: "Configure Salesforce connector",
+    description: "Konfiguriere Salesforce-Connector",
     values: [
       {
         type: "list",
-        query: "Enter requested objects:",
-        label: "Requested Objects",
+        query: "Gib angeforderte Objekte ein:",
+        label: "Angeforderte Objekte",
         name: "requested_objects",
         optional: true,
-        description: `Specify the Salesforce object types you want us to index. If unsure, don't specify any objects and Danswer will default to indexing by 'Account'.
+        description: `Gib die Salesforce-Objekttypen an, die wir indexieren sollen. Wenn du dir unsicher bist, gib keine Objekte an und Danswer wird standardmäßig nach 'Account' indexieren.
 
-Hint: Use the singular form of the object name (e.g., 'Opportunity' instead of 'Opportunities').`,
+Hinweis: Verwende die Einzahl des Objektnamens (z.B. 'Opportunity' statt 'Opportunities').`,
       },
     ],
     advanced_values: [],
   },
   sharepoint: {
-    description: "Configure SharePoint connector",
+    description: "Konfiguriere SharePoint-Connector",
     values: [
       {
         type: "list",
-        query: "Enter SharePoint sites:",
+        query: "Gib SharePoint-Sites ein:",
         label: "Sites",
         name: "sites",
         optional: true,
-        description: `• If no sites are specified, all sites in your organization will be indexed (Sites.Read.All permission required).
-• Specifying 'https://danswerai.sharepoint.com/sites/support' for example will only index documents within this site.
-• Specifying 'https://danswerai.sharepoint.com/sites/support/subfolder' for example will only index documents within this folder.
+        description: `• Wenn keine Sites angegeben sind, werden alle Sites in deiner Organisation indexiert (Sites.Read.All-Berechtigungen erforderlich).
+• Angabe von 'https://danswerai.sharepoint.com/sites/support' zum Beispiel wird nur Dokumente innerhalb dieser Site indexieren.
+• Angabe von 'https://danswerai.sharepoint.com/sites/support/unterordner' zum Beispiel wird nur Dokumente innerhalb dieses Ordners indexieren.
 `,
       },
     ],
     advanced_values: [],
   },
   teams: {
-    description: "Configure Teams connector",
+    description: "Konfiguriere Teams-Connector",
     values: [
       {
         type: "list",
-        query: "Enter Teams to include:",
+        query: "Gib Teams an, die einbezogen werden sollen:",
         label: "Teams",
         name: "teams",
         optional: true,
-        description: `Specify 0 or more Teams to index. For example, specifying the Team 'Support' for the 'danswerai' Org will cause us to only index messages sent in channels belonging to the 'Support' Team. If no Teams are specified, all Teams in your organization will be indexed.`,
+        description: `Gib 0 oder mehr Teams an, die indexiert werden sollen. Wenn du z.B. das Team 'Support' für die Organisation 'danswerai' angibst, wird es dazu führen, dass wir nur Nachrichten indexieren, die in Kanälen des 'Support'-Teams gesendet wurden. Wenn keine Teams angegeben sind, werden alle Teams in deiner Organisation indexiert.`,
       },
     ],
     advanced_values: [],
   },
   discourse: {
-    description: "Configure Discourse connector",
+    description: "Konfiguriere Discourse-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the base URL:",
-        label: "Base URL",
+        query: "Gib die Basis-URL ein:",
+        label: "Basis-URL",
         name: "base_url",
         optional: false,
       },
       {
         type: "list",
-        query: "Enter categories to include:",
-        label: "Categories",
+        query: "Gib einzuschließende Kategorien an:",
+        label: "Kategorien",
         name: "categories",
         optional: true,
       },
@@ -429,32 +429,32 @@ Hint: Use the singular form of the object name (e.g., 'Opportunity' instead of '
     advanced_values: [],
   },
   axero: {
-    description: "Configure Axero connector",
+    description: "Konfiguriere Axero-Connector",
     values: [
       {
         type: "list",
-        query: "Enter spaces to include:",
-        label: "Spaces",
+        query: "Gib einzuschließende Bereiche an:",
+        label: "Bereiche",
         name: "spaces",
         optional: true,
         description:
-          "Specify zero or more Spaces to index (by the Space IDs). If no Space IDs are specified, all Spaces will be indexed.",
+          "Gib null oder mehr Bereiche an, die indexiert werden sollen (nach den Bereichs-IDs). Wenn keine Bereichs-IDs angegeben sind, werden alle Bereiche indexiert.",
       },
     ],
     advanced_values: [],
     overrideDefaultFreq: 60 * 60 * 24,
   },
   productboard: {
-    description: "Configure Productboard connector",
+    description: "Konfiguriere Productboard-Connector",
     values: [],
     advanced_values: [],
   },
   slack: {
-    description: "Configure Slack connector",
+    description: "Konfiguriere Slack-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the Slack workspace:",
+        query: "Gib den Slack-Workspace ein:",
         label: "Workspace",
         name: "workspace",
         optional: false,
@@ -463,69 +463,69 @@ Hint: Use the singular form of the object name (e.g., 'Opportunity' instead of '
     advanced_values: [
       {
         type: "list",
-        query: "Enter channels to include:",
-        label: "Channels",
+        query: "Gib einzuschließende Kanäle an:",
+        label: "Kanäle",
         name: "channels",
-        description: `Specify 0 or more channels to index. For example, specifying the channel "support" will cause us to only index all content within the "#support" channel. If no channels are specified, all channels in your workspace will be indexed.`,
+        description: `Gib 0 oder mehr Kanäle an, die indexiert werden sollen. Wenn du z.B. den Kanal "support" angibst, wird das dazu führen, dass wir nur den gesamten Inhalt im Kanal "#support" indexieren. Wenn keine Kanäle angegeben sind, werden alle Kanäle in deinem Workspace indexiert.`,
         optional: true,
-        // Slack channels can only be lowercase
+        // Slack-Kanäle können nur in Kleinbuchstaben sein
         transform: (values) => values.map((value) => value.toLowerCase()),
       },
       {
         type: "checkbox",
-        query: "Enable channel regex?",
-        label: "Enable Channel Regex",
+        query: "Kanal-Regex aktivieren?",
+        label: "Kanal-Regex aktivieren",
         name: "channel_regex_enabled",
-        description: `If enabled, we will treat the "channels" specified above as regular expressions. A channel's messages will be pulled in by the connector if the name of the channel fully matches any of the specified regular expressions.
-For example, specifying .*-support.* as a "channel" will cause the connector to include any channels with "-support" in the name.`,
+        description: `Wenn aktiviert, behandeln wir die oben angegebenen "Kanäle" als reguläre Ausdrücke. Die Nachrichten eines Kanals werden durch den Connector abgerufen, wenn der Name des Kanals vollständig mit einem der angegebenen regulären Ausdrücke übereinstimmt.
+Beispielsweise bewirkt die Angabe von .*-support.* als "Kanal", dass der Connector alle Kanäle mit "-support" im Namen einbezieht.`,
         optional: true,
       },
     ],
   },
   slab: {
-    description: "Configure Slab connector",
+    description: "Konfiguriere Slab-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the base URL:",
-        label: "Base URL",
+        query: "Gib die Basis-URL ein:",
+        label: "Basis-URL",
         name: "base_url",
         optional: false,
-        description: `Specify the base URL for your Slab team. This will look something like: https://danswer.slab.com/`,
+        description: `Gib die Basis-URL für dein Slab-Team an. Dies sieht aus wie: https://danswer.slab.com/`,
       },
     ],
     advanced_values: [],
   },
   guru: {
-    description: "Configure Guru connector",
+    description: "Konfiguriere Guru-Connector",
     values: [],
     advanced_values: [],
   },
   gong: {
-    description: "Configure Gong connector",
+    description: "Konfiguriere Gong-Connector",
     values: [
       {
         type: "list",
-        query: "Enter workspaces to include:",
+        query: "Gib einzuschließende Workspaces an:",
         label: "Workspaces",
         name: "workspaces",
         optional: true,
         description:
-          "Specify 0 or more workspaces to index. Provide the workspace ID or the EXACT workspace name from Gong. If no workspaces are specified, transcripts from all workspaces will be indexed.",
+          "Gib null oder mehr Arbeitsbereiche an, die indexiert werden sollen. Gib die Arbeitsbereichs-ID oder den EXAKTEN Arbeitsbereichs-Namen aus Gong an. Wenn keine Arbeitsbereiche angegeben sind, werden Transkripte aus allen Arbeitsbereichen indexiert.",
       },
     ],
     advanced_values: [],
   },
   loopio: {
-    description: "Configure Loopio connector",
+    description: "Konfiguriere Loopio-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the Loopio stack name",
+        query: "Gib den Namen des Loopio-Stacks ein",
         label: "Loopio Stack Name",
         name: "loopio_stack_name",
         description:
-          "Must be exact match to the name in Library Management, leave this blank if you want to index all Stacks",
+          "Muss genau mit dem Namen in der Bibliotheksverwaltung übereinstimmen, lass dies leer, wenn du alle Stacks indexieren möchtest",
         optional: true,
       },
     ],
@@ -533,12 +533,12 @@ For example, specifying .*-support.* as a "channel" will cause the connector to 
     overrideDefaultFreq: 60 * 60 * 24,
   },
   file: {
-    description: "Configure File connector",
+    description: "Konfiguriere Datei-Connector",
     values: [
       {
         type: "file",
-        query: "Enter file locations:",
-        label: "File Locations",
+        query: "Gib Dateipfade ein:",
+        label: "Dateipfade",
         name: "file_locations",
         optional: false,
       },
@@ -546,19 +546,19 @@ For example, specifying .*-support.* as a "channel" will cause the connector to 
     advanced_values: [],
   },
   zulip: {
-    description: "Configure Zulip connector",
+    description: "Konfiguriere Zulip-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the realm name",
-        label: "Realm Name",
+        query: "Gib den Bereichsnamen ein",
+        label: "Bereichsname",
         name: "realm_name",
         optional: false,
       },
       {
         type: "text",
-        query: "Enter the realm URL",
-        label: "Realm URL",
+        query: "Gib die Bereichs-URL ein",
+        label: "Bereichs-URL",
         name: "realm_url",
         optional: false,
       },
@@ -566,99 +566,99 @@ For example, specifying .*-support.* as a "channel" will cause the connector to 
     advanced_values: [],
   },
   notion: {
-    description: "Configure Notion connector",
+    description: "Konfiguriere Notion-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the root page ID",
-        label: "Root Page ID",
+        query: "Gib die ID der Root-Seite ein",
+        label: "ID der Root-Seite",
         name: "root_page_id",
         optional: true,
         description:
-          "If specified, will only index the specified page + all of its child pages. If left blank, will index all pages the integration has been given access to.",
+          "Wenn angegeben, wird nur die angegebene Seite + alle zugehörigen Unterseiten indexiert. Wenn leer gelassen, werden alle Seiten indexiert, auf die die Integration Zugriff hat.",
       },
     ],
     advanced_values: [],
   },
   hubspot: {
-    description: "Configure HubSpot connector",
+    description: "Konfiguriere HubSpot-Connector",
     values: [],
     advanced_values: [],
   },
   document360: {
-    description: "Configure Document360 connector",
+    description: "Konfiguriere Document360-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the workspace",
+        query: "Gib den Workspace ein",
         label: "Workspace",
         name: "workspace",
         optional: false,
       },
       {
         type: "list",
-        query: "Enter categories to include",
-        label: "Categories",
+        query: "Gib einzuschließende Kategorien an",
+        label: "Kategorien",
         name: "categories",
         optional: true,
         description:
-          "Specify 0 or more categories to index. For instance, specifying the category 'Help' will cause us to only index all content within the 'Help' category. If no categories are specified, all categories in your workspace will be indexed.",
+          "Gib null oder mehr Kategorien an, die indexiert werden sollen. Zum Beispiel bewirkt die Angabe der Kategorie 'Hilfe', dass wir nur den gesamten Inhalt der Kategorie 'Hilfe' indexieren. Wenn keine Kategorien angegeben sind, werden alle Kategorien in deinem Workspace indexiert.",
       },
     ],
     advanced_values: [],
   },
   clickup: {
-    description: "Configure ClickUp connector",
+    description: "Konfiguriere ClickUp-Connector",
     values: [
       {
         type: "select",
-        query: "Select the connector type:",
-        label: "Connector Type",
+        query: "Wähle den Connector-Typ:",
+        label: "Connector-Typ",
         name: "connector_type",
         optional: false,
         options: [
-          { name: "list", value: "list" },
-          { name: "folder", value: "folder" },
-          { name: "space", value: "space" },
-          { name: "workspace", value: "workspace" },
+          { name: "Liste", value: "list" },
+          { name: "Folder", value: "folder" },
+          { name: "Space", value: "space" },
+          { name: "Workspace", value: "workspace" },
         ],
       },
       {
         type: "list",
-        query: "Enter connector IDs:",
-        label: "Connector IDs",
+        query: "Gib Connector-IDs ein:",
+        label: "Connector-IDs",
         name: "connector_ids",
-        description: "Specify 0 or more id(s) to index from.",
+        description: "Gib null oder mehr IDs an, die indexiert werden sollen.",
         optional: true,
       },
       {
         type: "checkbox",
-        query: "Retrieve task comments?",
-        label: "Retrieve Task Comments",
+        query: "Aufgabenskommentare abrufen?",
+        label: "Aufgabenskommentare abrufen",
         name: "retrieve_task_comments",
         description:
-          "If checked, then all the comments for each task will also be retrieved and indexed.",
+          "Wenn aktiviert, werden alle Kommentare für jede Aufgabe ebenfalls abgerufen und indexiert.",
         optional: false,
       },
     ],
     advanced_values: [],
   },
   google_sites: {
-    description: "Configure Google Sites connector",
+    description: "Konfiguriere Google Sites-Connector",
     values: [
       {
         type: "zip",
-        query: "Enter the zip path:",
-        label: "Zip Path",
+        query: "Gib den ZIP-Pfad ein:",
+        label: "ZIP-Pfad",
         name: "zip_path",
         optional: false,
         description:
-          "Upload a zip file containing the HTML of your Google Site",
+          "Lade eine ZIP-Datei mit dem HTML deiner Google-Site hoch",
       },
       {
         type: "text",
-        query: "Enter the base URL:",
-        label: "Base URL",
+        query: "Gib die Basis-URL ein:",
+        label: "Basis-URL",
         name: "base_url",
         optional: false,
       },
@@ -666,17 +666,17 @@ For example, specifying .*-support.* as a "channel" will cause the connector to 
     advanced_values: [],
   },
   zendesk: {
-    description: "Configure Zendesk connector",
+    description: "Konfiguriere Zendesk-Connector",
     values: [
       {
         type: "select",
-        query: "Select the what content this connector will index:",
-        label: "Content Type",
+        query: "Wähle, welchen Inhalt dieser Connector indexieren wird:",
+        label: "Inhaltstyp",
         name: "content_type",
         optional: false,
         options: [
-          { name: "articles", value: "articles" },
-          { name: "tickets", value: "tickets" },
+          { name: "Artikel", value: "articles" },
+          { name: "Tickets", value: "tickets" },
         ],
         default: "articles",
       },
@@ -684,35 +684,35 @@ For example, specifying .*-support.* as a "channel" will cause the connector to 
     advanced_values: [],
   },
   linear: {
-    description: "Configure Dropbox connector",
+    description: "Konfiguriere Dropbox-Connector",
     values: [],
     advanced_values: [],
   },
   dropbox: {
-    description: "Configure Dropbox connector",
+    description: "Konfiguriere Dropbox-Connector",
     values: [],
     advanced_values: [],
   },
   s3: {
-    description: "Configure S3 connector",
+    description: "Konfiguriere S3-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the bucket name:",
-        label: "Bucket Name",
+        query: "Gib den Bucket-Namen ein:",
+        label: "Bucket-Name",
         name: "bucket_name",
         optional: false,
       },
       {
         type: "text",
-        query: "Enter the prefix:",
-        label: "Prefix",
+        query: "Gib das Präfix ein:",
+        label: "Präfix",
         name: "prefix",
         optional: true,
       },
       {
         type: "text",
-        label: "Bucket Type",
+        label: "Bucket-Typ",
         name: "bucket_type",
         optional: false,
         default: "s3",
@@ -723,25 +723,25 @@ For example, specifying .*-support.* as a "channel" will cause the connector to 
     overrideDefaultFreq: 60 * 60 * 24,
   },
   r2: {
-    description: "Configure R2 connector",
+    description: "Konfiguriere R2-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the bucket name:",
-        label: "Bucket Name",
+        query: "Gib den Bucket-Namen ein:",
+        label: "Bucket-Name",
         name: "bucket_name",
         optional: false,
       },
       {
         type: "text",
-        query: "Enter the prefix:",
-        label: "Prefix",
+        query: "Gib das Präfix ein:",
+        label: "Präfix",
         name: "prefix",
         optional: true,
       },
       {
         type: "text",
-        label: "Bucket Type",
+        label: "Bucket-Typ",
         name: "bucket_type",
         optional: false,
         default: "r2",
@@ -752,26 +752,26 @@ For example, specifying .*-support.* as a "channel" will cause the connector to 
     overrideDefaultFreq: 60 * 60 * 24,
   },
   google_cloud_storage: {
-    description: "Configure Google Cloud Storage connector",
+    description: "Konfiguriere Google Cloud Storage-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the bucket name:",
-        label: "Bucket Name",
+        query: "Gib den Bucket-Namen ein:",
+        label: "Bucket-Name",
         name: "bucket_name",
         optional: false,
-        description: "Name of the GCS bucket to index, e.g. my-gcs-bucket",
+        description: "Name des zu indexierenden GCS-Buckets, z.B. my-gcs-bucket",
       },
       {
         type: "text",
-        query: "Enter the prefix:",
-        label: "Path Prefix",
+        query: "Gib das Präfix ein:",
+        label: "Pfad-Präfix",
         name: "prefix",
         optional: true,
       },
       {
         type: "text",
-        label: "Bucket Type",
+        label: "Bucket-Typ",
         name: "bucket_type",
         optional: false,
         default: "google_cloud_storage",
@@ -782,25 +782,25 @@ For example, specifying .*-support.* as a "channel" will cause the connector to 
     overrideDefaultFreq: 60 * 60 * 24,
   },
   oci_storage: {
-    description: "Configure OCI Storage connector",
+    description: "Konfiguriere OCI Storage-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the bucket name:",
-        label: "Bucket Name",
+        query: "Gib den Bucket-Namen ein:",
+        label: "Bucket-Name",
         name: "bucket_name",
         optional: false,
       },
       {
         type: "text",
-        query: "Enter the prefix:",
-        label: "Prefix",
+        query: "Gib das Präfix ein:",
+        label: "Präfix",
         name: "prefix",
         optional: true,
       },
       {
         type: "text",
-        label: "Bucket Type",
+        label: "Bucket-Typ",
         name: "bucket_type",
         optional: false,
         default: "oci_storage",
@@ -810,143 +810,143 @@ For example, specifying .*-support.* as a "channel" will cause the connector to 
     advanced_values: [],
   },
   wikipedia: {
-    description: "Configure Wikipedia connector",
+    description: "Konfiguriere Wikipedia-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the language code:",
-        label: "Language Code",
+        query: "Gib den Sprachcode ein:",
+        label: "Sprachcode",
         name: "language_code",
         optional: false,
-        description: "Input a valid Wikipedia language code (e.g. 'en', 'es')",
+        description: "Gib einen gültigen Wikipedia-Sprachcode ein (z.B. 'en', 'es')",
       },
       {
         type: "list",
-        query: "Enter categories to include:",
-        label: "Categories to index",
+        query: "Gib Kategorien an, die einbezogen werden sollen:",
+        label: "Zu indexierende Kategorien",
         name: "categories",
         description:
-          "Specify 0 or more names of categories to index. For most Wikipedia sites, these are pages with a name of the form 'Category: XYZ', that are lists of other pages/categories. Only specify the name of the category, not its url.",
+          "Gib null oder mehr Namen von Kategorien an, die indexiert werden sollen. Für die meisten Wikipedia-Seiten sind dies Seiten mit einem Namen der Form 'Kategorie: XYZ', die Listen anderer Seiten/Kategorien sind. Gib nur den Namen der Kategorie an, nicht deren URL.",
         optional: true,
       },
       {
         type: "list",
-        query: "Enter pages to include:",
-        label: "Pages",
+        query: "Gib Seiten an, die einbezogen werden sollen:",
+        label: "Seiten",
         name: "pages",
         optional: true,
-        description: "Specify 0 or more names of pages to index.",
+        description: "Gib null oder mehr Namen von Seiten an, die indexiert werden sollen.",
       },
       {
         type: "number",
-        query: "Enter the recursion depth:",
-        label: "Recursion Depth",
+        query: "Gib die Rekursionstiefe ein:",
+        label: "Rekursionstiefe",
         name: "recurse_depth",
         description:
-          "When indexing categories that have sub-categories, this will determine how may levels to index. Specify 0 to only index the category itself (i.e. no recursion). Specify -1 for unlimited recursion depth. Note, that in some rare instances, a category might contain itself in its dependencies, which will cause an infinite loop. Only use -1 if you confident that this will not happen.",
+          "Beim Indexieren von Kategorien, die Unterkategorien haben, wird dies bestimmen, wie viele Ebenen indexiert werden sollen. Gib 0 an, um nur die Kategorie selbst zu indexieren (d.h. ohne Rekursion). Gib -1 für unbegrenzte Rekursionstiefe an. Beachte, dass in einigen seltenen Fällen eine Kategorie sich selbst in ihren Abhängigkeiten enthalten könnte, was zu einer Endlosschleife führt. Verwende -1 nur, wenn du sicher bist, dass dies nicht passieren wird.",
         optional: false,
       },
     ],
     advanced_values: [],
   },
   xenforo: {
-    description: "Configure Xenforo connector",
+    description: "Konfiguriere Xenforo-Connector",
     values: [
       {
         type: "text",
-        query: "Enter forum or thread URL:",
+        query: "Gib die Forum- oder Thread-URL ein:",
         label: "URL",
         name: "base_url",
         optional: false,
         description:
-          "The XenForo v2.2 forum URL to index. Can be board or thread.",
+          "Die XenForo v2.2 Forum-URL, die indexiert werden soll. Kann ein Board oder ein Thread sein.",
       },
     ],
     advanced_values: [],
   },
   asana: {
-    description: "Configure Asana connector",
+    description: "Konfiguriere Asana-Connector",
     values: [
       {
         type: "text",
-        query: "Enter your Asana workspace ID:",
-        label: "Workspace ID",
+        query: "Gib die ID deines Asana-Workspaces ein:",
+        label: "Workspace-ID",
         name: "asana_workspace_id",
         optional: false,
         description:
-          "The ID of the Asana workspace to index. You can find this at https://app.asana.com/api/1.0/workspaces. It's a number that looks like 1234567890123456.",
+          "Die ID des Asana-Workspaces, der indexiert werden soll. Du findest diese unter: https://app.asana.com/api/1.0/workspaces. Es ist eine Zahl, die so aussieht: 1234567890123456.",
       },
       {
         type: "text",
-        query: "Enter project IDs to index (optional):",
-        label: "Project IDs",
+        query: "Gib die IDs der zu indexierenden Projekte ein (optional):",
+        label: "Projekt-IDs",
         name: "asana_project_ids",
         description:
-          "IDs of specific Asana projects to index, separated by commas. Leave empty to index all projects in the workspace. Example: 1234567890123456,2345678901234567",
+          "IDs bestimmter Asana-Projekte, die indexiert werden sollen, durch Kommas getrennt. Leer lassen, um alle Projekte im Workspace zu indexieren. Beispiel: 1234567890123456,2345678901234567",
         optional: true,
       },
       {
         type: "text",
-        query: "Enter the Team ID (optional):",
-        label: "Team ID",
+        query: "Gib die Team-ID ein (optional):",
+        label: "Team-ID",
         name: "asana_team_id",
         optional: true,
         description:
-          "ID of a team to use for accessing team-visible tasks. This allows indexing of team-visible tasks in addition to public tasks. Leave empty if you don't want to use this feature.",
+          "ID eines Teams, das zum Zugriff auf team-sichtbare Aufgaben verwendet wird. Dadurch können zusätzlich zu öffentlichen Aufgaben auch team-sichtbare Aufgaben indexiert werden. Leer lassen, wenn du diese Funktion nicht nutzen möchtest.",
       },
     ],
     advanced_values: [],
   },
   mediawiki: {
-    description: "Configure MediaWiki connector",
+    description: "Konfiguriere MediaWiki-Connector",
     values: [
       {
         type: "text",
-        query: "Enter the language code:",
-        label: "Language Code",
+        query: "Gib den Sprachcode ein:",
+        label: "Sprachcode",
         name: "language_code",
         optional: false,
-        description: "Input a valid MediaWiki language code (e.g. 'en', 'es')",
+        description: "Gib einen gültigen MediaWiki-Sprachcode ein (z.B. 'en', 'es')",
       },
       {
         type: "text",
-        query: "Enter the MediaWiki Site URL",
-        label: "MediaWiki Site URL",
+        query: "Gib die MediaWiki-Site-URL ein",
+        label: "MediaWiki-Site-URL",
         name: "hostname",
         optional: false,
       },
       {
         type: "list",
-        query: "Enter categories to include:",
-        label: "Categories to index",
+        query: "Gib Kategorien an, die einbezogen werden sollen:",
+        label: "Zu indexierende Kategorien",
         name: "categories",
         description:
-          "Specify 0 or more names of categories to index. For most MediaWiki sites, these are pages with a name of the form 'Category: XYZ', that are lists of other pages/categories. Only specify the name of the category, not its url.",
+          "Gib null oder mehr Namen von Kategorien an, die indexiert werden sollen. Für die meisten MediaWiki-Sites sind dies Seiten mit einem Namen der Form 'Kategorie: XYZ', die Listen anderer Seiten/Kategorien sind. Gib nur den Namen der Kategorie an, nicht deren URL.",
         optional: true,
       },
       {
         type: "list",
-        query: "Enter pages to include:",
-        label: "Pages",
+        query: "Gib Seiten an, die einbezogen werden sollen:",
+        label: "Seiten",
         name: "pages",
         optional: true,
         description:
-          "Specify 0 or more names of pages to index. Only specify the name of the page, not its url.",
+          "Gib null oder mehr Namen von Seiten an, die indexiert werden sollen. Gib nur den Namen der Seite an, nicht deren URL.",
       },
       {
         type: "number",
-        query: "Enter the recursion depth:",
-        label: "Recursion Depth",
+        query: "Gib die Rekursionstiefe ein:",
+        label: "Rekursionstiefe",
         name: "recurse_depth",
         description:
-          "When indexing categories that have sub-categories, this will determine how may levels to index. Specify 0 to only index the category itself (i.e. no recursion). Specify -1 for unlimited recursion depth. Note, that in some rare instances, a category might contain itself in its dependencies, which will cause an infinite loop. Only use -1 if you confident that this will not happen.",
+          "Beim Indexieren von Kategorien, die Unterkategorien haben, wird dies bestimmen, wie viele Ebenen indexiert werden sollen. Gib 0 an, um nur die Kategorie selbst zu indexieren (d.h. ohne Rekursion). Gib -1 für unbegrenzte Rekursionstiefe an. Beachte, dass in einigen seltenen Fällen eine Kategorie sich selbst in ihren Abhängigkeiten enthalten könnte, was zu einer Endlosschleife führt. Verwende -1 nur, wenn du sicher bist, dass dies nicht passieren wird.",
         optional: true,
       },
     ],
     advanced_values: [],
   },
   freshdesk: {
-    description: "Configure Freshdesk connector",
+    description: "Konfiguriere Freshdesk-Connector",
     values: [],
     advanced_values: [],
   },
@@ -1013,8 +1013,8 @@ export function createConnectorValidationSchema(
   const configuration = connectorConfigs[connector];
 
   return Yup.object().shape({
-    access_type: Yup.string().required("Access Type is required"),
-    name: Yup.string().required("Connector Name is required"),
+    access_type: Yup.string().required("Zugriffsart ist erforderlich"),
+    name: Yup.string().required("Connector-Name ist erforderlich"),
     ...configuration.values.reduce(
       (acc, field) => {
         let schema: any =
@@ -1029,7 +1029,7 @@ export function createConnectorValidationSchema(
                   : Yup.string();
 
         if (!field.optional) {
-          schema = schema.required(`${field.label} is required`);
+          schema = schema.required(`${field.label} ist erforderlich`);
         }
 
         acc[field.name] = schema;
@@ -1039,8 +1039,8 @@ export function createConnectorValidationSchema(
     ),
     // These are advanced settings
     indexingStart: Yup.string().nullable(),
-    pruneFreq: Yup.number().min(0, "Prune frequency must be non-negative"),
-    refreshFreq: Yup.number().min(0, "Refresh frequency must be non-negative"),
+    pruneFreq: Yup.number().min(0, "Prune-Häufigkeit muss nicht negativ sein"),
+    refreshFreq: Yup.number().min(0, "Refresh-Häufigkeit muss nicht negativ sein"),
   });
 }
 

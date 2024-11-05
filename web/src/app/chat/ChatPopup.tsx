@@ -32,13 +32,13 @@ export function ChatPopup() {
   const popupTitle =
     enterpriseSettings?.custom_popup_header ||
     (isConsentScreen
-      ? "Terms of Use"
-      : `Welcome to ${enterpriseSettings?.application_name || "Danswer"}!`);
+      ? "Nutzungsbedingungen"
+      : `Willkommen bei ${enterpriseSettings?.application_name || "Danswer"}!`);
 
   const popupContent =
     enterpriseSettings?.custom_popup_content ||
     (isConsentScreen
-      ? "By clicking 'I Agree', you acknowledge that you agree to the terms of use of this application and consent to proceed."
+      ? "Mit einem Klick auf 'Ich stimme zu' bestätigst du, dass du den Nutzungsbedingungen dieser Anwendung zustimmst und einverstanden bist, fortzufahren."
       : "");
 
   return (
@@ -64,7 +64,7 @@ export function ChatPopup() {
 
         {showConsentError && (
           <p className="text-red-500 text-sm mt-2">
-            You need to agree to the terms to access the application.
+            Du musst den Bedingungen zustimmen, um Zugriff auf die Anwendung zu erhalten.
           </p>
         )}
 
@@ -75,7 +75,7 @@ export function ChatPopup() {
               variant="destructive"
               onClick={() => setShowConsentError(true)}
             >
-              Cancel
+              Abbrechen
             </Button>
           )}
           <Button
@@ -88,7 +88,7 @@ export function ChatPopup() {
               setCompletedFlow(true);
             }}
           >
-            {isConsentScreen ? "I Agree" : "Get started!"}
+            {isConsentScreen ? "Ich stimme zu" : "Los geht's!"}
           </Button>
         </div>
       </>
