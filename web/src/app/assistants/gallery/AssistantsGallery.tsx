@@ -132,7 +132,7 @@ export function AssistantGalleryCard({
 
       <p className="text-sm mt-2">{assistant.description}</p>
       <p className="text-subtle text-sm my-2">
-        Autor: {assistant.owner?.email || "Danswer"}
+        Autor: {assistant.owner?.email || "Label KI"}
       </p>
       {assistant.tools.length > 0 && (
         <AssistantTools list assistant={assistant} />
