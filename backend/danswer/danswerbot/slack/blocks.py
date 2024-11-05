@@ -40,14 +40,14 @@ _MAX_BLURB_LEN = 45
 
 def get_feedback_reminder_blocks(thread_link: str, include_followup: bool) -> Block:
     text = (
-        f"Please provide feedback on <{thread_link}|this answer>. "
-        "This is essential to help us to improve the quality of the answers. "
-        "Please rate it by clicking the `Helpful` or `Not helpful` button. "
+        f"Bitte gib Feedback zu <{thread_link}|dieser Antwort>. "
+        "Das ist wichtig, um uns zu helfen die Qualität der Antworten zu verbessern. "
+        "Bitte bewerte sie, indem du auf den Button `Hilfreich` oder `Nicht hilfreich` klickst. "
     )
     if include_followup:
-        text += "\n\nIf you need more help, click the `I need more help from a human!` button. "
+        text += "\n\nWenn du mehr Hilfe benötigst, klicke auf den Button `Ich brauche mehr Hilfe von einem Menschen!`. "
 
-    text += "\n\nThanks!"
+    text += "\n\nDanke!"
 
     return SectionBlock(text=text)
 
@@ -114,13 +114,13 @@ def build_qa_feedback_block(
         elements=[
             ButtonElement(
                 action_id=LIKE_BLOCK_ACTION_ID,
-                text="👍 Helpful",
+                text="👍 Hilfreich",
                 style="primary",
                 value=feedback_reminder_id,
             ),
             ButtonElement(
                 action_id=DISLIKE_BLOCK_ACTION_ID,
-                text="👎 Not helpful",
+                text="👎 Nicht hilfreich",
                 value=feedback_reminder_id,
             ),
         ],
@@ -130,11 +130,11 @@ def build_qa_feedback_block(
 def get_document_feedback_blocks() -> Block:
     return SectionBlock(
         text=(
-            "- 'Up-Boost' if this document is a good source of information and should be "
-            "shown more often.\n"
-            "- 'Down-boost' if this document is a poor source of information and should be "
-            "shown less often.\n"
-            "- 'Hide' if this document is deprecated and should never be shown anymore."
+            "- 'Up-Boost', wenn dieses Dokument eine gute Informationsquelle ist und öfter "
+            "angezeigt werden sollte.\n"
+            "- 'Down-Boost', wenn dieses Dokument eine schlechte Informationsquelle ist und seltener "
+            "angezeigt werden sollte.\n"
+            "- 'Verstecken', wenn dieses Dokument veraltet ist und nicht mehr angezeigt werden sollte."
         ),
         accessory=RadioButtonsElement(
             options=[
@@ -147,7 +147,7 @@ def get_document_feedback_blocks() -> Block:
                     value=SearchFeedbackType.REJECT.value,
                 ),
                 Option(
-                    text=":x: Hide",
+                    text=":x: Verstecken",
                     value=SearchFeedbackType.HIDE.value,
                 ),
             ]
@@ -164,7 +164,7 @@ def build_doc_feedback_block(
     return ButtonElement(
         action_id=FEEDBACK_DOC_BUTTON_BLOCK_ACTION_ID,
         value=feedback_id,
-        text="Give Feedback",
+        text="Feedback geben",
     )
 
 
@@ -177,7 +177,7 @@ def get_restate_blocks(
         return []
 
     return [
-        HeaderBlock(text="Responding to the Query"),
+        HeaderBlock(text="Antwort auf die Anfrage"),
         SectionBlock(text=f"```{msg}```"),
     ]
 
@@ -188,7 +188,7 @@ def build_documents_blocks(
     num_docs_to_display: int = DANSWER_BOT_NUM_DOCS_TO_DISPLAY,
 ) -> list[Block]:
     header_text = (
-        "Retrieved Documents" if DISABLE_GENERATIVE_AI else "Reference Documents"
+        "Abgerufene Dokumente" if DISABLE_GENERATIVE_AI else "Referenzdokumente"
     )
     seen_docs_identifiers = set()
     section_blocks: list[Block] = [HeaderBlock(text=header_text)]
@@ -214,7 +214,7 @@ def build_documents_blocks(
         updated_at_line = ""
         if d.updated_at is not None:
             updated_at_line = (
-                f"_Updated {timeago.format(d.updated_at, datetime.now(pytz.utc))}_\n"
+                f"_Aktualisiert {timeago.format(d.updated_at, datetime.now(pytz.utc))}_\n"
             )
 
         body_text = f">{remove_slack_text_interactions(match_str)}"
@@ -248,12 +248,12 @@ def build_sources_blocks(
     if not cited_documents:
         return [
             SectionBlock(
-                text="*Warning*: no sources were cited for this answer, so it may be unreliable 😔"
+                text="*Warnung*: Keine Quellen wurden für diese Antwort zitiert, daher könnte sie unzuverlässig sein 😔"
             )
         ]
 
     seen_docs_identifiers = set()
-    section_blocks: list[Block] = [SectionBlock(text="*Sources:*")]
+    section_blocks: list[Block] = [SectionBlock(text="*Quellen:*")]
     included_docs = 0
     for citation_num, d in cited_documents:
         if d.document_id in seen_docs_identifiers:
@@ -275,7 +275,7 @@ def build_sources_blocks(
             else doc_sem_id
         )
 
-        owner_str = f"By {d.primary_owners[0]}" if d.primary_owners else None
+        owner_str = f"Von {d.primary_owners[0]}" if d.primary_owners else None
         days_ago_str = (
             timeago.format(d.updated_at, datetime.now(pytz.utc))
             if d.updated_at
@@ -356,7 +356,7 @@ def build_quotes_block(
     if not doc_to_quotes:
         return []
 
-    return [SectionBlock(text="*Relevant Snippets*\n" + "\n".join(quote_lines))]
+    return [SectionBlock(text="*Relevante Auszüge*\n" + "\n".join(quote_lines))]
 
 
 def build_qa_response_blocks(
@@ -378,26 +378,26 @@ def build_qa_response_blocks(
 
     filter_block: Block | None = None
     if time_cutoff or favor_recent or source_filters:
-        filter_text = "Filters: "
+        filter_text = "Filter: "
         if source_filters:
             sources_str = ", ".join([s.value for s in source_filters])
-            filter_text += f"`Sources in [{sources_str}]`"
+            filter_text += f"`Quellen in [{sources_str}]`"
             if time_cutoff or favor_recent:
-                filter_text += " and "
+                filter_text += " und "
         if time_cutoff is not None:
             time_str = time_cutoff.strftime("%b %d, %Y")
-            filter_text += f"`Docs Updated >= {time_str}` "
+            filter_text += f"`Dokumente aktualisiert >= {time_str}` "
         if favor_recent:
             if time_cutoff is not None:
                 filter_text += "+ "
-            filter_text += "`Prioritize Recently Updated Docs`"
+            filter_text += "`Bevorzugt kürzlich aktualisierte Dokumente`"
 
         filter_block = SectionBlock(text=f"_{filter_text}_")
 
     if not answer:
         answer_blocks = [
             SectionBlock(
-                text="Sorry, I was unable to find an answer, but I did find some potentially relevant docs 🤓"
+                text="Entschuldigung, ich konnte keine Antwort finden, aber ich habe einige potenziell relevante Dokumente gefunden 🤓"
             )
         ]
     else:
@@ -414,7 +414,7 @@ def build_qa_response_blocks(
         if not quotes_blocks:
             quotes_blocks = [
                 SectionBlock(
-                    text="*Warning*: no sources were quoted for this answer, so it may be unreliable 😔"
+                    text="*Warnung*: Keine Quellen wurden zitiert, daher könnte die Antwort unzuverlässig sein 😔"
                 )
             ]
 
@@ -445,12 +445,12 @@ def build_follow_up_block(message_id: int | None) -> ActionsBlock:
             ButtonElement(
                 action_id=IMMEDIATE_RESOLVED_BUTTON_ACTION_ID,
                 style="primary",
-                text="I'm all set!",
+                text="Alles geklärt!",
             ),
             ButtonElement(
                 action_id=FOLLOWUP_BUTTON_ACTION_ID,
                 style="danger",
-                text="I need more help from a human!",
+                text="Ich brauche mehr Hilfe von einem Menschen!",
             ),
         ],
     )
@@ -470,7 +470,7 @@ def build_follow_up_resolved_blocks(
     text = (
         tag_str
         + group_str
-        + "Someone has requested more help.\n\n:point_down:Please mark this resolved after answering!"
+        + "Jemand hat um zusätzliche Hilfe gebeten.\n\n:point_down:Bitte markiere dies als 'erledigt' nach der Beantwortung!"
     )
     text_block = SectionBlock(text=text)
     button_block = ActionsBlock(
@@ -478,7 +478,7 @@ def build_follow_up_resolved_blocks(
             ButtonElement(
                 action_id=FOLLOWUP_BUTTON_RESOLVED_ACTION_ID,
                 style="primary",
-                text="Mark Resolved",
+                text="Als erledigt markieren",
             )
         ]
     )

@@ -55,6 +55,8 @@ import { LlmOverride } from "@/lib/hooks";
 import { ContinueGenerating } from "./ContinueMessage";
 import { MemoizedLink, MemoizedParagraph } from "./MemoizedTextComponents";
 import { extractCodeText } from "./codeUtils";
+import ToolResult from "../../../components/tools/ToolResult";
+import CsvContent from "../../../components/tools/CSVContent";
 
 const TOOLS_WITH_CUSTOM_HANDLING = [
   SEARCH_TOOL_NAME,
@@ -69,8 +71,13 @@ function FileDisplay({
   files: FileDescriptor[];
   alignBubble?: boolean;
 }) {
+  const [close, setClose] = useState(true);
   const imageFiles = files.filter((file) => file.type === ChatFileType.IMAGE);
-  const nonImgFiles = files.filter((file) => file.type !== ChatFileType.IMAGE);
+  const nonImgFiles = files.filter(
+    (file) => file.type !== ChatFileType.IMAGE && file.type !== ChatFileType.CSV
+  );
+
+  const csvImgFiles = files.filter((file) => file.type == ChatFileType.CSV);
 
   return (
     <>
@@ -94,6 +101,7 @@ function FileDisplay({
           </div>
         </div>
       )}
+
       {imageFiles && imageFiles.length > 0 && (
         <div
           id="danswer-image"
@@ -102,6 +110,35 @@ function FileDisplay({
           <div className="flex flex-col gap-2">
             {imageFiles.map((file) => {
               return <InMessageImage key={file.id} fileId={file.id} />;
+            })}
+          </div>
+        </div>
+      )}
+
+      {csvImgFiles && csvImgFiles.length > 0 && (
+        <div className={` ${alignBubble && "ml-auto"} mt-2 auto mb-4`}>
+          <div className="flex flex-col gap-2">
+            {csvImgFiles.map((file) => {
+              return (
+                <div key={file.id} className="w-fit">
+                  {close ? (
+                    <>
+                      <ToolResult
+                        csvFileDescriptor={file}
+                        close={() => setClose(false)}
+                        contentComponent={CsvContent}
+                      />
+                    </>
+                  ) : (
+                    <DocumentPreview
+                      open={() => setClose(true)}
+                      fileName={file.name || file.id}
+                      maxWidth="max-w-64"
+                      alignBubble={alignBubble}
+                    />
+                  )}
+                </div>
+              );
             })}
           </div>
         </div>
@@ -152,7 +189,7 @@ export const AIMessage = ({
   files?: FileDescriptor[];
   query?: string;
   citedDocuments?: [string, DanswerDocument][] | null;
-  toolCall?: ToolCallMetadata;
+  toolCall?: ToolCallMetadata | null;
   isComplete?: boolean;
   hasDocs?: boolean;
   handleFeedback?: (feedbackType: FeedbackType) => void;
@@ -299,7 +336,9 @@ export const AIMessage = ({
       className={"py-5 ml-4 px-5 relative flex "}
     >
       <div
-        className={`mx-auto ${shared ? "w-full" : "w-[90%]"}  max-w-message-max`}
+        className={`mx-auto ${
+          shared ? "w-full" : "w-[90%]"
+        }  max-w-message-max`}
       >
         <div className={`desktop:mr-12 ${!shared && "mobile:ml-0 md:ml-8"}`}>
           <div className="flex">
@@ -545,9 +584,21 @@ export const AIMessage = ({
                         className={`
                         absolute -bottom-5
                         z-10
-                        invisible ${(isHovering || isRegenerateHovered || settings?.isMobile) && "!visible"}
-                        opacity-0 ${(isHovering || isRegenerateHovered || settings?.isMobile) && "!opacity-100"}
-                        translate-y-2 ${(isHovering || settings?.isMobile) && "!translate-y-0"}
+                        invisible ${
+                          (isHovering ||
+                            isRegenerateHovered ||
+                            settings?.isMobile) &&
+                          "!visible"
+                        }
+                        opacity-0 ${
+                          (isHovering ||
+                            isRegenerateHovered ||
+                            settings?.isMobile) &&
+                          "!opacity-100"
+                        }
+                        translate-y-2 ${
+                          (isHovering || settings?.isMobile) && "!translate-y-0"
+                        }
                         transition-transform duration-300 ease-in-out 
                         flex md:flex-row gap-x-0.5 bg-background-125/40 -mx-1.5 p-1.5 rounded-lg
                         `}
@@ -703,9 +754,7 @@ export const HumanMessage = ({
   }, [isEditing]);
 
   const handleEditSubmit = () => {
-    if (editedContent.trim() !== content.trim()) {
-      onEdit?.(editedContent);
-    }
+    onEdit?.(editedContent);
     setIsEditing(false);
   };
 
@@ -721,7 +770,9 @@ export const HumanMessage = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`text-user-text mx-auto ${shared ? "w-full" : "w-[90%]"} max-w-[790px]`}
+        className={`text-user-text mx-auto ${
+          shared ? "w-full" : "w-[90%]"
+        } max-w-[790px]`}
       >
         <div className="xl:ml-8">
           <div className="flex flex-col mr-4">

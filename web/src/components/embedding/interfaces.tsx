@@ -58,17 +58,10 @@ export interface EmbeddingModelDescriptor {
 
 export interface CloudEmbeddingModel extends EmbeddingModelDescriptor {
   pricePerMillion: number;
-  enabled?: boolean;
-  mtebScore: number;
-  maxContext: number;
 }
 
 export interface HostedEmbeddingModel extends EmbeddingModelDescriptor {
   link?: string;
-  model_dim: number;
-  normalize: boolean;
-  query_prefix: string;
-  passage_prefix: string;
   isDefault?: boolean;
 }
 
@@ -103,7 +96,7 @@ export const AVAILABLE_MODELS: HostedEmbeddingModel[] = [
     model_dim: 768,
     normalize: true,
     description:
-      "The recommended default for most situations. If you aren't sure which model to use, this is probably the one.",
+      "Die empfohlene Standardeinstellung für die meisten Situationen. Wenn du dir nicht sicher bist, welches Modell du verwenden sollst, ist das wahrscheinlich das richtige.",
     isDefault: false,
     link: "https://huggingface.co/nomic-ai/nomic-embed-text-v1",
     query_prefix: "search_query: ",
@@ -118,7 +111,7 @@ export const AVAILABLE_MODELS: HostedEmbeddingModel[] = [
     model_dim: 768,
     normalize: true,
     description:
-      "A smaller and faster model than the default. It is around 2x faster than the default model at the cost of lower search quality.",
+      "Ein kleineres und schnelleres Modell als die Standardeinstellung. Es ist etwa 2x schneller als das Standardmodell, allerdings auf Kosten einer niedrigeren Suchqualität.",
     link: "https://huggingface.co/intfloat/e5-base-v2",
     query_prefix: "query: ",
     passage_prefix: "passage: ",
@@ -132,7 +125,7 @@ export const AVAILABLE_MODELS: HostedEmbeddingModel[] = [
     model_dim: 384,
     normalize: true,
     description:
-      "The smallest and fastest version of the E5 line of models. If you're running Danswer on a resource constrained system, then this may be a good choice.",
+      "Die kleinste und schnellste Version der E5-Modellreihe. Wenn du Danswer auf einem ressourcenbeschränkten System betreibst, könnte dies eine gute Wahl sein.",
     link: "https://huggingface.co/intfloat/e5-small-v2",
     query_prefix: "query: ",
     passage_prefix: "passage: ",
@@ -146,7 +139,7 @@ export const AVAILABLE_MODELS: HostedEmbeddingModel[] = [
     model_dim: 768,
     normalize: true,
     description:
-      "For corpora in other languages besides English, this is the one to choose.",
+      "Für Korpora in anderen Sprachen als Englisch ist dies die richtige Wahl.",
     link: "https://huggingface.co/intfloat/multilingual-e5-base",
     query_prefix: "query: ",
     passage_prefix: "passage: ",
@@ -160,7 +153,7 @@ export const AVAILABLE_MODELS: HostedEmbeddingModel[] = [
     model_dim: 384,
     normalize: true,
     description:
-      "For corpora in other languages besides English, as well as being on a resource constrained system, this is the one to choose.",
+      "Für Korpora in anderen Sprachen als Englisch und gleichzeitig auf einem ressourcenbeschränkten System, ist dies die richtige Wahl.",
     link: "https://huggingface.co/intfloat/multilingual-e5-base",
     query_prefix: "query: ",
     passage_prefix: "passage: ",
@@ -175,7 +168,7 @@ export const LITELLM_CLOUD_PROVIDER: CloudEmbeddingProvider = {
   provider_type: EmbeddingProvider.LITELLM,
   website: "https://github.com/BerriAI/litellm",
   icon: LiteLLMIcon,
-  description: "Open-source library to call LLM APIs using OpenAI format",
+  description: "Open-Source-Bibliothek zum Aufrufen von LLM-APIs im OpenAI-Format",
   apiLink: "https://docs.litellm.ai/docs/proxy/quick_start",
   embedding_models: [], // No default embedding models
 };
@@ -186,7 +179,7 @@ export const AZURE_CLOUD_PROVIDER: CloudEmbeddingProvider = {
     "https://azure.microsoft.com/en-us/products/cognitive-services/openai/",
   icon: AzureIcon,
   description:
-    "Azure OpenAI is a cloud-based AI service that provides access to OpenAI models.",
+    "Azure OpenAI ist ein cloudbasierter KI-Dienst, der Zugriff auf OpenAI-Modelle bietet.",
   apiLink:
     "https://docs.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource",
   costslink:
@@ -202,7 +195,7 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
     docsLink:
       "https://docs.danswer.dev/guides/embedding_providers#cohere-models",
     description:
-      "AI company specializing in NLP models for various text-based tasks",
+      "KI-Unternehmen, das sich auf NLP-Modelle für verschiedene textbasierte Aufgaben spezialisiert hat",
     apiLink: "https://dashboard.cohere.ai/api-keys",
     costslink: "https://cohere.com/pricing",
     embedding_models: [
@@ -210,11 +203,8 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
         provider_type: EmbeddingProvider.COHERE,
         model_name: "embed-english-v3.0",
         description:
-          "Cohere's English embedding model. Good performance for English-language tasks.",
+          "Cohere's Englisches Embedding-Modell. Gute Leistung für Aufgaben in englischer Sprache.",
         pricePerMillion: 0.1,
-        mtebScore: 64.5,
-        maxContext: 512,
-        enabled: false,
         model_dim: 1024,
         normalize: false,
         query_prefix: "",
@@ -227,11 +217,8 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
         model_name: "embed-english-light-v3.0",
         provider_type: EmbeddingProvider.COHERE,
         description:
-          "Cohere's lightweight English embedding model. Faster and more efficient for simpler tasks.",
+          "Cohere's leichtgewichtiges englisches Embedding-Modell. Schneller und effizienter für einfachere Aufgaben.",
         pricePerMillion: 0.1,
-        mtebScore: 62,
-        maxContext: 512,
-        enabled: false,
         model_dim: 384,
         normalize: false,
         query_prefix: "",
@@ -246,7 +233,7 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
     provider_type: EmbeddingProvider.OPENAI,
     website: "https://openai.com",
     icon: OpenAIIcon,
-    description: "AI industry leader known for ChatGPT and DALL-E",
+    description: "KI-Branchenführer bekannt für ChatGPT und DALL-E",
     apiLink: "https://platform.openai.com/api-keys",
     docsLink:
       "https://docs.danswer.dev/guides/embedding_providers#openai-models",
@@ -256,15 +243,12 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
         provider_type: EmbeddingProvider.OPENAI,
         model_name: "text-embedding-3-large",
         description:
-          "OpenAI's large embedding model. Best performance, but more expensive.",
+          "OpenAI's großes Embedding-Modell. Beste Leistung, aber teurer.",
         pricePerMillion: 0.13,
         model_dim: 3072,
         normalize: false,
         query_prefix: "",
         passage_prefix: "",
-        mtebScore: 64.6,
-        maxContext: 8191,
-        enabled: false,
         index_name: "",
         api_key: null,
         api_url: null,
@@ -277,11 +261,8 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
         query_prefix: "",
         passage_prefix: "",
         description:
-          "OpenAI's newer, more efficient embedding model. Good balance of performance and cost.",
+          "OpenAI's neueres, effizienteres Embedding-Modell. Gute Balance zwischen Leistung und Kosten.",
         pricePerMillion: 0.02,
-        enabled: false,
-        mtebScore: 62.3,
-        maxContext: 8191,
         index_name: "",
         api_key: null,
         api_url: null,
@@ -296,18 +277,15 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
     docsLink:
       "https://docs.danswer.dev/guides/embedding_providers#vertex-ai-google-model",
     description:
-      "Offers a wide range of AI services including language and vision models",
+      "Bietet eine breite Palette von KI-Diensten, einschließlich Sprach- und Bildmodellen",
     apiLink: "https://console.cloud.google.com/apis/credentials",
     costslink: "https://cloud.google.com/vertex-ai/pricing",
     embedding_models: [
       {
         provider_type: EmbeddingProvider.GOOGLE,
         model_name: "text-embedding-004",
-        description: "Google's most recent text embedding model.",
+        description: "Googles neuestes Text-Embedding-Modell.",
         pricePerMillion: 0.025,
-        mtebScore: 66.31,
-        maxContext: 2048,
-        enabled: false,
         model_dim: 768,
         normalize: false,
         query_prefix: "",
@@ -319,11 +297,8 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
       {
         provider_type: EmbeddingProvider.GOOGLE,
         model_name: "textembedding-gecko@003",
-        description: "Google's Gecko embedding model. Powerful and efficient.",
+        description: "Googles Gecko-Embedding-Modell. Leistungsstark und effizient.",
         pricePerMillion: 0.025,
-        mtebScore: 66.31,
-        maxContext: 2048,
-        enabled: false,
         model_dim: 768,
         normalize: false,
         query_prefix: "",
@@ -338,7 +313,7 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
     provider_type: EmbeddingProvider.VOYAGE,
     website: "https://www.voyageai.com",
     icon: VoyageIcon,
-    description: "Advanced NLP research startup born from Stanford AI Labs",
+    description: "Fortschrittliches NLP-Forschungs-Startup von Stanford AI Labs",
     docsLink:
       "https://docs.danswer.dev/guides/embedding_providers#voyage-models",
     apiLink: "https://www.voyageai.com/dashboard",
@@ -348,11 +323,8 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
         provider_type: EmbeddingProvider.VOYAGE,
         model_name: "voyage-large-2-instruct",
         description:
-          "Voyage's large embedding model. High performance with instruction fine-tuning.",
+          "Voyages großes Embedding-Modell. Hohe Leistung mit Anweisungs-Fine-Tuning.",
         pricePerMillion: 0.12,
-        mtebScore: 68.28,
-        maxContext: 4000,
-        enabled: false,
         model_dim: 1024,
         normalize: false,
         query_prefix: "",
@@ -365,11 +337,8 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
         provider_type: EmbeddingProvider.VOYAGE,
         model_name: "voyage-light-2-instruct",
         description:
-          "Voyage's lightweight embedding model. Good balance of performance and efficiency.",
+          "Voyages leichtgewichtiges Embedding-Modell. Gute Balance zwischen Leistung und Effizienz.",
         pricePerMillion: 0.12,
-        mtebScore: 67.13,
-        maxContext: 16000,
-        enabled: false,
         model_dim: 1024,
         normalize: false,
         query_prefix: "",
@@ -385,7 +354,7 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
 export const getTitleForRerankType = (type: string) => {
   switch (type) {
     case "nomic-ai":
-      return "Nomic (recommended)";
+      return "Nomic (empfohlen)";
     case "intfloat":
       return "Microsoft";
     default:
