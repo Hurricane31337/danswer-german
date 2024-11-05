@@ -7,9 +7,10 @@ export const LoginText = () => {
   const settings = useContext(SettingsContext);
   return (
     <>
-      Log In to{" "}
+      Bei{" "}
       {(settings && settings?.enterpriseSettings?.application_name) ||
-        "Danswer"}
+        "Danswer"}{" "}
+      anmelden
     </>
   );
 };
