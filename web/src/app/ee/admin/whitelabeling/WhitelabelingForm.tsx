@@ -47,7 +47,7 @@ export function WhitelabelingForm() {
       router.refresh();
     } else {
       const errorMsg = (await response.json()).detail;
-      alert(`Failed to update settings. ${errorMsg}`);
+      alert(`Das Aktualisieren der Einstellungen ist fehlgeschlagen. ${errorMsg}`);
     }
   }
 
@@ -99,7 +99,7 @@ export function WhitelabelingForm() {
             );
             if (!response.ok) {
               const errorMsg = (await response.json()).detail;
-              alert(`Failed to upload logo. ${errorMsg}`);
+              alert(`Das Hochladen des Logos ist fehlgeschlagen. ${errorMsg}`);
               formikHelpers.setSubmitting(false);
               return;
             }
@@ -120,7 +120,7 @@ export function WhitelabelingForm() {
             );
             if (!response.ok) {
               const errorMsg = (await response.json()).detail;
-              alert(`Failed to upload logo. ${errorMsg}`);
+              alert(`Das Hochladen des Logos ist fehlgeschlagen. ${errorMsg}`);
               formikHelpers.setSubmitting(false);
               return;
             }
@@ -133,18 +133,18 @@ export function WhitelabelingForm() {
         {({ isSubmitting, values, setValues }) => (
           <Form>
             <TextFormField
-              label="Application Name"
+              label="Anwendungsname"
               name="application_name"
-              subtext={`The custom name you are giving Danswer for your organization. This will replace 'Danswer' everywhere in the UI.`}
-              placeholder="Custom name which will replace 'Danswer'"
+              subtext={`Der benutzerdefinierte Name, den du Danswer für deine Organisation gibst. Dieser wird überall im UI 'Danswer' ersetzen.`}
+              placeholder="Benutzerdefinierter Name, der 'Danswer' ersetzt"
               disabled={isSubmitting}
             />
 
-            <Label className="mt-4">Custom Logo</Label>
+            <Label className="mt-4">Benutzerdefiniertes Logo</Label>
 
             {values.use_custom_logo ? (
               <div className="mt-3">
-                <SubLabel>Current Custom Logo: </SubLabel>
+                <SubLabel>Aktuelles benutzerdefiniertes Logo: </SubLabel>
                 <img
                   src={"/api/enterprise-settings/logo?u=" + Date.now()}
                   alt="logo"
@@ -166,17 +166,17 @@ export function WhitelabelingForm() {
                     setValues(valuesWithoutLogo);
                   }}
                 >
-                  Delete
+                  Löschen
                 </Button>
 
                 <SubLabel>
-                  Override the current custom logo by uploading a new image
-                  below and clicking the Update button.
+                  Überschreibe das aktuelle benutzerdefinierte Logo, indem du ein neues
+                  Bild unten hochlädst und auf die Schaltfläche "Aktualisieren" klickst.
                 </SubLabel>
               </div>
             ) : (
               <SubLabel>
-                Specify your own logo to replace the standard Danswer logo.
+                Gib dein eigenes Logo an, um das Standard-Danswer-Logo zu ersetzen.
               </SubLabel>
             )}
 
@@ -195,28 +195,28 @@ export function WhitelabelingForm() {
             {showAdvancedOptions && (
               <div className="w-full flex flex-col gap-y-4">
                 <Text>
-                  Read{" "}
+                  Lesen Sie{" "}
                   <Link
                     href={"https://docs.danswer.dev/enterprise_edition/theming"}
                     className="text-link cursor-pointer"
                   >
-                    the docs
+                    die Dokumentation
                   </Link>{" "}
-                  to see whitelabelling examples in action.
+                  um White-Label-Beispiele in Aktion zu sehen.
                 </Text>
 
                 <TextFormField
-                  label="Chat Header Content"
+                  label="Chat-Header-Inhalt"
                   name="custom_header_content"
-                  subtext={`Custom Markdown content that will be displayed as a banner at the top of the Chat page.`}
-                  placeholder="Your header content..."
+                  subtext={`Benutzerdefinierter Markdown-Inhalt, der als Banner oben auf der Chat-Seite angezeigt wird.`}
+                  placeholder="Dein Header-Inhalt..."
                   disabled={isSubmitting}
                 />
 
                 <BooleanFormField
                   name="two_lines_for_chat_header"
-                  label="Two lines for chat header?"
-                  subtext="If enabled, the chat header will be displayed on two lines instead of one."
+                  label="Zwei Zeilen für Chat-Header?"
+                  subtext="Wenn aktiviert, wird der Chat-Header in zwei Zeilen statt einer angezeigt."
                 />
 
                 <Separator />
@@ -224,21 +224,21 @@ export function WhitelabelingForm() {
                 <TextFormField
                   label={
                     values.enable_consent_screen
-                      ? "Consent Screen Header"
-                      : "Popup Header"
+                      ? "Zustimmungsbildschirm-Header"
+                      : "Popup-Header"
                   }
                   name="custom_popup_header"
                   subtext={
                     values.enable_consent_screen
-                      ? `The title for the consent screen that will be displayed for each user on their initial visit to the application. If left blank, title will default to "Terms of Use".`
-                      : `The title for the popup that will be displayed for each user on their initial visit to the application. If left blank AND Custom Popup Content is specified, will use "Welcome to ${
+                      ? `Der Titel des Zustimmungsbildschirms, der bei jedem Benutzer beim ersten Besuch der Anwendung angezeigt wird. Wenn leer gelassen, wird der Titel standardmäßig "Nutzungsbedingungen" verwendet.`
+                      : `Der Titel für das Popup, das jedem Benutzer beim ersten Besuch der Anwendung angezeigt wird. Wenn leer gelassen UND benutzerdefinierter Popup-Inhalt angegeben ist, wird "Willkommen bei ${
                           values.application_name || "Label KI"
-                        }!".`
+                        }!" verwendet.`
                   }
                   placeholder={
                     values.enable_consent_screen
-                      ? "Consent Screen Header"
-                      : "Initial Popup Header"
+                      ? "Zustimmungsbildschirm-Header"
+                      : "Anfangs-Popup-Header"
                   }
                   disabled={isSubmitting}
                 />
@@ -246,19 +246,19 @@ export function WhitelabelingForm() {
                 <TextFormField
                   label={
                     values.enable_consent_screen
-                      ? "Consent Screen Content"
-                      : "Popup Content"
+                      ? "Zustimmungsbildschirm-Inhalt"
+                      : "Popup-Inhalt"
                   }
                   name="custom_popup_content"
                   subtext={
                     values.enable_consent_screen
-                      ? `Custom Markdown content that will be displayed as a consent screen on initial visit to the application. If left blank, will default to "By clicking 'I Agree', you acknowledge that you agree to the terms of use of this application and consent to proceed."`
-                      : `Custom Markdown content that will be displayed as a popup on initial visit to the application.`
+                      ? `Benutzerdefinierter Markdown-Inhalt, der beim ersten Besuch der Anwendung als Zustimmungsbildschirm angezeigt wird. Wenn leer gelassen, wird standardmäßig "Durch Klicken auf 'Ich stimme zu' bestätigen Sie, dass Sie den Nutzungsbedingungen dieser Anwendung zustimmen und fortzufahren." verwendet.`
+                      : `Benutzerdefinierter Markdown-Inhalt, der beim ersten Besuch der Anwendung als Popup angezeigt wird.`
                   }
                   placeholder={
                     values.enable_consent_screen
-                      ? "Your consent screen content..."
-                      : "Your popup content..."
+                      ? "Dein Zustimmungsbildschirm-Inhalt..."
+                      : "Dein Popup-Inhalt..."
                   }
                   isTextArea
                   disabled={isSubmitting}
@@ -266,26 +266,26 @@ export function WhitelabelingForm() {
 
                 <BooleanFormField
                   name="enable_consent_screen"
-                  label="Enable Consent Screen"
-                  subtext="If enabled, the initial popup will be transformed into a consent screen. Users will be required to agree to the terms before accessing the application on their first login."
+                  label="Zustimmungsbildschirm aktivieren"
+                  subtext="Wenn aktiviert, wird das anfängliche Popup in einen Zustimmungsbildschirm umgewandelt. Benutzer müssen den Bedingungen zustimmen, bevor sie beim ersten Anmelden Zugriff auf die Anwendung erhalten."
                   disabled={isSubmitting}
                 />
 
                 <TextFormField
-                  label="Chat Footer Text"
+                  label="Chat-Fußzeilentext"
                   name="custom_lower_disclaimer_content"
-                  subtext={`Custom Markdown content that will be displayed at the bottom of the Chat page.`}
-                  placeholder="Your disclaimer content..."
+                  subtext={`Benutzerdefinierter Markdown-Inhalt, der am unteren Rand der Chat-Seite angezeigt wird.`}
+                  placeholder="Dein Haftungsausschluss-Inhalt..."
                   isTextArea
                   disabled={isSubmitting}
                 />
 
                 <div>
-                  <Label>Chat Footer Logotype</Label>
+                  <Label>Chat-Fußzeilen-Logotyp</Label>
 
                   {values.use_custom_logotype ? (
                     <div className="mt-3">
-                      <SubLabel>Current Custom Logotype: </SubLabel>
+                      <SubLabel>Aktueller benutzerdefinierter Logotyp: </SubLabel>
                       <img
                         src={
                           "/api/enterprise-settings/logotype?u=" + Date.now()
@@ -309,22 +309,22 @@ export function WhitelabelingForm() {
                           setValues(valuesWithoutLogotype);
                         }}
                       >
-                        Delete
+                        Löschen
                       </Button>
 
                       <SubLabel>
-                        Override your uploaded custom logotype by uploading a
-                        new image below and clicking the Update button. This
-                        logotype is the text-based logo that will be rendered at
-                        the bottom right of the chat screen.
+                        Überschreibe deinen hochgeladenen benutzerdefinierten Logotyp,
+                        indem du unten ein neues Bild hochlädst und auf die Schaltfläche
+                        "Aktualisieren" klickst. Dieser Logotyp ist das textbasierte
+                        Logo, das unten rechts auf dem Chat-Bildschirm angezeigt wird.
                       </SubLabel>
                     </div>
                   ) : (
                     <SubLabel>
-                      Add a custom logotype by uploading a new image below and
-                      clicking the Update button. This logotype is the
-                      text-based logo that will be rendered at the bottom right
-                      of the chat screen.
+                      Füge einen benutzerdefinierten Logotyp hinzu, indem du unten
+                      ein neues Bild hochlädst und auf die Schaltfläche
+                      "Aktualisieren" klickst. Dieser Logotyp ist das textbasierte
+                      Logo, das unten rechts auf dem Chat-Bildschirm angezeigt wird.
                     </SubLabel>
                   )}
                   <ImageUpload
@@ -336,7 +336,7 @@ export function WhitelabelingForm() {
             )}
 
             <Button type="submit" className="mt-4">
-              Update
+              Aktualisieren
             </Button>
           </Form>
         )}

@@ -60,7 +60,7 @@ const Page = async () => {
         <div className="absolute top-10x w-full"></div>
         <div className="flex w-full flex-col justify-center">
           <h2 className="text-center text-xl text-strong font-bold">
-            {cloud ? "Complete your sign up" : "Sign Up for Label KI"}
+            {cloud ? "Schließe deine Anmeldung ab" : "Melde dich bei Label KI an"}
           </h2>
 
           {cloud && authUrl && (
@@ -68,7 +68,7 @@ const Page = async () => {
               <SignInButton authorizeUrl={authUrl} authType="cloud" />
               <div className="flex items-center w-full my-4">
                 <div className="flex-grow border-t border-background-300"></div>
-                <span className="px-4 text-gray-500">or</span>
+                <span className="px-4 text-gray-500">oder</span>
                 <div className="flex-grow border-t border-background-300"></div>
               </div>
             </div>
@@ -81,9 +81,9 @@ const Page = async () => {
 
           <div className="flex">
             <Text className="mt-4 mx-auto">
-              Already have an account?{" "}
+              Hast du bereits ein Konto?{" "}
               <Link href="/auth/login" className="text-link font-medium">
-                Log In
+                Einloggen
               </Link>
             </Text>
           </div>
