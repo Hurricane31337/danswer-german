@@ -7,7 +7,7 @@ services:
     command: >
       /bin/sh -c "alembic upgrade head &&
       echo \"Starting Danswer Api Server\" &&
-      uvicorn danswer.main:app --host 0.0.0.0 --port 8080"
+      python -m debugpy --listen 0.0.0.0:5678 -m uvicorn danswer.main:app --host 0.0.0.0 --port 8080"
     depends_on:
       - relational_db
       - index
@@ -16,6 +16,7 @@ services:
     restart: always
     ports:
       - "8080:8080"
+      - "5678:5678"
     environment:
       # Auth Settings
       - AUTH_TYPE=${AUTH_TYPE:-disabled}
