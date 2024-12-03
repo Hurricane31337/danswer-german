@@ -11,28 +11,28 @@ import React, { useContext, useState, useEffect } from "react";
 import { SettingsContext } from "@/components/settings/SettingsProvider";
 import { usePaidEnterpriseFeaturesEnabled } from "@/components/settings/usePaidEnterpriseFeaturesEnabled";
 
-function Checkbox({
+export function Checkbox({
   label,
   sublabel,
   checked,
   onChange,
 }: {
   label: string;
-  sublabel: string;
+  sublabel?: string;
   checked: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
-    <label className="flex text-sm mb-4">
+    <label className="flex text-sm cursor-pointer">
       <input
         checked={checked}
         onChange={onChange}
         type="checkbox"
-        className="mx-3 px-5 w-3.5 h-3.5 my-auto"
+        className="mr-2 w-3.5 h-3.5 my-auto"
       />
       <div>
         <Label>{label}</Label>
-        <SubLabel>{sublabel}</SubLabel>
+        {sublabel && <SubLabel>{sublabel}</SubLabel>}
       </div>
     </label>
   );
@@ -175,29 +175,6 @@ export function SettingsForm() {
       { fieldName, newValue: checked },
     ];
 
-    // If we're disabling a page, check if we need to update the default page
-    if (
-      !checked &&
-      (fieldName === "search_page_enabled" || fieldName === "chat_page_enabled")
-    ) {
-      const otherPageField =
-        fieldName === "search_page_enabled"
-          ? "chat_page_enabled"
-          : "search_page_enabled";
-      const otherPageEnabled = settings && settings[otherPageField];
-
-      if (
-        otherPageEnabled &&
-        settings?.default_page ===
-          (fieldName === "search_page_enabled" ? "search" : "chat")
-      ) {
-        updates.push({
-          fieldName: "default_page",
-          newValue: fieldName === "search_page_enabled" ? "chat" : "search",
-        });
-      }
-    }
-
     updateSettingField(updates);
   }
 
@@ -218,40 +195,15 @@ export function SettingsForm() {
   return (
     <div>
       {popup}
-      <Title className="mb-4">Sichtbarkeit der Seiten</Title>
+      <Title className="mb-4">Workspace-Einstellungen</Title>
 
       <Checkbox
-        label="Such-Seite aktiviert?"
-        sublabel="Wenn diese Einstellung eingeschaltet ist, ist die Seite „Suchen“ für alle Benutzer zugänglich und wird als Option in der oberen Navigationsleiste angezeigt. Wenn sie nicht eingeschaltet ist, ist diese Seite nicht verfügbar."
-        checked={settings.search_page_enabled}
+        label="Automatisch scrollen"
+        sublabel="Wenn ausgewählt, scrollt das Chatfenster automatisch nach unten, sobald neue Textzeilen vom KI-Modell erzeugt werden."
+        checked={settings.auto_scroll}
         onChange={(e) =>
-          handleToggleSettingsField("search_page_enabled", e.target.checked)
+          handleToggleSettingsField("auto_scroll", e.target.checked)
         }
-      />
-
-      <Checkbox
-        label="Chat-Seite aktiviert?"
-        sublabel="Wenn diese Einstellung eingeschaltet ist, ist die Seite „Chat“ für alle Benutzer zugänglich und wird als Option in der oberen Navigationsleiste angezeigt. Wenn sie nicht eingeschaltet ist, ist diese Seite nicht verfügbar."
-        checked={settings.chat_page_enabled}
-        onChange={(e) =>
-          handleToggleSettingsField("chat_page_enabled", e.target.checked)
-        }
-      />
-
-      <Selector
-        label="Standard-Seite"
-        subtext="Die Seite, zu der die Benutzer nach der Anmeldung weitergeleitet werden. Kann nur auf eine Seite gesetzt werden, die verfügbar ist."
-        options={[
-          { value: "search", name: "Suche" },
-          { value: "chat", name: "Chat" },
-        ]}
-        selected={settings.default_page}
-        onSelect={(value) => {
-          value &&
-            updateSettingField([
-              { fieldName: "default_page", newValue: value },
-            ]);
-        }}
       />
 
       {isEnterpriseEnabled && (

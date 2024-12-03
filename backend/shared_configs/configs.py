@@ -1,4 +1,5 @@
 import os
+from typing import Any
 from typing import List
 from urllib.parse import urlparse
 
@@ -133,8 +134,27 @@ MULTI_TENANT = os.environ.get("MULTI_TENANT", "").lower() == "true"
 
 POSTGRES_DEFAULT_SCHEMA = os.environ.get("POSTGRES_DEFAULT_SCHEMA") or "public"
 
+
+async def async_return_default_schema(*args: Any, **kwargs: Any) -> str:
+    return POSTGRES_DEFAULT_SCHEMA
+
+
 # Prefix used for all tenant ids
 TENANT_ID_PREFIX = "tenant_"
+
+DISALLOWED_SLACK_BOT_TENANT_IDS = os.environ.get("DISALLOWED_SLACK_BOT_TENANT_IDS")
+DISALLOWED_SLACK_BOT_TENANT_LIST = (
+    [tenant.strip() for tenant in DISALLOWED_SLACK_BOT_TENANT_IDS.split(",")]
+    if DISALLOWED_SLACK_BOT_TENANT_IDS
+    else None
+)
+
+IGNORED_SYNCING_TENANT_IDS = os.environ.get("IGNORED_SYNCING_TENANT_IDS")
+IGNORED_SYNCING_TENANT_LIST = (
+    [tenant.strip() for tenant in IGNORED_SYNCING_TENANT_IDS.split(",")]
+    if IGNORED_SYNCING_TENANT_IDS
+    else None
+)
 
 SUPPORTED_EMBEDDING_MODELS = [
     # Cloud-based models
@@ -144,9 +164,19 @@ SUPPORTED_EMBEDDING_MODELS = [
         index_name="danswer_chunk_cohere_embed_english_v3_0",
     ),
     SupportedEmbeddingModel(
+        name="cohere/embed-english-v3.0",
+        dim=1024,
+        index_name="danswer_chunk_embed_english_v3_0",
+    ),
+    SupportedEmbeddingModel(
         name="cohere/embed-english-light-v3.0",
         dim=384,
         index_name="danswer_chunk_cohere_embed_english_light_v3_0",
+    ),
+    SupportedEmbeddingModel(
+        name="cohere/embed-english-light-v3.0",
+        dim=384,
+        index_name="danswer_chunk_embed_english_light_v3_0",
     ),
     SupportedEmbeddingModel(
         name="openai/text-embedding-3-large",
@@ -154,9 +184,19 @@ SUPPORTED_EMBEDDING_MODELS = [
         index_name="danswer_chunk_openai_text_embedding_3_large",
     ),
     SupportedEmbeddingModel(
+        name="openai/text-embedding-3-large",
+        dim=3072,
+        index_name="danswer_chunk_text_embedding_3_large",
+    ),
+    SupportedEmbeddingModel(
         name="openai/text-embedding-3-small",
         dim=1536,
         index_name="danswer_chunk_openai_text_embedding_3_small",
+    ),
+    SupportedEmbeddingModel(
+        name="openai/text-embedding-3-small",
+        dim=1536,
+        index_name="danswer_chunk_text_embedding_3_small",
     ),
     SupportedEmbeddingModel(
         name="google/text-embedding-004",
@@ -164,9 +204,19 @@ SUPPORTED_EMBEDDING_MODELS = [
         index_name="danswer_chunk_google_text_embedding_004",
     ),
     SupportedEmbeddingModel(
+        name="google/text-embedding-004",
+        dim=768,
+        index_name="danswer_chunk_text_embedding_004",
+    ),
+    SupportedEmbeddingModel(
         name="google/textembedding-gecko@003",
         dim=768,
         index_name="danswer_chunk_google_textembedding_gecko_003",
+    ),
+    SupportedEmbeddingModel(
+        name="google/textembedding-gecko@003",
+        dim=768,
+        index_name="danswer_chunk_textembedding_gecko_003",
     ),
     SupportedEmbeddingModel(
         name="voyage/voyage-large-2-instruct",
@@ -174,15 +224,30 @@ SUPPORTED_EMBEDDING_MODELS = [
         index_name="danswer_chunk_voyage_large_2_instruct",
     ),
     SupportedEmbeddingModel(
+        name="voyage/voyage-large-2-instruct",
+        dim=1024,
+        index_name="danswer_chunk_large_2_instruct",
+    ),
+    SupportedEmbeddingModel(
         name="voyage/voyage-light-2-instruct",
         dim=384,
         index_name="danswer_chunk_voyage_light_2_instruct",
+    ),
+    SupportedEmbeddingModel(
+        name="voyage/voyage-light-2-instruct",
+        dim=384,
+        index_name="danswer_chunk_light_2_instruct",
     ),
     # Self-hosted models
     SupportedEmbeddingModel(
         name="nomic-ai/nomic-embed-text-v1",
         dim=768,
         index_name="danswer_chunk_nomic_ai_nomic_embed_text_v1",
+    ),
+    SupportedEmbeddingModel(
+        name="nomic-ai/nomic-embed-text-v1",
+        dim=768,
+        index_name="danswer_chunk_nomic_embed_text_v1",
     ),
     SupportedEmbeddingModel(
         name="intfloat/e5-base-v2",
