@@ -713,10 +713,10 @@ Beispielsweise bewirkt die Angabe von .*-support.* als "Kanal", dass der Connect
         name: "connector_type",
         optional: false,
         options: [
-          { name: "Liste", value: "list" },
-          { name: "Folder", value: "folder" },
-          { name: "Space", value: "space" },
-          { name: "Workspace", value: "workspace" },
+          { name: "list", value: "list" },
+          { name: "folder", value: "folder" },
+          { name: "space", value: "space" },
+          { name: "workspace", value: "workspace" },
         ],
       },
       {
