@@ -189,6 +189,13 @@ class SqlEngine:
             return ""
         return cls._app_name
 
+    @classmethod
+    def reset_engine(cls) -> None:
+        with cls._lock:
+            if cls._engine:
+                cls._engine.dispose()
+                cls._engine = None
+
 
 def get_all_tenant_ids() -> list[str] | list[None]:
     if not MULTI_TENANT:
@@ -312,7 +319,9 @@ async def get_async_session_with_tenant(
             await session.execute(text(f'SET search_path = "{tenant_id}"'))
             if POSTGRES_IDLE_SESSIONS_TIMEOUT:
                 await session.execute(
-                    f"SET SESSION idle_in_transaction_session_timeout = {POSTGRES_IDLE_SESSIONS_TIMEOUT}"
+                    text(
+                        f"SET SESSION idle_in_transaction_session_timeout = {POSTGRES_IDLE_SESSIONS_TIMEOUT}"
+                    )
                 )
         except Exception:
             logger.exception("Error setting search_path.")
@@ -324,23 +333,37 @@ async def get_async_session_with_tenant(
 
 
 @contextmanager
+def get_session_with_default_tenant() -> Generator[Session, None, None]:
+    """
+    Get a database session using the current tenant ID from the context variable.
+    """
+    tenant_id = CURRENT_TENANT_ID_CONTEXTVAR.get()
+    with get_session_with_tenant(tenant_id) as session:
+        yield session
+
+
+@contextmanager
 def get_session_with_tenant(
     tenant_id: str | None = None,
 ) -> Generator[Session, None, None]:
     """
-    Generate a database session bound to a connection with the appropriate tenant schema set.
-    This preserves the tenant ID across the session and reverts to the previous tenant ID
-    after the session is closed.
+    Generate a database session for a specific tenant.
+
+    This function:
+    1. Sets the database schema to the specified tenant's schema.
+    2. Preserves the tenant ID across the session.
+    3. Reverts to the previous tenant ID after the session is closed.
+    4. Uses the default schema if no tenant ID is provided.
     """
     engine = get_sqlalchemy_engine()
 
     # Store the previous tenant ID
-    previous_tenant_id = CURRENT_TENANT_ID_CONTEXTVAR.get()
+    previous_tenant_id = CURRENT_TENANT_ID_CONTEXTVAR.get() or POSTGRES_DEFAULT_SCHEMA
 
     if tenant_id is None:
-        tenant_id = previous_tenant_id
-    else:
-        CURRENT_TENANT_ID_CONTEXTVAR.set(tenant_id)
+        tenant_id = POSTGRES_DEFAULT_SCHEMA
+
+    CURRENT_TENANT_ID_CONTEXTVAR.set(tenant_id)
 
     event.listen(engine, "checkout", set_search_path_on_checkout)
 
@@ -359,7 +382,9 @@ def get_session_with_tenant(
                 cursor.execute(f'SET search_path = "{tenant_id}"')
                 if POSTGRES_IDLE_SESSIONS_TIMEOUT:
                     cursor.execute(
-                        f"SET SESSION idle_in_transaction_session_timeout = {POSTGRES_IDLE_SESSIONS_TIMEOUT}"
+                        text(
+                            f"SET SESSION idle_in_transaction_session_timeout = {POSTGRES_IDLE_SESSIONS_TIMEOUT}"
+                        )
                     )
             finally:
                 cursor.close()

@@ -1,6 +1,17 @@
 import { timeAgo } from "@/lib/time";
 import { MetadataBadge } from "../MetadataBadge";
 
-export function DocumentUpdatedAtBadge({ updatedAt }: { updatedAt: string }) {
-  return <MetadataBadge value={"Aktualisiert " + timeAgo(updatedAt)} />;
+export function DocumentUpdatedAtBadge({
+  updatedAt,
+  modal,
+}: {
+  updatedAt: string;
+  modal?: boolean;
+}) {
+  return (
+    <MetadataBadge
+      flexNone={modal}
+      value={(modal ? "" : "Aktualisiert ") + timeAgo(updatedAt)}
+    />
+  );
 }
