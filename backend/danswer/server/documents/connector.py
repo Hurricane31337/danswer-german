@@ -17,9 +17,9 @@ from danswer.auth.users import current_admin_user
 from danswer.auth.users import current_curator_or_admin_user
 from danswer.auth.users import current_user
 from danswer.background.celery.celery_utils import get_deletion_attempt_snapshot
-from danswer.background.celery.tasks.indexing.tasks import try_creating_indexing_task
 from danswer.background.celery.versioned_apps.primary import app as primary_app
 from danswer.configs.app_configs import ENABLED_CONNECTOR_TYPES
+from danswer.configs.constants import DanswerCeleryPriority
 from danswer.configs.constants import DocumentSource
 from danswer.configs.constants import FileOrigin
 from danswer.connectors.google_utils.google_auth import (
@@ -59,6 +59,7 @@ from danswer.db.connector import delete_connector
 from danswer.db.connector import fetch_connector_by_id
 from danswer.db.connector import fetch_connectors
 from danswer.db.connector import get_connector_credential_ids
+from danswer.db.connector import mark_ccpair_with_indexing_trigger
 from danswer.db.connector import update_connector
 from danswer.db.connector_credential_pair import add_credential_to_connector
 from danswer.db.connector_credential_pair import get_cc_pair_groups_for_ids
@@ -67,14 +68,14 @@ from danswer.db.connector_credential_pair import get_connector_credential_pairs
 from danswer.db.credentials import cleanup_gmail_credentials
 from danswer.db.credentials import cleanup_google_drive_credentials
 from danswer.db.credentials import create_credential
-from danswer.db.credentials import delete_gmail_service_account_credentials
-from danswer.db.credentials import delete_google_drive_service_account_credentials
+from danswer.db.credentials import delete_service_account_credentials
 from danswer.db.credentials import fetch_credential_by_id
 from danswer.db.deletion_attempt import check_deletion_attempt_is_allowed
 from danswer.db.document import get_document_counts_for_cc_pairs
 from danswer.db.engine import get_current_tenant_id
 from danswer.db.engine import get_session
 from danswer.db.enums import AccessType
+from danswer.db.enums import IndexingMode
 from danswer.db.index_attempt import get_index_attempts_for_cc_pair
 from danswer.db.index_attempt import get_latest_index_attempt_for_cc_pair_id
 from danswer.db.index_attempt import get_latest_index_attempts
@@ -82,13 +83,11 @@ from danswer.db.index_attempt import get_latest_index_attempts_by_status
 from danswer.db.models import IndexingStatus
 from danswer.db.models import SearchSettings
 from danswer.db.models import User
-from danswer.db.models import UserRole
 from danswer.db.search_settings import get_current_search_settings
 from danswer.db.search_settings import get_secondary_search_settings
 from danswer.file_store.file_store import get_default_file_store
 from danswer.key_value_store.interface import KvKeyNotFoundError
 from danswer.redis.redis_connector import RedisConnector
-from danswer.redis.redis_pool import get_redis_client
 from danswer.server.documents.models import AuthStatus
 from danswer.server.documents.models import AuthUrl
 from danswer.server.documents.models import ConnectorCredentialPairIdentifier
@@ -109,7 +108,7 @@ from danswer.server.documents.models import ObjectCreationIdResponse
 from danswer.server.documents.models import RunConnectorRequest
 from danswer.server.models import StatusResponse
 from danswer.utils.logger import setup_logger
-from ee.danswer.db.user_group import validate_user_creation_permissions
+from danswer.utils.variable_functionality import fetch_ee_implementation_or_noop
 
 logger = setup_logger()
 
@@ -309,13 +308,13 @@ def upsert_service_account_credential(
     try:
         credential_base = build_service_account_creds(
             DocumentSource.GOOGLE_DRIVE,
-            primary_admin_email=service_account_credential_request.google_drive_primary_admin,
+            primary_admin_email=service_account_credential_request.google_primary_admin,
         )
     except KvKeyNotFoundError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
     # first delete all existing service account credentials
-    delete_google_drive_service_account_credentials(user, db_session)
+    delete_service_account_credentials(user, db_session, DocumentSource.GOOGLE_DRIVE)
     # `user=None` since this credential is not a personal credential
     credential = create_credential(
         credential_data=credential_base, user=user, db_session=db_session
@@ -335,13 +334,13 @@ def upsert_gmail_service_account_credential(
     try:
         credential_base = build_service_account_creds(
             DocumentSource.GMAIL,
-            primary_admin_email=service_account_credential_request.gmail_primary_admin,
+            primary_admin_email=service_account_credential_request.google_primary_admin,
         )
     except KvKeyNotFoundError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
     # first delete all existing service account credentials
-    delete_gmail_service_account_credentials(user, db_session)
+    delete_service_account_credentials(user, db_session, DocumentSource.GMAIL)
     # `user=None` since this credential is not a personal credential
     credential = create_credential(
         credential_data=credential_base, user=user, db_session=db_session
@@ -659,11 +658,15 @@ def create_connector_from_model(
 ) -> ObjectCreationIdResponse:
     try:
         _validate_connector_allowed(connector_data.source)
-        validate_user_creation_permissions(
+
+        fetch_ee_implementation_or_noop(
+            "danswer.db.user_group", "validate_user_creation_permissions", None
+        )(
             db_session=db_session,
             user=user,
             target_group_ids=connector_data.groups,
-            object_is_public=connector_data.is_public,
+            object_is_public=connector_data.access_type == AccessType.PUBLIC,
+            object_is_perm_sync=connector_data.access_type == AccessType.SYNC,
         )
         connector_base = connector_data.to_connector_base()
         return create_connector(
@@ -681,32 +684,31 @@ def create_connector_with_mock_credential(
     user: User = Depends(current_curator_or_admin_user),
     db_session: Session = Depends(get_session),
 ) -> StatusResponse:
-    if user and user.role != UserRole.ADMIN:
-        if connector_data.is_public:
-            raise HTTPException(
-                status_code=401,
-                detail="User does not have permission to create public credentials",
-            )
-        if not connector_data.groups:
-            raise HTTPException(
-                status_code=401,
-                detail="Curators must specify 1+ groups",
-            )
+    fetch_ee_implementation_or_noop(
+        "danswer.db.user_group", "validate_user_creation_permissions", None
+    )(
+        db_session=db_session,
+        user=user,
+        target_group_ids=connector_data.groups,
+        object_is_public=connector_data.access_type == AccessType.PUBLIC,
+        object_is_perm_sync=connector_data.access_type == AccessType.SYNC,
+    )
     try:
         _validate_connector_allowed(connector_data.source)
         connector_response = create_connector(
-            db_session=db_session, connector_data=connector_data
+            db_session=db_session,
+            connector_data=connector_data,
         )
 
         mock_credential = CredentialBase(
-            credential_json={}, admin_public=True, source=connector_data.source
+            credential_json={},
+            admin_public=True,
+            source=connector_data.source,
         )
         credential = create_credential(
-            mock_credential, user=user, db_session=db_session
-        )
-
-        access_type = (
-            AccessType.PUBLIC if connector_data.is_public else AccessType.PRIVATE
+            credential_data=mock_credential,
+            user=user,
+            db_session=db_session,
         )
 
         response = add_credential_to_connector(
@@ -714,7 +716,7 @@ def create_connector_with_mock_credential(
             user=user,
             connector_id=cast(int, connector_response.id),  # will aways be an int
             credential_id=credential.id,
-            access_type=access_type,
+            access_type=connector_data.access_type,
             cc_pair_name=connector_data.name,
             groups=connector_data.groups,
         )
@@ -733,11 +735,14 @@ def update_connector_from_model(
 ) -> ConnectorSnapshot | StatusResponse[int]:
     try:
         _validate_connector_allowed(connector_data.source)
-        validate_user_creation_permissions(
+        fetch_ee_implementation_or_noop(
+            "danswer.db.user_group", "validate_user_creation_permissions", None
+        )(
             db_session=db_session,
             user=user,
             target_group_ids=connector_data.groups,
-            object_is_public=connector_data.is_public,
+            object_is_public=connector_data.access_type == AccessType.PUBLIC,
+            object_is_perm_sync=connector_data.access_type == AccessType.SYNC,
         )
         connector_base = connector_data.to_connector_base()
     except ValueError as e:
@@ -788,11 +793,9 @@ def connector_run_once(
     _: User = Depends(current_curator_or_admin_user),
     db_session: Session = Depends(get_session),
     tenant_id: str = Depends(get_current_tenant_id),
-) -> StatusResponse[list[int]]:
+) -> StatusResponse[int]:
     """Used to trigger indexing on a set of cc_pairs associated with a
     single connector."""
-
-    r = get_redis_client(tenant_id=tenant_id)
 
     connector_id = run_info.connector_id
     specified_credential_ids = run_info.credential_ids
@@ -839,44 +842,41 @@ def connector_run_once(
         )
     ]
 
-    search_settings = get_current_search_settings(db_session)
-
     connector_credential_pairs = [
         get_connector_credential_pair(connector_id, credential_id, db_session)
         for credential_id in credential_ids
         if credential_id not in skipped_credentials
     ]
 
-    index_attempt_ids = []
+    num_triggers = 0
     for cc_pair in connector_credential_pairs:
         if cc_pair is not None:
-            attempt_id = try_creating_indexing_task(
-                primary_app,
-                cc_pair,
-                search_settings,
-                run_info.from_beginning,
-                db_session,
-                r,
-                tenant_id,
+            indexing_mode = IndexingMode.UPDATE
+            if run_info.from_beginning:
+                indexing_mode = IndexingMode.REINDEX
+
+            mark_ccpair_with_indexing_trigger(cc_pair.id, indexing_mode, db_session)
+            num_triggers += 1
+
+            logger.info(
+                f"connector_run_once - marking cc_pair with indexing trigger: "
+                f"connector={run_info.connector_id} "
+                f"cc_pair={cc_pair.id} "
+                f"indexing_trigger={indexing_mode}"
             )
-            if attempt_id:
-                logger.info(
-                    f"try_creating_indexing_task succeeded: cc_pair={cc_pair.id} attempt_id={attempt_id}"
-                )
-                index_attempt_ids.append(attempt_id)
-            else:
-                logger.info(f"try_creating_indexing_task failed: cc_pair={cc_pair.id}")
 
-    if not index_attempt_ids:
-        raise HTTPException(
-            status_code=400,
-            detail="No new indexing attempts created, indexing jobs are queued or running.",
-        )
+    # run the beat task to pick up the triggers immediately
+    primary_app.send_task(
+        "check_for_indexing",
+        priority=DanswerCeleryPriority.HIGH,
+        kwargs={"tenant_id": tenant_id},
+    )
 
+    msg = f"Marked {num_triggers} index attempts with indexing triggers."
     return StatusResponse(
         success=True,
-        message=f"Successfully created {len(index_attempt_ids)} index attempts",
-        data=index_attempt_ids,
+        message=msg,
+        data=num_triggers,
     )
 
 
@@ -894,7 +894,7 @@ def gmail_auth(
         httponly=True,
         max_age=600,
     )
-    return AuthUrl(auth_url=get_auth_url(int(credential_id)))
+    return AuthUrl(auth_url=get_auth_url(int(credential_id), DocumentSource.GMAIL))
 
 
 @router.get("/connector/google-drive/authorize/{credential_id}")
@@ -908,7 +908,9 @@ def google_drive_auth(
         httponly=True,
         max_age=600,
     )
-    return AuthUrl(auth_url=get_auth_url(int(credential_id)))
+    return AuthUrl(
+        auth_url=get_auth_url(int(credential_id), DocumentSource.GOOGLE_DRIVE)
+    )
 
 
 @router.get("/connector/gmail/callback")
@@ -925,12 +927,10 @@ def gmail_callback(
         )
     credential_id = int(credential_id_cookie)
     verify_csrf(credential_id, callback.state)
-    if (
-        update_credential_access_tokens(
-            callback.code, credential_id, user, db_session, DocumentSource.GMAIL
-        )
-        is None
-    ):
+    credentials: Credentials | None = update_credential_access_tokens(
+        callback.code, credential_id, user, db_session, DocumentSource.GMAIL
+    )
+    if credentials is None:
         raise HTTPException(
             status_code=500, detail="Unable to fetch Gmail access tokens"
         )
