@@ -68,10 +68,11 @@ export default function UpgradingPage({
   const statusOrder: Record<ValidStatuses, number> = useMemo(
     () => ({
       failed: 0,
-      completed_with_errors: 1,
-      not_started: 2,
-      in_progress: 3,
-      success: 4,
+      canceled: 1,
+      completed_with_errors: 2,
+      not_started: 3,
+      in_progress: 4,
+      success: 5,
     }),
     []
   );
@@ -160,7 +161,7 @@ export default function UpgradingPage({
                     reindexingProgress={sortedReindexingProgress}
                   />
                 ) : (
-                  <ErrorCallout errorTitle="Fehler beim Abrufen des Re-Indexierungsfortschritts" />
+                  <ErrorCallout errorTitle="Fehler beim Abrufen des Reindexierungsfortschritts" />
                 )}
               </>
             ) : (
@@ -170,7 +171,7 @@ export default function UpgradingPage({
                 </h3>
                 <p className="mb-4 text-text-800">
                   Du wechselst derzeit die Embedding-Modelle, aber es gibt keine
-                  Anbindungen, die re-indexiert werden müssen. Das bedeutet,
+                  Anbindungen, die reindexiert werden müssen. Das bedeutet,
                   dass der Übergang schnell und nahtlos verläuft!
                 </p>
                 <p className="text-text-600">

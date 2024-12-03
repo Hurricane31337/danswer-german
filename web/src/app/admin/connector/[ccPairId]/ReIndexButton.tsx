@@ -122,7 +122,7 @@ export function ReIndexButton({
       {popup}
       <Button
         variant="success-reverse"
-        className="ml-auto"
+        className="ml-auto min-w-[100px]"
         onClick={() => {
           setReIndexPopupVisible(true);
         }}

@@ -20,6 +20,7 @@ mock_docs = [
         updated_at=datetime.now(),
         link=f"https://{int(id/2)}.com" if int(id / 2) % 2 == 0 else None,
         source_links={0: "https://mintlify.com/docs/settings/broken-links"},
+        match_highlights=[],
     )
     for id in range(10)
 ]
@@ -324,8 +325,13 @@ def test_lengthy_prefixed_json_with_quotes() -> None:
     assert quotes[0] == "Document"
 
 
-def test_prefixed_json_with_quotes() -> None:
+def test_json_with_lengthy_prefix_and_quotes() -> None:
     tokens = [
+        "*** Based on the provided documents, there does not appear to be any information ",
+        "directly relevant to answering which documents are my favorite. ",
+        "The documents seem to be focused on describing the Danswer product ",
+        "and its features/use cases. Since I do not have personal preferences ",
+        "for documents, I will provide a general response:\n\n",
         "```",
         "json",
         "\n",

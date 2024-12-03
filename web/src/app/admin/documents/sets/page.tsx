@@ -83,7 +83,7 @@ const EditRow = ({
             </div>
           </TooltipTrigger>
           {!documentSet.is_up_to_date && (
-            <TooltipContent maxWidth="max-w-sm">
+            <TooltipContent width="max-w-sm">
               <div className="flex break-words break-keep whitespace-pre-wrap items-start">
                 <InfoIcon className="mr-2 mt-0.5" />
                 Cannot update while syncing! Wait for the sync to finish, then
@@ -191,19 +191,15 @@ const DocumentSetTable = ({
                   </TableCell>
                   <TableCell>
                     {documentSet.is_up_to_date ? (
-                      <Badge size="md" variant="success" icon={FiCheckCircle}>
+                      <Badge variant="success" icon={FiCheckCircle}>
                         Aktuell
                       </Badge>
                     ) : documentSet.cc_pair_descriptors.length > 0 ? (
-                      <Badge size="md" variant="in_progress" icon={FiClock}>
+                      <Badge variant="in_progress" icon={FiClock}>
                         Synchronisiere
                       </Badge>
                     ) : (
-                      <Badge
-                        size="md"
-                        variant="destructive"
-                        icon={FiAlertTriangle}
-                      >
+                      <Badge variant="destructive" icon={FiAlertTriangle}>
                         Lösche
                       </Badge>
                     )}
@@ -211,7 +207,6 @@ const DocumentSetTable = ({
                   <TableCell>
                     {documentSet.is_public ? (
                       <Badge
-                        size="md"
                         variant={isEditable ? "success" : "default"}
                         icon={FiUnlock}
                       >
@@ -219,7 +214,6 @@ const DocumentSetTable = ({
                       </Badge>
                     ) : (
                       <Badge
-                        size="md"
                         variant={isEditable ? "in_progress" : "outline"}
                         icon={FiLock}
                       >
@@ -318,12 +312,10 @@ const Main = () => {
     <div className="mb-8">
       {popup}
       <Text className="mb-3">
-        <b>Dokument-Sets</b> ermöglichen es dir, logisch zusammenhängende
-        Dokumente in einem einzigen Bündel zu gruppieren. Diese können dann als
-        Filter verwendet werden, wenn du in der Web-Oberfläche suchst oder wenn
-        sie an Slack-Bots angehängt werden, um die Menge an Informationen zu
-        begrenzen, über die der Bot bei der Beantwortung in einem bestimmten
-        Kanal oder mit einer bestimmten Aktion sucht.
+        <b>Dokumentensätze</b> ermöglichen es dir, logisch verbundene Dokumente
+        zu einem einzigen Paket zusammenzufassen. Diese können dann als
+        Filter verwendet werden, um den Umfang der Informationen, über die
+        Danswer sucht, zu steuern.
       </Text>
 
       <div className="mb-3"></div>
