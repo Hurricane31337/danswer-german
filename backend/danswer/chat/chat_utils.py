@@ -7,10 +7,10 @@ from sqlalchemy.orm import Session
 
 from danswer.chat.models import CitationInfo
 from danswer.chat.models import LlmDoc
+from danswer.context.search.models import InferenceSection
 from danswer.db.chat import get_chat_messages_by_session
 from danswer.db.models import ChatMessage
 from danswer.llm.answering.models import PreviousMessage
-from danswer.search.models import InferenceSection
 from danswer.utils.logger import setup_logger
 
 logger = setup_logger()
@@ -31,6 +31,7 @@ def llm_doc_from_inference_section(inference_section: InferenceSection) -> LlmDo
         if inference_section.center_chunk.source_links
         else None,
         source_links=inference_section.center_chunk.source_links,
+        match_highlights=inference_section.center_chunk.match_highlights,
     )
 
 
