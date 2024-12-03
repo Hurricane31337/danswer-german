@@ -234,7 +234,7 @@ except ValueError:
         CELERY_WORKER_LIGHT_PREFETCH_MULTIPLIER_DEFAULT
     )
 
-CELERY_WORKER_INDEXING_CONCURRENCY_DEFAULT = 1
+CELERY_WORKER_INDEXING_CONCURRENCY_DEFAULT = 3
 try:
     env_value = os.environ.get("CELERY_WORKER_INDEXING_CONCURRENCY")
     if not env_value:
@@ -307,6 +307,22 @@ CONFLUENCE_CONNECTOR_ATTACHMENT_SIZE_THRESHOLD = int(
 CONFLUENCE_CONNECTOR_ATTACHMENT_CHAR_COUNT_THRESHOLD = int(
     os.environ.get("CONFLUENCE_CONNECTOR_ATTACHMENT_CHAR_COUNT_THRESHOLD", 200_000)
 )
+
+# Due to breakages in the confluence API, the timezone offset must be specified client side
+# to match the user's specified timezone.
+
+# The current state of affairs:
+# CQL queries are parsed in the user's timezone and cannot be specified in UTC
+# no API retrieves the user's timezone
+# All data is returned in UTC, so we can't derive the user's timezone from that
+
+# https://community.developer.atlassian.com/t/confluence-cloud-time-zone-get-via-rest-api/35954/16
+# https://jira.atlassian.com/browse/CONFCLOUD-69670
+
+# enter as a floating point offset from UTC in hours (-24 < val < 24)
+# this will be applied globally, so it probably makes sense to transition this to per
+# connector as some point.
+CONFLUENCE_TIMEZONE_OFFSET = float(os.environ.get("CONFLUENCE_TIMEZONE_OFFSET", 0.0))
 
 JIRA_CONNECTOR_LABELS_TO_SKIP = [
     ignored_tag
@@ -422,6 +438,9 @@ LOG_ALL_MODEL_INTERACTIONS = (
 LOG_DANSWER_MODEL_INTERACTIONS = (
     os.environ.get("LOG_DANSWER_MODEL_INTERACTIONS", "").lower() == "true"
 )
+LOG_INDIVIDUAL_MODEL_TOKENS = (
+    os.environ.get("LOG_INDIVIDUAL_MODEL_TOKENS", "").lower() == "true"
+)
 # If set to `true` will enable additional logs about Vespa query performance
 # (time spent on finding the right docs + time spent fetching summaries from disk)
 LOG_VESPA_TIMING_INFORMATION = (
@@ -490,6 +509,16 @@ CONTROL_PLANE_API_BASE_URL = os.environ.get(
 # JWT configuration
 JWT_ALGORITHM = "HS256"
 
-# Super Users
-SUPER_USERS = json.loads(os.environ.get("SUPER_USERS", '["pablo@danswer.ai"]'))
-SUPER_CLOUD_API_KEY = os.environ.get("SUPER_CLOUD_API_KEY", "api_key")
+
+#####
+# API Key Configs
+#####
+# refers to the rounds described here: https://passlib.readthedocs.io/en/stable/lib/passlib.hash.sha256_crypt.html
+_API_KEY_HASH_ROUNDS_RAW = os.environ.get("API_KEY_HASH_ROUNDS")
+API_KEY_HASH_ROUNDS = (
+    int(_API_KEY_HASH_ROUNDS_RAW) if _API_KEY_HASH_ROUNDS_RAW else None
+)
+
+
+POD_NAME = os.environ.get("POD_NAME")
+POD_NAMESPACE = os.environ.get("POD_NAMESPACE")

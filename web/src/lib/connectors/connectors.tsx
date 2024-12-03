@@ -6,7 +6,7 @@ import { Credential } from "@/lib/connectors/credentials"; // Import Credential 
 
 export function isLoadState(connector_name: string): boolean {
   // TODO: centralize connector metadata like this somewhere instead of hardcoding it here
-  const loadStateConnectors = ["web", "xenforo", "label_manual"];
+  const loadStateConnectors = ["web", "xenforo", "file", "label_manual"];
   if (loadStateConnectors.includes(connector_name)) {
     return true;
   }
@@ -42,6 +42,7 @@ export interface Option {
     values: any,
     currentCredential: Credential<any> | null
   ) => boolean;
+  wrapInCollapsible?: boolean;
 }
 
 export interface SelectOption extends Option {
@@ -59,6 +60,7 @@ export interface ListOption extends Option {
 export interface TextOption extends Option {
   type: "text";
   default?: string;
+  isTextArea?: boolean;
 }
 
 export interface NumberOption extends Option {
@@ -76,9 +78,28 @@ export interface FileOption extends Option {
   default?: string;
 }
 
-export interface ZipOption extends Option {
-  type: "zip";
+export interface StringTabOption extends Option {
+  type: "string_tab";
   default?: string;
+}
+
+export interface TabOption extends Option {
+  type: "tab";
+  defaultTab?: string;
+  tabs: {
+    label: string;
+    value: string;
+    fields: (
+      | BooleanOption
+      | ListOption
+      | TextOption
+      | NumberOption
+      | SelectOption
+      | FileOption
+      | StringTabOption
+    )[];
+  }[];
+  default?: [];
 }
 
 export interface ConnectionConfiguration {
@@ -91,7 +112,7 @@ export interface ConnectionConfiguration {
     | NumberOption
     | SelectOption
     | FileOption
-    | ZipOption
+    | TabOption
   )[];
   advanced_values: (
     | BooleanOption
@@ -100,7 +121,7 @@ export interface ConnectionConfiguration {
     | NumberOption
     | SelectOption
     | FileOption
-    | ZipOption
+    | TabOption
   )[];
   overrideDefaultFreq?: number;
 }
@@ -211,59 +232,96 @@ export const connectorConfigs: Record<
     description: "Konfiguriere Google-Drive-Connector",
     values: [
       {
-        type: "checkbox",
-        label: "Geteilte Laufwerke einbeziehen?",
-        description:
-          "Dadurch kann Danswer alles in deinen geteilten Laufwerken indexieren.",
-        name: "include_shared_drives",
+        type: "tab",
+        name: "indexing_scope",
+        label: "Wie sollen wir dein Google Drive indexieren?",
         optional: true,
-        default: true,
-      },
-      {
-        type: "text",
-        description:
-          "Gib eine durch Kommas getrennte Liste der URLs der zu indexierenden geteilten Laufwerke ein. Leer lassen, um alle geteilten Laufwerke zu indexieren.",
-        label: "URLs der geteilten Laufwerke",
-        name: "shared_drive_urls",
-        visibleCondition: (values) => values.include_shared_drives,
-        optional: true,
-      },
-      {
-        type: "checkbox",
-        label: (currentCredential) =>
-          currentCredential?.credential_json?.google_drive_tokens
-            ? "Mein Laufwerk einbeziehen?"
-            : "Alle Laufwerke einbeziehen?",
-        description: (currentCredential) =>
-          currentCredential?.credential_json?.google_drive_tokens
-            ? "Dadurch kann Danswer alles in deinem 'Mein Laufwerk' indexieren."
-            : "Dadurch kann Danswer alles in den 'Mein Laufwerk' aller Benutzer indexieren.",
-        name: "include_my_drives",
-        optional: true,
-        default: true,
-      },
-      {
-        type: "text",
-        description:
-          "Gib eine durch Kommas getrennte Liste der E-Mails der Benutzer ein, deren 'Mein Laufwerk' du indexieren möchtest. Leer lassen, um alle 'Mein Laufwerk'-Instanzen zu indexieren.",
-        label: "E-Mails der Benutzer für 'Mein Laufwerk'",
-        name: "my_drive_emails",
-        visibleCondition: (values, currentCredential) =>
-          values.include_my_drives &&
-          !currentCredential?.credential_json?.google_drive_tokens,
-        optional: true,
+        tabs: [
+          {
+            value: "general",
+            label: "General",
+            fields: [
+              {
+                type: "checkbox",
+                label: "Include shared drives?",
+                description: (currentCredential) => {
+                  return currentCredential?.credential_json?.google_tokens
+                    ? "This will allow Danswer to index everything in the shared drives you have access to."
+                    : "This will allow Danswer to index everything in your Organization's shared drives.";
+                },
+                name: "include_shared_drives",
+                default: false,
+              },
+              {
+                type: "checkbox",
+                label: (currentCredential) => {
+                  return currentCredential?.credential_json?.google_tokens
+                    ? "Include My Drive?"
+                    : "Include Everyone's My Drive?";
+                },
+                description: (currentCredential) => {
+                  return currentCredential?.credential_json?.google_tokens
+                    ? "This will allow Danswer to index everything in your My Drive."
+                    : "This will allow Danswer to index everything in everyone's My Drives.";
+                },
+                name: "include_my_drives",
+                default: false,
+              },
+              {
+                type: "checkbox",
+                description:
+                  "This will allow Danswer to index all files shared with you.",
+                label: "Include All Files Shared With You?",
+                name: "include_files_shared_with_me",
+                visibleCondition: (values, currentCredential) =>
+                  currentCredential?.credential_json?.google_tokens,
+                default: false,
+              },
+            ],
+          },
+          {
+            value: "specific",
+            label: "Specific",
+            fields: [
+              {
+                type: "text",
+                description: (currentCredential) => {
+                  return currentCredential?.credential_json?.google_tokens
+                    ? "Enter a comma separated list of the URLs for the shared drive you would like to index. You must have access to these shared drives."
+                    : "Enter a comma separated list of the URLs for the shared drive you would like to index.";
+                },
+                label: "Shared Drive URLs",
+                name: "shared_drive_urls",
+                default: "",
+                isTextArea: true,
+              },
+              {
+                type: "text",
+                description:
+                  "Enter a comma separated list of the URLs of any folders you would like to index. The files located in these folders (and all subfolders) will be indexed.",
+                label: "Folder URLs",
+                name: "shared_folder_urls",
+                default: "",
+                isTextArea: true,
+              },
+              {
+                type: "text",
+                description:
+                  "Enter a comma separated list of the emails of the users whose MyDrive you want to index.",
+                label: "My Drive Emails",
+                name: "my_drive_emails",
+                visibleCondition: (values, currentCredential) =>
+                  !currentCredential?.credential_json?.google_tokens,
+                default: "",
+                isTextArea: true,
+              },
+            ],
+          },
+        ],
+        defaultTab: "space",
       },
     ],
-    advanced_values: [
-      {
-        type: "text",
-        description:
-          "Gib eine durch Kommas getrennte Liste der URLs der in geteilten Laufwerken befindlichen Ordner ein, die indexiert werden sollen. Die Dateien in diesen Ordnern (und allen Unterordnern) werden indexiert. Hinweis: Dies wird zusätzlich zu den Einstellungen 'Geteilte Laufwerke einbeziehen' und 'URLs der geteilten Laufwerke' verwendet – lass diese leer, wenn du nur die hier angegebenen Ordner indexieren möchtest.",
-        label: "Ordner-URLs",
-        name: "shared_folder_urls",
-        optional: true,
-      },
-    ],
+    advanced_values: [],
   },
   gmail: {
     description: "Konfiguriere Gmail-Connector",
@@ -277,26 +335,7 @@ export const connectorConfigs: Record<
   },
   confluence: {
     description: "Konfiguriere Confluence-Connector",
-    subtext: `Gebe die Basis-URL deiner Confluence-Instanz, den Namen des Bereichs und optional eine spezifische Seiten-ID an, die indexiert werden soll. Wenn keine Seiten-ID angegeben ist, wird der gesamte Bereich indexiert. Wird kein Bereich angegeben, werden alle verfügbaren Confluence-Bereiche indexiert.`,
     values: [
-      {
-        type: "text",
-        query: "Gib die Wiki-Basis-URL ein:",
-        label: "Wiki-Basis-URL",
-        name: "wiki_base",
-        optional: false,
-        description:
-          "Die Basis-URL deiner Confluence-Instanz (z.B., https://your-domain.atlassian.net/wiki)",
-      },
-      {
-        type: "text",
-        query: "Gib den Bereich ein:",
-        label: "Bereich",
-        name: "space",
-        optional: true,
-        description:
-          "Der Name des Confluence-Bereichs, der indexiert werden soll (z.B. `KB`). Wenn kein Bereich angegeben ist, werden alle verfügbaren Confluence-Bereiche indexiert.",
-      },
       {
         type: "checkbox",
         query: "Ist dies eine Confluence-Cloud-Instanz?",
@@ -307,36 +346,93 @@ export const connectorConfigs: Record<
         description:
           "Ankreuzen, wenn dies eine Confluence-Cloud-Instanz ist, abwählen für Confluence Server/Data Center",
       },
-    ],
-    advanced_values: [
       {
         type: "text",
-        query: "Gib die Seiten-ID ein (optional):",
-        label: "Seiten-ID",
-        name: "page_id",
-        optional: true,
-        description:
-          "Spezifische Seiten-ID, die indexiert werden soll – leer lassen, um den gesamten Bereich zu indexieren (z.B. `131368`)",
-      },
-      {
-        type: "checkbox",
-        query: "Sollten Seiten rekursiv indexiert werden?",
-        label: "Rekursiv indexieren",
-        name: "index_recursively",
-        description:
-          "Wenn dies aktiviert ist und die Wiki-Seiten-URL zu einer Seite führt, werden wir die Seite und alle ihre untergeordneten Seiten anstelle nur der Seite indexieren. Dies ist standardmäßig für Confluence-Connectoren festgelegt, bei denen keine Seiten-ID angegeben ist.",
+        query: "Enter the wiki base URL:",
+        label: "Wiki Base URL",
+        name: "wiki_base",
         optional: false,
+        description:
+          "The base URL of your Confluence instance (e.g., https://your-domain.atlassian.net/wiki)",
       },
       {
-        type: "text",
-        query: "Gib die CQL-Abfrage ein (optional):",
-        label: "CQL-Abfrage",
-        name: "cql_query",
+        type: "tab",
+        name: "indexing_scope",
+        label: "How Should We Index Your Confluence?",
         optional: true,
-        description:
-          "WICHTIG: Dies überschreibt alle anderen ausgewählten Einstellungen des Connectors (außer der Wiki-Basis-URL). Wir unterstützen derzeit nur CQL-Abfragen, die Objekte des Typs 'Seite' zurückgeben. Das bedeutet, dass alle CQL-Abfragen 'type=page' als einzigen Typfilter enthalten müssen. Es ist auch wichtig, dass keine Filter für 'lastModified' verwendet werden, da dies Probleme mit unserer Connector-Abfrage-Logik verursachen würde. Wir werden dennoch alle Anhänge und Kommentare auf den von der CQL-Abfrage zurückgegebenen Seiten beziehen. Alle 'lastmodified'-Filter werden überschrieben. Weitere Informationen findest du unter https://developer.atlassian.com/server/confluence/advanced-searching-using-cql/.",
+        tabs: [
+          {
+            value: "everything",
+            label: "Everything",
+            fields: [
+              {
+                type: "string_tab",
+                label: "Everything",
+                name: "everything",
+                description:
+                  "This connector will index all pages the provided credentials have access to!",
+              },
+            ],
+          },
+          {
+            value: "space",
+            label: "Space",
+            fields: [
+              {
+                type: "text",
+                query: "Enter the space:",
+                label: "Space Key",
+                name: "space",
+                default: "",
+                description: "The Confluence space key to index (e.g. `KB`).",
+              },
+            ],
+          },
+          {
+            value: "page",
+            label: "Page",
+            fields: [
+              {
+                type: "text",
+                query: "Enter the page ID:",
+                label: "Page ID",
+                name: "page_id",
+                default: "",
+                description: "Specific page ID to index (e.g. `131368`)",
+              },
+              {
+                type: "checkbox",
+                query: "Should index pages recursively?",
+                label: "Index Recursively",
+                name: "index_recursively",
+                description:
+                  "If this is set, we will index the page indicated by the Page ID as well as all of its children.",
+                optional: false,
+                default: true,
+              },
+            ],
+          },
+          {
+            value: "cql",
+            label: "CQL Query",
+            fields: [
+              {
+                type: "text",
+                query: "Enter the CQL query (optional):",
+                label: "CQL Query",
+                name: "cql_query",
+                default: "",
+                description:
+                  "IMPORTANT: We currently only support CQL queries that return objects of type 'page'. This means all CQL queries must contain 'type=page' as the only type filter. It is also important that no filters for 'lastModified' are used as it will cause issues with our connector polling logic. We will still get all attachments and comments for the pages returned by the CQL query. Any 'lastmodified' filters will be overwritten. See https://developer.atlassian.com/server/confluence/advanced-searching-using-cql/ for more details.",
+              },
+            ],
+          },
+        ],
+        defaultTab: "space",
       },
     ],
+    ],
+    advanced_values: [],
   },
   jira: {
     description: "Konfiguriere Jira-Connector",
@@ -468,7 +564,7 @@ Hinweis: Verwende die Einzahl des Objektnamens (z.B. 'Opportunity' statt 'Opport
         name: "channels",
         description: `Gib 0 oder mehr Kanäle an, die indexiert werden sollen. Wenn du z.B. den Kanal "support" angibst, wird das dazu führen, dass wir nur den gesamten Inhalt im Kanal "#support" indexieren. Wenn keine Kanäle angegeben sind, werden alle Kanäle in deinem Workspace indexiert.`,
         optional: true,
-        // Slack-Kanäle können nur in Kleinbuchstaben sein
+        // Slack Channels can only be lowercase
         transform: (values) => values.map((value) => value.toLowerCase()),
       },
       {
@@ -617,10 +713,10 @@ Beispielsweise bewirkt die Angabe von .*-support.* als "Kanal", dass der Connect
         name: "connector_type",
         optional: false,
         options: [
-          { name: "Liste", value: "list" },
-          { name: "Folder", value: "folder" },
-          { name: "Space", value: "space" },
-          { name: "Workspace", value: "workspace" },
+          { name: "list", value: "list" },
+          { name: "folder", value: "folder" },
+          { name: "space", value: "space" },
+          { name: "workspace", value: "workspace" },
         ],
       },
       {
@@ -647,10 +743,10 @@ Beispielsweise bewirkt die Angabe von .*-support.* als "Kanal", dass der Connect
     description: "Konfiguriere Google Sites-Connector",
     values: [
       {
-        type: "zip",
+        type: "file",
         query: "Gib den ZIP-Pfad ein:",
-        label: "ZIP-Pfad",
-        name: "zip_path",
+        label: "Datei-Orte",
+        name: "file_locations",
         optional: false,
         description:
           "Lade eine ZIP-Datei mit dem HTML deiner Google-Site hoch",
@@ -950,6 +1046,11 @@ Beispielsweise bewirkt die Angabe von .*-support.* als "Kanal", dass der Connect
     values: [],
     advanced_values: [],
   },
+  fireflies: {
+    description: "Configure Fireflies connector",
+    values: [],
+    advanced_values: [],
+  },
   label_manual: {
     description: "Label-Handbuch-Anbindung einrichten",
     values: [
@@ -1056,7 +1157,7 @@ export interface ConnectorBase<T> {
   refresh_freq: number | null;
   prune_freq: number | null;
   indexing_start: Date | null;
-  is_public?: boolean;
+  access_type: string;
   groups?: number[];
 }
 
@@ -1237,6 +1338,8 @@ export interface AsanaConfig {
 }
 
 export interface FreshdeskConfig {}
+
+export interface FirefliesConfig {}
 
 export interface MediaWikiConfig extends MediaWikiBaseConfig {
   hostname: string;

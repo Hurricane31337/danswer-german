@@ -17,6 +17,12 @@ interface FullSearchBarProps {
   showingSidebar: boolean;
 }
 
+import {
+  TooltipProvider,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 import { useRef } from "react";
 import { SendIcon } from "../icons/icons";
 import { Separator } from "@/components/ui/separator";
@@ -28,61 +34,65 @@ import { CCPairBasicInfo, DocumentSet, Tag } from "@/lib/types";
 export const AnimatedToggle = ({
   isOn,
   handleToggle,
+  direction = "top",
 }: {
   isOn: boolean;
   handleToggle: () => void;
+  direction?: "bottom" | "top";
 }) => {
   const commandSymbol = KeyboardSymbol();
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <CustomTooltip
-      light
-      large
-      content={
-        <div className="bg-white my-auto p-6 rounded-lg w-full">
-          <h2 className="text-xl text-text-800 font-bold mb-2">
-            Agentenbasierte Suche
-          </h2>
-          <p className="text-text-700 text-sm mb-4">
-            Die leistungsstärkste Suche &ndash; Lasse dich von einem
-            KI-Agenten unterstützen, um genau das zu finden, wonach du suchst.
-          </p>
-          <Separator />
-          <h2 className="text-xl text-text-800 font-bold mb-2">Schnelle Suche</h2>
-          <p className="text-text-700 text-sm mb-4">
-            Erhalte direkt qualitativ hochwertige Ergebnisse &ndash; optimal
-            für den sofortigen Zugriff auf deine Dokumente.
-          </p>
-          <p className="mt-2 flex text-xs">Shortcut: ({commandSymbol}/)</p>
-        </div>
-      }
-    >
-      <div
-        ref={containerRef}
-        className="my-auto ml-auto flex justify-end items-center cursor-pointer"
-        onClick={handleToggle}
-      >
-        <div ref={contentRef} className="flex items-center">
-          {/* Toggle switch */}
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
           <div
-            className={`
-            w-10 h-6 flex items-center rounded-full p-1 transition-all duration-300 ease-in-out 
-            ${isOn ? "bg-toggled-background" : "bg-untoggled-background"}
-          `}
+            ref={containerRef}
+            className="my-auto ml-auto flex justify-end items-center cursor-pointer"
+            onClick={handleToggle}
           >
-            <div
-              className={`
-              bg-white w-4 h-4 rounded-full shadow-md transform transition-all duration-300 ease-in-out
-              ${isOn ? "translate-x-4" : ""}
-            `}
-            ></div>
+            <div ref={contentRef} className="flex items-center">
+              <div
+                className={`
+                w-10 h-6 flex items-center rounded-full p-1 transition-all duration-300 ease-in-out 
+                ${isOn ? "bg-toggled-background" : "bg-untoggled-background"}
+              `}
+              >
+                <div
+                  className={`
+                  bg-white w-4 h-4 rounded-full shadow-md transform transition-all duration-300 ease-in-out
+                  ${isOn ? "translate-x-4" : ""}
+                `}
+                ></div>
+              </div>
+              <p className="ml-2 text-sm">Pro</p>
+            </div>
           </div>
-          <p className="ml-2 text-sm">Agentenbasiert</p>
-        </div>
-      </div>
-    </CustomTooltip>
+        </TooltipTrigger>
+        <TooltipContent side={direction} backgroundColor="bg-background-200">
+          <div className="bg-white my-auto p-6 rounded-lg max-w-sm">
+            <h2 className="text-xl text-text-800 font-bold mb-2">
+              Agentic Search
+            </h2>
+            <p className="text-text-700 text-sm mb-4">
+              Die leistungsstärkste Suche &ndash; Lasse dich von einem
+              KI-Agenten unterstützen, um genau das zu finden, wonach du suchst.
+            </p>
+            <Separator />
+            <h2 className="text-xl text-text-800 font-bold mb-2">
+              Fast Search
+            </h2>
+            <p className="text-text-700 text-sm mb-4">
+              Erhalte direkt qualitativ hochwertige Ergebnisse &ndash; optimal
+              für den sofortigen Zugriff auf deine Dokumente.
+            </p>
+            <p className="mt-2 flex text-xs">Shortcut: ({commandSymbol}/)</p>
+          </div>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };
 

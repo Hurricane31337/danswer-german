@@ -90,7 +90,7 @@ export function PersonasTable() {
         message: `Aktualisierung der Persona-Reihenfolge fehlgeschlagen - ${await response.text()}`,
       });
       setFinalPersonas(assistants);
-      router.refresh();
+      await refreshAssistants();
       return;
     }
 
@@ -152,7 +152,7 @@ export function PersonasTable() {
                       persona.is_visible
                     );
                     if (response.ok) {
-                      router.refresh();
+                      await refreshAssistants();
                     } else {
                       setPopup({
                         type: "error",
@@ -184,7 +184,7 @@ export function PersonasTable() {
                       onClick={async () => {
                         const response = await deletePersona(persona.id);
                         if (response.ok) {
-                          router.refresh();
+                          await refreshAssistants();
                         } else {
                           alert(
                             `Persona konnte nicht gelöscht werden - ${await response.text()}`
