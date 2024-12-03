@@ -2,6 +2,7 @@ import {
   AnswerPiecePacket,
   DanswerDocument,
   Filters,
+  FinalContextDocs,
   StreamStopInfo,
 } from "@/lib/search/interfaces";
 import { handleSSEStream } from "@/lib/search/streamingUtils";
@@ -102,6 +103,7 @@ export type PacketType =
   | ToolCallMetadata
   | BackendMessage
   | AnswerPiecePacket
+  | FinalContextDocs
   | DocumentsResponse
   | FileChatDisplay
   | StreamingError
@@ -147,7 +149,6 @@ export async function* sendMessage({
 }): AsyncGenerator<PacketType, void, unknown> {
   const documentsAreSelected =
     selectedDocumentIds && selectedDocumentIds.length > 0;
-
   const body = JSON.stringify({
     alternate_assistant_id: alternateAssistantId,
     chat_session_id: chatSessionId,
@@ -203,7 +204,7 @@ export async function* sendMessage({
   yield* handleSSEStream<PacketType>(response);
 }
 
-export async function nameChatSession(chatSessionId: string, message: string) {
+export async function nameChatSession(chatSessionId: string) {
   const response = await fetch("/api/chat/rename-chat-session", {
     method: "PUT",
     headers: {
@@ -212,7 +213,6 @@ export async function nameChatSession(chatSessionId: string, message: string) {
     body: JSON.stringify({
       chat_session_id: chatSessionId,
       name: null,
-      first_message: message,
     }),
   });
   return response;
@@ -263,7 +263,6 @@ export async function renameChatSession(
     body: JSON.stringify({
       chat_session_id: chatSessionId,
       name: newName,
-      first_message: null,
     }),
   });
   return response;
@@ -639,25 +638,33 @@ export async function useScrollonStream({
   scrollableDivRef,
   scrollDist,
   endDivRef,
-  distance,
   debounceNumber,
-  waitForScrollRef,
+  mobile,
+  enableAutoScroll,
 }: {
   chatState: ChatState;
   scrollableDivRef: RefObject<HTMLDivElement>;
-  waitForScrollRef: RefObject<boolean>;
   scrollDist: MutableRefObject<number>;
   endDivRef: RefObject<HTMLDivElement>;
-  distance: number;
   debounceNumber: number;
   mobile?: boolean;
+  enableAutoScroll?: boolean;
 }) {
+  const mobileDistance = 900; // distance that should "engage" the scroll
+  const desktopDistance = 500; // distance that should "engage" the scroll
+
+  const distance = mobile ? mobileDistance : desktopDistance;
+
   const preventScrollInterference = useRef<boolean>(false);
   const preventScroll = useRef<boolean>(false);
   const blockActionRef = useRef<boolean>(false);
   const previousScroll = useRef<number>(0);
 
   useEffect(() => {
+    if (!enableAutoScroll) {
+      return;
+    }
+
     if (chatState != "input" && scrollableDivRef && scrollableDivRef.current) {
       const newHeight: number = scrollableDivRef.current?.scrollTop!;
       const heightDifference = newHeight - previousScroll.current;
@@ -692,7 +699,7 @@ export async function useScrollonStream({
         endDivRef.current
       ) {
         // catch up if necessary!
-        const scrollAmount = scrollDist.current + 10000;
+        const scrollAmount = scrollDist.current + (mobile ? 1000 : 10000);
         if (scrollDist.current > 300) {
           // if (scrollDist.current > 140) {
           endDivRef.current.scrollIntoView();
@@ -715,7 +722,7 @@ export async function useScrollonStream({
 
   // scroll on end of stream if within distance
   useEffect(() => {
-    if (scrollableDivRef?.current && chatState == "input") {
+    if (scrollableDivRef?.current && chatState == "input" && enableAutoScroll) {
       if (scrollDist.current < distance - 50) {
         scrollableDivRef?.current?.scrollBy({
           left: 0,

@@ -37,6 +37,7 @@ import {
   ColorSlackIcon,
   XenforoIcon,
   FreshdeskIcon,
+  FirefliesIcon,
   LabelIcon,
 } from "@/components/icons/icons";
 import { ValidSources } from "./types";
@@ -58,7 +59,7 @@ type SourceMap = {
   [K in ValidSources]: PartialSourceMetadata;
 };
 
-const SOURCE_METADATA_MAP: SourceMap = {
+export const SOURCE_METADATA_MAP: SourceMap = {
   web: {
     icon: GlobeIcon,
     displayName: "Web",
@@ -289,6 +290,12 @@ const SOURCE_METADATA_MAP: SourceMap = {
     displayName: "Freshdesk",
     category: SourceCategory.CustomerSupport,
     docs: "https://docs.danswer.dev/connectors/freshdesk",
+  },
+  fireflies: {
+    icon: FirefliesIcon,
+    displayName: "Fireflies",
+    category: SourceCategory.Other,
+    docs: "https://docs.danswer.dev/connectors/fireflies",
   },
   label_manual: {
     icon: LabelIcon,
