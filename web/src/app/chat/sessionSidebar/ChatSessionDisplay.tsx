@@ -68,7 +68,7 @@ export function ChatSessionDisplay({
       setIsRenamingChat(false);
       router.refresh();
     } else {
-      alert("Failed to rename chat session");
+      alert("Fehler beim Umbenennen der Chat-Sitzung");
     }
   };
 
@@ -228,21 +228,21 @@ export function ChatSessionDisplay({
                               <div className="border border-border rounded-lg bg-background z-50 w-32">
                                 {showShareModal && (
                                   <DefaultDropdownElement
-                                    name="Share"
+                                    name="Teilen"
                                     icon={FiShare2}
                                     onSelect={() => showShareModal(chatSession)}
                                   />
                                 )}
                                 {!search && (
                                   <DefaultDropdownElement
-                                    name="Rename"
+                                    name="Umbenennen"
                                     icon={FiEdit2}
                                     onSelect={() => setIsRenamingChat(true)}
                                   />
                                 )}
                                 {showDeleteModal && (
                                   <DefaultDropdownElement
-                                    name="Delete"
+                                    name="Löschen"
                                     icon={FiTrash}
                                     onSelect={() =>
                                       showDeleteModal(chatSession)

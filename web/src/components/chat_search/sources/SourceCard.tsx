@@ -49,7 +49,7 @@ export function SeeMoreBlock({
     >
       <div className="line-clamp-1 font-semibold text-ellipsis text-text-900 flex h-6 items-center justify-between text-sm">
         <p className="mr-0 flex-shrink-0">
-          {documentSelectionToggled ? "Hide sources" : "See context"}
+          {documentSelectionToggled ? "Quellen ausblenden" : "Kontext anzeigen"}
         </p>
         <div className="flex -space-x-3 flex-shrink-0 overflow-hidden">
           {uniqueSources.map((sourceType, ind) => (
