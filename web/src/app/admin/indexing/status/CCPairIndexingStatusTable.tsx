@@ -43,11 +43,11 @@ import { usePaidEnterpriseFeaturesEnabled } from "@/components/settings/usePaidE
 import { ConnectorCredentialPairStatus } from "../../connector/[ccPairId]/types";
 
 function SummaryRow({
-                      source,
-                      summary,
-                      isOpen,
-                      onToggle,
-                    }: {
+  source,
+  summary,
+  isOpen,
+  onToggle,
+}: {
   source: ValidSources;
   summary: ConnectorSummary;
   isOpen: boolean;
@@ -135,10 +135,10 @@ function SummaryRow({
 }
 
 function ConnectorRow({
-                        ccPairsIndexingStatus,
-                        invisible,
-                        isEditable,
-                      }: {
+  ccPairsIndexingStatus,
+  invisible,
+  isEditable,
+}: {
   ccPairsIndexingStatus: ConnectorIndexingStatus<any, any>;
   invisible?: boolean;
   isEditable: boolean;
@@ -256,9 +256,9 @@ function ConnectorRow({
 }
 
 export function CCPairIndexingStatusTable({
-                                            ccPairsIndexingStatuses,
-                                            editableCcPairsIndexingStatuses,
-                                          }: {
+  ccPairsIndexingStatuses,
+  editableCcPairsIndexingStatuses,
+}: {
   ccPairsIndexingStatuses: ConnectorIndexingStatus<any, any>[];
   editableCcPairsIndexingStatuses: ConnectorIndexingStatus<any, any>[];
 }) {
@@ -476,8 +476,8 @@ export function CCPairIndexingStatusTable({
                         <TableHead></TableHead>
                       </TableRow>
                       {(sourceMatches
-                          ? groupedStatuses[source]
-                          : matchingConnectors
+                        ? groupedStatuses[source]
+                        : matchingConnectors
                       ).map((ccPairsIndexingStatus) => (
                         <ConnectorRow
                           key={ccPairsIndexingStatus.cc_pair_id}
