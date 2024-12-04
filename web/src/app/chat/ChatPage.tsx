@@ -2293,7 +2293,7 @@ export function ChatPage({
                                     <div className="mx-auto px-4 w-full max-w-[750px] flex flex-col items-center">
                                       <Separator className="mx-2 w-full my-12" />
                                       <div className="text-sm text-black font-medium mb-4">
-                                        Recent Assistants
+                                        Letzte Assistenten
                                       </div>
                                       <AssistantBanner
                                         mobile={settings?.isMobile}

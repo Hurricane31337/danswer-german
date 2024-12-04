@@ -44,7 +44,7 @@ export function SeeMoreBlock({
       onClick={toggleDocumentSelection}
       className={`
         ${documentSelectionToggled ? "border-border-100 border" : ""}
-        cursor-pointer w-[150px] rounded-sm flex-none transition-all duration-500 hover:bg-background-125 bg-text-100 px-3 py-2.5
+        cursor-pointer w-[180px] rounded-sm flex-none transition-all duration-500 hover:bg-background-125 bg-text-100 px-3 py-2.5
       `}
     >
       <div className="line-clamp-1 font-semibold text-ellipsis text-text-900 flex h-6 items-center justify-between text-sm">
@@ -67,7 +67,7 @@ export function SeeMoreBlock({
       </div>
       <div className="line-clamp-2 text-sm font-semibold"></div>
       <div className="line-clamp-2 text-sm font-normal leading-snug text-text-700">
-        See more
+        Mehr anzeigen
       </div>
     </div>
   );

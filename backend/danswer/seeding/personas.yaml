@@ -42,14 +42,14 @@ personas:
     display_priority: 1
     is_visible: true
     starter_messages:
-      - name: "Give me an overview of what's here"
-        message: "Sample some documents and tell me what you find."
-      - name: "Use AI to solve a work related problem"
-        message: "Ask me what problem I would like to solve, then search the knowledge base to help me find a solution."
-      - name: "Find updates on a topic of interest"
-        message: "Once I provide a topic, retrieve related documents and tell me when there was last activity on the topic if available."
-      - name: "Surface contradictions"
-        message: "Have me choose a subject. Once I have provided it, check against the knowledge base and point out any inconsistencies. For all your following responses, focus on identifying contradictions."
+      - name: "Gib mir einen Überblick, was hier ist"
+        message: "Durchstöbere einige Dokumente und erzähle mir, was du findest."
+      - name: "Nutze KI, um ein arbeitsbezogenes Problem zu lösen"
+        message: "Frage mich, welches Problem ich lösen möchte, dann durchsuche die Wissensdatenbank, um mir bei der Lösung zu helfen."
+      - name: "Finde Updates zu einem Interessensgebiet"
+        message: "Sobald ich ein Thema gegeben habe, rufe verwandte Dokumente ab und sage mir, wann es das letzte Mal Aktivitäten zu dem Thema gab, falls verfügbar."
+      - name: "Widersprüche aufdecken"
+        message: "Lass mich ein Thema wählen. Sobald ich es bereitgestellt habe, überprüfe die Wissensdatenbank und weise auf etwaige Unstimmigkeiten hin. Konzentriere dich in allen folgenden Antworten darauf, Widersprüche zu identifizieren."
 
   - id: 1
     name: "Allgemein"

@@ -19,11 +19,11 @@ export const DeleteEntityModal = ({
     <Modal onOutsideClick={onClose}>
       <>
         <div className="flex mb-4">
-          <h2 className="my-auto text-2xl font-bold">Delete {entityType}?</h2>
+          <h2 className="my-auto text-2xl font-bold">{entityType.charAt(0).toUpperCase() + entityType.slice(1)} löschen?</h2>
         </div>
         <p className="mb-4">
-          Click below to confirm that you want to delete{" "}
-          <b>&quot;{entityName}&quot;</b>
+          Klicke unten, um zu bestätigen, dass du{" "}
+          <b>&quot;{entityName}&quot; löschen möchtest.</b>
         </p>
         {additionalDetails && <p className="mb-4">{additionalDetails}</p>}
         <div className="flex">
@@ -31,7 +31,7 @@ export const DeleteEntityModal = ({
             <BasicClickable onClick={onSubmit}>
               <div className="flex mx-2">
                 <FiTrash className="my-auto mr-2" />
-                Delete
+                Löschen
               </div>
             </BasicClickable>
           </div>
