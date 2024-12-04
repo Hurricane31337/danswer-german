@@ -140,7 +140,7 @@ export function SourceSelector({
                   }}
                   className="text-sm text-gray-500 hover:text-gray-700"
                 >
-                  Clear
+                  Löschen
                 </button>
               )}
             </div>
@@ -152,7 +152,7 @@ export function SourceSelector({
                 >
                   <span>
                     {getDateRangeString(timeRange?.from!, timeRange?.to!) ||
-                      "Select a time range"}
+                      "Wähle eine Zeitspanne"}
                   </span>
                 </Button>
               </PopoverTrigger>

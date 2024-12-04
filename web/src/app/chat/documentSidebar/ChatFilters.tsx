@@ -109,7 +109,7 @@ export const ChatFilters = forwardRef<HTMLDivElement, ChatFiltersProps>(
             {popup}
             <div className="p-4 flex justify-between items-center">
               <h2 className="text-xl font-bold text-text-900">
-                {showFilters ? "Filters" : "Sources"}
+                {showFilters ? "Filter" : "Quellen"}
               </h2>
               <button
                 onClick={closeSidebar}
@@ -180,11 +180,11 @@ export const ChatFilters = forwardRef<HTMLDivElement, ChatFiltersProps>(
                 className="text-sm font-medium py-2 px-4 rounded-full transition-colors bg-gray-900 text-white"
                 onClick={clearSelectedDocuments}
               >
-                {`Remove ${
+                {`Entferne ${
                   delayedSelectedDocumentCount > 0
                     ? delayedSelectedDocumentCount
                     : ""
-                } Source${delayedSelectedDocumentCount > 1 ? "s" : ""}`}
+                } Quelle${delayedSelectedDocumentCount > 1 ? "n" : ""}`}
               </button>
             </div>
           )}

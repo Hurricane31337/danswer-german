@@ -124,7 +124,7 @@ export function SourceSelector({
             <PopoverTrigger asChild>
               <div className="cursor-pointer">
                 <div className="flex justify-between items-center">
-                  <SectionTitle>Time Range</SectionTitle>
+                  <SectionTitle>Zeitraum</SectionTitle>
                   {true && (
                     <button
                       onClick={(e) => {
@@ -133,7 +133,7 @@ export function SourceSelector({
                       }}
                       className="text-sm text-gray-500 hover:text-gray-700"
                     >
-                      Clear
+                      Löschen
                     </button>
                   )}
                 </div>
@@ -364,7 +364,7 @@ export function HorizontalFilters({
               <FiMap size={16} />
             </div>
           }
-          defaultDisplay="All Sources"
+          defaultDisplay="Alle Quellen"
         />
 
         <FilterDropdown
@@ -388,7 +388,7 @@ export function HorizontalFilters({
               <FiBook size={16} />
             </div>
           }
-          defaultDisplay="All Document Sets"
+          defaultDisplay="Alle Document-Sets"
         />
       </div>
 
@@ -519,7 +519,7 @@ export function HorizontalSourceSelector({
           >
             <CalendarIcon className="h-4 w-4" />
 
-            {timeRange?.from ? getTimeAgoString(timeRange.from) : "Since"}
+            {timeRange?.from ? getTimeAgoString(timeRange.from) : "Seit"}
           </div>
         </PopoverTrigger>
         <PopoverContent

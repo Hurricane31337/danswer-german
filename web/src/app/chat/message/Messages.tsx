@@ -429,8 +429,8 @@ export const AIMessage = ({
                         <ToolRunDisplay
                           toolName={
                             toolCall.tool_result && content
-                              ? `Used "${toolCall.tool_name}"`
-                              : `Using "${toolCall.tool_name}"`
+                              ? `"${toolCall.tool_name}" benutzt`
+                              : `Benutze "${toolCall.tool_name}"`
                           }
                           toolLogo={
                             <FiTool size={15} className="my-auto mr-1" />
@@ -449,8 +449,8 @@ export const AIMessage = ({
                         <ToolRunDisplay
                           toolName={
                             toolCall.tool_result
-                              ? `Searched the internet`
-                              : `Searching the internet`
+                              ? `Internet durchsucht`
+                              : `Duchsuche das Internet`
                           }
                           toolLogo={
                             <FiGlobe size={15} className="my-auto mr-1" />
@@ -535,16 +535,16 @@ export const AIMessage = ({
                               </div>
                             )}
                           </div>
-                          <CustomTooltip showTick line content="Copy!">
+                          <CustomTooltip showTick line content="Kopieren!">
                             <CopyButton content={content.toString()} />
                           </CustomTooltip>
-                          <CustomTooltip showTick line content="Good response!">
+                          <CustomTooltip showTick line content="Gute Antwort!">
                             <HoverableIcon
                               icon={<LikeFeedback />}
                               onClick={() => handleFeedback("like")}
                             />
                           </CustomTooltip>
-                          <CustomTooltip showTick line content="Bad response!">
+                          <CustomTooltip showTick line content="Schlechte Antwort!">
                             <HoverableIcon
                               icon={<DislikeFeedback size={16} />}
                               onClick={() => handleFeedback("dislike")}
@@ -555,7 +555,7 @@ export const AIMessage = ({
                               disabled={isRegenerateDropdownVisible}
                               showTick
                               line
-                              content="Regenerate!"
+                              content="Neugenerieren!"
                             >
                               <RegenerateOption
                                 onDropdownVisibleChange={
@@ -620,18 +620,18 @@ export const AIMessage = ({
                               </div>
                             )}
                           </div>
-                          <CustomTooltip showTick line content="Copy!">
+                          <CustomTooltip showTick line content="Kopieren!">
                             <CopyButton content={content.toString()} />
                           </CustomTooltip>
 
-                          <CustomTooltip showTick line content="Good response!">
+                          <CustomTooltip showTick line content="Gute Antwort!">
                             <HoverableIcon
                               icon={<LikeFeedback />}
                               onClick={() => handleFeedback("like")}
                             />
                           </CustomTooltip>
 
-                          <CustomTooltip showTick line content="Bad response!">
+                          <CustomTooltip showTick line content="Schlechte Antwort!">
                             <HoverableIcon
                               icon={<DislikeFeedback size={16} />}
                               onClick={() => handleFeedback("dislike")}
@@ -642,7 +642,7 @@ export const AIMessage = ({
                               disabled={isRegenerateDropdownVisible}
                               showTick
                               line
-                              content="Regenerate!"
+                              content="Neugenerieren!"
                             >
                               <RegenerateOption
                                 selectedAssistant={currentPersona!}
