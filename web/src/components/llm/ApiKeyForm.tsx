@@ -6,11 +6,11 @@ import { LLMProviderUpdateForm } from "@/app/admin/configuration/llm/LLMProvider
 import { CustomLLMProviderUpdateForm } from "@/app/admin/configuration/llm/CustomLLMProviderUpdateForm";
 
 export const ApiKeyForm = ({
-                             onSuccess,
-                             providerOptions,
-                             setPopup,
-                             hideSuccess,
-                           }: {
+  onSuccess,
+  providerOptions,
+  setPopup,
+  hideSuccess,
+}: {
   onSuccess: () => void;
   providerOptions: WellKnownLLMProviderDescriptor[];
   setPopup: (popup: PopupSpec) => void;
