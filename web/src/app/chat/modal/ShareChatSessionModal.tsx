@@ -107,7 +107,7 @@ export function ShareChatSessionModal({
         <>
           <div className="flex mb-4">
             <h2 className="text-2xl text-emphasis font-bold flex my-auto">
-              Share link to Chat
+              Link zum Chat teilen
             </h2>
           </div>
 
@@ -115,9 +115,9 @@ export function ShareChatSessionModal({
             {shareLink ? (
               <div>
                 <Text>
-                  This chat session is currently shared. Anyone at your
-                  organization can view the message history using the following
-                  link:
+                  Diese Chat-Sitzung wird derzeit geteilt. Jeder in deiner
+                  Organisation kann den Nachrichtenverlauf mit dem folgenden
+                  Link ansehen:
                 </Text>
 
                 <div className="flex mt-2">
@@ -135,7 +135,7 @@ export function ShareChatSessionModal({
                 <Separator />
 
                 <Text className="mb-4">
-                  Click the button below to make the chat private again.
+                  Klicke den Button unten, um den Chat wieder privat zu machen.
                 </Text>
 
                 <Button
@@ -145,22 +145,23 @@ export function ShareChatSessionModal({
                       setShareLink("");
                       onShare && onShare(false);
                     } else {
-                      alert("Failed to delete share link");
+                      alert("Löschen des Teilungslinks fehlgeschlagen");
                     }
                   }}
                   size="sm"
                   variant="destructive"
                 >
-                  Delete Share Link
+                  Teilungslink löschen
                 </Button>
               </div>
             ) : (
               <div>
-                <Callout type="warning" title="Warning" className="mb-4">
-                  Ensure that all content in the chat is safe to share with the
-                  whole organization. The content of the retrieved documents
-                  will not be visible, but the names of cited documents as well
-                  as the AI and human messages will be visible.
+                <Callout type="warning" title="Warnung" className="mb-4">
+                  Stelle sicher, dass alle Inhalte im Chat sicher mit der
+                  gesamten Organisation geteilt werden können. Der Inhalt
+                  der abgerufenen Dokumente wird nicht sichtbar sein, aber
+                  die Namen der zitierten Dokumente sowie die AI- und
+                  menschlichen Nachrichten werden sichtbar sein.
                 </Callout>
                 <div className="flex w-full justify-between">
                   <Button
@@ -172,7 +173,7 @@ export function ShareChatSessionModal({
                         const shareLink =
                           await generateShareLink(chatSessionId);
                         if (!shareLink) {
-                          alert("Failed to generate share link");
+                          alert("Erstellen des Teilungslinks fehlgeschlagen");
                         } else {
                           setShareLink(shareLink);
                           onShare && onShare(true);
@@ -185,7 +186,7 @@ export function ShareChatSessionModal({
                     size="sm"
                     variant="submit"
                   >
-                    Generate and Copy Share Link
+                    Teilungslink generieren und kopieren
                   </Button>
                 </div>
               </div>
@@ -194,10 +195,10 @@ export function ShareChatSessionModal({
 
           <Separator className="my-4" />
           <div className="mb-4">
-            <Callout type="notice" title="Clone Chat">
-              Generate a link to clone this chat session with the current query.
-              This allows others to start a new chat with the same initial
-              message and settings.
+            <Callout type="notice" title="Chat klonen">
+              Erstelle einen Link, um diese Chat-Sitzung mit der aktuellen Anfrage
+              zu klonen. Dadurch können andere einen neuen Chat mit derselben
+              Anfangsnachricht und denselben Einstellungen starten.
             </Callout>
           </div>
           <div className="flex w-full justify-between">
@@ -214,25 +215,25 @@ export function ShareChatSessionModal({
                   );
                   if (!cloneLink) {
                     setPopup({
-                      message: "Failed to generate clone link",
+                      message: "Erstellen des Klon-Links fehlgeschlagen",
                       type: "error",
                     });
                   } else {
                     navigator.clipboard.writeText(cloneLink);
                     setPopup({
-                      message: "Link copied to clipboard!",
+                      message: "Link in die Zwischenablage kopiert!",
                       type: "success",
                     });
                   }
                 } catch (e) {
                   console.error(e);
-                  alert("Failed to generate or copy link.");
+                  alert("Fehler beim Erstellen oder Kopieren des Links.");
                 }
               }}
               size="sm"
               variant="secondary"
             >
-              Generate and Copy Clone Link
+              Klon-Link generieren und kopieren
             </Button>
           </div>
         </>
