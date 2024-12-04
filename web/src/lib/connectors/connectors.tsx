@@ -431,7 +431,6 @@ export const connectorConfigs: Record<
         defaultTab: "space",
       },
     ],
-    ],
     advanced_values: [],
   },
   jira: {
