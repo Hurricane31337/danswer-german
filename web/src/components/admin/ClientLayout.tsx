@@ -164,7 +164,7 @@ export function ClientLayout({
                                 className="text-icon-settings-sidebar"
                                 size={18}
                               />
-                              <div className="ml-1">Tools</div>
+                              <div className="ml-1">Werkzeuge</div>
                             </div>
                           ),
                           link: "/admin/tools",
