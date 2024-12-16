@@ -595,6 +595,7 @@ export function AssistantEditor({
                 tooltip="Used to identify the Assistant in the UI."
                 label="Name"
                 placeholder="e.g. 'Email Assistant'"
+                aria-label="assistant-name-input"
               />
 
               <TextFormField
@@ -602,6 +603,7 @@ export function AssistantEditor({
                 name="description"
                 label="Description"
                 placeholder="e.g. 'Use this Assistant to help draft professional emails'"
+                data-testid="assistant-description-input"
               />
 
               <TextFormField
@@ -610,9 +612,7 @@ export function AssistantEditor({
                 label="Instructions"
                 isTextArea={true}
                 placeholder="e.g. 'You are a professional email writing assistant that always uses a polite enthusiastic tone, emphasizes action items, and leaves blanks for the human to fill in when you have unknowns'"
-                onChange={(e) => {
-                  setFieldValue("system_prompt", e.target.value);
-                }}
+                data-testid="assistant-instructions-input"
               />
 
               <div>
@@ -885,8 +885,8 @@ export function AssistantEditor({
                                     {user?.role !== "admin" && (
                                       <>
                                         If this functionality would be useful,
-                                        reach out to the administrators of
-                                        Danswer for assistance.
+                                        reach out to the administrators of Onyx
+                                        for assistance.
                                       </>
                                     )}
                                   </p>
@@ -1185,7 +1185,7 @@ export function AssistantEditor({
                           setFieldValue("task_prompt", e.target.value);
                         }}
                         explanationText="Learn about prompting in our docs!"
-                        explanationLink="https://docs.danswer.dev/guides/assistants"
+                        explanationLink="https://docs.onyx.app/guides/assistants"
                       />
                     </>
                   )}
