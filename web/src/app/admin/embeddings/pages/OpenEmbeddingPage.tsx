@@ -57,9 +57,9 @@ export default function OpenEmbeddingPage({
         </a>
         .
         <br />
-        <b>HINWEIS:</b> Nicht alle aufgeführten Modelle funktionieren mit Danswer,
+        <b>HINWEIS:</b> Nicht alle aufgeführten Modelle funktionieren mit Onyx,
         da einige einzigartige Schnittstellen oder spezielle Anforderungen
-        haben. Im Zweifelsfall wende dich an das Danswer-Team.
+        haben. Im Zweifelsfall wende dich an das Onyx-Team.
       </Text>
       {!configureModel && (
         <Button

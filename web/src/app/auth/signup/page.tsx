@@ -69,7 +69,7 @@ const Page = async (props: {
         <div className="absolute top-10x w-full"></div>
         <div className="flex w-full flex-col justify-center">
           <h2 className="text-center text-xl text-strong font-bold">
-            {cloud ? "Schließe deine Anmeldung ab" : "Melde dich bei Label KI an"}
+            {cloud ? "Schließe deine Anmeldung ab" : "Registriere dich bei Label KI"}
           </h2>
           {cloud && (
             <>

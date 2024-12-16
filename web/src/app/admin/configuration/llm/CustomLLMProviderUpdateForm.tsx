@@ -275,8 +275,9 @@ export function CustomLLMProviderUpdateForm({
             <SubLabel>
               <>
                 <div>
-                  Zusätzliche Konfigurationen, die der Modellanbieter benötigt.
-                  Werden über Umgebungsvariablen an litellm übergeben.
+                  Zusätzliche Konfigurationen, die vom Modellanbieter benötigt werden. Diese
+                  werden über die Umgebung an litellm übergeben und als Argumente in den
+                  `completion`-Aufruf übergeben.
                 </div>
 
                 <div className="mt-2">
@@ -290,14 +291,14 @@ export function CustomLLMProviderUpdateForm({
             <FieldArray
               name="custom_config_list"
               render={(arrayHelpers: ArrayHelpers<any[]>) => (
-                <div>
+                <div className="w-full">
                   {formikProps.values.custom_config_list.map((_, index) => {
                     return (
                       <div
                         key={index}
-                        className={index === 0 ? "mt-2" : "mt-6"}
+                        className={(index === 0 ? "mt-2" : "mt-6") + " w-full"}
                       >
-                        <div className="flex">
+                        <div className="flex w-full">
                           <div className="w-full mr-6 border border-border p-3 rounded">
                             <div>
                               <Label>Schlüssel</Label>
@@ -458,6 +459,7 @@ export function CustomLLMProviderUpdateForm({
                   <Button
                     type="button"
                     variant="destructive"
+                    className="ml-3"
                     icon={FiTrash}
                     onClick={async () => {
                       const response = await fetch(
