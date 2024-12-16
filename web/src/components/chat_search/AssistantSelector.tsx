@@ -1,4 +1,10 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useContext,
+} from "react";
 import { useAssistants } from "@/components/context/AssistantsContext";
 import { useChatContext } from "@/components/context/ChatContext";
 import { useUser } from "@/components/user/UserProvider";
@@ -35,6 +41,7 @@ import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "../ui/drawer";
 import { truncateString } from "@/lib/utils";
+import { SettingsContext } from "../settings/SettingsProvider";
 
 const AssistantSelector = ({
   liveAssistant,
@@ -46,7 +53,7 @@ const AssistantSelector = ({
   liveAssistant: Persona;
   onAssistantChange: (assistant: Persona) => void;
   chatSessionId?: string;
-  llmOverrideManager?: LlmOverrideManager;
+  llmOverrideManager: LlmOverrideManager;
   isMobile: boolean;
 }) => {
   const { finalAssistants } = useAssistants();
@@ -54,11 +61,9 @@ const AssistantSelector = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { llmProviders } = useChatContext();
   const { user } = useUser();
+
   const [assistants, setAssistants] = useState<Persona[]>(finalAssistants);
   const [isTemperatureExpanded, setIsTemperatureExpanded] = useState(false);
-  const [localTemperature, setLocalTemperature] = useState<number>(
-    llmOverrideManager?.temperature || 0
-  );
 
   // Initialize selectedTab from localStorage
   const [selectedTab, setSelectedTab] = useState<number>(() => {
@@ -92,26 +97,13 @@ const AssistantSelector = ({
     }
   };
 
-  const debouncedSetTemperature = useCallback(
-    (value: number) => {
-      const debouncedFunction = debounce((value: number) => {
-        llmOverrideManager?.setTemperature(value);
-      }, 300);
-      return debouncedFunction(value);
-    },
-    [llmOverrideManager]
-  );
-
-  const handleTemperatureChange = (value: number) => {
-    setLocalTemperature(value);
-    debouncedSetTemperature(value);
-  };
-
   // Handle tab change and update localStorage
   const handleTabChange = (index: number) => {
     setSelectedTab(index);
     localStorage.setItem("assistantSelectorSelectedTab", index.toString());
   };
+
+  const settings = useContext(SettingsContext);
 
   // Get the user's default model
   const userDefaultModel = user?.preferences.default_model;
@@ -119,7 +111,7 @@ const AssistantSelector = ({
   const [_, currentLlm] = getFinalLLM(
     llmProviders,
     liveAssistant,
-    llmOverrideManager?.llmOverride ?? null
+    llmOverrideManager.llmOverride ?? null
   );
 
   const requiresImageGeneration =
@@ -143,7 +135,7 @@ const AssistantSelector = ({
           </Tab>
           <Tab
             className={({ selected }) =>
-              `w-full py-2.5 text-sm leading-5 font-medium rounded-md
+              `w-full py-2.5  text-sm leading-5 font-medium rounded-md
                  ${
                    selected
                      ? "bg-white text-gray-700 shadow"
@@ -204,11 +196,10 @@ const AssistantSelector = ({
               llmProviders={llmProviders}
               currentLlm={currentLlm}
               userDefault={userDefaultModel}
-              includeUserDefault={true}
               onSelect={(value: string | null) => {
                 if (value == null) return;
                 const { modelName, name, provider } = destructureValue(value);
-                llmOverrideManager?.setLlmOverride({
+                llmOverrideManager.setLlmOverride({
                   name,
                   provider,
                   modelName,
@@ -216,7 +207,6 @@ const AssistantSelector = ({
                 if (chatSessionId) {
                   updateModelOverrideForChatSession(chatSessionId, value);
                 }
-                setIsOpen(false);
               }}
             />
             <div className="mt-4">
@@ -243,26 +233,31 @@ const AssistantSelector = ({
                     <input
                       type="range"
                       onChange={(e) =>
-                        handleTemperatureChange(parseFloat(e.target.value))
+                        llmOverrideManager.updateTemperature(
+                          parseFloat(e.target.value)
+                        )
                       }
                       className="w-full p-2 border border-border rounded-md"
                       min="0"
                       max="2"
                       step="0.01"
-                      value={localTemperature}
+                      value={llmOverrideManager.temperature?.toString() || "0"}
                     />
                     <div
                       className="absolute text-sm"
                       style={{
-                        left: `${(localTemperature || 0) * 50}%`,
+                        left: `${(llmOverrideManager.temperature || 0) * 50}%`,
                         transform: `translateX(-${Math.min(
-                          Math.max((localTemperature || 0) * 50, 10),
+                          Math.max(
+                            (llmOverrideManager.temperature || 0) * 50,
+                            10
+                          ),
                           90
                         )}%)`,
                         top: "-1.5rem",
                       }}
                     >
-                      {localTemperature}
+                      {llmOverrideManager.temperature}
                     </div>
                   </div>
                 </>
@@ -294,7 +289,16 @@ const AssistantSelector = ({
 
   return (
     <div className="pointer-events-auto relative" ref={dropdownRef}>
-      <div className="flex justify-center">
+      <div
+        className={`h-12 items-end flex justify-center 
+          ${
+            settings?.enterpriseSettings?.custom_header_content &&
+            (settings?.enterpriseSettings?.two_lines_for_chat_header
+              ? "mt-16 "
+              : "mt-10")
+          }
+        `}
+      >
         <div
           onClick={() => {
             setIsOpen(!isOpen);
@@ -306,20 +310,23 @@ const AssistantSelector = ({
           }}
           className="flex items-center gap-x-2 justify-between px-6 py-3 text-sm font-medium text-white bg-black rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
         >
-          <div className="flex gap-x-2 items-center">
+          <div className="h-4 flex gap-x-2 items-center">
             <AssistantIcon assistant={liveAssistant} size="xs" />
             <span className="font-bold">{liveAssistant.name}</span>
           </div>
-          <div className="flex items-center">
+          <div className="h-4 flex items-center">
             <span className="mr-2 text-xs">
               {truncateString(getDisplayNameForModel(currentLlm), 30)}
             </span>
             <FiChevronDown
-              className={`w-5 h-5 text-white transition-transform duration-300 transform ${
+              className={`w-3 h-3 text-white transition-transform duration-300 transform ${
                 isOpen ? "rotate-180" : ""
               }`}
               aria-hidden="true"
             />
+            <div className="invisible w-0">
+              <AssistantIcon assistant={liveAssistant} size="xs" />
+            </div>
           </div>
         </div>
       </div>
