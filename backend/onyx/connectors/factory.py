@@ -51,6 +51,8 @@ from onyx.connectors.label_manual.connector import LabelManualConnector
 from onyx.db.credentials import backend_update_credential_json
 from onyx.db.models import Credential
 
+from onyx.utils.logger import setup_logger
+
 logger = setup_logger()
 
 
