@@ -14,14 +14,14 @@ from urllib.parse import urlparse
 from openpyxl.styles.builtins import title
 from playwright.sync_api import Playwright, BrowserContext, Cookie
 
-from danswer.configs.constants import DocumentSource
-from danswer.connectors.web.connector import WebConnector, start_playwright, protected_url_check, check_internet_connection, read_pdf_file, _get_datetime_from_last_modified_header, get_internal_links
-from danswer.connectors.web.connector import WEB_CONNECTOR_VALID_SETTINGS
-from danswer.connectors.interfaces import GenerateDocumentsOutput
-from danswer.connectors.models import Document
-from danswer.connectors.models import Section
-from danswer.file_processing.html_utils import web_html_cleanup, ParsedHTML
-from danswer.utils.logger import setup_logger
+from onyx.configs.constants import DocumentSource
+from onyx.connectors.web.connector import WebConnector, start_playwright, protected_url_check, check_internet_connection, read_pdf_file, _get_datetime_from_last_modified_header, get_internal_links
+from onyx.connectors.web.connector import WEB_CONNECTOR_VALID_SETTINGS
+from onyx.connectors.interfaces import GenerateDocumentsOutput
+from onyx.connectors.models import Document
+from onyx.connectors.models import Section
+from onyx.file_processing.html_utils import web_html_cleanup, ParsedHTML
+from onyx.utils.logger import setup_logger
 
 logger = setup_logger()
 
