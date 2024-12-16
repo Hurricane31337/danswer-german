@@ -109,7 +109,7 @@ def identify_connector_class(
         DocumentSource.FRESHDESK: FreshdeskConnector,
         DocumentSource.FIREFLIES: FirefliesConnector,
         DocumentSource.EGNYTE: EgnyteConnector,
-        DocumentSource.Label_MANUAL: LabelManualConnector,
+        DocumentSource.LABEL_MANUAL: LabelManualConnector,
     }
     connector_by_source = connector_map.get(source, {})
 
