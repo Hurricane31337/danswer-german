@@ -135,8 +135,7 @@ export const connectorConfigs: Record<
     values: [
       {
         type: "text",
-        query:
-          "Gib die Website-URL zum Scrapen ein, z.B.: https://docs.danswer.dev/:",
+        query: "Gib die Website-URL zum Scrapen ein, z.B.: https://docs.onyx.app/:",
         label: "Basis-URL",
         name: "base_url",
         optional: false,
@@ -246,8 +245,8 @@ export const connectorConfigs: Record<
                 label: "Include shared drives?",
                 description: (currentCredential) => {
                   return currentCredential?.credential_json?.google_tokens
-                    ? "This will allow Danswer to index everything in the shared drives you have access to."
-                    : "This will allow Danswer to index everything in your Organization's shared drives.";
+                    ? "This will allow Onyx to index everything in the shared drives you have access to."
+                    : "This will allow Onyx to index everything in your Organization's shared drives.";
                 },
                 name: "include_shared_drives",
                 default: false,
@@ -261,8 +260,8 @@ export const connectorConfigs: Record<
                 },
                 description: (currentCredential) => {
                   return currentCredential?.credential_json?.google_tokens
-                    ? "This will allow Danswer to index everything in your My Drive."
-                    : "This will allow Danswer to index everything in everyone's My Drives.";
+                    ? "This will allow Onyx to index everything in your My Drive."
+                    : "This will allow Onyx to index everything in everyone's My Drives.";
                 },
                 name: "include_my_drives",
                 default: false,
@@ -270,7 +269,7 @@ export const connectorConfigs: Record<
               {
                 type: "checkbox",
                 description:
-                  "This will allow Danswer to index all files shared with you.",
+                  "This will allow Onyx to index all files shared with you.",
                 label: "Include All Files Shared With You?",
                 name: "include_files_shared_with_me",
                 visibleCondition: (values, currentCredential) =>
@@ -434,8 +433,8 @@ export const connectorConfigs: Record<
     advanced_values: [],
   },
   jira: {
-    description: "Konfiguriere Jira-Connector",
-    subtext: `Gebe einen beliebigen Link zu einer Jira-Seite unten an und klicke auf "Indexieren", um ihn zu indexieren. Basierend auf dem bereitgestellten Link werden wir das GESAMTE PROJEKT indexieren, nicht nur die angegebene Seite. Zum Beispiel: Wenn du https://danswer.atlassian.net/jira/software/projects/DAN/boards/1 angibst und auf den Index-Button klickst, wird das gesamte Jira-Projekt DAN indexiert.`,
+    description: "Configure Jira connector",
+    subtext: `Gebe einen beliebigen Link zu einer Jira-Seite unten an und klicke auf "Indexieren", um ihn zu indexieren. Basierend auf dem bereitgestellten Link werden wir das GESAMTE PROJEKT indexieren, nicht nur die angegebene Seite. Zum Beispiel: Wenn du https://onyx.atlassian.net/jira/software/projects/DAN/boards/1 angibst und auf den Index-Button klickst, wird das gesamte DAN-Jira-Projekt indexiert.`,
     values: [
       {
         type: "text",
@@ -465,7 +464,7 @@ export const connectorConfigs: Record<
         label: "Angeforderte Objekte",
         name: "requested_objects",
         optional: true,
-        description: `Gib die Salesforce-Objekttypen an, die wir indexieren sollen. Wenn du dir unsicher bist, gib keine Objekte an und Danswer wird standardmäßig nach 'Account' indexieren.
+        description: `Gib die Salesforce-Objekttypen an, die wir indexieren sollen. Wenn du dir unsicher bist, gib keine Objekte an und Onyx wird standardmäßig nach 'Account' indexieren.
 
 Hinweis: Verwende die Einzahl des Objektnamens (z.B. 'Opportunity' statt 'Opportunities').`,
       },
@@ -482,8 +481,8 @@ Hinweis: Verwende die Einzahl des Objektnamens (z.B. 'Opportunity' statt 'Opport
         name: "sites",
         optional: true,
         description: `• Wenn keine Sites angegeben sind, werden alle Sites in deiner Organisation indexiert (Sites.Read.All-Berechtigungen erforderlich).
-• Angabe von 'https://danswerai.sharepoint.com/sites/support' zum Beispiel wird nur Dokumente innerhalb dieser Site indexieren.
-• Angabe von 'https://danswerai.sharepoint.com/sites/support/unterordner' zum Beispiel wird nur Dokumente innerhalb dieses Ordners indexieren.
+• Angabe von 'https://onyxai.sharepoint.com/sites/support' wird beispielsweise nur Dokumente innerhalb dieser Site indexieren.
+• Angabe von 'https://onyxai.sharepoint.com/sites/support/unterordner' wird beispielsweise nur Dokumente innerhalb dieses Ordners indexieren.
 `,
       },
     ],
@@ -498,7 +497,7 @@ Hinweis: Verwende die Einzahl des Objektnamens (z.B. 'Opportunity' statt 'Opport
         label: "Teams",
         name: "teams",
         optional: true,
-        description: `Gib 0 oder mehr Teams an, die indexiert werden sollen. Wenn du z.B. das Team 'Support' für die Organisation 'danswerai' angibst, wird es dazu führen, dass wir nur Nachrichten indexieren, die in Kanälen des 'Support'-Teams gesendet wurden. Wenn keine Teams angegeben sind, werden alle Teams in deiner Organisation indexiert.`,
+        description: `Gib 0 oder mehr Teams an, die indexiert werden sollen. Wenn du z.B. das Team 'Support' für die Organisation 'onyxai' angibst, wird es dazu führen, dass wir nur Nachrichten indexieren, die in Kanälen des 'Support'-Teams gesendet wurden. Wenn keine Teams angegeben sind, werden alle Teams in deiner Organisation indexiert.`,
       },
     ],
     advanced_values: [],
@@ -546,15 +545,7 @@ Hinweis: Verwende die Einzahl des Objektnamens (z.B. 'Opportunity' statt 'Opport
   },
   slack: {
     description: "Konfiguriere Slack-Connector",
-    values: [
-      {
-        type: "text",
-        query: "Gib den Slack-Workspace ein:",
-        label: "Workspace",
-        name: "workspace",
-        optional: false,
-      },
-    ],
+    values: [],
     advanced_values: [
       {
         type: "list",
@@ -586,7 +577,7 @@ Beispielsweise bewirkt die Angabe von .*-support.* als "Kanal", dass der Connect
         label: "Basis-URL",
         name: "base_url",
         optional: false,
-        description: `Gib die Basis-URL für dein Slab-Team an. Dies sieht aus wie: https://danswer.slab.com/`,
+        description: `Gib die Basis-URL für dein Slab-Team an. Dies sieht aus wie: https://onyx.slab.com/`,
       },
     ],
     advanced_values: [],
@@ -1050,6 +1041,21 @@ Beispielsweise bewirkt die Angabe von .*-support.* als "Kanal", dass der Connect
     values: [],
     advanced_values: [],
   },
+  egnyte: {
+    description: "Configure Egnyte connector",
+    values: [
+      {
+        type: "text",
+        query: "Enter folder path to index:",
+        label: "Folder Path",
+        name: "folder_path",
+        optional: true,
+        description:
+          "The folder path to index (e.g., '/Shared/Documents'). Leave empty to index everything.",
+      },
+    ],
+    advanced_values: [],
+  },
   label_manual: {
     description: "Label-Handbuch-Anbindung einrichten",
     values: [
@@ -1163,6 +1169,20 @@ export interface ConnectorBase<T> {
 export interface Connector<T> extends ConnectorBase<T> {
   id: number;
   credential_ids: number[];
+  time_created: string;
+  time_updated: string;
+}
+
+export interface ConnectorSnapshot {
+  id: number;
+  name: string;
+  source: ValidSources;
+  input_type: ValidInputTypes;
+  // connector_specific_config
+  refresh_freq: number | null;
+  prune_freq: number | null;
+  credential_ids: number[];
+  indexing_start: number | null;
   time_created: string;
   time_updated: string;
 }

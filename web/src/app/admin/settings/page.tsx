@@ -13,7 +13,7 @@ export default async function Page() {
       />
 
       <Text className="mb-8">
-        Verwalte allgemeine Danswer-Einstellungen, die für alle Benutzer
+        Verwalte allgemeine Onyx-Einstellungen, die für alle Benutzer
         im Workspace gelten.
       </Text>
 

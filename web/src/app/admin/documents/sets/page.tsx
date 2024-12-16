@@ -312,10 +312,10 @@ const Main = () => {
     <div className="mb-8">
       {popup}
       <Text className="mb-3">
-        <b>Dokumentensätze</b> ermöglichen es dir, logisch verbundene Dokumente
+        <b>Dokument-Sets</b> ermöglichen es dir, logisch verbundene Dokumente
         zu einem einzigen Paket zusammenzufassen. Diese können dann als
         Filter verwendet werden, um den Umfang der Informationen, über die
-        Danswer sucht, zu steuern.
+        Onyx sucht, zu steuern.
       </Text>
 
       <div className="mb-3"></div>

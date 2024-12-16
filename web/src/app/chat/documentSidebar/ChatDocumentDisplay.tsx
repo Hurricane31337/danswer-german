@@ -1,5 +1,5 @@
 import { SourceIcon } from "@/components/SourceIcon";
-import { DanswerDocument } from "@/lib/search/interfaces";
+import { OnyxDocument } from "@/lib/search/interfaces";
 import { FiTag } from "react-icons/fi";
 import { DocumentSelector } from "./DocumentSelector";
 import { buildDocumentSummaryDisplay } from "@/components/search/DocumentDisplay";
@@ -7,15 +7,16 @@ import { DocumentUpdatedAtBadge } from "@/components/search/DocumentUpdatedAtBad
 import { MetadataBadge } from "@/components/MetadataBadge";
 import { WebResultIcon } from "@/components/WebResultIcon";
 import { Dispatch, SetStateAction } from "react";
+import { ValidSources } from "@/lib/types";
 
 interface DocumentDisplayProps {
   closeSidebar: () => void;
-  document: DanswerDocument;
+  document: OnyxDocument;
   modal?: boolean;
   isSelected: boolean;
   handleSelect: (documentId: string) => void;
   tokenLimitReached: boolean;
-  setPresentingDocument: Dispatch<SetStateAction<DanswerDocument | null>>;
+  setPresentingDocument: Dispatch<SetStateAction<OnyxDocument | null>>;
 }
 
 export function DocumentMetadataBlock({
@@ -23,7 +24,7 @@ export function DocumentMetadataBlock({
   document,
 }: {
   modal?: boolean;
-  document: DanswerDocument;
+  document: OnyxDocument;
 }) {
   const MAX_METADATA_ITEMS = 3;
   const metadataEntries = Object.entries(document.metadata);
@@ -73,19 +74,15 @@ export function ChatDocumentDisplay({
   }
 
   const handleViewFile = async () => {
-    if (document.link) {
+    if (document.source_type == ValidSources.File && setPresentingDocument) {
+      setPresentingDocument(document);
+    } else if (document.link) {
       window.open(document.link, "_blank");
-    } else {
-      closeSidebar();
-
-      setTimeout(async () => {
-        setPresentingDocument(document);
-      }, 100);
     }
   };
 
   return (
-    <div className={`opacity-100   ${modal ? "w-[90vw]" : "w-full"}`}>
+    <div className={`opacity-100 ${modal ? "w-[90vw]" : "w-full"}`}>
       <div
         className={`flex relative flex-col gap-0.5  rounded-xl mx-2 my-1 ${
           isSelected ? "bg-gray-200" : "hover:bg-background-125"

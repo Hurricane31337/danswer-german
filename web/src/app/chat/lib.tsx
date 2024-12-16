@@ -1,8 +1,8 @@
 import {
   AnswerPiecePacket,
-  DanswerDocument,
+  OnyxDocument,
   Filters,
-  FinalContextDocs,
+  DocumentInfoPacket,
   StreamStopInfo,
 } from "@/lib/search/interfaces";
 import { handleSSEStream } from "@/lib/search/streamingUtils";
@@ -103,7 +103,7 @@ export type PacketType =
   | ToolCallMetadata
   | BackendMessage
   | AnswerPiecePacket
-  | FinalContextDocs
+  | DocumentInfoPacket
   | DocumentsResponse
   | FileChatDisplay
   | StreamingError
@@ -334,7 +334,7 @@ export function getCitedDocumentsFromMessage(message: Message) {
     return [];
   }
 
-  const documentsWithCitationKey: [string, DanswerDocument][] = [];
+  const documentsWithCitationKey: [string, OnyxDocument][] = [];
   Object.entries(message.citations).forEach(([citationKey, documentDbId]) => {
     const matchingDocument = message.documents!.find(
       (document) => document.db_doc_id === documentDbId

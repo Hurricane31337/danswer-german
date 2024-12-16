@@ -62,7 +62,7 @@ export function _WelcomeModal({ user }: { user: User | null }) {
           setWelcomeFlowComplete();
           router.refresh();
         }}
-        title={"Willkommen bei Danswer!"}
+        title={"Willkommen bei Onyx!"}
         width="w-full max-h-[900px] overflow-y-scroll max-w-3xl"
       >
         <div>
@@ -72,7 +72,7 @@ export function _WelcomeModal({ user }: { user: User | null }) {
           </Text>
           <Text className="mb-4">
             Um zu beginnen, müssen wir einen API-Schlüssel für den LLM-Anbieter
-            einrichten. Dieser Schlüssel ermöglicht es Danswer, mit dem KI-Modell
+            einrichten. Dieser Schlüssel ermöglicht es Onyx, mit dem KI-Modell
             zu interagieren und intelligente Antworten auf deine Anfragen zu liefern.
           </Text>
 

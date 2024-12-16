@@ -211,7 +211,7 @@ export function SettingsForm() {
           <Title className="mb-4">Chat Settings</Title>
           <IntegerInput
             label="Chat-Aufbewahrung"
-            sublabel="Gebe die maximale Anzahl von Tagen ein, die Danswer Chat-Nachrichten aufbewahren soll. Wenn du dieses Feld leer lässt, löscht Danswer die Chatnachrichten nie."
+            sublabel="Gebe die maximale Anzahl von Tagen ein, die Onyx Chat-Nachrichten aufbewahren soll. Wenn du dieses Feld leer lässt, löscht Onyx die Chatnachrichten nie."
             value={chatRetention === "" ? null : Number(chatRetention)}
             onChange={(e) => {
               const numValue = parseInt(e.target.value, 10);
