@@ -131,7 +131,7 @@ export default async function RootLayout({
             Wenn du ein Admin bist, schaue bitte in{" "}
             <a
               className="text-link"
-              href="https://docs.danswer.dev/introduction?utm_source=app&utm_medium=error_page&utm_campaign=config_error"
+              href="https://docs.onyx.app/introduction?utm_source=app&utm_medium=error_page&utm_campaign=config_error"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -146,7 +146,7 @@ export default async function RootLayout({
             unsere Community auf{" "}
             <a
               className="text-link"
-              href="https://danswer.ai?utm_source=app&utm_medium=error_page&utm_campaign=config_error"
+              href="https://onyx.app?utm_source=app&utm_medium=error_page&utm_campaign=config_error"
               target="_blank"
               rel="noopener noreferrer"
             >
