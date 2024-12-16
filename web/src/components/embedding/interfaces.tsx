@@ -125,7 +125,7 @@ export const AVAILABLE_MODELS: HostedEmbeddingModel[] = [
     model_dim: 384,
     normalize: true,
     description:
-      "Die kleinste und schnellste Version der E5-Modellreihe. Wenn du Danswer auf einem ressourcenbeschränkten System betreibst, könnte dies eine gute Wahl sein.",
+      "Die kleinste und schnellste Version der E5-Modellreihe. Wenn du Onyx auf einem ressourcenbeschränkten System betreibst, könnte dies eine gute Wahl sein.",
     link: "https://huggingface.co/intfloat/e5-small-v2",
     query_prefix: "query: ",
     passage_prefix: "passage: ",
@@ -192,8 +192,7 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
     provider_type: EmbeddingProvider.COHERE,
     website: "https://cohere.ai",
     icon: CohereIcon,
-    docsLink:
-      "https://docs.danswer.dev/guides/embedding_providers#cohere-models",
+    docsLink: "https://docs.onyx.app/guides/embedding_providers#cohere-models",
     description:
       "KI-Unternehmen, das sich auf NLP-Modelle für verschiedene textbasierte Aufgaben spezialisiert hat",
     apiLink: "https://dashboard.cohere.ai/api-keys",
@@ -235,8 +234,7 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
     icon: OpenAIIcon,
     description: "KI-Branchenführer bekannt für ChatGPT und DALL-E",
     apiLink: "https://platform.openai.com/api-keys",
-    docsLink:
-      "https://docs.danswer.dev/guides/embedding_providers#openai-models",
+    docsLink: "https://docs.onyx.app/guides/embedding_providers#openai-models",
     costslink: "https://openai.com/pricing",
     embedding_models: [
       {
@@ -275,7 +273,7 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
     website: "https://ai.google",
     icon: GoogleIcon,
     docsLink:
-      "https://docs.danswer.dev/guides/embedding_providers#vertex-ai-google-model",
+      "https://docs.onyx.app/guides/embedding_providers#vertex-ai-google-model",
     description:
       "Bietet eine breite Palette von KI-Diensten, einschließlich Sprach- und Bildmodellen",
     apiLink: "https://console.cloud.google.com/apis/credentials",
@@ -314,8 +312,7 @@ export const AVAILABLE_CLOUD_PROVIDERS: CloudEmbeddingProvider[] = [
     website: "https://www.voyageai.com",
     icon: VoyageIcon,
     description: "Fortschrittliches NLP-Forschungs-Startup von Stanford AI Labs",
-    docsLink:
-      "https://docs.danswer.dev/guides/embedding_providers#voyage-models",
+    docsLink: "https://docs.onyx.app/guides/embedding_providers#voyage-models",
     apiLink: "https://www.voyageai.com/dashboard",
     costslink: "https://www.voyageai.com/pricing",
     embedding_models: [

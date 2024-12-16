@@ -137,8 +137,8 @@ export function WhitelabelingForm() {
             <TextFormField
               label="Anwendungsname"
               name="application_name"
-              subtext={`Der benutzerdefinierte Name, den du Danswer für deine Organisation gibst. Dieser wird überall im UI 'Danswer' ersetzen.`}
-              placeholder="Benutzerdefinierter Name, der 'Danswer' ersetzt"
+              subtext={`Der benutzerdefinierte Name, den du Onyx für deine Organisation gibst. Dieser wird überall im UI 'Onyx' ersetzen.`}
+              placeholder="Benutzerdefinierter Name, der 'Onyx' ersetzt"
               disabled={isSubmitting}
             />
 
@@ -178,7 +178,7 @@ export function WhitelabelingForm() {
               </div>
             ) : (
               <SubLabel>
-                Gib dein eigenes Logo an, um das Standard-Danswer-Logo zu ersetzen.
+                Gib dein eigenes Logo an, um das Standard-Onyx-Logo zu ersetzen.
               </SubLabel>
             )}
 
@@ -199,7 +199,7 @@ export function WhitelabelingForm() {
                 <Text>
                   Lesen Sie{" "}
                   <Link
-                    href={"https://docs.danswer.dev/enterprise_edition/theming"}
+                    href={"https://docs.onyx.app/enterprise_edition/theming"}
                     className="text-link cursor-pointer"
                   >
                     die Dokumentation
@@ -234,7 +234,7 @@ export function WhitelabelingForm() {
                     values.enable_consent_screen
                       ? `Der Titel des Zustimmungsbildschirms, der bei jedem Benutzer beim ersten Besuch der Anwendung angezeigt wird. Wenn leer gelassen, wird der Titel standardmäßig "Nutzungsbedingungen" verwendet.`
                       : `Der Titel für das Popup, das jedem Benutzer beim ersten Besuch der Anwendung angezeigt wird. Wenn leer gelassen UND benutzerdefinierter Popup-Inhalt angegeben ist, wird "Willkommen bei ${
-                          values.application_name || "Danswer"
+                          values.application_name || "Onyx"
                         }!" verwendet.`
                   }
                   placeholder={

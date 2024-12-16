@@ -31,18 +31,18 @@ const inter = Inter({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  let logoLocation = buildClientUrl("/danswer.ico");
+  let logoLocation = buildClientUrl("/onyx.ico");
   let enterpriseSettings: EnterpriseSettings | null = null;
   if (SERVER_SIDE_ONLY__PAID_ENTERPRISE_FEATURES_ENABLED) {
     enterpriseSettings = await (await fetchEnterpriseSettingsSS()).json();
     logoLocation =
       enterpriseSettings && enterpriseSettings.use_custom_logo
         ? "/api/enterprise-settings/logo"
-        : buildClientUrl("/danswer.ico");
+        : buildClientUrl("/onyx.ico");
   }
 
   return {
-    title: enterpriseSettings?.application_name ?? "Danswer",
+    title: enterpriseSettings?.application_name ?? "Onyx",
     description: "Fragen-Beantwortung für deine Dokumente",
     icons: {
       icon: logoLocation,
@@ -115,14 +115,14 @@ export default async function RootLayout({
     return getPageContent(
       <div className="flex flex-col items-center justify-center min-h-screen">
         <div className="mb-2 flex items-center max-w-[175px]">
-          <HeaderTitle>Danswer</HeaderTitle>
+          <HeaderTitle>Onyx</HeaderTitle>
           <Logo height={40} width={40} />
         </div>
 
         <CardSection className="max-w-md">
           <h1 className="text-2xl font-bold mb-4 text-error">Fehler</h1>
           <p className="text-text-500">
-            Deine Danswer-Instanz wurde nicht richtig konfiguriert und
+            Deine Onyx-Instanz wurde nicht richtig konfiguriert und
             deine Einstellungen konnten nicht geladen werden. Das kann an
             einem Admin-Konfigurationsproblem oder einer unvollständigen
             Einrichtung liegen.
@@ -131,13 +131,13 @@ export default async function RootLayout({
             Wenn du ein Admin bist, schaue bitte in{" "}
             <a
               className="text-link"
-              href="https://docs.danswer.dev/introduction?utm_source=app&utm_medium=error_page&utm_campaign=config_error"
+              href="https://docs.onyx.app/introduction?utm_source=app&utm_medium=error_page&utm_campaign=config_error"
               target="_blank"
               rel="noopener noreferrer"
             >
               unsere Doku
             </a>{" "}
-            um zu sehen wie man Danswer richtig konfiguriert. Wenn du ein
+            um zu sehen wie man Onyx richtig konfiguriert. Wenn du ein
             Benutzer bist, kontaktiere bitte deinen Admin um das Problem zu
             beheben.
           </p>
@@ -146,7 +146,7 @@ export default async function RootLayout({
             unsere Community auf{" "}
             <a
               className="text-link"
-              href="https://danswer.ai?utm_source=app&utm_medium=error_page&utm_campaign=config_error"
+              href="https://onyx.app?utm_source=app&utm_medium=error_page&utm_campaign=config_error"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -162,20 +162,20 @@ export default async function RootLayout({
     return getPageContent(
       <div className="flex flex-col items-center justify-center min-h-screen">
         <div className="mb-2 flex items-center max-w-[175px]">
-          <HeaderTitle>Danswer</HeaderTitle>
-          <Logo height={40} width={40}/>
+          <HeaderTitle>Onyx</HeaderTitle>
+          <Logo height={40} width={40} />
         </div>
         <CardSection className="w-full max-w-md">
           <h1 className="text-2xl font-bold mb-4 text-error">
             Zugang eingeschränkt
           </h1>
           <p className="text-text-500 mb-4">
-            Es tut uns leid, dir mitteilen zu müssen, dass dein Zugang zu Danswer
+            Es tut uns leid, dir mitteilen zu müssen, dass dein Zugang zu Onyx
             aufgrund eines Abonnement-Ausfalls vorübergehend gesperrt wurde.
           </p>
           <p className="text-text-500 mb-4">
             Um deinen Zugang wiederherzustellen und weiterhin von den
-            leistungsstarken Funktionen von Danswer zu profitieren, aktualisiere
+            leistungsstarken Funktionen von Onyx zu profitieren, aktualisiere
             bitte deine Zahlungsinformationen.
           </p>
           <p className="text-text-500">

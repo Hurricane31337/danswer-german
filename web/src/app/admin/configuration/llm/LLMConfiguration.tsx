@@ -158,7 +158,7 @@ export function LLMConfiguration() {
         </>
       ) : (
         <Callout type="warning" title="Noch keine LLM-Anbieter konfiguriert">
-          Bitte richte einen ein, um Danswer nutzen zu können!
+          Bitte richte einen ein, um Onyx nutzen zu können!
         </Callout>
       )}
 

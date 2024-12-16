@@ -29,13 +29,13 @@ export function ModelSelectionConfirmationModal({
           </Text>
           <Text className="text-lg mb-2">
             Wir werden alle deine Dokumente im Hintergrund neu-indizieren, sodass
-            du Danswer in der Zwischenzeit wie gewohnt mit dem alten Modell
+            du Onyx in der Zwischenzeit wie gewohnt mit dem alten Modell
             weiternutzen kannst. Je nachdem, wie viele Dokumente du indiziert hast,
             kann dies eine Weile dauern.
           </Text>
           <Text className="text-lg mb-2">
             <i>HINWEIS:</i> Dieser Neuindizierungsprozess verbraucht mehr Ressourcen
-            als normalerweise. Wenn du selbst-hostest, empfehlen wir dir, Danswer
+            als normalerweise. Wenn du selbst-hostest, empfehlen wir dir, Onyx
             während dieses Vorgangs mindestens 16 GB RAM zuzuweisen.
           </Text>
 

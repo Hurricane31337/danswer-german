@@ -9,7 +9,7 @@ export const LoginText = () => {
     <>
       Bei{" "}
       {(settings && settings?.enterpriseSettings?.application_name) ||
-        "Danswer"}{" "}
+        "Onyx"}{" "}
       anmelden
     </>
   );
