@@ -911,7 +911,7 @@ def connector_run_once(
         kwargs={"tenant_id": tenant_id},
     )
 
-    msg = f"Erfolgreich {len(index_attempt_ids)} Indexierungsversuche erstellt",
+    msg = f"Erfolgreich {num_triggers} Indexierungsversuche erstellt",
     return StatusResponse(
         success=True,
         message=msg,
